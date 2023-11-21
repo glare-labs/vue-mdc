@@ -17,6 +17,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material/material-color-utilities": "^0.2.7",
+    "aphrodite": "^2.4.0",
     "vue": "^3.3.8"
   },
   "devDependencies": {
