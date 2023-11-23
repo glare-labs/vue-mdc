@@ -1,5 +1,5 @@
-export * from './renderThemeProvider'
+export * from './ThemeProvider.render'
 import { toRef } from 'vue'
-import { ThemeProvider as TP } from './renderThemeProvider'
+import { renderThemeProvider } from './ThemeProvider.render'
 
-export const ThemeProvider = toRef(() => TP())
+export const ThemeProvider = toRef(() => renderThemeProvider())

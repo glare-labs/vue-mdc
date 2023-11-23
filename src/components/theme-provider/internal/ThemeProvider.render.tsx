@@ -2,7 +2,8 @@ import { GenerateMaterialTheme } from '@/utils/material-theme'
 import { defineComponent, onMounted, ref } from 'vue'
 import { props, slots } from './ThemeProvider.type'
 
-export const ThemeProvider = () => defineComponent({
+export const renderThemeProvider = () => defineComponent({
+    name: 'MAMVThemeProvider',
     props,
     slots,
     setup(props, { slots }) {
