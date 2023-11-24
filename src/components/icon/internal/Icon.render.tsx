@@ -3,7 +3,7 @@ import { props, slots } from './Icon.type'
 import { css } from 'aphrodite'
 import { iconStyles } from './Icon.styles'
 
-export const renderIcon = () => defineComponent({
+export const renderIcon = defineComponent({
     name: 'MAMVIcon',
     props,
     slots,

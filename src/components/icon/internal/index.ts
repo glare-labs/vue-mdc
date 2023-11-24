@@ -1,4 +1,3 @@
-import { toRef } from 'vue'
 import { renderIcon } from './Icon.render'
 
-export const Icon = toRef(() => renderIcon())
+export const Icon = renderIcon
