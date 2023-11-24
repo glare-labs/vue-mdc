@@ -4,7 +4,7 @@ import { buttonStyles } from './Button.styles'
 import { css } from 'aphrodite'
 import { Elevation } from '@/components/elevation'
 
-export const renderButton = () => defineComponent({
+export const renderButton = defineComponent({
     name: 'MAMVButton',
     props,
     slots,
