@@ -1,6 +1,8 @@
 import { StyleSheet } from 'aphrodite'
 import { tokens } from '@/utils/tokens'
 
+const elevationVar = '--elevation-level'
+
 const iconSpacingVar = '--button-icon-spacing'
 
 // for filled, outlined, text
@@ -21,16 +23,11 @@ export const buttonStyles = StyleSheet.create({
         textDecorationLine: 'none',
         verticalAlign: 'middle',
         margin: 0,
-        overflow: 'hidden',
         fontFamily: tokens.fontFamilyBase,
         outlineStyle: 'none',
         ':hover': {
             cursor: 'pointer',
         },
-        ':hover:active': {
-            outlineStyle: 'none',
-        },
-
         transitionDuration: tokens.durationFaster,
         transitionProperty: 'background, border, color, box-shadow',
         transitionTimingFunction: tokens.curveEasyEase,
@@ -44,6 +41,27 @@ export const buttonStyles = StyleSheet.create({
         justifyContent: 'center',
         display: 'inline-flex',
         [iconSpacingVar]: tokens.spacingHorizontalSNudge,
+    },
+
+    /**
+     * elevation shadow
+     */
+    activeElevationForever: {
+        [elevationVar]: '3',
+        ':active': {
+            [elevationVar]: '0'
+        }
+    },
+    activeElevationOnHover: {
+        ':hover': {
+            [elevationVar]: '3',
+        },
+        ':active': {
+            [elevationVar]: '0'
+        }
+    },
+    activeElevationNever: {
+        [elevationVar]: '0',
     },
 
     /**
@@ -81,7 +99,6 @@ export const buttonStyles = StyleSheet.create({
         backgroundColor: `var(${backgroundColorVar})`,
         color: `var(${onBackgroundColorVar})`,
         ':hover': {
-            boxShadow: tokens.shadow4,
         },
         ':active': {
             boxShadow: 'none',
@@ -90,12 +107,6 @@ export const buttonStyles = StyleSheet.create({
     'filled-tonal': {
         backgroundColor: `var(${backgroundContainerColorVar})`,
         color: `var(${onBackgroundContainerColorVar})`,
-        ':hover': {
-            boxShadow: tokens.shadow4,
-        },
-        ':active': {
-            boxShadow: 'none',
-        },
     },
     outlined: {
         backgroundColor: 'transparent',
@@ -108,15 +119,10 @@ export const buttonStyles = StyleSheet.create({
     elevated: {
         backgroundColor: `color-mix(in srgb, var(${backgroundContainerColorVar}) 50%, ${tokens.surfaceContainer})`,
         color: `color-mix(in srgb, var(${onBackgroundContainerColorVar}) 50%, ${tokens.onSurface})`,
-        boxShadow: tokens.shadow8,
-        ':active': {
-            boxShadow: 'none',
-        },
     },
     text: {
         backgroundColor: 'transparent',
         color: `var(${onBackgroundColorVar.replace('on-', '')})`,
-        boxShadow: 'none',
         ':hover': {
             backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 5%, black 0%)`,
         }

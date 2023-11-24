@@ -2,12 +2,16 @@ import { defineComponent } from 'vue'
 import { emits, props, slots } from './Button.type'
 import { buttonStyles } from './Button.styles'
 import { css } from 'aphrodite'
+import { Elevation } from '@/components/elevation'
 
 export const renderButton = () => defineComponent({
     name: 'MAMVButton',
     props,
     slots,
     emits,
+    data: () => ({
+        hovered: false,
+    }),
     computed: {
         classes() {
             return {
@@ -19,7 +23,9 @@ export const renderButton = () => defineComponent({
                     buttonStyles[this.size],
                     buttonStyles[`${this.size}WithIcon`],
                     this.iconOnly && buttonStyles[`${this.size}IconOnly`],
-                    this.disabled && buttonStyles.disabledRoot
+                    this.disabled && buttonStyles.disabledRoot,
+                    !this.disabled ? this.appearance === 'elevated' ? buttonStyles.activeElevationForever : (['filled', 'filled-tonal'].includes(this.appearance) && buttonStyles.activeElevationOnHover) : buttonStyles.activeElevationNever,
+                    
                 ),
                 icon: css(
                     buttonStyles.iconRoot,
@@ -37,12 +43,14 @@ export const renderButton = () => defineComponent({
             this.$emit('mousedown', e)
         },
         mouseenterEvent(e: Event) {
+            this.hovered = true
             if(this.disabled) {
                 return 
             }
             this.$emit('mouseenter', e)
         },
         mouseleaveEvent(e: Event) {
+            this.hovered = false
             if(this.disabled) {
                 return 
             }
@@ -108,6 +116,7 @@ export const renderButton = () => defineComponent({
                 class={this.classes.root}
                 style="user-select: none"
             >
+                <Elevation></Elevation>
                 {
                     this.iconPosition === 'left' && this.$slots.icon && <span class={this.classes.icon}>{ this.$slots.icon() }</span>
                 }
@@ -125,4 +134,7 @@ export const renderButton = () => defineComponent({
             target.setAttribute('aria-disabled', 'true')
         }
     },
+    components: {
+        Elevation
+    }
 })
