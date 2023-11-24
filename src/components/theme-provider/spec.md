@@ -3,6 +3,11 @@
 
 生成结果来自`@material/material-color-utilities`，如果你正在使用`@material/web`，请注意，当ThemeProvider挂载后，此组件将在有效范围内覆盖`@material/web`的组件的样式。
 
+## DisplayName
+```
+MAMVThemeProvider
+```
+
 ## dark
 `dark: Boolean`
 
