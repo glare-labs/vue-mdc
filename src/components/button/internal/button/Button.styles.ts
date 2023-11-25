@@ -113,7 +113,7 @@ export const buttonStyles = StyleSheet.create({
         color: tokens.onSurface,
         border: `1px solid ${tokens.outline}`,
         ':hover': {
-            backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 5%, black 0%)`,
+            backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 5%, black 5%)`,
         }
     },
     elevated: {
@@ -124,7 +124,7 @@ export const buttonStyles = StyleSheet.create({
         backgroundColor: 'transparent',
         color: `var(${onBackgroundColorVar.replace('on-', '')})`,
         ':hover': {
-            backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 5%, black 0%)`,
+            backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 5%, black 5%)`,
         }
     },
 
