@@ -10,6 +10,7 @@ export const renderIcon = defineComponent({
     computed: {
         classes() {
             return  css(
+                iconStyles.root,
                 iconStyles[this.size],
                 iconStyles[this.variant],
             )

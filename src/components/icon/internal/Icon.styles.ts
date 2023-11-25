@@ -1,5 +1,5 @@
 import { tokens } from '@/utils/tokens'
-import { StyleSheet } from 'aphrodite'
+import { StyleSheet } from 'aphrodite/no-important'
 
 export const iconStyles = StyleSheet.create({
     root: {
