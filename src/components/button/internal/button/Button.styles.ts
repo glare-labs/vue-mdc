@@ -181,7 +181,6 @@ export const buttonStyles = StyleSheet.create({
         paddingTop: tokens.spacingVerticalL,
     },
     smallIcon: {
-        fontSize: '20px',
         height: '20px',
         width: '20px',
         [iconSpacingVar]: tokens.spacingHorizontalXXS,
