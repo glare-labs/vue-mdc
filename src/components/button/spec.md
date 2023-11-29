@@ -34,6 +34,16 @@ _按钮提供5种表现形式。_
 + medium
 + large
 
+## type
+指定按钮的默认点击行为。默认值为button。_当type为submit或reset时，需要为Button组件指定form属性的值为一个form的选择器_
+
++ submit
++ reset
++ button
+
+## form
+一个用于获取form的选择器。
+
 ## iconOnly
 当iconOnly为true时，忽略按钮的文字，仅显示图标。
 

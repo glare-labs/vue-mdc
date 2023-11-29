@@ -84,7 +84,13 @@ export const renderButton = defineComponent({
             if(this.disabled) {
                 return 
             }
-            this.$emit('click', e)
+            if(this.type === 'reset') {
+                this.resetEvent()
+            } else if(this.type === 'submit') {
+                this.submitEvent()
+            } else {
+                this.buttonEvent(e)
+            }
         },
         auxclickEvent(e: Event) {
             if(this.disabled) {
@@ -97,6 +103,19 @@ export const renderButton = defineComponent({
                 return 
             }
             this.$emit('dblclick', e)
+        },
+        submitEvent() {
+            if(this.form === undefined) return
+            const formRoot = document.querySelector(this.form) as HTMLFormElement
+            formRoot.submit()
+        },
+        resetEvent() {
+            if(this.form === undefined) return
+            const formRoot = document.querySelector(this.form) as HTMLFormElement
+            formRoot.reset()
+        },
+        buttonEvent(e: Event) {
+            this.$emit('click', e)
         },
     },
     render() {

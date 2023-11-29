@@ -24,6 +24,7 @@ export const props = {
         default: false,
         type: Boolean as PropType<boolean>
     },
+
     /**
      * @default rounded
      */
@@ -31,6 +32,7 @@ export const props = {
         default: 'rounded',
         type: String as PropType<'rounded' | 'circular' | 'square'>
     },
+
     /**
      * @default 'medium
      */
@@ -38,6 +40,7 @@ export const props = {
         default: 'medium',
         type: String as PropType<'small' | 'medium' | 'large'>
     },
+
     /**
      * @default left
      */
@@ -45,13 +48,32 @@ export const props = {
         default: 'left',
         type: String as PropType<'left' | 'right'>
     },
+
     /**
      * @default false
      */
     iconOnly: {
         default: false,
         type: Boolean as PropType<boolean>
+    },
+
+    /**
+     * @default 'button'
+     */
+    type: {
+        default: 'button',
+        type: String as PropType<'button' | 'submit' | 'reset'>
+    },
+
+    /**
+     * 指定一个表单的选择器，用于触发reset或submit
+     * @default undefined
+     */
+    form: {
+        default: undefined,
+        type: String as PropType<string | undefined>
     }
+
 }
 
 export const emits = [
