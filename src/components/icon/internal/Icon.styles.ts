@@ -3,10 +3,6 @@ import { StyleSheet } from 'aphrodite/no-important'
 
 export const iconStyles = StyleSheet.create({
     root: {
-        fontWeight: 'normal',
-        fontStyle: 'normal',
-        lineHeight: '1',
-        letterSpacing: 'normal',
         textTransform: 'none',
         display: 'inline-block',
         whiteSpace: 'nowrap',
@@ -17,15 +13,17 @@ export const iconStyles = StyleSheet.create({
         textRendering: 'optimizeLegibility',
         'font-feature-settings': 'liga',
     },
+    
     small: {
-        fontSize: tokens.fontSizeBase400,
+        ...tokens.typescale.bodySmall,
     },
     medium: {
-        fontSize: tokens.fontSizeBase500,
+        ...tokens.typescale.bodyMedium,
     },
     large: {
-        fontSize: tokens.fontSizeBase600,
+        ...tokens.typescale.bodyLarge,
     },
+
     outlined: {
         fontFamily: 'Material Symbols Outlined',
     },
