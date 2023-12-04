@@ -16,7 +16,7 @@ position: relative;
 --elevation-level: 3;
 ```
 
-`--elevation-level`从0开始，当值为0时不显示任何阴影。
+`--elevation-level`从0开始，最大为5。当值为0时不显示任何阴影。
 
 ## Example
 如下代码通过CSS变量显示了一个有阴影的盒子。
