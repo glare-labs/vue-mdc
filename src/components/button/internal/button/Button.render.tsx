@@ -9,9 +9,6 @@ export const renderButton = defineComponent({
     props,
     slots,
     emits,
-    data: () => ({
-        hovered: false,
-    }),
     computed: {
         classes() {
             return {
@@ -37,53 +34,35 @@ export const renderButton = defineComponent({
     },
     methods: {
         mousedownEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mousedown', e)
         },
         mouseenterEvent(e: Event) {
-            this.hovered = true
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mouseenter', e)
         },
         mouseleaveEvent(e: Event) {
-            this.hovered = false
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mouseleave', e)
         },
         mousemoveEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mousemove', e)
         },
         mouseoutEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mouseout', e)
         },
         mouseoverEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mouseover', e)
         },
         mouseupEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('mouseup', e)
         },
         clickEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             if(this.type === 'reset') {
                 this.resetEvent()
             } else if(this.type === 'submit') {
@@ -93,15 +72,11 @@ export const renderButton = defineComponent({
             }
         },
         auxclickEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('auxclick', e)
         },
         dblclickEvent(e: Event) {
-            if(this.disabled) {
-                return 
-            }
+            if(this.disabled) return 
             this.$emit('dblclick', e)
         },
         submitEvent() {
@@ -133,6 +108,15 @@ export const renderButton = defineComponent({
                 onAuxclick={this.auxclickEvent}
                 onDblclick={this.mousedownEvent}
                 class={this.classes.root}
+                {
+                    ...{
+                        on: {
+                            'click': () => {
+
+                            }
+                        }
+                    }
+                }
                 style="user-select: none"
             >
                 <Elevation></Elevation>
