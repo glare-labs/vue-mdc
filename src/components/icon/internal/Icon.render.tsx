@@ -16,15 +16,6 @@ export const renderIcon = defineComponent({
             )
         }
     },
-    mounted() {
-        /**
-         * Aria
-         */
-        const target = this.$el as HTMLElement
-        if(target.getAttribute('aria-hidden') === 'false') {
-            target.removeAttribute('aria-hidden')
-        }
-    },
     render() {
         return (
             <span aria-hidden class={this.classes}>
