@@ -1,77 +1,212 @@
 
 export const tokens = {
-    /**
-     * Material Pattle
-     */
-    primary: 'var(--md-sys-color-primary)',
-    onPrimary: 'var(--md-sys-color-on-primary)',
-    primaryContainer: 'var(--md-sys-color-primary-container)',
-    onPrimaryContainer: 'var(--md-sys-color-on-primary-container)',
-    secondary: 'var(--md-sys-color-secondary)',
-    onSecondary: 'var(--md-sys-color-on-secondary)',
-    secondaryContainer: 'var(--md-sys-color-secondary-container)',
-    onSecondaryContainer: 'var(--md-sys-color-on-secondary-container)',
-    tertiary: 'var(--md-sys-color-tertiary)',
-    onTertiary: 'var(--md-sys-color-on-tertiary)',
-    tertiaryContainer: 'var(--md-sys-color-tertiary-container)',
-    onTertiaryContainer: 'var(--md-sys-color-on-tertiary-container)',
-    error: 'var(--md-sys-color-error)',
-    onError: 'var(--md-sys-color-on-error)',
-    errorContainer: 'var(--md-sys-color-error-container)',
-    onErrorContainer: 'var(--md-sys-color-on-error-container)',
-    background: 'var(--md-sys-color-background)',
-    onBackground: 'var(--md-sys-color-on-background)',
-    surface: 'var(--md-sys-color-surface)',
-    onSurface: 'var(--md-sys-color-on-surface)',
-    surfaceVariant: 'var(--md-sys-color-surface-variant)',
-    onSurfaceVariant: 'var(--md-sys-color-on-surface-variant)',
-    outline: 'var(--md-sys-color-outline)',
-    outlineVariant: 'var(--md-sys-color-outline-variant)',
-    shadow: 'var(--md-sys-color-shadow)',
-    scrim: 'var(--md-sys-color-scrim)',
-    inverseSurface: 'var(--md-sys-color-inverse-surface)',
-    inverseOnSurface: 'var(--md-sys-color-inverse-on-surface)',
-    inversePrimary: 'var(--md-sys-color-inverse-primary)',
-    surfaceContainerLowest: 'var(--md-sys-color-surface-container-lowest)',
-    surfaceContainerLow: 'var(--md-sys-color-surface-container-low)',
-    surfaceContainer: 'var(--md-sys-color-surface-container)',
-    surfaceContainerHigh: 'var(--md-sys-color-surface-container-high)',
-    surfaceContainerHighest: 'var(--md-sys-color-surface-container-highest)',
 
+    color: {
+        primary: {
+            primary: 'var(--md-sys-color-primary)',
+            onPrimary: 'var(--md-sys-color-on-primary)',
+            primaryContainer: 'var(--md-sys-color-primary-container)',
+            onPrimaryContainer: 'var(--md-sys-color-on-primary-container)',
+            inversePrimary: 'var(--md-sys-color-inverse-primary)',
+        },
+        secondary: {
+            secondary: 'var(--md-sys-color-secondary)',
+            onSecondary: 'var(--md-sys-color-on-secondary)',
+            secondaryContainer: 'var(--md-sys-color-secondary-container)',
+            onSecondaryContainer: 'var(--md-sys-color-on-secondary-container)',
+        },
+        tertiary: {
+            tertiary: 'var(--md-sys-color-tertiary)',
+            onTertiary: 'var(--md-sys-color-on-tertiary)',
+            tertiaryContainer: 'var(--md-sys-color-tertiary-container)',
+            onTertiaryContainer: 'var(--md-sys-color-on-tertiary-container)',
+        },
+        error: {
+            error: 'var(--md-sys-color-error)',
+            onError: 'var(--md-sys-color-on-error)',
+            errorContainer: 'var(--md-sys-color-error-container)',
+            onErrorContainer: 'var(--md-sys-color-on-error-container)',
+        },
+        background: {
+            background: 'var(--md-sys-color-background)',
+            onBackground: 'var(--md-sys-color-on-background)',
+        },
+        surface: {
+            surface: 'var(--md-sys-color-surface)',
+            onSurface: 'var(--md-sys-color-on-surface)',
+            surfaceVariant: 'var(--md-sys-color-surface-variant)',
+            onSurfaceVariant: 'var(--md-sys-color-on-surface-variant)',
+            surfaceContainerLowest: 'var(--md-sys-color-surface-container-lowest)',
+            surfaceContainerLow: 'var(--md-sys-color-surface-container-low)',
+            surfaceContainer: 'var(--md-sys-color-surface-container)',
+            surfaceContainerHigh: 'var(--md-sys-color-surface-container-high)',
+            surfaceContainerHighest: 'var(--md-sys-color-surface-container-highest)',
+            inverseSurface: 'var(--md-sys-color-inverse-surface)',
+            inverseOnSurface: 'var(--md-sys-color-inverse-on-surface)',
+        },
+        outline: {
+            outline: 'var(--md-sys-color-outline)',
+            outlineVariant: 'var(--md-sys-color-outline-variant)',
+        },
+        shadow: {
+            shadow: 'var(--md-sys-color-shadow)',
+        },
+        scrim: {
+            scrim: 'var(--md-sys-color-scrim)',
+        }
+    },
 
-    /**
-     * Duration
-     */
-    durationUltraFast: '50ms',
-    durationFaster: '100ms',
-    durationFast: '150ms',
-    durationNormal: '200ms',
-    durationGentle: '250ms',
-    durationSlow: '300ms',
-    durationSlower: '400ms',
-    durationUltraSlow: '500ms',
+    shape: {
+        corner: {
+            full: '9999px',
+            extraLarge: dp(28),
+            large: dp(16),
+            medium: dp(12),
+            small: dp(8),
+            extraSmall: dp(4),
+            none: '0'
+        },
+    },
 
-    /**
-     * Curves
-     */
-    curveAccelerateMax: 'cubic-bezier(0.9,0.1,1,0.2)',
-    curveAccelerateMid: 'cubic-bezier(1,0,1,1)',
-    curveAccelerateMin: 'cubic-bezier(0.8,0,0.78,1)',
-    curveDecelerateMax: 'cubic-bezier(0.1,0.9,0.2,1)',
-    curveDecelerateMid: 'cubic-bezier(0,0,0,1)',
-    curveDecelerateMin: 'cubic-bezier(0.33,0,0.1,1)',
-    curveEasyEaseMax: 'cubic-bezier(0.8,0,0.2,1)',
-    curveEasyEase: 'cubic-bezier(0.33,0,0.67,1)',
-    curveLinear: 'cubic-bezier(0,0,1,1)',
+    elevation: {
+        level5: '5',
+        level4: '4',
+        level3: '3',
+        level2: '2',
+        level1: '1',
+        level0: '0',
+    },
 
-    /**
-     * Border Width
-     */
-    strokeWidthThin: '1px',
-    strokeWidthThick: '2px',
-    strokeWidthThicker: '3px',
-    strokeWidthThickest: '4px',
+    motion: {
+        easing: {
+            standard: 'cubic-bezier(0.2, 0, 0, 1)',
+            standardAccelerate: 'cubic-bezier(0.3, 0, 1, 1)',
+            standardDecelerate: 'cubic-bezier(0, 0, 0, 1)',
+            emphasized: 'cubic-beziercubic-bezier(0.2, 0, 0, 1)',
+            emphasizedAccelerate: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
+            emphasizedDecelerate: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
+            legacy: 'cubic-bezier(0.4, 0, 0.2, 1)',
+            legacyAccelerate: 'cubic-bezier(0.4, 0, 1, 1)',
+            legacyDecelerate: 'cubic-bezier(0, 0, 0.2, 1)',
+            linear: 'cubic-bezier(0, 0, 1, 1)',
+        },
+        duration: {
+            short1: '50ms',
+            short2: '100ms',
+            short3: '150ms',
+            short4: '200ms',
+            medium1: '250ms',
+            medium2: '300ms',
+            medium3: '350ms',
+            medium4: '400ms',
+            long1: '450ms',
+            long2: '500ms',
+            long3: '550ms',
+            long4: '600ms',
+            extraLong1: '700ms',
+            extraLong2: '800ms',
+            extraLong3: '900ms',
+            extraLong4: '1000ms',
+        },
+        style: {
+            linear: 'linear',
+        },
+    },
 
+    typescale: {
+        displayLarge: {
+            fontSize: '57px',
+            fontWeight: 400,
+            lineHeight: '64px',
+            letterSpacing: '-0.25px',
+        },
+        displayMedium: {
+            fontSize: '45px',
+            fontWeight: 400,
+            lineHeight: '52px',
+            letterSpacing: '0',
+        },
+        displaySmall: {
+            fontSize: '36px',
+            fontWeight: 400,
+            lineHeight: '44px',
+            letterSpacing: '0',
+        },
+        headlineLarge: {
+            fontSize: '32px',
+            fontWeight: 400,
+            lineHeight: '40px',
+            letterSpacing: '0',
+        },
+        headlineMedium: {
+            fontSize: '28px',
+            fontWeight: 400,
+            lineHeight: '36px',
+            letterSpacing: '0',
+        },
+        headlineSmall: {
+            fontSize: '24px',
+            fontWeight: 400,
+            lineHeight: '32px',
+            letterSpacing: '0',
+        },
+        titleLarge: {
+            fontSize: '22px',
+            fontWeight: 400,
+            lineHeight: '28px',
+            letterSpacing: '0',
+        },
+        titleMedium: {
+            fontSize: '16px',
+            fontWeight: 500,
+            lineHeight: '24px',
+            letterSpacing: '0.15px',
+        },
+        titleSmall: {
+            fontSize: '14px',
+            fontWeight: 500,
+            lineHeight: '20px',
+            letterSpacing: '0.1px',
+        },
+        bodyLarge: {
+            fontSize: '16px',
+            fontWeight: 400,
+            lineHeight: '24px',
+            letterSpacing: '0.5px',
+        },
+        bodyMedium: {
+            fontSize: '14px',
+            fontWeight: 400,
+            lineHeight: '20px',
+            letterSpacing: '0.25px',
+        },
+        bodySmall: {
+            fontSize: '12px',
+            fontWeight: 400,
+            lineHeight: '16px',
+            letterSpacing: '0.4px',
+        },
+        labelLarge: {
+            fontSize: '14px',
+            fontWeight: 500,
+            lineHeight: '20px',
+            letterSpacing: '0.1px',
+        },
+        labelMedium: {
+            fontSize: '12px',
+            fontWeight: 500,
+            lineHeight: '16px',
+            letterSpacing: '0.5px',
+        },
+        labelSmall: {
+            fontSize: '11px',
+            fontWeight: 500,
+            lineHeight: '16px',
+            letterSpacing: '0.5px',
+        },
+    },
+
+    // WILL DEPRECATED
     /**
      * Spacing V -
      */
@@ -102,67 +237,24 @@ export const tokens = {
     spacingHorizontalXXL: '24px',
     spacingHorizontalXXXL: '32px',
 
-    /**
-     * Border Radius
-     */
-    borderRadiusNone: '0',
-    borderRadiusSmall: '2px',
-    borderRadiusMedium: '4px',
-    borderRadiusLarge: '6px',
-    borderRadiusXLarge: '8px',
-    borderRadiusCircular: '10000px',
+} as const
 
-    /**
-     * Font Family
-     */
-    fontFamilyBase: '\'Segoe UI\', \'Segoe UI Web (West European)\', -apple-system, BlinkMacSystemFont, Roboto, \'Helvetica Neue\', sans-serif',
-    fontFamilyMonospace: 'Consolas, \'Courier New\', Courier, monospace',
-    fontFamilyNumeric: 'Bahnschrift, \'Segoe UI\', \'Segoe UI Web (West European)\', -apple-system, BlinkMacSystemFont, Roboto, \'Helvetica Neue\', sans-serif',
+export function dp(value: number) {
+    return `${window.devicePixelRatio * value}px`
+}
 
-    /**
-     * Font Size
-     */
-    fontSizeBase100: '10px',
-    fontSizeBase200: '12px',
-    fontSizeBase300: '14px',
-    fontSizeBase400: '16px',
-    fontSizeBase500: '20px',
-    fontSizeBase600: '24px',
-    fontSizeHero700: '28px',
-    fontSizeHero800: '32px',
-    fontSizeHero900: '40px',
-    fontSizeHero1000: '68px',
-    
-    /**
-     * Font Weight
-     */
-    fontWeightRegular: 400,
-    fontWeightMedium: 500,
-    fontWeightSemibold: 600,
-    fontWeightBold: 700,
+/**
+ * The following units are used to express font size on Android and the web.
+ * @see FontSize
+ */
+export function sp(value: number) {
+    return `${value * 0.0625}rem`
+}
 
-    /**
-     * Font Line Height
-     */
-    lineHeightBase100: '14px',
-    lineHeightBase200: '16px',
-    lineHeightBase300: '20px',
-    lineHeightBase400: '22px',
-    lineHeightBase500: '28px',
-    lineHeightBase600: '32px',
-    lineHeightHero700: '36px',
-    lineHeightHero800: '40px',
-    lineHeightHero900: '52px',
-    lineHeightHero1000: '92px',
-
-    /**
-     * Shadow
-     */
-    shadow2: '0 0 2px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 1px 2px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-    shadow4: '0 0 2px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 2px 4px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-    shadow8: '0 0 2px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 4px 8px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-    shadow16: '0 0 2px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 8px 16px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-    shadow28: '0 0 8px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 14px 28px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-    shadow64: '0 0 8px color-mix(in srgb, var(--md-sys-color-shadow) 12%, transparent), 0 32px 64px color-mix(in srgb, var(--md-sys-color-shadow) 14%, transparent)',
-
+/**
+ * value The following units are for spacing letters in a UI.
+ * @see LettersSpacing
+ */
+export function rem(value: number) {
+    return `${value}rem`
 }
