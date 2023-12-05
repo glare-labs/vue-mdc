@@ -29,14 +29,6 @@ export const props = {
     /**
      * @default false
      */
-    iconOnly: {
-        default: false,
-        type: Boolean as PropType<boolean>
-    },
-
-    /**
-     * @default false
-     */
     lowered: {
         default: false,
         type: Boolean as PropType<boolean>
@@ -45,6 +37,6 @@ export const props = {
 }
 
 export const slots = Object as SlotsType<{
-    default?: void
+    default: void
     icon?: void
 }>

@@ -6,9 +6,8 @@ const onBackgroundColorVar = '--button-on-background-color'
 
 const heightVar = '--height'
 const widthVar = '--width'
-const minWidthVar = '--min-width'
 const iconSizeVar = '--icon-size'
-
+const shapeVar = '--shape'
 const elevationVar = '--elevation-level'
 
 export const fabStyles = StyleSheet.create({
@@ -21,7 +20,6 @@ export const fabStyles = StyleSheet.create({
         textDecorationLine: 'none',
         verticalAlign: 'middle',
         alignSelf: 'flex-start',
-        'gap': '8px',
         margin: 0,
         outlineStyle: 'none',
         transitionDuration: tokens.motion.duration.medium1,
@@ -32,8 +30,6 @@ export const fabStyles = StyleSheet.create({
         },
         zIndex: 1,
         'user-select': 'none',
-        paddingLeft: '16px',
-        paddingRight: '16px',
     },
 
     /**
@@ -62,16 +58,41 @@ export const fabStyles = StyleSheet.create({
     },
 
     containerShape: {
-        borderRadius: tokens.shape.corner.large,
+        borderRadius: `var(${shapeVar}, ${tokens.shape.corner.large})`,
     },
 
     containerSize: {
         height: `var(${heightVar}, 56px)`,
-        minWidth: `var(${minWidthVar}, 80px)`,
-    },
-    containerSizeIconOnly: {
-        height: `var(${heightVar}, 56px)`,
         width: `var(${widthVar}, 56px)`,
+    },
+    small: {
+        [heightVar]: '48px',
+        [widthVar]: '48px',
+        [iconSizeVar]: '24px',
+        '--icon-font-size': '24px',
+        [shapeVar]: tokens.shape.corner.large,
+    },
+    medium: {
+        [heightVar]: '56px',
+        [widthVar]: '56px',
+        [iconSizeVar]: '24px',
+        '--icon-font-size': '24px',
+        [shapeVar]: tokens.shape.corner.large,
+    },
+    large: {
+        [heightVar]: '96px',
+        [widthVar]: '96px',
+        [iconSizeVar]: '48px',
+        '--icon-font-size': '36px',
+        [shapeVar]: tokens.shape.corner.extraLarge,
+        [elevationVar]: tokens.elevation.level4,
+        ':hover': {
+            cursor: 'pointer',
+            [elevationVar]: tokens.elevation.level5,
+        },
+        ':active': {
+            [elevationVar]: tokens.elevation.level4,
+        },
     },
 
     containerElevation: {
@@ -105,10 +126,6 @@ export const fabStyles = StyleSheet.create({
     },
     iconColor: {
         color: `var(${onBackgroundColorVar})`,
-    },
-
-    containerLabel: {
-        ...tokens.typescale.labelLarge,
     },
 
     /**

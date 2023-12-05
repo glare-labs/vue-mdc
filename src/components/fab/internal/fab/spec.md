@@ -13,8 +13,13 @@ MAMVFab
 + tertiary
 + surface
 
-## iconOnly
-当iconOnly为true时，忽略按钮的文字，仅显示图标。
+## size
++ small
++ medium
++ large
+
+## lowered
+当lowered值设为true时降低该组件的elevation-level到1。
 
 ## disabled
 当disabled为true时，将不再触发按钮的任何事件。
@@ -25,13 +30,15 @@ MAMVFab
 <template>
 
     <ThemeProvider>
-        <Fab @click="remove" variant="primary">Create</Fab>
+        <Fab @click="remove" variant="primary">
+            <Icon>edit</Icon>
+        </Fab>
     </ThemeProvider>
 
 </template>
 
 <script setup lang="ts">
-import { ThemeProvider, Fab } from 'material-anti-mage-vue'
+import { ThemeProvider, Fab， Icon } from 'material-anti-mage-vue'
 
 </script>
 ```

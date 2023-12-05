@@ -1,11 +1,11 @@
 import { defineComponent } from 'vue'
-import { props, slots } from './Fab.type'
+import { props, slots } from './FabExtended.type'
 import { css } from 'aphrodite'
-import { fabStyles } from './Fab.styles'
+import { fabStyles } from './FabExtended.styles'
 import { Elevation } from '@/components/elevation'
 
-export const renderFab = defineComponent({
-    name: 'MAMVFab',
+export const renderFabExtended = defineComponent({
+    name: 'MAMVFabExtended',
     props,
     slots,
     computed: {
@@ -18,7 +18,7 @@ export const renderFab = defineComponent({
                     fabStyles.containerColor,
                     fabStyles[this.variant],
                     fabStyles.containerLabel,
-                    this.iconOnly ? fabStyles.containerSizeIconOnly : fabStyles.containerSize,
+                    fabStyles.containerSize,
                     this.disabled && fabStyles.disabledRoot,
                 ),
                 iconRoot: css(
@@ -94,7 +94,7 @@ export const renderFab = defineComponent({
                 {
                     this.iconPosition === 'left' && this.$slots.icon && <span aria-hidden class={this.classes.iconRoot}>{ this.$slots.icon() }</span>
                 }
-                { !this.iconOnly && this.$slots.default && this.$slots.default() }
+                { this.$slots.default && this.$slots.default() }
                 {
                     this.iconPosition === 'right' && this.$slots.icon && <span aria-hidden class={this.classes.iconRoot}>{ this.$slots.icon() }</span>
                 }
