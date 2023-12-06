@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Icon.type'
-import { css } from 'aphrodite'
+import { css } from 'aphrodite/no-important'
 import { iconStyles } from './Icon.styles'
 
 export const renderIcon = defineComponent({
@@ -10,9 +10,9 @@ export const renderIcon = defineComponent({
     computed: {
         classes() {
             return  css(
-                iconStyles.root,
-                iconStyles[this.size],
                 iconStyles[this.variant],
+                iconStyles[this.size],
+                iconStyles.root,
             )
         }
     },

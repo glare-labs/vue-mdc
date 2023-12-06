@@ -1,45 +1,35 @@
-import { tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
-
-const innerFontSizeVar = '--inner-icon-font-size'
-const fontSizeVar = '--icon-font-size'
+import { iconTokens, iconTokensExtern } from './Icon.tokens'
 
 export const iconStyles = StyleSheet.create({
     root: {
-        textTransform: 'none',
-        display: 'inline-block',
-        whiteSpace: 'nowrap',
-        wordWrap: 'normal',
-        direction: 'ltr',
-        '-webkit-font-smoothing': 'antialiased',
-        '-moz-osx-font-smoothing': 'grayscale',
-        textRendering: 'optimizeLegibility',
-        'font-feature-settings': 'liga',
+        fontFamily: `var(${iconTokensExtern.fontFamily, iconTokens.fontFamily})`,
+        fontSize: `var(${iconTokensExtern.fontSize}, ${iconTokens.fontSize})`,
     },
     
+    /**
+     * size
+     */
     small: {
-        ...tokens.typescale.bodySmall,
-        [innerFontSizeVar]: '24px',
+        [iconTokens.fontSize]: '24px',
     },
     medium: {
-        ...tokens.typescale.bodyMedium,
-        [innerFontSizeVar]: '24px',
+        [iconTokens.fontSize]: '24px',
     },
     large: {
-        ...tokens.typescale.bodyLarge,
-        [innerFontSizeVar]: '48px',
+        [iconTokens.fontSize]: '48px',
     },
 
+    /**
+     * variant
+     */
     outlined: {
-        fontFamily: 'Material Symbols Outlined',
-        fontSize: `var(${fontSizeVar}, ${innerFontSizeVar})`
+        [iconTokens.fontFamily]: 'Material Symbols Outlined',
     },
     rounded: {
-        fontFamily: 'Material Symbols Rounded',
-        fontSize: `var(${fontSizeVar}, ${innerFontSizeVar})`
+        [iconTokens.fontFamily]: 'Material Symbols Rounded',
     },
     sharp: {
-        fontFamily: 'Material Symbols Sharp',
-        fontSize: `var(${fontSizeVar}, ${innerFontSizeVar})`
+        [iconTokens.fontFamily]: 'Material Symbols Sharp',
     },
 })
