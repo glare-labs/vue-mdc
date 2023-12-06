@@ -1,10 +1,8 @@
+import { makeComponentExternTokens } from '@/utils/tokens'
 
 export const iconTokens = {
-    fontSize: '--mamv-font-size',
-    fontFamily: '--mamv-font-family',
+    fontSize: '--mamv-icon-font-size',
+    fontFamily: '--mamv-icon-font-family',
 } as const 
 
-export const iconTokensExtern = {
-    fontSize: '--mamv-font-size-extern',
-    fontFamily: '--mamv-font-family-extern',
-} as const
+export const iconTokensExtern = makeComponentExternTokens<typeof iconTokens>(iconTokens)

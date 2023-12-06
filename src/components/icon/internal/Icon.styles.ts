@@ -3,8 +3,8 @@ import { iconTokens, iconTokensExtern } from './Icon.tokens'
 
 export const iconStyles = StyleSheet.create({
     root: {
-        fontFamily: `var(${iconTokensExtern.fontFamily, iconTokens.fontFamily})`,
-        fontSize: `var(${iconTokensExtern.fontSize}, ${iconTokens.fontSize})`,
+        fontFamily: `var(${iconTokensExtern.fontFamily}, var(${iconTokens.fontFamily}))`,
+        fontSize: `var(${iconTokensExtern.fontSize}, var(${iconTokens.fontSize}))`,
     },
     
     /**
