@@ -39,6 +39,7 @@
     "src/**/*.tsx",
     "src/**/*.d.ts",
     "src/**/*.vue",
+    "scripts/templates/**/*.tsx"
   ],
   "references": [
     {
