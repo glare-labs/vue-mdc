@@ -59,11 +59,11 @@ export const tokens = {
     shape: {
         corner: {
             full: '9999px',
-            extraLarge: dp(28),
-            large: dp(16),
-            medium: dp(12),
-            small: dp(8),
-            extraSmall: dp(4),
+            extraLarge: '28px',
+            large: '16px',
+            medium: '12px',
+            small: '8px',
+            extraSmall: '4px',
             none: '0'
         },
     },
@@ -257,4 +257,13 @@ export function sp(value: number) {
  */
 export function rem(value: number) {
     return `${value}rem`
+}
+
+export function makeComponentExternTokens<T extends Record<string, string>>(componentTokens: Record<string, string>) {
+    const e = new Object()
+    for(const i in componentTokens) {
+        e[i] = componentTokens[i] + '-extern'
+    }
+    
+    return e as T
 }
