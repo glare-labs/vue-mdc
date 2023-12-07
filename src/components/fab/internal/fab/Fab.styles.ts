@@ -1,14 +1,8 @@
 import { tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite'
-
-const backgroundColorVar = '--button-background-color'
-const onBackgroundColorVar = '--button-on-background-color'
-
-const heightVar = '--height'
-const widthVar = '--width'
-const iconSizeVar = '--icon-size'
-const shapeVar = '--shape'
-const elevationVar = '--elevation-level'
+import { fabTokens, fabTokensExtern } from './Fab.tokens'
+import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
+import { iconTokens, iconTokensExtern } from '@/components/icon/internal/Icon.tokens'
 
 export const fabStyles = StyleSheet.create({
     root: {
@@ -30,102 +24,107 @@ export const fabStyles = StyleSheet.create({
         },
         zIndex: 1,
         'user-select': 'none',
+        borderRadius: `var(${fabTokensExtern.shape}, var(${fabTokens.shape}))`,
+        backgroundColor: `var(${fabTokensExtern.background}, var(${fabTokens.background}))`,
+        color: `var(${fabTokensExtern.color}, var(${fabTokens.color}))`,
+        height: `var(${fabTokensExtern.height}, var(${fabTokens.height}))`,
+        width: `var(${fabTokensExtern.width}, var(${fabTokens.width}))`,
     },
 
     /**
      * variant
      */
     primary: {
-        [backgroundColorVar]: tokens.color.primary.primaryContainer,
-        [onBackgroundColorVar]: tokens.color.primary.onPrimaryContainer,
+        [fabTokens.background]: tokens.color.primary.primaryContainer,
+        [fabTokens.color]: tokens.color.primary.onPrimaryContainer,
     },
     secondary: {
-        [backgroundColorVar]: tokens.color.secondary.secondaryContainer,
-        [onBackgroundColorVar]: tokens.color.secondary.onSecondaryContainer,
+        [fabTokens.background]: tokens.color.secondary.secondaryContainer,
+        [fabTokens.color]: tokens.color.secondary.onSecondaryContainer,
     },
     tertiary: {
-        [backgroundColorVar]: tokens.color.tertiary.tertiaryContainer,
-        [onBackgroundColorVar]: tokens.color.tertiary.onTertiaryContainer,
+        [fabTokens.background]: tokens.color.tertiary.tertiaryContainer,
+        [fabTokens.color]: tokens.color.tertiary.onTertiaryContainer,
     },
     surface: {
-        [backgroundColorVar]: tokens.color.surface.surfaceContainer,
-        [onBackgroundColorVar]: tokens.color.surface.onSurface,
+        [fabTokens.background]: tokens.color.surface.surfaceContainer,
+        [fabTokens.color]: tokens.color.surface.onSurface,
     },
 
-    containerColor: {
-        backgroundColor: `var(${backgroundColorVar})`,
-        color: `var(${onBackgroundColorVar})`,
-    },
-
-    containerShape: {
-        borderRadius: `var(${shapeVar}, ${tokens.shape.corner.large})`,
-    },
-
-    containerSize: {
-        height: `var(${heightVar}, 56px)`,
-        width: `var(${widthVar}, 56px)`,
-    },
+    /**
+     * size
+     */
     small: {
-        [heightVar]: '48px',
-        [widthVar]: '48px',
-        [iconSizeVar]: '24px',
-        '--icon-font-size': '24px',
-        [shapeVar]: tokens.shape.corner.large,
+        [fabTokens.height]: '48px',
+        [fabTokens.width]: '48px',
     },
     medium: {
-        [heightVar]: '56px',
-        [widthVar]: '56px',
-        [iconSizeVar]: '24px',
-        '--icon-font-size': '24px',
-        [shapeVar]: tokens.shape.corner.large,
+        [fabTokens.height]: '56px',
+        [fabTokens.width]: '56px',
     },
     large: {
-        [heightVar]: '96px',
-        [widthVar]: '96px',
-        [iconSizeVar]: '48px',
-        '--icon-font-size': '36px',
-        [shapeVar]: tokens.shape.corner.extraLarge,
-        [elevationVar]: tokens.elevation.level4,
-        ':hover': {
-            cursor: 'pointer',
-            [elevationVar]: tokens.elevation.level5,
-        },
-        ':active': {
-            [elevationVar]: tokens.elevation.level4,
-        },
+        [fabTokens.height]: '96px',
+        [fabTokens.width]: '96px',
     },
 
+    /**
+     * shape
+     */
+    smallShape: {
+        [fabTokens.shape]: tokens.shape.corner.large,
+    },
+    mediumShape: {
+        [fabTokens.shape]: tokens.shape.corner.large,
+    },
+    largeShape: {
+        [fabTokens.shape]: tokens.shape.corner.extraLarge,
+    },
+
+    /**
+     * elevation
+     */
     containerElevation: {
-        [elevationVar]: tokens.elevation.level3,
+        [elevationTokensExtern.level]: tokens.elevation.level3,
         ':hover': {
             cursor: 'pointer',
-            [elevationVar]: tokens.elevation.level4,
+            [elevationTokensExtern.level]: tokens.elevation.level4,
         },
         ':active': {
-            [elevationVar]: tokens.elevation.level3,
+            [elevationTokensExtern.level]: tokens.elevation.level3,
         },
     },
-    containerLowElevation: {
-        [elevationVar]: tokens.elevation.level1,
+    containerElevationLow: {
+        [elevationTokensExtern.level]: tokens.elevation.level1,
         ':hover': {
             cursor: 'pointer',
-            [elevationVar]: tokens.elevation.level2,
+            [elevationTokensExtern.level]: tokens.elevation.level2,
         },
         ':active': {
-            [elevationVar]: tokens.elevation.level1,
+            [elevationTokensExtern.level]: tokens.elevation.level1,
+        },
+    },
+    containerElevationHigh: {
+        [elevationTokensExtern.level]: tokens.elevation.level4,
+        ':hover': {
+            cursor: 'pointer',
+            [elevationTokensExtern.level]: tokens.elevation.level5,
+        },
+        ':active': {
+            [elevationTokensExtern.level]: tokens.elevation.level4,
         },
     },
     
-    iconRoot: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'inline-flex',
+    /**
+     * icon
+     */
+    smallIconSize: {
+        [iconTokensExtern.fontSize]: '24px',
     },
-    iconSize: {
-        fontSize: `var(${iconSizeVar}, 24px)`,
+    mediumIconSize: {
+        [iconTokens.fontSize]: '24px',
     },
-    iconColor: {
-        color: `var(${onBackgroundColorVar})`,
+    largeIconSize: {
+        [iconTokensExtern.fontSize]: '48px',
     },
 
     /**
@@ -138,15 +137,14 @@ export const fabStyles = StyleSheet.create({
         borderColor: 'transparent',
         boxShadow: 'none',
         cursor: 'not-allowed',
-        [elevationVar]: '0',
+        [elevationTokensExtern.level]: '0',
         ':hover': {
             cursor: 'not-allowed',
-            [elevationVar]: '0',
+            [elevationTokensExtern.level]: '0',
         },
         ':hover:active': {
             cursor: 'not-allowed',
-            [elevationVar]: '0',
+            [elevationTokensExtern.level]: '0',
         },
-
     }
 })

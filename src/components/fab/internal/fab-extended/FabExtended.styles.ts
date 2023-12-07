@@ -1,13 +1,8 @@
+import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
+import { iconTokensExtern } from '@/components/icon/internal/Icon.tokens'
 import { tokens } from '@/utils/tokens'
-import { StyleSheet } from 'aphrodite'
-
-const backgroundColorVar = '--button-background-color'
-const onBackgroundColorVar = '--button-on-background-color'
-
-const heightVar = '--height'
-const minWidthVar = '--min-width'
-const iconSizeVar = '--icon-size'
-const elevationVar = '--elevation-level'
+import { StyleSheet } from 'aphrodite/no-important'
+import { fabExtendedTokens, fabExtendedTokensExtern } from './FabExtended.tokens'
 
 export const fabStyles = StyleSheet.create({
     root: {
@@ -32,78 +27,73 @@ export const fabStyles = StyleSheet.create({
         'user-select': 'none',
         paddingLeft: '16px',
         paddingRight: '16px',
+        [fabExtendedTokens.height]: '56px',
+        [fabExtendedTokens.minWidth]: '80px',
+        [fabExtendedTokens.shape]: tokens.shape.corner.large,
+        borderRadius: `var(${fabExtendedTokensExtern.shape}, var(${fabExtendedTokens.shape}))`,
+        backgroundColor: `var(${fabExtendedTokensExtern.background}, var(${fabExtendedTokens.background}))`,
+        color: `var(${fabExtendedTokensExtern.color}, var(${fabExtendedTokens.color}))`,
+        height: `var(${fabExtendedTokensExtern.height}, var(${fabExtendedTokens.height}))`,
+        minWidth: `var(${fabExtendedTokensExtern.minWidth}, var(${fabExtendedTokens.minWidth}))`,
+        width: `var(${fabExtendedTokensExtern.width}, var(${fabExtendedTokens.width}))`,
     },
 
     /**
      * variant
      */
     primary: {
-        [backgroundColorVar]: tokens.color.primary.primaryContainer,
-        [onBackgroundColorVar]: tokens.color.primary.onPrimaryContainer,
+        [fabExtendedTokens.background]: tokens.color.primary.primaryContainer,
+        [fabExtendedTokens.color]: tokens.color.primary.onPrimaryContainer,
     },
     secondary: {
-        [backgroundColorVar]: tokens.color.secondary.secondaryContainer,
-        [onBackgroundColorVar]: tokens.color.secondary.onSecondaryContainer,
+        [fabExtendedTokens.background]: tokens.color.secondary.secondaryContainer,
+        [fabExtendedTokens.color]: tokens.color.secondary.onSecondaryContainer,
     },
     tertiary: {
-        [backgroundColorVar]: tokens.color.tertiary.tertiaryContainer,
-        [onBackgroundColorVar]: tokens.color.tertiary.onTertiaryContainer,
+        [fabExtendedTokens.background]: tokens.color.tertiary.tertiaryContainer,
+        [fabExtendedTokens.color]: tokens.color.tertiary.onTertiaryContainer,
     },
     surface: {
-        [backgroundColorVar]: tokens.color.surface.surfaceContainer,
-        [onBackgroundColorVar]: tokens.color.surface.onSurface,
+        [fabExtendedTokens.background]: tokens.color.surface.surfaceContainer,
+        [fabExtendedTokens.color]: tokens.color.surface.onSurface,
     },
 
-    containerColor: {
-        backgroundColor: `var(${backgroundColorVar})`,
-        color: `var(${onBackgroundColorVar})`,
-    },
-
-    containerShape: {
-        borderRadius: tokens.shape.corner.large,
-    },
-
-    containerSize: {
-        height: `var(${heightVar}, 56px)`,
-        minWidth: `var(${minWidthVar}, 80px)`,
-    },
-
+    /**
+     * elevation
+     */
     containerElevation: {
-        [elevationVar]: tokens.elevation.level3,
+        [elevationTokensExtern.level]: tokens.elevation.level3,
         ':hover': {
             cursor: 'pointer',
-            [elevationVar]: tokens.elevation.level4,
+            [elevationTokensExtern.level]: tokens.elevation.level4,
         },
         ':active': {
-            [elevationVar]: tokens.elevation.level3,
+            [elevationTokensExtern.level]: tokens.elevation.level3,
         },
     },
-    containerLowElevation: {
-        [elevationVar]: tokens.elevation.level1,
+    containerElevationLow: {
+        [elevationTokensExtern.level]: tokens.elevation.level1,
         ':hover': {
             cursor: 'pointer',
-            [elevationVar]: tokens.elevation.level2,
+            [elevationTokensExtern.level]: tokens.elevation.level2,
         },
         ':active': {
-            [elevationVar]: tokens.elevation.level1,
+            [elevationTokensExtern.level]: tokens.elevation.level1,
         },
-    },
-    
-    iconRoot: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'inline-flex',
-    },
-    iconSize: {
-        fontSize: `var(${iconSizeVar}, 24px)`,
-        '--icon-font-size': '24px',
-    },
-    iconColor: {
-        color: `var(${onBackgroundColorVar})`,
     },
 
+    /**
+     * fab's label
+     */
     containerLabel: {
         ...tokens.typescale.labelLarge,
+    },
+
+    /**
+     * icon
+     */
+    containerIcon: {
+        [iconTokensExtern.fontSize]: '24px',
     },
 
     /**
@@ -116,15 +106,14 @@ export const fabStyles = StyleSheet.create({
         borderColor: 'transparent',
         boxShadow: 'none',
         cursor: 'not-allowed',
-        [elevationVar]: '0',
+        [elevationTokensExtern.level]: '0',
         ':hover': {
             cursor: 'not-allowed',
-            [elevationVar]: '0',
+            [elevationTokensExtern.level]: '0',
         },
         ':hover:active': {
             cursor: 'not-allowed',
-            [elevationVar]: '0',
+            [elevationTokensExtern.level]: '0',
         },
-
     }
 })

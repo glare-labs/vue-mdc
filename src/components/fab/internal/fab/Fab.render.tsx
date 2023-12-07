@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Fab.type'
-import { css } from 'aphrodite'
+import { css } from 'aphrodite/no-important'
 import { fabStyles } from './Fab.styles'
 import { Elevation } from '@/components/elevation'
 
@@ -13,18 +13,12 @@ export const renderFab = defineComponent({
             return {
                 root: css(
                     fabStyles.root,
-                    fabStyles.containerShape,
                     fabStyles[this.variant],
-                    this.lowered ? fabStyles.containerLowElevation : fabStyles.containerElevation,
-                    fabStyles.containerColor,
-                    fabStyles.containerSize,
+                    fabStyles[`${this.size}Shape`],
                     fabStyles[this.size],
+                    fabStyles[`${this.size}IconSize`],
+                    this.lowered ? fabStyles.containerElevationLow : this.size === 'large' ? fabStyles.containerElevationHigh : fabStyles.containerElevation,
                     this.disabled && fabStyles.disabledRoot,
-                ),
-                iconRoot: css(
-                    fabStyles.iconRoot,
-                    fabStyles.iconSize,
-                    fabStyles.iconColor,
                 ),
             }
         }

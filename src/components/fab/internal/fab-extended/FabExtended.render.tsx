@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './FabExtended.type'
-import { css } from 'aphrodite'
+import { css } from 'aphrodite/no-important'
 import { fabStyles } from './FabExtended.styles'
 import { Elevation } from '@/components/elevation'
 
@@ -13,18 +13,11 @@ export const renderFabExtended = defineComponent({
             return {
                 root: css(
                     fabStyles.root,
-                    fabStyles.containerShape,
-                    this.lowered ? fabStyles.containerLowElevation : fabStyles.containerElevation,
-                    fabStyles.containerColor,
                     fabStyles[this.variant],
                     fabStyles.containerLabel,
-                    fabStyles.containerSize,
+                    fabStyles.containerIcon,
+                    this.lowered ? fabStyles.containerElevationLow : fabStyles.containerElevation,
                     this.disabled && fabStyles.disabledRoot,
-                ),
-                iconRoot: css(
-                    fabStyles.iconRoot,
-                    fabStyles.iconSize,
-                    fabStyles.iconColor,
                 ),
             }
         }
@@ -92,11 +85,11 @@ export const renderFabExtended = defineComponent({
             >
                 <Elevation></Elevation>
                 {
-                    this.iconPosition === 'left' && this.$slots.icon && <span aria-hidden class={this.classes.iconRoot}>{ this.$slots.icon() }</span>
+                    this.iconPosition === 'left' && this.$slots.icon && this.$slots.icon()
                 }
                 { this.$slots.default && this.$slots.default() }
                 {
-                    this.iconPosition === 'right' && this.$slots.icon && <span aria-hidden class={this.classes.iconRoot}>{ this.$slots.icon() }</span>
+                    this.iconPosition === 'right' && this.$slots.icon && this.$slots.icon()
                 }
             </div>
         )
