@@ -1,11 +1,15 @@
-import { makeComponentExternTokens } from '@/utils/tokens'
+import { makeComponentExternTokens, makeComponentTokens } from '@/utils/tokens'
 
-export const fabTokens = {
-    background: '--mamv-fab-background',
-    color: '--mamv-fab-on-background',
-    height: '--mamv-fab-height',
-    width: '--mamv-fab-width',
-    shape: '--mamv-fab-shape',
-} as const
+const tokens = [
+    'background',
+    'color',
+    'height',
+    'width',
+    'shape',
+] as const
 
+export const fabTokens = makeComponentTokens<typeof tokens>(
+    'fab',
+    tokens
+)
 export const fabTokensExtern = makeComponentExternTokens<typeof fabTokens>(fabTokens)
