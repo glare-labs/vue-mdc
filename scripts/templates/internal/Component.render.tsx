@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './component.type'
 
-export const renderComponent = defineComponent({
+export const render = defineComponent({
     props,
     slots,
     render() {

@@ -1,4 +1,11 @@
+import { makeComponentExternTokens, makeComponentTokens } from '@/utils/tokens'
 
-export const componentTokens = {
+const tokens = [
 
-} as const
+] as const
+
+export const Tokens = makeComponentTokens<typeof tokens>(
+    '',
+    tokens
+)
+export const TokensExtern = makeComponentExternTokens<typeof Tokens>(Tokens)
