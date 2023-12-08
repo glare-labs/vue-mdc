@@ -5,7 +5,7 @@ export const props = {
     /**
      * @default middle-inset
      */
-    mode: {
+    variant: {
         default: 'middle-inset',
         type: String as PropType<'inset-left' | 'middle-inset' | 'inset-right' | 'no-inset'>
     }

@@ -11,7 +11,7 @@ export const renderDivider = defineComponent({
         classes() {
             return css(
                 dividerStyles.root,
-                dividerStyles[this.mode],
+                dividerStyles[this.variant],
             )
         },
     },
