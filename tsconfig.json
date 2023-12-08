@@ -39,7 +39,10 @@
     "src/**/*.tsx",
     "src/**/*.d.ts",
     "src/**/*.vue",
-    "scripts/templates/**/*.tsx"
+  ],
+  "exclude": [
+    "scripts/**/*",
+    "test-report/**/*"
   ],
   "references": [
     {
