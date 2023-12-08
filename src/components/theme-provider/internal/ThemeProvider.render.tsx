@@ -1,11 +1,12 @@
 import { GenerateMaterialTheme } from '@/utils/material-theme'
 import { defineComponent } from 'vue'
-import { props, slots } from './ThemeProvider.type'
+import { emits, props, slots } from './ThemeProvider.type'
 
 export const renderThemeProvider = defineComponent({
     name: 'MAMVThemeProvider',
     props,
     slots,
+    emits,
     render() {
         return (
             <div>
@@ -17,17 +18,28 @@ export const renderThemeProvider = defineComponent({
     },
     methods: {
         generateTheme() {
-            GenerateMaterialTheme(
+            const result = GenerateMaterialTheme(
                 this.$el,
                 this.sourceColor.toString(),
                 ['true'].includes(this.dark.toString())
             )
-        }
+            result.applyTheme()
+            this.$emit('theme-updated', result)
+        },
+    },
+    watch: {
+        sourceColor: {
+            handler() {
+                this.generateTheme()
+            },
+        },
+        dark: {
+            handler() {
+                this.generateTheme()
+            },
+        },
     },
     mounted() {
-        this.generateTheme()
-    },
-    updated() {
         this.generateTheme()
     },
 })
