@@ -6,13 +6,15 @@ export function GenerateMaterialTheme(
     sourceColor: string,
     dark = window.matchMedia('(prefers-color-scheme: dark)').matches
 ) {
-    // Get the theme from a hex color
     const theme = themeFromSourceColor(argbFromHex(sourceColor))
-
-
-    // Apply the theme to the body by updating custom properties for material tokens
-    applyTheme(theme, { target, dark })
-    MakeSurfaceContainer(target, dark)
+    
+    return {
+        tokens: theme,
+        applyTheme: () => {
+            applyTheme(theme, { target, dark })
+            MakeSurfaceContainer(target, dark)
+        }
+    }
 }
 
 /**
