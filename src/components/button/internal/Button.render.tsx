@@ -1,8 +1,9 @@
 import { defineComponent } from 'vue'
 import { emits, props, slots } from './Button.type'
-import { buttonStyles } from './Button.styles'
-import { css } from 'aphrodite'
+import { sharedButtonStyles } from './Button.styles'
+import { css } from 'aphrodite/no-important'
 import { Elevation } from '@/components/elevation'
+import { Ripple } from '@/components/ripple'
 
 export const renderButton = defineComponent({
     name: 'MAMVButton',
@@ -11,25 +12,15 @@ export const renderButton = defineComponent({
     emits,
     computed: {
         classes() {
-            return {
-                root: css(
-                    buttonStyles.root,
-                    !this.disabled && buttonStyles[this.appearance],
-                    buttonStyles[this.variant],
-                    buttonStyles[this.shape],
-                    buttonStyles[this.size],
-                    buttonStyles[`${this.size}WithIcon`],
-                    this.iconOnly && buttonStyles[`${this.size}IconOnly`],
-                    this.disabled && buttonStyles.disabledRoot,
-                    !this.disabled ? this.appearance === 'elevated' ? buttonStyles.activeElevationForever : (['filled', 'filled-tonal'].includes(this.appearance) && buttonStyles.activeElevationOnHover) : buttonStyles.activeElevationNever,
-                    
-                ),
-                icon: css(
-                    buttonStyles.iconRoot,
-                    buttonStyles[`${this.size}Icon`],
-                    !this.iconOnly && buttonStyles[this.iconPosition],
-                )
-            }
+            return css(
+                sharedButtonStyles.root,
+                sharedButtonStyles[this.shape],
+                sharedButtonStyles[this.size],
+                sharedButtonStyles[this.appearance],
+                this.$slots.icon !== undefined ? sharedButtonStyles.paddingWithIcon : sharedButtonStyles.padding,
+                this.disabled && sharedButtonStyles.disabled,
+            )
+
         },
     },
     methods: {
@@ -107,26 +98,13 @@ export const renderButton = defineComponent({
                 onClick={this.clickEvent}
                 onAuxclick={this.auxclickEvent}
                 onDblclick={this.mousedownEvent}
-                class={this.classes.root}
-                {
-                    ...{
-                        on: {
-                            'click': () => {
-
-                            }
-                        }
-                    }
-                }
-                style="user-select: none"
+                class={this.classes}
             >
                 <Elevation></Elevation>
-                {
-                    this.iconPosition === 'left' && this.$slots.icon && <span class={this.classes.icon}>{ this.$slots.icon() }</span>
-                }
+                <Ripple disabled={this.disabled}></Ripple>
+                { (this.iconPosition === 'left' && this.$slots.icon) && this.$slots.icon() }
                 { !this.iconOnly && this.$slots.default && this.$slots.default() }
-                {
-                    this.iconPosition === 'right' && this.$slots.icon && <span class={this.classes.icon}>{ this.$slots.icon() }</span>
-                }
+                { (this.iconPosition === 'right' && this.$slots.icon) && this.$slots.icon() }
             </span>
         )
     },
@@ -138,6 +116,7 @@ export const renderButton = defineComponent({
         }
     },
     components: {
-        Elevation
+        Elevation,
+        Ripple
     }
 })

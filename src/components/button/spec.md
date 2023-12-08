@@ -7,14 +7,6 @@
 MAMVButton
 ```
 
-## variant
-_按钮根据重要程度提供四种配色。primary、secondary、tertiary按照重要程度从重到轻，**非毁灭性操作请勿使用error**（例如无法撤销的行为）。_
-
-+ primary
-+ secondary
-+ tertiary
-+ error
-
 ## appearance
 _按钮提供5种表现形式。_
 

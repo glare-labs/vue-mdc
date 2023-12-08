@@ -1,13 +1,6 @@
 import { PropType, SlotsType } from 'vue'
 
 export const props = {
-    /**
-     * @default primary
-     */
-    variant: {
-        default: 'primary',
-        type: String as PropType<'primary' | 'secondary' | 'tertiary' | 'error'>
-    },
 
     /**
      * @default filled
@@ -89,8 +82,7 @@ export const emits = [
     'dblclick'
 ]
 
-
 export const slots = Object as SlotsType<{
-    default: void
-    icon: void
+    default?: void
+    icon?: void
 }>
