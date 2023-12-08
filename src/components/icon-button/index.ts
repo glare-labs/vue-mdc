@@ -1,3 +1,2 @@
-import { renderIconButton } from './internal'
 
-export const IconButton = renderIconButton
+export { renderIconButton as IconButton } from './internal/IconButton.render'

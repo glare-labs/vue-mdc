@@ -1,2 +1,2 @@
 
-export * from './internal/index'
+export { renderElevation as Elevation } from './internal/Elevation.render'
