@@ -9,10 +9,10 @@ export const renderIcon = defineComponent({
     slots,
     computed: {
         classes() {
-            return  css(
-                iconStyles.root,
+            return css(
                 iconStyles[this.variant],
                 iconStyles[this.size],
+                iconStyles.root,
             )
         }
     },

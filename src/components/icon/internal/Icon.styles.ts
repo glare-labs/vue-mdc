@@ -1,35 +1,43 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { iconTokens, iconTokensExtern } from './Icon.tokens'
+import { tokens } from '@/utils/tokens'
 
 export const iconStyles = StyleSheet.create({
     root: {
-        fontFamily: `var(${iconTokensExtern.fontFamily}, var(${iconTokens.fontFamily}))`,
-        fontSize: `var(${iconTokensExtern.fontSize}, var(${iconTokens.fontSize}))`,
+        fontFamily: `var(${iconTokensExtern['font-family']}, var(${iconTokens['font-family']}))`,
+        fontSize: `var(${iconTokensExtern['font-size']}, var(${iconTokens['font-size']}))`,
+
+        [iconTokens.color]: tokens.color.surface.onSurface,
+
+        color: `var(${iconTokensExtern.color}, var(${iconTokens.color}))`,
+
+        pointerEvent: 'none',
+        'user-select': 'none',
     },
     
     /**
      * size
      */
     small: {
-        [iconTokens.fontSize]: '24px',
+        [iconTokens['font-size']]: '24px',
     },
     medium: {
-        [iconTokens.fontSize]: '24px',
+        [iconTokens['font-size']]: '24px',
     },
     large: {
-        [iconTokens.fontSize]: '48px',
+        [iconTokens['font-size']]: '48px',
     },
 
     /**
      * variant
      */
     outlined: {
-        [iconTokens.fontFamily]: 'Material Symbols Outlined',
+        [iconTokens['font-family']]: 'Material Symbols Outlined',
     },
     rounded: {
-        [iconTokens.fontFamily]: 'Material Symbols Rounded',
+        [iconTokens['font-family']]: 'Material Symbols Rounded',
     },
     sharp: {
-        [iconTokens.fontFamily]: 'Material Symbols Sharp',
+        [iconTokens['font-family']]: 'Material Symbols Sharp',
     },
 })
