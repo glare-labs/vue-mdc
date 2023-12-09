@@ -1,72 +1,142 @@
 import { defineComponent } from 'vue'
-import { data, props, slots } from './IconButton.type'
-import { css } from 'aphrodite'
-import { iconButtonStyles } from './IconButton.styles'
+import { emits, props, slots } from './IconButton.type'
+import { css } from 'aphrodite/no-important'
+import { sharedIconButtonStyles } from './IconButton.styles'
+import { Ripple } from '@/components/ripple'
 
 export const renderIconButton = defineComponent({
     name: 'MAMVIconButton',
     props,
     slots,
-    data,
+    emits,
+    data: () => ({
+        selected: false,
+    }),
     computed: {
         classes() {
-            return {
-                root: css(
-                    iconButtonStyles.root,
-                    iconButtonStyles[this.size],
-                    iconButtonStyles[this.variant],
-                    !this.disabled && iconButtonStyles.untoggle,
-                    this.variant !== 'surface' && this.toggle && this.isSelected && iconButtonStyles.toggle,
-                    this.disabled && iconButtonStyles.disabledRoot,
-                ),
-                icon: css(
-                    iconButtonStyles.iconRoot,
-                    iconButtonStyles[`${this.size}Icon`],
-                )
-            }
+            return css(
+                sharedIconButtonStyles.root,
+                sharedIconButtonStyles[this.size],
+                sharedIconButtonStyles[this.appearance],
+                sharedIconButtonStyles[this.shape],
+                this.toggle ? this.selected ? sharedIconButtonStyles['toggle-selected'] : sharedIconButtonStyles['toggle-unselect'] : sharedIconButtonStyles['no-toggle'],
+                this.disabled && sharedIconButtonStyles.disabled,
+            )
         },
     },
     render() {
         return (
-            <div class={this.classes.root} onClick={this.clickEvent}>
-                
+            <span
+                role='button'
+                class={this.classes}
+                onMousedown={this.mousedownEvent}
+                onMouseenter={this.mouseenterEvent}
+                onMouseleave={this.mouseleaveEvent}
+                onMousemove={this.mousemoveEvent}
+                onMouseout={this.mouseoutEvent}
+                onMouseover={this.mouseoverEvent}
+                onMouseup={this.mouseupEvent}
+                onClick={this.clickEvent}
+                onAuxclick={this.auxclickEvent}
+                onDblclick={this.mousedownEvent}
+            >
+                <Ripple disabled={this.disabled}></Ripple>
                 {
-                    this.$slots.default && <span aria-hidden="true" class={this.classes.icon}>{ this.$slots.default() }</span>
+                    this.$slots.default && this.$slots.default()
                 }
                 
-            </div>
+            </span>
         )
     },
     methods: {
-        setIsSelected(e: boolean) {
-            this.isSelected = e
-        },
-        clickEvent() {
+        mousedownEvent(e: Event) {
             if(this.disabled) return 
-            this.setIsSelected(!this.isSelected)
-        }
+            this.$emit('mousedown', e)
+        },
+        mouseenterEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mouseenter', e)
+        },
+        mouseleaveEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mouseleave', e)
+        },
+        mousemoveEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mousemove', e)
+        },
+        mouseoutEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mouseout', e)
+        },
+        mouseoverEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mouseover', e)
+        },
+        mouseupEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('mouseup', e)
+        },
+        clickEvent(e: Event) {
+            if(this.disabled) return 
+            if(this.type === 'reset') {
+                this.resetEvent()
+            } else if(this.type === 'submit') {
+                this.submitEvent()
+            }
+            this.buttonEvent(e)
+        },
+        auxclickEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('auxclick', e)
+        },
+        dblclickEvent(e: Event) {
+            if(this.disabled) return 
+            this.$emit('dblclick', e)
+        },
+        submitEvent() {
+            if(this.form === undefined) return
+            const formRoot = document.querySelector(this.form) as HTMLFormElement
+            formRoot.submit()
+        },
+        resetEvent() {
+            if(this.form === undefined) return
+            const formRoot = document.querySelector(this.form) as HTMLFormElement
+            formRoot.reset()
+        },
+        buttonEvent(e: Event) {
+            this.$emit('click', e)
+            this.setSelected(e, !this.selected)
+        },
+        setSelected(e: Event, data: boolean) {
+            this.selected = data
+            this.$emit('select', e, data)
+        },
+        aria() {
+            const target = this.$el as HTMLElement
+            if (this.disabled) {
+                target.setAttribute('disabled', 'true')
+                target.setAttribute('aria-disabled', 'true')
+            } else {
+                target.removeAttribute('disabled')
+                target.removeAttribute('aria-disabled')
+            }
+        },
+    },
+    watch: {
+        disabled: {
+            handler() {
+                this.aria()
+            }
+        },
     },
     created() {
-        if(this.variant === 'surface' && this.toggle) {
-            console.warn('Can not set the property \'toggle\' in a surface properted icon-button.')
-        }
-        if(this.toggle && this.selected) {
-            console.warn('Please set \'toggle\' in the icon-button if you want it is selected.')
-        }
-    },
-    beforeMount() {
-        this.isSelected = this.selected
+        this.selected = this.defaultSelected
     },
     mounted() {
-        /**
-         * aria
-         */
-        const target = this.$el as HTMLElement
-        if (this.disabled) {
-            target.setAttribute('disabled', 'true')
-            target.setAttribute('aria-disabled', 'true')
-        }
-
+        this.aria()
     },
-    
+    components: {
+        Ripple,
+    }
 })

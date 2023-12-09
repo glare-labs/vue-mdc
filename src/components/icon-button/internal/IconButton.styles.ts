@@ -1,133 +1,140 @@
+import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
+import { iconTokensExtern } from '@/components/icon'
 import { tokens } from '@/utils/tokens'
-import { StyleSheet } from 'aphrodite'
+import { StyleSheet } from 'aphrodite/no-important'
+import { iconButtonTokens, iconButtonTokensExtern } from './IconButton.tokens'
 
-// for filled
-const backgroundColorVar = '--button-background-color'
-const onBackgroundColorVar = '--button-on-background-color'
-const backgroundContainerColorVar = '--button-background-continer-color'
-const onBackgroundContainerColorVar = '--button-on-background-container-color'
+export const sharedIconButtonStyles = StyleSheet.create({
 
-export const iconButtonStyles = StyleSheet.create({
     root: {
+        shape: `var(${iconButtonTokensExtern.shape}, var(${iconButtonTokens.shape}))`,
+        height: `var(${iconButtonTokensExtern.height}, var(${iconButtonTokens.height}))`,
+        width: `var(${iconButtonTokensExtern.width}, var(${iconButtonTokens.width}))`,
+        borderRadius: `var(${iconButtonTokens.shape})`,
+        
+        ...tokens.typescale.labelLarge,
+
         position: 'relative',
+        display: 'inline-flex',
         alignItems: 'center',
         boxSizing: 'border-box',
-        display: 'inline-flex',
         justifyContent: 'center',
         textDecorationLine: 'none',
         verticalAlign: 'middle',
-        margin: 0,
+        margin: '8px',
         outlineStyle: 'none',
-        transitionDuration: tokens.durationFaster,
-        transitionProperty: 'background, border, color',
-        transitionTimingFunction: tokens.curveEasyEase,
+        ':hover': {
+            cursor: 'pointer',
+        },
+        transitionDuration: tokens.motion.duration.medium1,
+        transitionProperty: 'background, border, color, box-shadow',
+        transitionTimingFunction: tokens.motion.easing.standard,
         '@media screen and (prefers-reduced-motion: reduce)': {
             transitionDuration: '0.01ms',
         },
         zIndex: 0,
-        borderRadius: tokens.borderRadiusCircular,
-        'aspect-ratio': '1/1',
-        cursor: 'pointer',
         'user-select': 'none',
     },
-    iconRoot: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'inline-flex',
-    },
 
-    toggle: {
-        backgroundColor: `var(${backgroundContainerColorVar})`,
-        color: `var(${onBackgroundContainerColorVar})`,
-        ':hover': {
-            backgroundColor: `color-mix(in srgb, var(${backgroundContainerColorVar}) 75%, black 15%)`,
-        }
+    /**
+     * shape
+     */
+    circular: {
+        [iconButtonTokens.shape]: tokens.shape.corner.full,
     },
-    untoggle: {
-        backgroundColor: `var(${backgroundColorVar})`,
-        color: `var(${onBackgroundColorVar})`,
-        ':hover': {
-            backgroundColor: `color-mix(in srgb, var(${backgroundColorVar}) 75%, white 15%)`,
-        },
+    rounded: {
+        [iconButtonTokens.shape]: tokens.shape.corner.medium,
+    },
+    square: {
+        [iconButtonTokens.shape]: tokens.shape.corner.none,
     },
 
     /**
      * size
      */
     small: {
-        padding: tokens.spacingHorizontalL,
-        height: '24px',
-        width: '24px',
+        [iconButtonTokens.height]: '36px',
+        [iconButtonTokens.width]: '36px',
+        [iconTokensExtern['font-size']]: '18px',
     },
     medium: {
-        padding: tokens.spacingHorizontalXL,
-        height: '32px',
-        width: '32px',
+        [iconButtonTokens.height]: '40px',
+        [iconButtonTokens.width]: '40px',
+        [iconTokensExtern['font-size']]: '24px',
     },
     large: {
-        padding: tokens.spacingHorizontalXXL,
-        height: '40px',
-        width: '40px',
+        [iconButtonTokens.height]: '44px',
+        [iconButtonTokens.width]: '44px',
+        [iconTokensExtern['font-size']]: '28px',
     },
 
-    smallIcon: {
-    },
-    mediumIcon: {
-    },
-    largeIcon: {
+    disabled: {
+        backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 12%, transparent 88%)`,
+        color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, transparent 62%)`,
+        cursor: 'not-allowed',
+        [elevationTokensExtern.level]: '0',
+        ':hover': {
+            cursor: 'not-allowed',
+            [elevationTokensExtern.level]: '0',
+        },
+        ':hover:active': {
+            cursor: 'not-allowed',
+            [elevationTokensExtern.level]: '0',
+        },
     },
 
     /**
      * variant
      */
-    surface: {
-        [backgroundColorVar]: tokens.surface,
-        [onBackgroundColorVar]: tokens.onSurface,
-        ':hover': {
-            [backgroundColorVar]: `color-mix(in srgb, ${tokens.surface} 5%, black 15%)`,
-        }
+    filled: {
+        [iconButtonTokens.color]: tokens.color.primary.onPrimary,
+        [iconButtonTokens['toggle-unselect-color']]: tokens.color.primary.primary,
+        [iconButtonTokens['toggle-selected-color']]: tokens.color.primary.onPrimary,
+        [iconButtonTokens['container-color']]: tokens.color.primary.primary,
+        [iconButtonTokens['unselect-container-color']]: tokens.color.surface.surfaceContainerHighest,
+        [iconButtonTokens['selected-container-color']]: tokens.color.primary.primary,    
     },
-    primary: {
-        [backgroundColorVar]: tokens.primary,
-        [onBackgroundColorVar]: tokens.onPrimary,
-        [backgroundContainerColorVar]: tokens.primaryContainer,
-        [onBackgroundContainerColorVar]: tokens.onPrimaryContainer,
+    'filled-tonal': {
+        [iconButtonTokens.color]: tokens.color.secondary.onSecondaryContainer,
+        [iconButtonTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
+        [iconButtonTokens['toggle-selected-color']]: tokens.color.secondary.onSecondaryContainer,
+        [iconButtonTokens['container-color']]: tokens.color.secondary.secondaryContainer,
+        [iconButtonTokens['unselect-container-color']]: tokens.color.surface.surfaceContainerHighest,
+        [iconButtonTokens['selected-container-color']]: tokens.color.secondary.secondaryContainer,
     },
-    secondary: {
-        [backgroundColorVar]: tokens.secondary,
-        [onBackgroundColorVar]: tokens.onSecondary,
-        [backgroundContainerColorVar]: tokens.secondaryContainer,
-        [onBackgroundContainerColorVar]: tokens.onSecondaryContainer,
+    outlined: {
+        [iconButtonTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
+        [iconButtonTokens['toggle-selected-color']]: tokens.color.surface.inverseOnSurface,
+        [iconButtonTokens['container-color']]: 'transparent',
+        [iconButtonTokens['unselect-container-color']]: 'transparent',
+        [iconButtonTokens['selected-container-color']]: tokens.color.surface.inverseSurface,
+        outline: `1px solid ${tokens.color.outline.outline}`,
     },
-    tertiary: {
-        [backgroundColorVar]: tokens.tertiary,
-        [onBackgroundColorVar]: tokens.onTertiary,
-        [backgroundContainerColorVar]: tokens.tertiaryContainer,
-        [onBackgroundContainerColorVar]: tokens.onTertiaryContainer,
-    },
-    error: {
-        [backgroundColorVar]: tokens.error,
-        [onBackgroundColorVar]: tokens.onError,
-        [backgroundContainerColorVar]: tokens.errorContainer,
-        [onBackgroundContainerColorVar]: tokens.onErrorContainer,
+    standard: {
+        // [iconButtonTokens.color]: tokens.color.secondary.onSecondaryContainer,
+        [iconButtonTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
+        [iconButtonTokens['toggle-selected-color']]: tokens.color.primary.primary,
+        [iconButtonTokens['container-color']]: 'transparent',
+        [iconButtonTokens['unselect-container-color']]: 'transparent',
+        [iconButtonTokens['selected-container-color']]: 'transparent',
     },
 
     /**
-     * disabled
+     * toggle and no-toggle
      */
-    disabledRoot: {
-        filter: 'grayscale(1)',
-        backgroundColor: `color-mix(in srgb, ${tokens.surface} 75%, gray 25%)`,
-        color: `color-mix(in srgb, ${tokens.onSurface} 5%, gray 95%)`,
-        borderColor: 'transparent',
-        boxShadow: 'none',
-        cursor: 'not-allowed',
-        ':hover': {
-            cursor: 'not-allowed',
-        },
-        ':hover:active': {
-            cursor: 'not-allowed',
-        },
-
+    'toggle-unselect': {
+        backgroundColor: `var(${iconButtonTokensExtern['unselect-container-color']}, var(${iconButtonTokens['unselect-container-color']}))`,
+        color: `var(${iconButtonTokensExtern['toggle-unselect-color']}, var(${iconButtonTokens['toggle-unselect-color']}))`,
+        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['toggle-unselect-color']}, var(${iconButtonTokens['toggle-unselect-color']}))`,
+    },
+    'toggle-selected': {
+        backgroundColor: `var(${iconButtonTokensExtern['selected-container-color']}, var(${iconButtonTokens['selected-container-color']}))`,
+        color: `var(${iconButtonTokensExtern['toggle-selected-color']}, var(${iconButtonTokens['toggle-selected-color']}))`,
+        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['toggle-selected-color']}, var(${iconButtonTokens['toggle-selected-color']}))`,
+    },
+    'no-toggle': {
+        backgroundColor: `var(${iconButtonTokensExtern['container-color']}, var(${iconButtonTokens['container-color']}))`,
+        color: `var(${iconButtonTokensExtern['color']}, var(${iconButtonTokens['color']}))`,
+        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['color']}, var(${iconButtonTokens['color']}))`,
     }
 })
