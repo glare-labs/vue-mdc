@@ -19,10 +19,10 @@ export const props = {
     },
 
     /**
-     * @default rounded
+     * @default circular
      */
     shape: {
-        default: 'rounded',
+        default: 'circular',
         type: String as PropType<'rounded' | 'circular' | 'square'>
     },
 
