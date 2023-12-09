@@ -1,19 +1,34 @@
 {
   "name": "material-anti-mage-vue",
+  "author": "bre97-web",
   "private": true,
   "version": "0.0.0",
+  "displayName": "Material Anti-Mage Vue",
+  "keywords": [
+    "vue",
+    "components",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bre97-web/material-anti-mage-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bre97-web/material-anti-mage-vue/issues"
+  },
+  "homepage": "https://github.com/bre97-web/material-anti-mage-vue",
+  "license": "MIT",
   "type": "module",
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.umd.js"
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
+    "build": "vue-tsc && vite build && eslint ./dist/**/*",
     "preview": "vite preview",
     "eslint": "npx eslint ./src/**",
     "eslint:fix": "npx eslint ./src/** --fix",
@@ -22,28 +37,27 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@material/material-color-utilities": "^0.2.7",
     "aphrodite": "^2.4.0",
-    "vue": "^3.3.8"
+    "vue": "^3.3.11"
   },
   "devDependencies": {
-    "@types/node": "^20.9.3",
-    "@typescript-eslint/eslint-plugin": "^6.12.0",
-    "@typescript-eslint/parser": "^6.12.0",
-    "@vitejs/plugin-vue": "^4.5.0",
+    "@material/material-color-utilities": "^0.2.7",
+    "@types/node": "^20.10.4",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
+    "@vitejs/plugin-vue": "^4.5.2",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vitest/ui": "^1.0.2",
     "@vue/test-utils": "^2.4.3",
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "generate-template-files": "^3.2.1",
     "jsdom": "^23.0.1",
-    "material-symbols": "^0.14.1",
+    "material-symbols": "^0.14.2",
     "readline": "^1.3.0",
-    "rollup-plugin-typescript2": "^0.36.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.3",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.7",
+    "vite-plugin-dts": "^3.6.4",
     "vitest": "^1.0.2",
-    "vue-tsc": "^1.8.22"
+    "vue-tsc": "^1.8.25"
   }
 }
