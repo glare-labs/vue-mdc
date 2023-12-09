@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Typography.type'
-import { css } from 'aphrodite'
+import { css } from 'aphrodite/no-important'
 import { typographyStyles } from './Typography.styles'
 
 export const renderTypography = defineComponent({
@@ -10,8 +10,8 @@ export const renderTypography = defineComponent({
     computed: {
         classes() {
             return css(
-                typographyStyles.root,
                 typographyStyles[this.variant],
+                typographyStyles.root,
             )
         },
     },
