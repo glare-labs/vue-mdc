@@ -3,6 +3,7 @@ import { emits, props, slots } from './Fab.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './Fab.styles'
 import { Elevation } from '@/components/elevation'
+import { Ripple } from '@/components/ripple'
 
 export const renderFab = defineComponent({
     name: 'MAMVFab',
@@ -26,43 +27,43 @@ export const renderFab = defineComponent({
     },
     methods: {
         mousedownEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousedown', e)
         },
         mouseenterEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseenter', e)
         },
         mouseleaveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseleave', e)
         },
         mousemoveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousemove', e)
         },
         mouseoutEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseout', e)
         },
         mouseoverEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseover', e)
         },
         mouseupEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseup', e)
         },
         clickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.buttonEvent(e)
         },
         auxclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('auxclick', e)
         },
         dblclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('dblclick', e)
         },
         buttonEvent(e: Event) {
@@ -86,8 +87,12 @@ export const renderFab = defineComponent({
                 onDblclick={this.mousedownEvent}
             >
                 <Elevation></Elevation>
-                { this.$slots.default && this.$slots.default() }
+                <Ripple disabled={this.disabled}></Ripple>
+                {this.$slots.default && this.$slots.default()}
             </div>
         )
-    }
+    },
+    components: {
+        Ripple,
+    },
 })
