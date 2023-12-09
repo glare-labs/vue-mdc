@@ -20,7 +20,7 @@ export const renderRipple = defineComponent({
     },
     render() {
         return (
-            <span class={this.classes.container}>
+            <span aria-hidden="true" class={this.classes.container}>
 
             </span>
         )
