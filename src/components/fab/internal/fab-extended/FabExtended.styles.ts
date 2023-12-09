@@ -93,7 +93,7 @@ export const fabStyles = StyleSheet.create({
      * icon
      */
     containerIcon: {
-        [iconTokensExtern.fontSize]: '24px',
+        [iconTokensExtern['font-size']]: '24px',
     },
 
     /**

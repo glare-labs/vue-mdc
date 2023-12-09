@@ -118,13 +118,13 @@ export const fabStyles = StyleSheet.create({
      * icon
      */
     smallIconSize: {
-        [iconTokensExtern.fontSize]: '24px',
+        [iconTokensExtern['font-size']]: '24px',
     },
     mediumIconSize: {
-        [iconTokens.fontSize]: '24px',
+        [iconTokens['font-size']]: '24px',
     },
     largeIconSize: {
-        [iconTokensExtern.fontSize]: '48px',
+        [iconTokensExtern['font-size']]: '48px',
     },
 
     /**
