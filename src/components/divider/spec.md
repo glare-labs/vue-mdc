@@ -1,4 +1,5 @@
 # Divider
+分隔线。
 
 [Divider in Material](https://m3.material.io/components/divider/overview)
 
@@ -7,8 +8,14 @@
 MAMVDivider
 ```
 
-## mode
-mode属性控制线段的左右间距。
+## direction
+分隔线的方向。
+
++ horizontal
++ vertical
+
+## variant
+variant属性控制分隔线的左（上）右（下）间距。
 
 + no-inset
 + middle-inset
@@ -21,7 +28,7 @@ mode属性控制线段的左右间距。
 <template>
 
     <ThemeProvider>
-        <Divider mode="middle-inset"></Divider>
+        <Divider variant="middle-inset"></Divider>
     </ThemeProvider>
 
 </template>

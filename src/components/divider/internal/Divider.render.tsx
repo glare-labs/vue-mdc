@@ -1,25 +1,23 @@
 import { defineComponent } from 'vue'
-import { props, slots } from './Divider.type'
-import { css } from 'aphrodite'
-import { dividerStyles } from './Divider.styles'
+import { props } from './Divider.type'
+import { css } from 'aphrodite/no-important'
+import { sharedDividerStyles } from './Divider.styles'
 
 export const renderDivider = defineComponent({
     name: 'MAMVDivider',
     props,
-    slots,
     computed: {
         classes() {
             return css(
-                dividerStyles.root,
-                dividerStyles[this.variant],
+                sharedDividerStyles.root,
+                sharedDividerStyles[this.variant],
+                sharedDividerStyles[this.direction],
             )
         },
     },
     render() {
         return (
-            <span class={this.classes}>
-
-            </span>
+            <span class={this.classes}></span>
         )
     },
 })

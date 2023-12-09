@@ -4,6 +4,7 @@ const tokens = [
     'color',
     'thickness',
     'width',
+    'height',
     'margin-left',
     'margin-right',
     'margin-bottom',

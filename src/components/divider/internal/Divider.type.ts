@@ -1,4 +1,4 @@
-import { PropType, SlotsType } from 'vue'
+import { PropType } from 'vue'
 
 export const props = {
 
@@ -8,9 +8,14 @@ export const props = {
     variant: {
         default: 'middle-inset',
         type: String as PropType<'inset-left' | 'middle-inset' | 'inset-right' | 'no-inset'>
-    }
+    },
+
+    /**
+     * @default horizontal
+     */
+    direction: {
+        default: 'horizontal',
+        type: String as PropType<'horizontal' | 'vertical'>,
+    },
 
 }
-
-export const slots = Object as SlotsType<{
-}>
