@@ -1,0 +1,25 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "files.exclude": {
+        "**/node_modules": true
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+        "jsx",
+        "tsx"
+    ],
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "javascript.format.semicolons": "remove",
+    "typescript.format.semicolons": "remove",
+    "typescript.autoClosingTags": true,
+    "typescript.format.indentSwitchCase": true,
+    "typescript.preferences.quoteStyle": "single",
+    "editor.indentSize": 4,
+    "testing.automaticallyOpenPeekView": "never",
+}

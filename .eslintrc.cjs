@@ -30,7 +30,7 @@ module.exports = {
     ],
     'rules': {
         'indent': [
-            'error',
+            'warn',
             4
         ],
         'linebreak-style': [
@@ -45,7 +45,34 @@ module.exports = {
             'error',
             'never'
         ],
+        'array-callback-return': 'error',
+        'constructor-super': 'warn',
+        'for-direction': 'error',
+        'no-debugger': 'error',
+        'no-duplicate-case': 'warn',
+        'no-duplicate-imports': 'error',
+        'no-fallthrough': 'error',
+        'no-irregular-whitespace': 'error',
+        'class-methods-use-this': 'error',
+        'id-length': [
+            'error',
+            {
+                'min': 2,
+                'max': 64,
+            },
+        ],
+        'no-loop-func': 'warn',
+        'no-var': 'warn',
+        'no-with': 'error',
+        'line-comment-position': [
+            'error',
+            {
+                'position': 'above'
+            }
+        ],
         '@typescript-eslint/ban-types': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-explicit-any': 'warn',
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': 'warn'
     },
 }
