@@ -66,7 +66,6 @@ export const sharedButtonStyles = StyleSheet.create({
     },
     medium: {
         [buttonTokens.height]: '40px',
-        // [buttonTokens.height]: '40px',
         [iconTokensExtern['font-size']]: '18px',
         [buttonTokens['font-size']]: '14px',
     },
@@ -86,6 +85,13 @@ export const sharedButtonStyles = StyleSheet.create({
     paddingWithIcon: {
         [buttonTokens['padding-left']]: '16px',
         [buttonTokens['padding-right']]: '24px',
+    },
+
+    /**
+     * icon-only
+     */
+    'icon-only': {
+        [buttonTokens['padding-left']]: '24px',
     },
 
     disabled: {

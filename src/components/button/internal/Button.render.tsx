@@ -18,6 +18,7 @@ export const renderButton = defineComponent({
                 sharedButtonStyles[this.size],
                 sharedButtonStyles[this.appearance],
                 this.$slots.icon !== undefined ? sharedButtonStyles.paddingWithIcon : sharedButtonStyles.padding,
+                this.iconOnly && sharedButtonStyles['icon-only'],
                 this.disabled && sharedButtonStyles.disabled,
             )
 
@@ -83,6 +84,16 @@ export const renderButton = defineComponent({
         buttonEvent(e: Event) {
             this.$emit('click', e)
         },
+        aria() {
+            const target = this.$el as HTMLElement
+            if (this.disabled) {
+                target.setAttribute('disabled', 'true')
+                target.setAttribute('aria-disabled', 'true')
+            } else {
+                target.removeAttribute('disabled')
+                target.removeAttribute('aria-disabled')
+            }
+        },
     },
     render() {
         return (
@@ -108,12 +119,13 @@ export const renderButton = defineComponent({
             </span>
         )
     },
-    mounted() {
-        const target = this.$el as HTMLElement
-        if (this.disabled) {
-            target.setAttribute('disabled', 'true')
-            target.setAttribute('aria-disabled', 'true')
+    disabled: {
+        handler() {
+            this.aria()
         }
+    },
+    mounted() {
+        this.aria()
     },
     components: {
         Elevation,
