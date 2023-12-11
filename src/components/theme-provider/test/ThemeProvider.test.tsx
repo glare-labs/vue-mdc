@@ -18,7 +18,7 @@ describe('theme-generate', () => {
     })
 
     test('theme: dark', () => {
-        expect(wrapper.getCurrentComponent().props).toBeTruthy()
+        expect(wrapper.getCurrentComponent().props.dark).toBeTruthy()
     })
 
     test('theme: sourceColor', () => {
@@ -29,7 +29,7 @@ describe('theme-generate', () => {
         let styles = wrapper.element.getAttribute('style')
         await wrapper.setProps({ dark: false })
         expect(wrapper.element.getAttribute('style') !== styles).toBeTruthy()
-        
+
         styles = wrapper.element.getAttribute('style')
         await wrapper.setProps({ sourceColor: '#9a2f99' })
         expect(wrapper.element.getAttribute('style') !== styles).toBeTruthy()

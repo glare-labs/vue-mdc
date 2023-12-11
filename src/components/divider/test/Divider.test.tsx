@@ -5,7 +5,7 @@ import { Divider } from '../index'
 describe('divider', () => {
 
     test('renders', () => {
-        mount(Divider)
+        expect(mount(Divider)).toBeDefined()
     })
 
     test('divider: update property variant', async () => {
@@ -19,5 +19,5 @@ describe('divider', () => {
 
         expect(className !== wrapper.element.getAttribute('class')).toBeTruthy()
     })
-    
+
 })

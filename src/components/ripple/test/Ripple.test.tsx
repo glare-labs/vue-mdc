@@ -5,7 +5,7 @@ import { Ripple } from '../index'
 describe('ripple', () => {
 
     test('ripple: renders', () => {
-        mount(Ripple)
+        expect(mount(Ripple)).toBeDefined()
     })
 
     test('ripple: attach', () => {

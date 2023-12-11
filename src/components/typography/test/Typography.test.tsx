@@ -5,10 +5,10 @@ import { Typography } from '../index'
 describe('typography', () => {
 
     test('typography: renders', () => {
-        mount(Typography)
+        expect(mount(Typography)).toBeDefined()
     })
 
-    test('typography: slots\' content', () => {
+    test('typography: slots content', () => {
         const wrapper = mount(Typography, {
             slots: {
                 default: 'CONTENT'
