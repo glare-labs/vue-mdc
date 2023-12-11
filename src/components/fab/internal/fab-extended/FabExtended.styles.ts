@@ -94,6 +94,7 @@ export const fabStyles = StyleSheet.create({
      */
     containerIcon: {
         [iconTokensExtern['font-size']]: '24px',
+        [iconTokensExtern.color]: `var(${fabExtendedTokens.color})`,
     },
 
     /**

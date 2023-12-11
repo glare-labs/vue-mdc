@@ -27,6 +27,7 @@ export const fabStyles = StyleSheet.create({
         borderRadius: `var(${fabTokensExtern.shape}, var(${fabTokens.shape}))`,
         backgroundColor: `var(${fabTokensExtern.background}, var(${fabTokens.background}))`,
         color: `var(${fabTokensExtern.color}, var(${fabTokens.color}))`,
+        [iconTokensExtern.color]: `var(${fabTokens.color})`,
         height: `var(${fabTokensExtern.height}, var(${fabTokens.height}))`,
         width: `var(${fabTokensExtern.width}, var(${fabTokens.width}))`,
     },
@@ -113,7 +114,7 @@ export const fabStyles = StyleSheet.create({
             [elevationTokensExtern.level]: tokens.elevation.level4,
         },
     },
-    
+
     /**
      * icon
      */
