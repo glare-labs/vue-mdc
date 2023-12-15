@@ -6,6 +6,7 @@ import { Icon } from '@/components/icon'
 import { Ripple } from '@/components/ripple'
 import { ThemeProvider } from '@/components/theme-provider/index'
 import { Typography } from '@/components/typography'
+import { IconButton } from '@/components/icon-button'
 
 export {
     /**
@@ -15,7 +16,7 @@ export {
     Divider,
     Elevation,
     Typography,
-    
+
     /**
      * Those are ready to use
     */
@@ -24,4 +25,5 @@ export {
     Fab,
     FabExtended,
     Button,
+    IconButton
 }
