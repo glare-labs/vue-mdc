@@ -14,7 +14,7 @@ export const iconStyles = StyleSheet.create({
         pointerEvent: 'none',
         'user-select': 'none',
     },
-    
+
     /**
      * size
      */

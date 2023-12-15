@@ -3,15 +3,20 @@ import { iconTokensExtern } from '@/components/icon'
 import { tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { iconButtonTokens, iconButtonTokensExtern } from './IconButton.tokens'
+import { sharedStyles } from '@/utils/shared.styles'
 
 export const sharedIconButtonStyles = StyleSheet.create({
 
     root: {
+        ...sharedStyles.base,
+        ...sharedStyles.button,
+        ...sharedStyles.buttonInputOptgroupSelectTextarea,
+
         shape: `var(${iconButtonTokensExtern.shape}, var(${iconButtonTokens.shape}))`,
         height: `var(${iconButtonTokensExtern.height}, var(${iconButtonTokens.height}))`,
         width: `var(${iconButtonTokensExtern.width}, var(${iconButtonTokens.width}))`,
         borderRadius: `var(${iconButtonTokens.shape})`,
-        
+
         ...tokens.typescale.labelLarge,
 
         position: 'relative',
@@ -23,9 +28,6 @@ export const sharedIconButtonStyles = StyleSheet.create({
         verticalAlign: 'middle',
         margin: '8px',
         outlineStyle: 'none',
-        ':hover': {
-            cursor: 'pointer',
-        },
         transitionDuration: tokens.motion.duration.medium1,
         transitionProperty: 'background, border, color, box-shadow',
         transitionTimingFunction: tokens.motion.easing.standard,
@@ -69,16 +71,16 @@ export const sharedIconButtonStyles = StyleSheet.create({
     },
 
     disabled: {
-        backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 12%, transparent 88%)`,
-        color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, transparent 62%)`,
-        cursor: 'not-allowed',
+        ...sharedStyles.disabled,
+
+        [iconButtonTokens['container-color']]: `color-mix(in srgb, ${tokens.color.surface.surface} 12%, transparent 88%)`,
+        [iconButtonTokens.color]: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, transparent 62%)`,
+
         [elevationTokensExtern.level]: '0',
         ':hover': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
         ':hover:active': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
     },
@@ -92,7 +94,7 @@ export const sharedIconButtonStyles = StyleSheet.create({
         [iconButtonTokens['toggle-selected-color']]: tokens.color.primary.onPrimary,
         [iconButtonTokens['container-color']]: tokens.color.primary.primary,
         [iconButtonTokens['unselect-container-color']]: tokens.color.surface.surfaceContainerHighest,
-        [iconButtonTokens['selected-container-color']]: tokens.color.primary.primary,    
+        [iconButtonTokens['selected-container-color']]: tokens.color.primary.primary,
     },
     'filled-tonal': {
         [iconButtonTokens.color]: tokens.color.secondary.onSecondaryContainer,
@@ -125,16 +127,16 @@ export const sharedIconButtonStyles = StyleSheet.create({
     'toggle-unselect': {
         backgroundColor: `var(${iconButtonTokensExtern['unselect-container-color']}, var(${iconButtonTokens['unselect-container-color']}))`,
         color: `var(${iconButtonTokensExtern['toggle-unselect-color']}, var(${iconButtonTokens['toggle-unselect-color']}))`,
-        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['toggle-unselect-color']}, var(${iconButtonTokens['toggle-unselect-color']}))`,
+        [iconTokensExtern.color]: `var(${iconButtonTokensExtern['toggle-unselect-color']}, var(${iconButtonTokens['toggle-unselect-color']}))`,
     },
     'toggle-selected': {
         backgroundColor: `var(${iconButtonTokensExtern['selected-container-color']}, var(${iconButtonTokens['selected-container-color']}))`,
         color: `var(${iconButtonTokensExtern['toggle-selected-color']}, var(${iconButtonTokens['toggle-selected-color']}))`,
-        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['toggle-selected-color']}, var(${iconButtonTokens['toggle-selected-color']}))`,
+        [iconTokensExtern.color]: `var(${iconButtonTokensExtern['toggle-selected-color']}, var(${iconButtonTokens['toggle-selected-color']}))`,
     },
     'no-toggle': {
         backgroundColor: `var(${iconButtonTokensExtern['container-color']}, var(${iconButtonTokens['container-color']}))`,
         color: `var(${iconButtonTokensExtern['color']}, var(${iconButtonTokens['color']}))`,
-        [iconTokensExtern.color]:`var(${iconButtonTokensExtern['color']}, var(${iconButtonTokens['color']}))`,
+        [iconTokensExtern.color]: `var(${iconButtonTokensExtern['color']}, var(${iconButtonTokens['color']}))`,
     }
 })

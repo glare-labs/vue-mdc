@@ -75,18 +75,3 @@ export const props = {
 export const slots = Object as SlotsType<{
     default?: void
 }>
-
-export const emits = [
-    'mousedown',
-    'mouseenter',
-    'mouseleave',
-    'mousemove',
-    'mouseout',
-    'mouseover',
-    'mouseup',
-    'click',
-    'auxclick',
-    'dblclick',
-
-    'select',
-]
