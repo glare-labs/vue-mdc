@@ -57,7 +57,7 @@ module.exports = {
         'id-length': [
             'error',
             {
-                'min': 2,
+                'min': 1,
                 'max': 64,
             },
         ],
@@ -73,6 +73,7 @@ module.exports = {
         '@typescript-eslint/ban-types': 'off',
         '@typescript-eslint/no-explicit-any': 'warn',
         'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': 'warn'
+        '@typescript-eslint/no-unused-vars': 'warn',
+        '@typescript-eslint/ban-ts-comment': 'off',
     },
 }

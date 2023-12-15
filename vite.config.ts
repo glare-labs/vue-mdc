@@ -24,14 +24,6 @@ export default defineConfig(({ command }) => {
             ],
             root: './catalog',
             base: '/material-anti-mage-vue',
-            build: {
-                outDir: '../docs',
-                manifest: true,
-                minify: true,
-                cssMinify: true,
-                cssCodeSplit: true,
-                emptyOutDir: true,
-            }
         }
     } else if (command === 'build') {
         return {
@@ -58,7 +50,9 @@ export default defineConfig(({ command }) => {
                         'vue',
                         'material-symbols',
                         './src/docs/**/*',
-                        './src/components/**/test/*.test.{ts,tsx}'
+                        './src/components/**/test/*.test.{ts,tsx}',
+                        './src/components/labs/**/*',
+                        './catalog/**/*',
                     ],
                     output: {
                         globals: {

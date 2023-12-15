@@ -14,7 +14,18 @@ export default defineConfig(e => mergeConfig(
             coverage: {
                 provider: 'v8',
                 reporter: ['html'],
-                reportsDirectory: '../test-report/'
+                reportsDirectory: '../test-report/',
+                clean: true,
+                exclude: [
+                    '../scripts/**/*',
+                    '../catalog/**/*',
+                    '../dist/**/*',
+                    '../src/lib/**/*',
+                    '../src/utils/**/*',
+                ],
+                include: [
+                    '../src/components/**/*'
+                ]
             }
         },
     })

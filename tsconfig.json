@@ -42,10 +42,9 @@
   "exclude": [
     "scripts/**/*",
     "test-report/**/*",
-    "catalog/**/*",
-    "test-report/**/*",
     "dist/**/*",
-    ".vscode/**/*"
+    ".vscode/**/*",
+    "catalog/**/*",
   ],
   "references": [
     {
