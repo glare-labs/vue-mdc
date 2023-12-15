@@ -1,5 +1,6 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { tokens } from '@/utils/tokens'
+import { sharedStyles } from '@/utils/shared.styles.ts'
 import { buttonTokens, buttonTokensExtern } from './Button.tokens'
 import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
 import { iconTokensExtern } from '@/components/icon'
@@ -7,6 +8,10 @@ import { iconTokensExtern } from '@/components/icon'
 export const sharedButtonStyles = StyleSheet.create({
 
     root: {
+        ...sharedStyles.base,
+        ...sharedStyles.button,
+        ...sharedStyles.buttonInputOptgroupSelectTextarea,
+
         shape: `var(${buttonTokensExtern.shape}, var(${buttonTokens.shape}))`,
         height: `var(${buttonTokensExtern.height}, var(${buttonTokens.height}))`,
         borderRadius: `var(${buttonTokens.shape})`,
@@ -30,16 +35,16 @@ export const sharedButtonStyles = StyleSheet.create({
         verticalAlign: 'middle',
         margin: 0,
         outlineStyle: 'none',
-        ':hover': {
-            cursor: 'pointer',
-        },
+        outline: 'none',
+        border: 'none',
+        cursor: 'pointer',
         transitionDuration: tokens.motion.duration.medium1,
         transitionProperty: 'background, border, color, box-shadow',
         transitionTimingFunction: tokens.motion.easing.standard,
         '@media screen and (prefers-reduced-motion: reduce)': {
             transitionDuration: '0.01ms',
         },
-        zIndex: 1,
+        zIndex: 0,
         'user-select': 'none',
     },
 
@@ -95,16 +100,15 @@ export const sharedButtonStyles = StyleSheet.create({
     },
 
     disabled: {
+        ...sharedStyles.disabled,
+
         backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 12%, transparent 88%)`,
         color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, transparent 62%)`,
-        cursor: 'not-allowed',
         [elevationTokensExtern.level]: '0',
         ':hover': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
         ':hover:active': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
     },
@@ -116,7 +120,7 @@ export const sharedButtonStyles = StyleSheet.create({
         [buttonTokens['background-color']]: tokens.color.surface.surfaceContainerLow,
         [buttonTokens.color]: tokens.color.primary.primary,
         [iconTokensExtern.color]: tokens.color.primary.primary,
-    
+
         [elevationTokensExtern.level]: '1',
         ':hover': {
             [elevationTokensExtern.level]: '2',
@@ -124,7 +128,7 @@ export const sharedButtonStyles = StyleSheet.create({
         ':active': {
             [elevationTokensExtern.level]: '1',
         }
-        
+
     },
     filled: {
         [buttonTokens['background-color']]: tokens.color.primary.primary,
@@ -138,7 +142,7 @@ export const sharedButtonStyles = StyleSheet.create({
         ':active': {
             [elevationTokensExtern.level]: '0',
         }
-    
+
     },
     'filled-tonal': {
         [buttonTokens['background-color']]: tokens.color.secondary.secondaryContainer,
@@ -152,7 +156,7 @@ export const sharedButtonStyles = StyleSheet.create({
         ':active': {
             [elevationTokensExtern.level]: '0',
         }
-        
+
     },
     outlined: {
         [buttonTokens['background-color']]: 'transparent',
@@ -167,7 +171,7 @@ export const sharedButtonStyles = StyleSheet.create({
         ':active': {
             [elevationTokensExtern.level]: '0',
         }
-        
+
     },
     text: {
         [buttonTokens['background-color']]: 'transparent',
@@ -181,7 +185,7 @@ export const sharedButtonStyles = StyleSheet.create({
         ':active': {
             [elevationTokensExtern.level]: '0',
         }
-        
+
     },
 
 })
