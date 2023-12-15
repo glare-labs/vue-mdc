@@ -43,5 +43,13 @@ export const sharedRippleStyles = StyleSheet.create({
         ':hover': {
             [rippleTokens['hover-color']]: tokens.color.surface.inverseSurface,
         }
+    },
+
+    disabled: {
+        display: 'inline-block',
+        cursor: 'not-allowed',
+        ':hover': {
+            [rippleTokens['hover-color']]: 'unset',
+        }
     }
 })

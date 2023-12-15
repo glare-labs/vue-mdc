@@ -11,6 +11,7 @@ export const renderRipple = defineComponent({
             return {
                 container: css(
                     sharedRippleStyles.root,
+                    this.disabled && sharedRippleStyles.disabled,
                 ),
                 ripple: css(
                     sharedRippleStyles.ripple,
@@ -27,10 +28,10 @@ export const renderRipple = defineComponent({
     },
     methods: {
         attach(event: MouseEvent) {
-            if(this.disabled) return
-            
+            if (this.disabled) return
+
             const target = event.target as HTMLElement
-            
+
             const {
                 width,
                 height,
@@ -42,14 +43,14 @@ export const renderRipple = defineComponent({
                 x: (event.clientX - x - width / 2),
                 y: (event.clientY - y - width / 2),
             }
-            
+
             const circle = document.createElement('span')
             circle.style.left = position.x + 'px'
             circle.style.top = position.y + 'px'
             circle.style.height = size + 'px'
             circle.style.width = size + 'px'
             circle.classList.add(this.classes.ripple)
-            
+
             circle.animate(
                 [
                     {
@@ -68,7 +69,7 @@ export const renderRipple = defineComponent({
             )
 
             this.$el.appendChild(circle)
-            
+
             const resumeRippleEvent = () => {
                 circle.animate(
                     [
@@ -88,7 +89,7 @@ export const renderRipple = defineComponent({
                 window.removeEventListener('mouseup', resumeRippleEvent)
             }
             setTimeout(() => {
-                if(circle != undefined) {
+                if (circle != undefined) {
                     resumeRippleEvent()
                 }
             }, 3000)
