@@ -40,16 +40,3 @@ export const slots = Object as SlotsType<{
     default: void
     icon?: void
 }>
-
-export const emits = [
-    'mousedown',
-    'mouseenter',
-    'mouseleave',
-    'mousemove',
-    'mouseout',
-    'mouseover',
-    'mouseup',
-    'click',
-    'auxclick',
-    'dblclick'
-]

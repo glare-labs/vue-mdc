@@ -3,9 +3,14 @@ import { iconTokensExtern } from '@/components/icon/internal/Icon.tokens'
 import { tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { fabExtendedTokens, fabExtendedTokensExtern } from './FabExtended.tokens'
+import { sharedStyles } from '@/utils/shared.styles'
 
 export const fabStyles = StyleSheet.create({
     root: {
+        ...sharedStyles.base,
+        ...sharedStyles.button,
+        ...sharedStyles.buttonInputOptgroupSelectTextarea,
+
         position: 'relative',
         alignItems: 'center',
         boxSizing: 'border-box',
@@ -23,7 +28,7 @@ export const fabStyles = StyleSheet.create({
         '@media screen and (prefers-reduced-motion: reduce)': {
             transitionDuration: '0.01ms',
         },
-        zIndex: 1,
+        zIndex: 0,
         'user-select': 'none',
         paddingLeft: '16px',
         paddingRight: '16px',
@@ -101,19 +106,18 @@ export const fabStyles = StyleSheet.create({
      * disabled
      */
     disabledRoot: {
+        ...sharedStyles.disabled,
+
         filter: 'grayscale(1)',
         backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 75%, gray 25%)`,
         color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 5%, gray 95%)`,
         borderColor: 'transparent',
         boxShadow: 'none',
-        cursor: 'not-allowed',
         [elevationTokensExtern.level]: '0',
         ':hover': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
         ':hover:active': {
-            cursor: 'not-allowed',
             [elevationTokensExtern.level]: '0',
         },
     }
