@@ -1,8 +1,8 @@
 {
   "name": "material-anti-mage-vue",
   "author": "bre97-web",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.0.2",
   "displayName": "Material Anti-Mage Vue",
   "keywords": [
     "vue",
@@ -19,19 +19,29 @@
   "homepage": "https://github.com/bre97-web/material-anti-mage-vue",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js"
     }
   },
+  "types": "/dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "!src/**/*",
+    "!scripts/**/*",
+    "!test-reporter/**/*",
+    "!.vscode/**/*",
+    "!catalog/**/*"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build && eslint ./dist/**/*",
     "preview": "vite preview",
     "eslint": "npx eslint ./src/**",
-    "eslint:fix": "npx eslint ./src/** --fix",
+    "eslint:fix-src": "npx eslint ./src/** --fix",
+    "eslint:fix-dist": "npx eslint ./dist/** --fix",
     "template": "node ./scripts/generate.js",
     "test": "vitest --ui",
     "test:coverage": "vitest run --coverage"
