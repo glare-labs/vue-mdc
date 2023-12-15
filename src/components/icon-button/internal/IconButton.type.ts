@@ -1,6 +1,9 @@
+import { sharedProps } from '@/utils/shared.type'
 import { PropType, SlotsType } from 'vue'
 
 export const props = {
+
+    ...sharedProps,
 
     /**
      * @default filled
@@ -42,7 +45,7 @@ export const props = {
         default: false,
         type: Boolean as PropType<boolean>
     },
-    
+
     /**
      * @default false
      */
@@ -50,7 +53,7 @@ export const props = {
         default: false,
         type: Boolean as PropType<boolean>
     },
-    
+
     /**
      * @default 'button'
      */
@@ -58,11 +61,11 @@ export const props = {
         default: 'button',
         type: String as PropType<'button' | 'submit' | 'reset'>
     },
-    
+
     /**
-         * 指定一个表单的选择器，用于触发reset或submit
-         * @default undefined
-         */
+     * 指定一个表单的选择器，用于触发reset或submit
+     * @default undefined
+     */
     form: {
         default: undefined,
         type: String as PropType<string | undefined>
@@ -74,15 +77,15 @@ export const slots = Object as SlotsType<{
 }>
 
 export const emits = [
-    'mousedown', 
-    'mouseenter', 
-    'mouseleave', 
-    'mousemove', 
-    'mouseout', 
-    'mouseover', 
-    'mouseup', 
-    'click', 
-    'auxclick', 
+    'mousedown',
+    'mouseenter',
+    'mouseleave',
+    'mousemove',
+    'mouseout',
+    'mouseover',
+    'mouseup',
+    'click',
+    'auxclick',
     'dblclick',
 
     'select',

@@ -28,6 +28,8 @@ export const renderIconButton = defineComponent({
         return (
             <span
                 role='button'
+                aria-label={this.ariaLabel}
+                aria-aria-labelledby={this.ariaLabelledby}
                 class={this.classes}
                 onMousedown={this.mousedownEvent}
                 onMouseenter={this.mouseenterEvent}
@@ -44,63 +46,63 @@ export const renderIconButton = defineComponent({
                 {
                     this.$slots.default && this.$slots.default()
                 }
-                
+
             </span>
         )
     },
     methods: {
         mousedownEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousedown', e)
         },
         mouseenterEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseenter', e)
         },
         mouseleaveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseleave', e)
         },
         mousemoveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousemove', e)
         },
         mouseoutEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseout', e)
         },
         mouseoverEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseover', e)
         },
         mouseupEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseup', e)
         },
         clickEvent(e: Event) {
-            if(this.disabled) return 
-            if(this.type === 'reset') {
+            if (this.disabled) return
+            if (this.type === 'reset') {
                 this.resetEvent()
-            } else if(this.type === 'submit') {
+            } else if (this.type === 'submit') {
                 this.submitEvent()
             }
             this.buttonEvent(e)
         },
         auxclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('auxclick', e)
         },
         dblclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('dblclick', e)
         },
         submitEvent() {
-            if(this.form === undefined) return
+            if (this.form === undefined) return
             const formRoot = document.querySelector(this.form) as HTMLFormElement
             formRoot.submit()
         },
         resetEvent() {
-            if(this.form === undefined) return
+            if (this.form === undefined) return
             const formRoot = document.querySelector(this.form) as HTMLFormElement
             formRoot.reset()
         },

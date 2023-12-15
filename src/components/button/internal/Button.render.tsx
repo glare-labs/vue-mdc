@@ -26,59 +26,65 @@ export const renderButton = defineComponent({
     },
     methods: {
         mousedownEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousedown', e)
         },
         mouseenterEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseenter', e)
         },
         mouseleaveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseleave', e)
         },
         mousemoveEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mousemove', e)
         },
         mouseoutEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseout', e)
         },
         mouseoverEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseover', e)
         },
         mouseupEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('mouseup', e)
         },
         clickEvent(e: Event) {
-            if(this.disabled) return 
-            if(this.type === 'reset') {
+            if (this.disabled) return
+            if (this.type === 'reset') {
                 this.resetEvent()
-            } else if(this.type === 'submit') {
+            } else if (this.type === 'submit') {
                 this.submitEvent()
             } else {
                 this.buttonEvent(e)
             }
         },
         auxclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('auxclick', e)
         },
         dblclickEvent(e: Event) {
-            if(this.disabled) return 
+            if (this.disabled) return
             this.$emit('dblclick', e)
         },
+
+        /**
+         * CAN NOT PASS TEST
+         */
         submitEvent() {
-            if(this.form === undefined) return
+            if (this.form === undefined) return
             const formRoot = document.querySelector(this.form) as HTMLFormElement
+            if (formRoot === null) return
             formRoot.submit()
         },
         resetEvent() {
-            if(this.form === undefined) return
+            if (this.form === undefined) return
             const formRoot = document.querySelector(this.form) as HTMLFormElement
+            if (formRoot === null) return
             formRoot.reset()
         },
         buttonEvent(e: Event) {
@@ -99,6 +105,8 @@ export const renderButton = defineComponent({
         return (
             <span
                 role='button'
+                aria-label={this.ariaLabel}
+                aria-labelledby={this.ariaLabelledby}
                 onMousedown={this.mousedownEvent}
                 onMouseenter={this.mouseenterEvent}
                 onMouseleave={this.mouseleaveEvent}
@@ -113,16 +121,18 @@ export const renderButton = defineComponent({
             >
                 <Elevation></Elevation>
                 <Ripple disabled={this.disabled}></Ripple>
-                { (this.iconPosition === 'left' && this.$slots.icon) && this.$slots.icon() }
-                { !this.iconOnly && this.$slots.default && this.$slots.default() }
-                { (this.iconPosition === 'right' && this.$slots.icon) && this.$slots.icon() }
+                {(this.iconPosition === 'left' && this.$slots.icon) && this.$slots.icon()}
+                {!this.iconOnly && this.$slots.default && this.$slots.default()}
+                {(this.iconPosition === 'right' && this.$slots.icon) && this.$slots.icon()}
             </span>
         )
     },
-    disabled: {
-        handler() {
-            this.aria()
-        }
+    watch: {
+        disabled: {
+            handler() {
+                this.aria()
+            }
+        },
     },
     mounted() {
         this.aria()

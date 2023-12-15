@@ -75,6 +75,8 @@ export const renderFab = defineComponent({
             <div
                 class={this.classes.root}
                 role='button'
+                aria-label={this.ariaLabel}
+                aria-aria-labelledby={this.ariaLabelledby}
                 onMousedown={this.mousedownEvent}
                 onMouseenter={this.mouseenterEvent}
                 onMouseleave={this.mouseleaveEvent}

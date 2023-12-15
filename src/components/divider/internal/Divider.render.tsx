@@ -17,7 +17,10 @@ export const renderDivider = defineComponent({
     },
     render() {
         return (
-            <span class={this.classes}></span>
+            <span
+                class={this.classes}
+                aria-hidden='true'
+            ></span>
         )
     },
 })

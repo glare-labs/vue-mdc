@@ -1,6 +1,9 @@
+import { sharedProps } from '@/utils/shared.type'
 import { PropType, SlotsType } from 'vue'
 
 export const props = {
+
+    ...sharedProps,
 
     /**
      * @default surface
@@ -33,7 +36,7 @@ export const props = {
         default: false,
         type: Boolean as PropType<boolean>
     },
-        
+
 }
 
 export const slots = Object as SlotsType<{
@@ -41,14 +44,14 @@ export const slots = Object as SlotsType<{
 }>
 
 export const emits = [
-    'mousedown', 
-    'mouseenter', 
-    'mouseleave', 
-    'mousemove', 
-    'mouseout', 
-    'mouseover', 
-    'mouseup', 
-    'click', 
-    'auxclick', 
+    'mousedown',
+    'mouseenter',
+    'mouseleave',
+    'mousemove',
+    'mouseout',
+    'mouseover',
+    'mouseup',
+    'click',
+    'auxclick',
     'dblclick'
 ]
