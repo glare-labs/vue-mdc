@@ -23,6 +23,7 @@ describe('icon-button', () => {
             value: 0
         }
         const wrapper = mount((
+            // @ts-ignore
             <IconButton onClick={() => counter.value++}></IconButton>
         ), {
             props: {
