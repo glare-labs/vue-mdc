@@ -7,6 +7,7 @@ import { Ripple } from '@/components/ripple'
 import { ThemeProvider } from '@/components/theme-provider/index'
 import { Typography } from '@/components/typography'
 import { IconButton } from '@/components/icon-button'
+import { RegisterAllComponents, RegisterComponents } from '@/utils/register-components'
 
 export {
     /**
@@ -25,5 +26,8 @@ export {
     Fab,
     FabExtended,
     Button,
-    IconButton
+    IconButton,
+
+    RegisterAllComponents,
+    RegisterComponents,
 }
