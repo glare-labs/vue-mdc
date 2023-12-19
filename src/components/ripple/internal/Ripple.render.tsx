@@ -74,25 +74,25 @@ export const renderRipple = defineComponent({
                 circle.animate(
                     [
                         {
-                            transform: 'scale(2)',
+                            transform: 'scale(3)',
                             opacity: 0,
                         },
                     ],
                     {
-                        duration: 250,
+                        duration: 500,
                         iterations: 1,
                     }
                 )
                 setTimeout(() => {
                     circle.remove()
-                }, 250)
+                }, 500 - 50)
                 window.removeEventListener('mouseup', resumeRippleEvent)
             }
             setTimeout(() => {
                 if (circle != undefined) {
                     resumeRippleEvent()
                 }
-            }, 3000)
+            }, 3000 - 50)
             window.addEventListener('mouseup', resumeRippleEvent)
         },
 

@@ -11,8 +11,7 @@ export const sharedRippleStyles = StyleSheet.create({
             var(--md-sys-color-shadow) max(calc(100% - 70px), 65%),\
             transparent 100%\
         )',
-        opacity: 0.25,
-        transition: 'all',
+        opacity: 0,
         zIndex: 1,
         pointerEvents: 'none',
     },
