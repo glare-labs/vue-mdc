@@ -239,39 +239,19 @@ export const tokens = {
 
 } as const
 
-export function dp(value: number) {
-    return `${window.devicePixelRatio * value}px`
-}
-
-/**
- * The following units are used to express font size on Android and the web.
- * @see FontSize
- */
-export function sp(value: number) {
-    return `${value * 0.0625}rem`
-}
-
-/**
- * value The following units are for spacing letters in a UI.
- * @see LettersSpacing
- */
-export function rem(value: number) {
-    return `${value}rem`
-}
-
 export function makeComponentExternTokens<T extends Record<string, string>>(componentTokens: Record<string, string>) {
     const e = new Object() as Record<string, string>
-    for(const i in componentTokens) {
+    for (const i in componentTokens) {
         e[i] = componentTokens[i] + '-extern'
     }
-    
+
     return e as Readonly<T>
 }
 export function makeComponentTokens<T extends Readonly<string[]>>(componentName: string, componentTokenNames: T) {
     const e = new Object() as Record<string, string>
 
     const componentNameKebabCase = toKebabCase(componentName)
-    for(const i of componentTokenNames) {
+    for (const i of componentTokenNames) {
         e[i] = `--mamv-${componentNameKebabCase}-${i}`
     }
 
@@ -281,10 +261,10 @@ export function makeComponentTokens<T extends Readonly<string[]>>(componentName:
 }
 
 function toKebabCase(s: string) {
-    if(s.includes('-') && s == s.toLowerCase()) return s
+    if (s.includes('-') && s == s.toLowerCase()) return s
     const arr = []
-    for(let i = 0; i < s.length; i ++) {
-        if(s[i] >= 'A' && s[i] <= 'Z') {
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] >= 'A' && s[i] <= 'Z') {
             arr.push('-')
             arr.push(s[i].toLowerCase())
         } else {
