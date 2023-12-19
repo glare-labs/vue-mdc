@@ -273,3 +273,29 @@ function toKebabCase(s: string) {
     }
     return arr.join('')
 }
+
+/**
+ * Converts string array to CSS variable.
+ * 
+ * @example
+ * makeVar('--a') -> var(--a)
+ * makeVar('--a', '--b') -> var(--a, var(--b))
+ * makeVar('--a', '--b', '--c') -> var(--a, var(--b, var(--c)))
+ */
+export function makeVar(...tokens: string[]): string {
+    if (tokens.length === 1) return `var(${tokens[0]})`
+    return tokens.reduceRight((pre, cur, index) => `var(${cur}${index === tokens.length - 2 ? ', var(' + pre + ')' : ', ' + pre})`)
+}
+
+/**
+ * Add a default value to the last CSS variable.
+ * 
+ * @example
+ * makeVar(['--a'], 'red') -> var(--a, 'red')
+ * makeVar(['--a', '--b'], 'red') -> var(--a, var(--b, 'red'))
+ * makeVar(['--a', '--b', '--c'], 'red') -> var(--a, var(--b, var(--c, 'red')))
+ */
+export function makeVarWithDefault(tokens: string[], value: string | number): string {
+    if (!Array.isArray(tokens)) throw new Error(`The first arguments ${tokens} is not a string[]`)
+    return `${makeVar(...tokens).split(')', 1)}, ${value}${')'.repeat(tokens.length)}`
+}
