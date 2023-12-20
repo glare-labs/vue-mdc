@@ -1,54 +1,69 @@
-import { tokens } from '@/utils/tokens'
+import { makeVar, tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { rippleTokens, rippleTokensExtern } from './Ripple.tokens'
 
 export const sharedRippleStyles = StyleSheet.create({
-    ripple: {
-        position: 'absolute',
-        borderRadius: tokens.shape.corner.full,
-        background: 'radial-gradient(\
-            closest-side,\
-            var(--md-sys-color-shadow) max(calc(100% - 70px), 65%),\
-            transparent 100%\
-        )',
-        opacity: 0,
-        zIndex: 1,
-        pointerEvents: 'none',
-    },
     root: {
-        zIndex: 0,
-        position: 'absolute',
-        left: '0',
-        top: '0',
+        display: 'flex',
+        margin: 0,
+        zIndex: 1,
+
         height: '100%',
         width: '100%',
-        overflow: 'hidden',
+
+        left: 0,
+        top: 0,
+
         borderRadius: 'inherit',
+        position: 'absolute',
+        insert: 0,
+        overflow: 'hidden',
+        '-webkit-tap-highlight-color': 'transparent',
+
         '::before': {
-            pointerEvents: 'none',
             content: '""',
+            opacity: 0,
             position: 'absolute',
-            inset: 0,
-            left: '0',
-            top: '0',
             height: '100%',
             width: '100%',
-            transition: 'all',
-            transitionDuration: tokens.motion.duration.medium1,
-            transitionTimingFunction: tokens.motion.easing.standardDecelerate,
-            backgroundColor: `var(${rippleTokensExtern['hover-color']}, var(${rippleTokens['hover-color']}))`,
-            opacity: 0.1,
-        },
-        ':hover': {
+            [rippleTokens['hover-opacity']]: '0.08',
             [rippleTokens['hover-color']]: tokens.color.surface.inverseSurface,
+            insert: 0,
+            transition: 'opacity 15ms linear, background-color 15ms linear',
+        },
+        '::after': {
+            content: '""',
+            opacity: 0,
+            position: 'absolute',
+            [rippleTokens['press-color']]: tokens.color.surface.onSurface,
+            [rippleTokens['press-opacity']]: '0.12',
+            background: `radial-gradient(\
+                closest-side,\
+                ${makeVar(rippleTokensExtern['press-color'], rippleTokens['press-color'])} max(calc(100% - 70px), 65%),\
+                transparent 100%\
+            )`,
+            transformOrigin: 'center center',
+            transition: 'opacity 375ms linear',
+        }
+    },
+
+    hovered: {
+        '::before': {
+            backgroundColor: makeVar(rippleTokensExtern['hover-color'], rippleTokens['hover-color']),
+            // @ts-ignore
+            opacity: makeVar(rippleTokensExtern['hover-opacity'], rippleTokens['hover-opacity']),
+        },
+    },
+    pressed: {
+        '::after': {
+            // @ts-ignore
+            opacity: makeVar(rippleTokensExtern['press-opacity'], rippleTokens['press-opacity']),
+            transitionDuration: '105ms',
         }
     },
 
     disabled: {
-        display: 'inline-block',
-        cursor: 'not-allowed',
-        ':hover': {
-            [rippleTokens['hover-color']]: 'unset',
-        }
-    }
+        display: 'none',
+        pointerEvents: 'none',
+    },
 })

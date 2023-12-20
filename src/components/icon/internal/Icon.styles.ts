@@ -13,6 +13,7 @@ export const iconStyles = StyleSheet.create({
 
         pointerEvent: 'none',
         'user-select': 'none',
+        zIndex: 0,
     },
 
     /**
