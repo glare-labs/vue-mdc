@@ -23,7 +23,6 @@ export const renderThemeProvider = defineComponent({
                 this.sourceColor.toString(),
                 ['true'].includes(this.dark.toString())
             )
-            result.applyTheme()
             this.$emit('theme-updated', result)
         },
     },

@@ -1,38 +1,76 @@
-import { argbFromHex, themeFromSourceColor, applyTheme } from '@material/material-color-utilities'
+import { argbFromHex, MaterialDynamicColors, Theme, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
 
+/**
+ * A Mapping of color token name to MCU HCT color function generator.
+ */
+const materialColors = {
+    background: MaterialDynamicColors.background,
+    'on-background': MaterialDynamicColors.onBackground,
+    surface: MaterialDynamicColors.surface,
+    'surface-dim': MaterialDynamicColors.surfaceDim,
+    'surface-bright': MaterialDynamicColors.surfaceBright,
+    'surface-container-lowest': MaterialDynamicColors.surfaceContainerLowest,
+    'surface-container-low': MaterialDynamicColors.surfaceContainerLow,
+    'surface-container': MaterialDynamicColors.surfaceContainer,
+    'surface-container-high': MaterialDynamicColors.surfaceContainerHigh,
+    'surface-container-highest': MaterialDynamicColors.surfaceContainerHighest,
+    'on-surface': MaterialDynamicColors.onSurface,
+    'surface-variant': MaterialDynamicColors.surfaceVariant,
+    'on-surface-variant': MaterialDynamicColors.onSurfaceVariant,
+    'inverse-surface': MaterialDynamicColors.inverseSurface,
+    'inverse-on-surface': MaterialDynamicColors.inverseOnSurface,
+    outline: MaterialDynamicColors.outline,
+    'outline-variant': MaterialDynamicColors.outlineVariant,
+    shadow: MaterialDynamicColors.shadow,
+    scrim: MaterialDynamicColors.scrim,
+    'surface-tint': MaterialDynamicColors.surfaceTint,
+    primary: MaterialDynamicColors.primary,
+    'on-primary': MaterialDynamicColors.onPrimary,
+    'primary-container': MaterialDynamicColors.primaryContainer,
+    'on-primary-container': MaterialDynamicColors.onPrimaryContainer,
+    'inverse-primary': MaterialDynamicColors.inversePrimary,
+    secondary: MaterialDynamicColors.secondary,
+    'on-secondary': MaterialDynamicColors.onSecondary,
+    'secondary-container': MaterialDynamicColors.secondaryContainer,
+    'on-secondary-container': MaterialDynamicColors.onSecondaryContainer,
+    tertiary: MaterialDynamicColors.tertiary,
+    'on-tertiary': MaterialDynamicColors.onTertiary,
+    'tertiary-container': MaterialDynamicColors.tertiaryContainer,
+    'on-tertiary-container': MaterialDynamicColors.onTertiaryContainer,
+    error: MaterialDynamicColors.error,
+    'on-error': MaterialDynamicColors.onError,
+    'error-container': MaterialDynamicColors.errorContainer,
+    'on-error-container': MaterialDynamicColors.onErrorContainer,
+}
 
 export function GenerateMaterialTheme(
     target: HTMLElement,
     sourceColor: string,
     dark = window.matchMedia('(prefers-color-scheme: dark)').matches
-) {
-    const theme = themeFromSourceColor(argbFromHex(sourceColor))
-    
-    return {
-        tokens: theme,
-        applyTheme: () => {
-            applyTheme(theme, { target, dark })
-            MakeSurfaceContainer(target, dark)
-        }
-    }
+): void {
+    // Generate Styles
+    const theme = createThemeFromSourceColor(sourceColor, dark)
+
+    // Generate StyleText
+    const styleText = createStyleText(theme)
+
+    // Set styles to DOM's style
+    target.setAttribute('style', styleText)
 }
-
-/**
- * @see ONLY DEV IN EMVIRONMENT
- */
-function MakeSurfaceContainer(target: HTMLElement, dark: boolean) {
-    if(!dark) {
-        target.style.setProperty('--md-sys-color-surface-container-lowest', '#ffffff')
-        target.style.setProperty('--md-sys-color-surface-container-low', '#f1f5ec')
-        target.style.setProperty('--md-sys-color-surface-container', '#ebefe7')
-        target.style.setProperty('--md-sys-color-surface-container-high', '#e5e9e1')
-        target.style.setProperty('--md-sys-color-surface-container-highest', '#e0e4dc')
-    } else {
-        target.style.setProperty('--md-sys-color-surface-container-lowest', '#0b0f0b')
-        target.style.setProperty('--md-sys-color-surface-container-low', '#181d18')
-        target.style.setProperty('--md-sys-color-surface-container', '#1c211c')
-        target.style.setProperty('--md-sys-color-surface-container-high', '#262b26')
-        target.style.setProperty('--md-sys-color-surface-container-highest', '#313630')
-
+function createStyleText(theme: Theme): string {
+    let styleString = ''
+    for (const [k, v] of Object.entries(theme)) {
+        styleString += `--md-sys-color-${k}: ${v};`
     }
+    return styleString
+}
+function createThemeFromSourceColor(color: string, isDark: boolean): Theme {
+    const scheme = new SchemeContent(Hct.fromInt(argbFromHex(color)), isDark, 0)
+
+    const theme: Record<string, any> = {}
+
+    for (const [key, value] of Object.entries(materialColors)) {
+        theme[key] = hexFromArgb(value.getArgb(scheme))
+    }
+    return theme as Theme
 }
