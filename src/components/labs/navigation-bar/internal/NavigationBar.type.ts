@@ -10,13 +10,11 @@ export const props = {
         type: Number as PropType<number>
     },
 
-    tabs: {
-        default: [],
-        type: Array as PropType<string[]>
-    }
-
 }
 
 export const slots = Object as SlotsType<{
-    default?: void
+    default: ({
+        activeIndex: number
+        setActiveIndex: (e: number) => void
+    })
 }>

@@ -1,69 +1,53 @@
-import { defineComponent } from 'vue'
+import { Ref, computed, defineComponent, provide, ref, shallowRef } from 'vue'
 import { props, slots } from './NavigationBar.type'
 import { css } from 'aphrodite/no-important'
 import { sharedNavigationBarStyles } from './NavigationBar.styles'
-import { Icon } from '@/lib'
+
+export interface NavigationBarProvider {
+    activeIndex: Ref<number>
+    setActiveIndex: (e: number) => void
+    getTabId: () => number
+}
 
 export const renderNavigationBar = defineComponent({
+    name: 'MAMVNavigationBar',
     props,
     slots,
-    computed: {
-        classes() {
-            return ({
-                container: css(
-                    sharedNavigationBarStyles.container,
-                    sharedNavigationBarStyles.label,
-                ),
-                tab: css(
-                    sharedNavigationBarStyles.tab,
-                    sharedNavigationBarStyles.stateLayer,
-                    sharedNavigationBarStyles.icon,
-                    sharedNavigationBarStyles.label,
+    setup(props, { slots }) {
+        const activeIndex = ref(props.defaultActiveIndex)
+        const setActiveIndex = (index: number) => {
+            activeIndex.value = index
+            if (activeIndex.value < 0 || activeIndex.value >= initTabId.value.id) {
+                activeIndex.value = 0
+                console.warn('The navigation-bar\'s activeIndex had out of the bound, but we reset activeIndex to 0')
+            }
+        }
 
-                ),
-                indicator: css(
-                    sharedNavigationBarStyles.indicator,
-                ),
-                activeIndicator: css(
-                    sharedNavigationBarStyles.indicator,
-                    sharedNavigationBarStyles.activeIndicator,
-                ),
-            })
-        },
-    },
-    render() {
-        return (
-            <span class={this.classes.container}>
+        const initTabId = shallowRef({
+            id: 0,
+        })
+        const getTabId = () => initTabId.value.id++
+
+        const classes = computed(() => css(
+            sharedNavigationBarStyles.container,
+        ))
+
+        provide<NavigationBarProvider, string>('navigation-bar-provider', {
+            activeIndex: activeIndex,
+            setActiveIndex: setActiveIndex,
+            getTabId: getTabId,
+        })
+
+        return () => (
+            <span class={classes.value}>
                 {
-                    this.tabs && this.tabs.map((e, i) => (
-                        <div class={this.classes.tab} onClick={() => this.setActiveIndex(i)}>
-                            <span class={this.isActiveIndex(i) ? this.classes.activeIndicator : this.classes.indicator}>
-                                <Icon>send</Icon>
-                            </span>
-                            {e}
-                        </div>
-                    ))
+                    slots.default && slots.default({
+                        activeIndex: activeIndex.value,
+                        setActiveIndex: setActiveIndex,
+                    })
                 }
+
             </span>
         )
-    },
-    data: () => ({
-        activeIndex: 0,
-    }),
-    methods: {
-        setActiveIndex(index: number) {
-            this.activeIndex = index
-        },
-        isActiveIndex(index: number) {
-            return index === this.activeIndex
-        },
-
-    },
-    created() {
-        this.activeIndex = this.defaultActiveIndex
-    },
-    mounted() {
-        console.log('received', this.tabs)
-
     },
 })
