@@ -32,14 +32,26 @@ export const renderIconButton = defineComponent({
                 aria-label={this.ariaLabel}
                 aria-aria-labelledby={this.ariaLabelledby}
                 class={this.classes}
+                onClick={this.updateToggleState}
             >
                 <Ripple disabled={this.disabled}></Ripple>
                 {
-                    this.$slots.default && this.$slots.default()
+                    this.$slots.default && this.$slots.default({
+                        selected: this.selected
+                    })
                 }
 
             </button>
         )
+    },
+    methods: {
+        setSelected(e: boolean) {
+            if (this.disabled || !this.toggle) return
+            this.selected = e
+        },
+        updateToggleState() {
+            this.setSelected(!this.selected)
+        }
     },
     created() {
         this.selected = this.defaultSelected
