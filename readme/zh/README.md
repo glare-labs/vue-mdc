@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![LOGO](../resources/cover.png?raw=true)
+![LOGO](../resources/cover.png)
 
 Material Anti-Mage Vue
 

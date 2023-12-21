@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![LOGO](https://raw.githubusercontent.com/bre97-web/material-anti-mage-vue/main/readme/resources/cover.jpg)
+![LOGO](./readme/resources/cover.png)
 
 Material Anti-Mage Vue
 
@@ -11,7 +11,7 @@ Material Anti-Mage Vue
 |Language|Link|
 |:--|:--|
 |**简体中文**|[./readme/zh/README.md](./readme/zh/README.md)|
-|**English**|[./readme/en/README.md](./readme/en/README.md)|
+|**English(Current Page)**|[./README.md](./README.md)|
 
 Material Anti-Mage Vue provides easy-to-use simple Vue components, provides complete type support, and is based on Vue3 and TypeScript.
 
