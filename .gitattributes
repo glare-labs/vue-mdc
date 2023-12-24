@@ -1,62 +1,62 @@
 # source code
-*.css text
-*.sass text
-*.scss text
-*.less text
-*.styl text
-*.js text
-*.ts text
-*.tsx text
-*.jsx text
-*.coffee text
-*.json text
-*.htm text
-*.html text
-*.xml text
-*.svg text
-*.txt text
-*.ini text
-*.inc text
-*.py text
-*.sql text
-*.sh text
-*.bat text
+*.css text eol=lf
+*.sass text eol=lf
+*.scss text eol=lf
+*.less text eol=lf
+*.styl text eol=lf
+*.js text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.jsx text eol=lf
+*.coffee text eol=lf
+*.json text eol=lf
+*.htm text eol=lf
+*.html text eol=lf
+*.xml text eol=lf
+*.svg text eol=lf
+*.txt text eol=lf
+*.ini text eol=lf
+*.inc text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+*.sh text eol=lf
+*.bat text eol=lf
 
 # templates
-*.ejs text
-*.hbt text
-*.jade text
-*.haml text
-*.hbs text
-*.dot text
-*.tmpl text
-*.phtml text
+*.ejs text eol=lf
+*.hbt text eol=lf
+*.jade text eol=lf
+*.haml text eol=lf
+*.hbs text eol=lf
+*.dot text eol=lf
+*.tmpl text eol=lf
+*.phtml text eol=lf
 
 # server config
-.htaccess text
+.htaccess text eol=lf
 
 # git config
-.gitattributes text
-.gitignore text
-.gitconfig text
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitconfig text eol=lf
 
 # misc config
-*.yaml text
-*.yml text
-.editorconfig text
+*.yaml text eol=lf
+*.yml text eol=lf
+.editorconfig text eol=lf
 
 # build config
-*.npmignore text
-*.bowerrc text
+*.npmignore text eol=lf
+*.bowerrc text eol=lf
 
 # Heroku
-Procfile text
-.slugignore text
+Procfile text eol=lf
+.slugignore text eol=lf
 
 # Documentation
-*.md text
-LICENSE text
-AUTHORS text
+*.md text eol=lf
+LICENSE text eol=lf
+AUTHORS text eol=lf
 
 
 #
