@@ -24,7 +24,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": [
-        "./src/*"
+        "./*"
       ]
     },
     "allowJs": true,
@@ -33,22 +33,21 @@
     "declaration": true,
     "outDir": "dist",
     "declarationDir": "dist",
+    "composite": true,
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.d.ts",
+    "./components/**/*.ts",
+    "./components/**/*.d.ts",
+    "./components/**/*.tsx",
+    "./components/**/*.d.tsx",
+    "./lib/**/*.ts",
+    "./lib/**/*.d.ts",
+    "./utils/**/*.ts",
+    "./utils/**/*.d.ts",
+    "./vite.config.ts"
   ],
   "exclude": [
-    "scripts/**/*",
-    "test-report/**/*",
-    "dist/**/*",
-    ".vscode/**/*",
-    "catalog/**/*",
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "./test-report/**/*",
+    "./dist/**/*",
   ],
 }

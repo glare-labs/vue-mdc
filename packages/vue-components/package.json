@@ -1,0 +1,23 @@
+{
+  "name": "vue-components",
+  "license": "MIT",
+  "scripts": {
+    "build": "vue-tsc && vite build",
+    "test": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@material/material-color-utilities": "^0.2.7",
+    "@types/node": "^20.10.5",
+    "@vitejs/plugin-vue": "^4.5.2",
+    "@vitejs/plugin-vue-jsx": "^3.1.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-dts": "^3.6.4",
+    "vitest": "^1.1.0",
+    "vue-tsc": "^1.8.26"
+  },
+  "dependencies": {
+    "vue": "^3.3.13"
+  }
+}

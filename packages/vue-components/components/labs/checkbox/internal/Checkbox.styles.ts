@@ -1,4 +1,3 @@
-import { iconTokensExtern } from '@/components/icon'
 import { tokens } from '@/utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { checkboxTokens, checkboxTokensExtern } from '..'
