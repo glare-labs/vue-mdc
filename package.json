@@ -7,7 +7,10 @@
   "keywords": [
     "vue",
     "components",
-    "lib"
+    "lib",
+    "material",
+    "material-design",
+    "material-you"
   ],
   "repository": {
     "type": "git",
@@ -21,6 +24,10 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "workspaces": [
+    "packages/catalog",
+    "packages/vue-components"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js"
@@ -29,22 +36,15 @@
   "types": "/dist/index.d.ts",
   "files": [
     "dist/**/*",
-    "!src/**/*",
+    "!packages/**/*",
     "!scripts/**/*",
     "!test-reporter/**/*",
     "!.vscode/**/*",
-    "!catalog/**/*"
+    "!packages/**/*",
+    "!readme/**/*"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build && eslint ./dist/**/*",
-    "preview": "vite preview",
-    "eslint": "npx eslint ./src/**",
-    "eslint:fix-src": "npx eslint ./src/** --fix",
-    "eslint:fix-dist": "npx eslint ./dist/** --fix",
-    "template": "node ./scripts/generate.js",
-    "test": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "template": "node ./scripts/generate.js"
   },
   "dependencies": {
     "aphrodite": "^2.4.0",
