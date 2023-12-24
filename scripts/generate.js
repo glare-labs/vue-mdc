@@ -3,21 +3,13 @@ import { generateTemplateFilesBatch } from 'generate-template-files'
 import readline from 'readline'
 import fs from 'fs'
 
-const toKebabCase = (s) => {
-    const arr = []
-    for(let i = 0; i < s.length; i ++) {
-        if(s[i] >= 'A' && s[i] <= 'Z') {
-            arr.push('-')
-            arr.push(s[i].toLowerCase())
-        } else {
-            arr.push(s[i])
-        }
-    }
-    return arr.join('')
+function convertToHyphenated(inputString) {
+    const hyphenatedString = inputString.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`)
+    return hyphenatedString.startsWith('-') ? hyphenatedString.slice(1) : hyphenatedString
 }
 
 /**
- * Copy ./scripts/templates/..   ->   ./src/components/../..
+ * Copy ./scripts/templates/..   ->   ./packages/vue-components/components/../..
  */
 const createTemplates = async (componentName) => {
     await generateTemplateFilesBatch([
@@ -31,15 +23,15 @@ const createTemplates = async (componentName) => {
                 { slot: '__componentFolderName__', slotValue: componentName },
             ],
             output: {
-                path: './src/components/__componentFolderName__/',
+                path: './packages/vue-components/components/__componentFolderName__/',
                 files: [
-                    './src/components/__componentFolderName__/spec.md',
-                    './src/components/__componentFolderName__/index.ts',
-                    './src/components/__componentFolderName__/internal/index.ts',
-                    './src/components/__componentFolderName__/internal/Component.tokens.ts',
-                    './src/components/__componentFolderName__/internal/Component.render.tsx',
-                    './src/components/__componentFolderName__/internal/Component.type.ts',
-                    './src/components/__componentFolderName__/internal/Component.styles.ts',
+                    './packages/vue-components/components/__componentFolderName__/spec.md',
+                    './packages/vue-components/components/__componentFolderName__/index.ts',
+                    './packages/vue-components/components/__componentFolderName__/internal/index.ts',
+                    './packages/vue-components/components/__componentFolderName__/internal/Component.tokens.ts',
+                    './packages/vue-components/components/__componentFolderName__/internal/Component.render.tsx',
+                    './packages/vue-components/components/__componentFolderName__/internal/Component.type.ts',
+                    './packages/vue-components/components/__componentFolderName__/internal/Component.styles.ts',
                 ],
             },
             onComplete: (results) => {
@@ -53,10 +45,10 @@ const createTemplates = async (componentName) => {
  * Rename Component.**.**
  */
 const renameTemplates = (componentFolderName, componentFileName) => {
-    const makeInternalPath = (file) => `./src/components/${componentFolderName}/internal/${file}`
+    const makeInternalPath = (file) => `./packages/vue-components/components/${componentFolderName}/internal/${file}`
 
     const errorHandle = (error) => {
-        if(error) throw error
+        if (error) throw error
     }
 
     fs.rename(makeInternalPath('Component.type.ts'), makeInternalPath(`${componentFileName}.type.ts`), errorHandle)
@@ -74,11 +66,11 @@ const rl = readline.createInterface({
 rl.question('The Component Name: ', async (answer) => {
 
     // ../component/..
-    const componentFolderName = toKebabCase(answer)
+    const componentFolderName = convertToHyphenated(answer)
 
     // ../Component.type.ts
     const componentFileName = (answer.charAt(0).toUpperCase() + answer.slice(1)).replaceAll('-', '')
-    
+
     await createTemplates(componentFolderName)
     renameTemplates(componentFolderName, componentFileName)
 

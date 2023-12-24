@@ -1,5 +1,5 @@
 import { StyleSheet } from 'aphrodite'
 
-export const styles = StyleSheet.create({
+export const sharedStyles = StyleSheet.create({
 
 })
