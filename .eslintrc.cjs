@@ -31,8 +31,12 @@ module.exports = {
     'rules': {
         'indent': [
             'warn',
-            4
+            4,
+            {
+                'SwitchCase': 1
+            }
         ],
+
         'linebreak-style': [
             'error',
             'unix'
@@ -71,7 +75,7 @@ module.exports = {
             }
         ],
         '@typescript-eslint/ban-types': 'off',
-        '@typescript-eslint/no-explicit-any': 'warn',
+        '@typescript-eslint/no-explicit-any': 'off',
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/ban-ts-comment': 'off',
