@@ -7,13 +7,19 @@
             >
                 <Icon>expand</Icon>
             </IconButton>
-            <IconButton
-                appearance="standard"
-                @click="() => theme.isDark.value = !theme.isDark.value"
-            >
-                <Icon>{{ theme.isDark.value ? 'light_mode' : 'dark_mode' }}</Icon>
-            </IconButton>
         </ClientOnly>
+
+        <div class="flex items-center">
+            <ThemePicker></ThemePicker>
+            <ClientOnly>
+                <IconButton
+                    appearance="standard"
+                    @click="() => theme.isDark.value = !theme.isDark.value"
+                >
+                    <Icon>{{ theme.isDark.value ? 'light_mode' : 'dark_mode' }}</Icon>
+                </IconButton>
+            </ClientOnly>
+        </div>
 
     </header>
 </template>

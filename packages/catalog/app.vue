@@ -1,5 +1,8 @@
 <template>
-    <ThemeProvider :dark="isDark">
+    <ThemeProvider
+        :source-color="sourceColor"
+        :dark="isDark"
+    >
         <ContentProvider>
             <NavigationDrawerProvider v-slot="{ isOpen }">
                 <Background class="flex flex-col h-svh min-h-svh max-h-svh overflow-clip">
@@ -28,18 +31,23 @@
 </template>
 
 <script setup lang="ts">
-import { Icon, IconButton, RegisterComponents, Ripple, ThemeProvider, Button } from './mamv/index.mjs'
+import { Icon, IconButton, RegisterComponents, Ripple, ThemeProvider, Button } from '../vue-components/lib'
 import 'material-symbols'
 
 const app = useNuxtApp().vueApp
+// @ts-ignore
 app.use(RegisterComponents(ThemeProvider, Ripple, Icon, IconButton, Button))
 
 export type ThemeProvider = {
     isDark: Ref<boolean>
+    sourceColor: Ref<string>
 }
+
 const isDark = ref(false)
+const sourceColor = ref('#2A6B3C')
 provide<ThemeProvider>('theme-provider', {
-    isDark
+    isDark,
+    sourceColor
 })
 
 </script>
