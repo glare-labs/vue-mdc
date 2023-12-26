@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+
+@layer base {
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 6px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: transparent;
+        border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-track:hover {
+        background: var(--md-sys-color-surface-dim);
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--md-sys-color-tertiary-container);
+        border-radius: 9999px;
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover,
+    ::-webkit-scrollbar-thumb:active {
+        background: var(--md-sys-color-tertiary);
+    }
+    
+}
+
+@layer components {
+
+    .title-card-group {
+        @apply flex flex-col md:flex-row justify-center gap-8 w-full my-16;
+    }
+
+    .title-card-group>div {
+        @apply relative grid grid-rows-6 grid-cols-1 w-full h-full md:h-auto rounded-2xl bg-[--md-sys-color-surface-container] px-8 py-4 lg:max-w-xs;
+    }
+
+    .title-card-group>div>.icon {
+        @apply transition-all row-span-3 mx-auto;
+        --mamv-icon-font-size: 64px;
+        line-height: 128px;
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .title-card-group>div>section {
+        @apply row-span-3;
+    }
+
+    .title-card-group>div:hover>.icon {
+        @apply overflow-clip md:scale-125;
+        --mamv-icon-font-size: 64px;
+        line-height: 128px;
+        font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .title-card-group>div>section>h1 {
+        @apply text-[--md-sys-color-on-surface] text-center font-bold my-1;
+    }
+
+    .title-card-group>div>section>h1+p {
+        @apply text-[--md-sys-color-on-surface-variant];
+    }
+
+    .md-panel h1:first-child {
+        @apply mt-0 mb-8 font-bold text-6xl text-[--md-sys-color-on-tertiary-container] bg-[--md-sys-color-tertiary-container] block rounded-2xl p-8 py-10 pb-12 w-full;
+    }
+    .md-panel * {
+        @apply text-[--md-sys-color-on-surface];
+    }
+    .md-panel h1,
+    .md-panel h2,
+    .md-panel h3,
+    .md-panel h4,
+    .md-panel h5,
+    .md-panel h6 {
+        @apply my-2 mt-8;
+    }
+    .md-panel :is(h1, h2, h3, h4, h5, h6) a {
+        @apply text-[--md-sys-color-primary];
+    }
+    .md-panel h1 {
+        @apply font-bold text-3xl;
+    }
+    .md-panel h1+p {
+        @apply font-medium text-lg;
+    }
+    .md-panel h2 {
+        @apply font-bold text-2xl;
+    }
+    .md-panel h2+p {
+        @apply font-medium text-lg;
+    }
+    .md-panel h3 {
+        @apply font-bold text-xl;
+    }
+    .md-panel h3+p {
+        @apply font-medium text-lg;
+    }
+    .md-panel p {
+        @apply text-base;
+    }
+    .md-panel a {
+        @apply hover:underline underline-offset-1 hover:underline-offset-2 transition-all;
+    }
+    .md-panel pre {
+        @apply my-4 border p-3 rounded-2xl border-[--md-sys-color-outlined] w-full overflow-auto;
+    }
+    .md-panel ul {
+        @apply space-y-2 list-disc pl-8 pt-4;
+    }
+}
