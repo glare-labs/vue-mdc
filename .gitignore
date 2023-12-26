@@ -8,12 +8,15 @@ pnpm-debug.log*
 lerna-debug.log*
 .firebase/*
 
+.nuxt
 node_modules
+.output
 dist
 dist-ssr
-docs
+!docs
 *.local
 test-report
+/packages/catalog/mamv
 
 # Editor directories and files
 !.vscode/extensions.json
