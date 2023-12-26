@@ -4,13 +4,13 @@
         "**/node_modules": true
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit"
+        "source.fixAll": "explicit",
     },
     "eslint.validate": [
         "javascript",
         "typescript",
         "jsx",
-        "tsx"
+        "tsx",
     ],
     "editor.formatOnSave": true,
     "eslint.format.enable": true,
@@ -20,6 +20,15 @@
     "typescript.autoClosingTags": true,
     "typescript.format.indentSwitchCase": true,
     "typescript.preferences.quoteStyle": "single",
+    "html.format.preserveNewLines": true,
+    "files.insertFinalNewline": true,
     "editor.indentSize": 4,
+    "editor.tabSize": 4,
+    "files.eol": "\n",
     "testing.automaticallyOpenPeekView": "never",
+    "[css]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "html.format.wrapAttributes": "force-expand-multiline",
+    "files.encoding": "utf8",
 }
