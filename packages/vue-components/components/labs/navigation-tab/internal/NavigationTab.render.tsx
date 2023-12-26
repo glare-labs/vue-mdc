@@ -2,7 +2,7 @@ import { computed, defineComponent, inject, ref } from 'vue'
 import { props, slots } from './NavigationTab.type'
 import { css } from 'aphrodite/no-important'
 import { sharedNavigationTabStyles } from './NavigationTab.styles'
-import { NavigationBarProvider } from '@/components/labs/navigation-bar/internal/NavigationBar.render'
+import { NavigationBarProvider } from '../../../../components/labs/navigation-bar/internal/NavigationBar.render'
 
 export const renderNavigationTab = defineComponent({
     name: 'MAMVNavigationTab',

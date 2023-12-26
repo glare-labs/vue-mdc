@@ -1,9 +1,9 @@
-import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
-import { iconTokensExtern } from '@/components/icon'
-import { tokens } from '@/utils/tokens'
+import { elevationTokensExtern } from '../../../components/elevation/internal/Elevation.tokens'
+import { iconTokensExtern } from '../../../components/icon'
+import { tokens } from '../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { iconButtonTokens, iconButtonTokensExtern } from './IconButton.tokens'
-import { sharedStyles } from '@/utils/shared.styles'
+import { sharedStyles } from '../../../utils/shared.styles'
 
 export const sharedIconButtonStyles = StyleSheet.create({
 

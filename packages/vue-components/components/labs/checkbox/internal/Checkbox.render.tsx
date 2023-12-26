@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { props } from './Checkbox.type'
 import { css } from 'aphrodite/no-important'
 import { sharedCheckboxStyles } from './Checkbox.styles'
-import { Ripple } from '@/components/ripple/index'
+import { Ripple } from '../../../../components/ripple/index'
 
 export const renderCheckbox = defineComponent({
     name: 'MAMVChecbox',

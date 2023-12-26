@@ -2,8 +2,8 @@ import { defineComponent } from 'vue'
 import { props, slots } from './FabExtended.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './FabExtended.styles'
-import { Elevation } from '@/components/elevation'
-import { Ripple } from '@/components/ripple'
+import { Elevation } from '../../../../components/elevation'
+import { Ripple } from '../../../../components/ripple'
 
 export const renderFabExtended = defineComponent({
     name: 'MAMVFabExtended',

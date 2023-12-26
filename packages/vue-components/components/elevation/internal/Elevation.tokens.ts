@@ -1,4 +1,4 @@
-import { makeComponentExternTokens, makeComponentTokens } from '@/utils/tokens'
+import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
 
 const tokens = [
     'level',

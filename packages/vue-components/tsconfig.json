@@ -22,11 +22,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
@@ -49,5 +44,7 @@
   "exclude": [
     "./test-report/**/*",
     "./dist/**/*",
+    "./**/*.test.tsx",
+    "./**/*.test.ts"
   ],
 }

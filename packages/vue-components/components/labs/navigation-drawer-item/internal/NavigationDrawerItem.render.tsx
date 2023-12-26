@@ -2,12 +2,13 @@ import { computed, defineComponent, inject, onMounted, ref } from 'vue'
 import { props, slots } from './NavigationDrawerItem.type'
 import { css } from 'aphrodite/no-important'
 import { sharedNavigationDrawerItemStyles } from './NavigationDrawerItem.styles'
-import { Ripple } from '@/lib'
-import { NavigationDrawerProvider } from '@/components/navigation-drawer/internal/NavigationDrawer.render'
+import { Ripple } from '../../../../lib'
+import { NavigationDrawerProvider } from '../../../../components/labs/navigation-drawer/internal/NavigationDrawer.render'
 
 export const renderNavigationDrawerItem = defineComponent({
     props,
     slots,
+    // ../../../..ts-ignore
     setup(props, { slots }) {
 
         const classes = computed(() => ({

@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { props, slots } from './IconButton.type'
 import { css } from 'aphrodite/no-important'
 import { sharedIconButtonStyles } from './IconButton.styles'
-import { Ripple } from '@/components/ripple'
+import { Ripple } from '../../../components/ripple'
 
 export const renderIconButton = defineComponent({
     name: 'MAMVIconButton',

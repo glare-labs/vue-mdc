@@ -2,7 +2,7 @@ import { computed, defineComponent, provide, ref, Ref } from 'vue'
 import { props, slots } from './NavigationDrawer.type'
 import { css } from 'aphrodite/no-important'
 import { sharedNavigationDrawerStyles } from './NavigationDrawer.styles'
-import { Elevation, Ripple } from '@/lib'
+import { Ripple } from '../../../../lib'
 
 export type NavigationDrawerProvider = {
     currentIndex: Ref<number>

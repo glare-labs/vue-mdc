@@ -1,10 +1,10 @@
-import { tokens } from '@/utils/tokens'
+import { tokens } from '../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { typographyTokens, typographyTokensExtern } from './Typography.tokens'
 
 export const typographyStyles = StyleSheet.create({
     root: {
-        [typographyTokens.color]: tokens.color.surface.onSurface,        
+        [typographyTokens.color]: tokens.color.surface.onSurface,
         color: `var(${typographyTokensExtern.color}, var(${typographyTokens.color}))`,
     },
 

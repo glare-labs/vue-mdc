@@ -2,8 +2,8 @@ import { defineComponent } from 'vue'
 import { emits, props, slots } from './Button.type'
 import { sharedButtonStyles } from './Button.styles'
 import { css } from 'aphrodite/no-important'
-import { Elevation } from '@/components/elevation'
-import { Ripple } from '@/components/ripple'
+import { Elevation } from '../../elevation'
+import { Ripple } from '../../ripple'
 
 export const renderButton = defineComponent({
     name: 'MAMVButton',

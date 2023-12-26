@@ -1,9 +1,9 @@
-import { sharedStyles } from '@/utils/shared.styles'
-import { makeVar, tokens } from '@/utils/tokens'
+import { sharedStyles } from '../../../../utils/shared.styles'
+import { makeVar, tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { navigationTabTokens, navigationTabTokensExtern } from './NavigationTab.tokens'
-import { iconTokensExtern } from '@/components/icon'
-import { rippleTokensExtern } from '@/components/ripple'
+import { iconTokensExtern } from '../../../../components/icon'
+import { rippleTokensExtern } from '../../../../components/ripple'
 
 const indicatorKeyframes = {
     '0%': {
@@ -37,7 +37,7 @@ export const sharedNavigationTabStyles = StyleSheet.create({
         transitionDuration: tokens.motion.duration.medium1,
         transitionProperty: 'background, border, color, box-shadow',
         transitionTimingFunction: tokens.motion.easing.standard,
-        '@media screen and (prefers-reduced-motion: reduce)': {
+        '../../../..media screen and (prefers-reduced-motion: reduce)': {
             transitionDuration: '0.01ms',
         },
         zIndex: 1,

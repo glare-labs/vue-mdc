@@ -1,4 +1,4 @@
-import { GenerateMaterialTheme } from '@/utils/material-theme'
+import { GenerateMaterialTheme } from '../../../utils/material-theme'
 import { defineComponent } from 'vue'
 import { emits, props, slots } from './ThemeProvider.type'
 

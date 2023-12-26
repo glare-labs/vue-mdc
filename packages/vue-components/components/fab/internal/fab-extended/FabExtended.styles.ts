@@ -1,9 +1,9 @@
-import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
-import { iconTokensExtern } from '@/components/icon/internal/Icon.tokens'
-import { tokens } from '@/utils/tokens'
+import { elevationTokensExtern } from '../../../../components/elevation/internal/Elevation.tokens'
+import { iconTokensExtern } from '../../../../components/icon/internal/Icon.tokens'
+import { tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { fabExtendedTokens, fabExtendedTokensExtern } from './FabExtended.tokens'
-import { sharedStyles } from '@/utils/shared.styles'
+import { sharedStyles } from '../../../../utils/shared.styles'
 
 export const fabStyles = StyleSheet.create({
     root: {

@@ -2,7 +2,8 @@ import { defineComponent } from 'vue'
 import { props, slots } from './Card.type'
 import { css } from 'aphrodite/no-important'
 import { sharedCardStyles } from './Card.styles'
-import { Elevation, Ripple } from '@/lib'
+import { Elevation } from '../../elevation'
+import { Ripple } from '../../ripple'
 
 export const renderCard = defineComponent({
     props,
@@ -13,6 +14,7 @@ export const renderCard = defineComponent({
                 container: css(
                     sharedCardStyles.container,
                     sharedCardStyles.rounded,
+                    // @ts-ignore
                     sharedCardStyles[this.appearance],
                 ),
             })

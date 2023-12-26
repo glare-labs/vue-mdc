@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { props } from './Ripple.type'
 import { css } from 'aphrodite/no-important'
 import { sharedRippleStyles } from './Ripple.styles'
-import { tokens } from '@/utils/tokens'
+import { tokens } from '../../../utils/tokens'
 
 enum State {
     /**

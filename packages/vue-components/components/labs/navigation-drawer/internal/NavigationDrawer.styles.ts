@@ -1,5 +1,5 @@
-import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
-import { makeVar, tokens } from '@/utils/tokens'
+import { elevationTokensExtern } from '../../../../components/elevation/internal/Elevation.tokens'
+import { makeVar, tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { navigationDrawerTokens, navigationDrawerTokensExtern } from '..'
 

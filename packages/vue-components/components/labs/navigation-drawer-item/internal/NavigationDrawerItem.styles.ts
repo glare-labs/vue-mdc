@@ -1,8 +1,8 @@
-import { makeVar, tokens } from '@/utils/tokens'
+import { makeVar, tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { navigationDrawerItemTokens, navigationDrawerItemTokensExtern } from './NavigationDrawerItem.tokens'
-import { iconTokensExtern } from '@/components/icon'
-import { rippleTokensExtern } from '@/components/ripple'
+import { iconTokensExtern } from '../../../../components/icon'
+import { rippleTokensExtern } from '../../../../components/ripple'
 
 export const sharedNavigationDrawerItemStyles = StyleSheet.create({
 

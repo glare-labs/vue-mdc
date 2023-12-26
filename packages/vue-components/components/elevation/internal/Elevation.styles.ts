@@ -1,4 +1,4 @@
-import { tokens } from '@/utils/tokens'
+import { tokens } from '../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { elevationTokens, elevationTokensExtern } from './Elevation.tokens'
 

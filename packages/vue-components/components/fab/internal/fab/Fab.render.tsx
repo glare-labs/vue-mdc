@@ -2,8 +2,8 @@ import { defineComponent } from 'vue'
 import { props, slots } from './Fab.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './Fab.styles'
-import { Elevation } from '@/components/elevation'
-import { Ripple } from '@/components/ripple'
+import { Elevation } from '../../../elevation'
+import { Ripple } from '../../../ripple'
 
 export const renderFab = defineComponent({
     name: 'MAMVFab',

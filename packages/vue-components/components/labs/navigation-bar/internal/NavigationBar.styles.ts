@@ -1,8 +1,8 @@
-import { sharedStyles } from '@/utils/shared.styles'
-import { makeVar, tokens } from '@/utils/tokens'
+import { sharedStyles } from '../../../../utils/shared.styles'
+import { makeVar, tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { navigationBarTokens, navigationBarTokensExtern } from './NavigationBar.tokens'
-import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
+import { elevationTokensExtern } from '../../../../components/elevation/internal/Elevation.tokens'
 
 export const sharedNavigationBarStyles = StyleSheet.create({
     container: {
@@ -22,7 +22,7 @@ export const sharedNavigationBarStyles = StyleSheet.create({
         transitionDuration: tokens.motion.duration.medium1,
         transitionProperty: 'background, border, color, box-shadow',
         transitionTimingFunction: tokens.motion.easing.standard,
-        '@media screen and (prefers-reduced-motion: reduce)': {
+        '../../../..media screen and (prefers-reduced-motion: reduce)': {
             transitionDuration: '0.01ms',
         },
         zIndex: 0,

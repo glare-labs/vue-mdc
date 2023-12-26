@@ -1,4 +1,4 @@
-import { sharedProps } from '@/utils/shared.type'
+import { sharedProps } from '../../../../utils/shared.type'
 import { PropType } from 'vue'
 
 export const props = {

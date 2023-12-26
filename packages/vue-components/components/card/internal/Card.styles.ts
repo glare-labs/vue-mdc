@@ -1,8 +1,8 @@
-import { makeVar, tokens } from '@/utils/tokens'
+import { makeVar, tokens } from '../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { cardTokens, cardTokensExtern } from './Card.tokens'
-import { elevationTokensExtern } from '@/components/elevation/internal/Elevation.tokens'
-import { sharedStyles } from '@/utils/shared.styles'
+import { elevationTokensExtern } from '../../../components/elevation/internal/Elevation.tokens'
+import { sharedStyles } from '../../../utils/shared.styles'
 
 export const sharedCardStyles = StyleSheet.create({
 

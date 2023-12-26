@@ -1,4 +1,4 @@
-import { makeVar, tokens } from '@/utils/tokens'
+import { makeVar, tokens } from '../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { rippleTokens, rippleTokensExtern } from './Ripple.tokens'
 

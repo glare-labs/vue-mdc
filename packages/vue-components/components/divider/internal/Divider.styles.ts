@@ -1,6 +1,6 @@
 import { StyleSheet } from 'aphrodite/no-important'
 import { dividerTokens, dividerTokensExtern } from './Divider.tokens'
-import { tokens } from '@/utils/tokens'
+import { tokens } from '../../../utils/tokens'
 
 export const sharedDividerStyles = StyleSheet.create({
     root: {

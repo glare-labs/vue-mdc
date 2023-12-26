@@ -1,4 +1,4 @@
-import { sharedEmits, sharedProps } from '@/utils/shared.type'
+import { sharedEmits, sharedProps } from '../../../utils/shared.type'
 import { PropType, SlotsType } from 'vue'
 
 export const props = {

@@ -1,4 +1,4 @@
-import { Button, Divider, Elevation, Fab, FabExtended, Icon, IconButton, Ripple, ThemeProvider, Typography } from '@/lib'
+import { Button, Divider, Elevation, Fab, FabExtended, Icon, IconButton, Ripple, ThemeProvider, Typography } from '../lib'
 import { Component, Plugin } from 'vue'
 
 /**
