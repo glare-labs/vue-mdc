@@ -1,6 +1,7 @@
 {
   "hosting": {
-    "public": "/docs",
+    "site": "anti-mage",
+    "public": "/packages/catalog/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
