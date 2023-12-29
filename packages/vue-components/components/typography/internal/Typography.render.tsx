@@ -1,27 +1,27 @@
-import { defineComponent } from 'vue'
-import { props, slots } from './Typography.type'
-import { css } from 'aphrodite/no-important'
-import { typographyStyles } from './Typography.styles'
+import { defineSSRCustomElement } from 'vue'
+import { props } from './Typography.type'
+import { sharedTypographyStyles } from './Typography.styles'
 
-export const renderTypography = defineComponent({
-    name: 'MAMVTypography',
+declare module 'vue' {
+    export interface GlobalComponents {
+        'am-typography': typeof renderTypography,
+    }
+}
+
+/**
+ * @alias am-typography
+ */
+export const renderTypography = defineSSRCustomElement({
+    name: 'am-typography',
     props,
-    slots,
-    computed: {
-        classes() {
-            return css(
-                typographyStyles[this.variant],
-                typographyStyles.root,
-            )
-        },
-    },
     render() {
         return (
-            <span class={this.classes}>
-                {
-                    this.$slots.default && this.$slots.default()
-                }
+            <span class="surface headline-large">
+                <slot></slot>
             </span>
         )
     },
+    styles: [
+        sharedTypographyStyles
+    ]
 })

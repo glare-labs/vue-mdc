@@ -15,9 +15,5 @@ export const props = {
             'display-small' | 'display-medium' | 'display-large'
         >,
     },
-    
-}
 
-export const slots = Object as SlotsType<{
-    default?: void
-}>
+}
