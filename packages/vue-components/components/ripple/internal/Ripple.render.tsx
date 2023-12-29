@@ -1,6 +1,5 @@
-import { defineComponent } from 'vue'
+import { defineSSRCustomElement } from 'vue'
 import { props } from './Ripple.type'
-import { css } from 'aphrodite/no-important'
 import { sharedRippleStyles } from './Ripple.styles'
 import { tokens } from '../../../utils/tokens'
 
@@ -48,26 +47,29 @@ const PRESS_PSEUDO = '::after'
 const ANIMATION_FILL = 'forwards'
 const TOUCH_DELAY_MS = 150
 
-export const renderRipple = defineComponent({
-    name: 'MAMVRipple',
+declare module 'vue' {
+    export interface GlobalComponents {
+        'am-ripple': typeof renderRipple,
+    }
+}
+
+/**
+ * @alias am-ripple
+ */
+export const renderRipple = defineSSRCustomElement({
+    name: 'am-ripple',
     props,
     computed: {
         classes() {
-            return {
-                surface: css(
-                    sharedRippleStyles.root,
-                    this.hovered && sharedRippleStyles.hovered,
-                    this.pressed && sharedRippleStyles.pressed,
-                    // this.disabled && sharedRippleStyles.disabled,
-                ),
-            }
-        },
+            return `surface ${this.hovered ? 'hovered' : ''} ${this.pressed ? 'pressed' : ''} ${this.disabled ? 'disabled' : ''}`
+        }
     },
     render() {
         return (
             <div
-                class={this.classes.surface}
+                class={this.classes}
                 aria-hidden="true"
+                aria-disabled={this.disabled}
                 onClick={this.handleClick}
                 onPointerenter={this.handlePointerenter}
                 onMouseenter={() => this.handlePointerenter()}
@@ -267,15 +269,7 @@ export const renderRipple = defineComponent({
             return pointerType === 'touch'
         },
     },
-    mounted() {
-
-        /**
-         * Make Real DOM can be updated by browser update DOM's properties.
-         */
-        const observer = new MutationObserver(() => { })
-
-        observer.observe(this.$el, {
-            childList: true
-        })
-    },
+    styles: [
+        sharedRippleStyles,
+    ]
 })
