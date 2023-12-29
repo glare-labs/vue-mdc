@@ -1,16 +1,28 @@
-import { css } from 'aphrodite/no-important'
-import { defineComponent } from 'vue'
-import { elevationStyles } from './Elevation.styles'
+import { defineSSRCustomElement } from 'vue'
+import { sharedElevationStyles } from './Elevation.styles'
 
-export const renderElevation = defineComponent({
-    name: 'MAMVElevation',
+
+declare module 'vue' {
+    export interface GlobalComponents {
+        'am-elevation': typeof renderElevation,
+    }
+}
+
+/**
+ * @alias am-elevation
+ */
+export const renderElevation = defineSSRCustomElement({
+    name: 'am-elevation',
     render() {
         return (
             <span
                 aria-hidden="true"
-                class={css(elevationStyles.root)}
+                class="surface"
             >
             </span>
         )
     },
+    styles: [
+        sharedElevationStyles
+    ]
 })

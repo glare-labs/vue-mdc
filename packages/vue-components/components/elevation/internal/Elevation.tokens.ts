@@ -2,7 +2,7 @@ import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/t
 
 const tokens = [
     'level',
-    'shadowColor',
+    'color',
 ] as const
 
 export const elevationTokens = makeComponentTokens<typeof tokens>(
