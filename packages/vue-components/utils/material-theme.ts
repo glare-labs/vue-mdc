@@ -44,18 +44,16 @@ const materialColors = {
 }
 
 export function GenerateMaterialTheme(
-    target: HTMLElement,
     sourceColor: string,
     dark = window.matchMedia('(prefers-color-scheme: dark)').matches
-): void {
+): string {
     // Generate Styles
     const theme = createThemeFromSourceColor(sourceColor, dark)
 
     // Generate StyleText
     const styleText = createStyleText(theme)
 
-    // Set styles to DOM's style
-    target.setAttribute('style', styleText)
+    return styleText
 }
 function createStyleText(theme: Theme): string {
     let styleString = ''
