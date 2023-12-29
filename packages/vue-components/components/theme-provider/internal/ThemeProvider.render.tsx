@@ -9,21 +9,23 @@ export const renderThemeProvider = defineComponent({
     emits,
     render() {
         return (
-            <div>
+            <div style={this.style}>
                 {
                     this.$slots.default && this.$slots.default()
                 }
             </div>
         )
     },
+    data: () => ({
+        style: '',
+    }),
     methods: {
         generateTheme() {
-            const result = GenerateMaterialTheme(
-                this.$el,
+            this.style = GenerateMaterialTheme(
                 this.sourceColor.toString(),
-                ['true'].includes(this.dark.toString())
+                this.dark
             )
-            this.$emit('theme-updated', result)
+            this.$emit('theme-updated', this.style)
         },
     },
     watch: {
@@ -41,4 +43,5 @@ export const renderThemeProvider = defineComponent({
     mounted() {
         this.generateTheme()
     },
+    inheritAttrs: false,
 })
