@@ -2,7 +2,6 @@ import { defineComponent } from 'vue'
 import { props, slots } from './IconButton.type'
 import { css } from 'aphrodite/no-important'
 import { sharedIconButtonStyles } from './IconButton.styles'
-import { Ripple } from '../../../components/ripple'
 
 export const renderIconButton = defineComponent({
     name: 'MAMVIconButton',
@@ -29,12 +28,10 @@ export const renderIconButton = defineComponent({
                 role='button'
                 disabled={this.disabled}
                 aria-disabled={this.disabled}
-                aria-label={this.ariaLabel}
-                aria-aria-labelledby={this.ariaLabelledby}
                 class={this.classes}
                 onClick={this.updateToggleState}
             >
-                <Ripple disabled={this.disabled}></Ripple>
+                <am-ripple disabled={this.disabled}></am-ripple>
                 {
                     this.$slots.default && this.$slots.default({
                         selected: this.selected
@@ -56,7 +53,4 @@ export const renderIconButton = defineComponent({
     created() {
         this.selected = this.defaultSelected
     },
-    components: {
-        Ripple,
-    }
 })
