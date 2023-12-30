@@ -1,26 +1,32 @@
-import { defineComponent } from 'vue'
-import { props, slots } from './Icon.type'
-import { css } from 'aphrodite/no-important'
-import { iconStyles } from './Icon.styles'
+import { defineSSRCustomElement } from 'vue'
+import { props } from './Icon.type'
+import { sharedIconStyles } from './Icon.styles'
 
-export const renderIcon = defineComponent({
-    name: 'MAMVIcon',
+declare module 'vue' {
+    export interface GlobalComponents {
+        'am-icon': typeof renderIcon,
+    }
+}
+
+/**
+ * @alias am-icon
+ */
+export const renderIcon = defineSSRCustomElement({
+    name: 'am-icon',
     props,
-    slots,
     computed: {
         classes() {
-            return css(
-                iconStyles[this.variant],
-                iconStyles[this.size],
-                iconStyles.root,
-            )
+            return `surface ${this.variant} ${this.size}`
         }
     },
     render() {
         return (
             <span aria-hidden class={this.classes}>
-                { this.$slots.default && this.$slots.default() }
+                <slot></slot>
             </span>
         )
-    }
+    },
+    styles: [
+        sharedIconStyles
+    ]
 })

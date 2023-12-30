@@ -2,6 +2,8 @@ import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/t
 
 const tokens = [
     'font-size',
+    'line-height',
+
     'font-family',
     'color',
 ] as const

@@ -1,4 +1,4 @@
-import { PropType, SlotsType } from 'vue'
+import { PropType } from 'vue'
 
 export const props = {
 
@@ -17,9 +17,5 @@ export const props = {
         default: 'outlined',
         type: String as PropType<'outlined' | 'rounded' | 'sharp'>
     },
-    
-}
 
-export const slots = Object as SlotsType<{
-    default?: void,
-}>
+}
