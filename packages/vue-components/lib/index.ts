@@ -7,7 +7,8 @@ import { Ripple } from '../components/ripple'
 import { ThemeProvider } from '../components/theme-provider'
 import { Typography } from '../components/typography'
 import { IconButton } from '../components/icon-button'
-import { RegisterAllComponents, RegisterComponents } from '../utils/register-components'
+import { RegisterAllComponents, RegisterComponents, RegisterAllCustomElements } from '../utils/register-components'
+import { Checkbox } from '../components/labs/checkbox'
 
 export {
     /**
@@ -28,6 +29,12 @@ export {
     Button,
     IconButton,
 
+    /**
+     * Unstable
+     */
+    Checkbox,
+
     RegisterAllComponents,
     RegisterComponents,
+    RegisterAllCustomElements,
 }

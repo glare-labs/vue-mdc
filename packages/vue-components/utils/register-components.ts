@@ -26,14 +26,8 @@ export const RegisterAllComponents = {
     install: (instance) => {
         RegisterComponents(
             ThemeProvider,
-            Divider,
-            Elevation,
-            Typography,
-            Ripple,
-            Icon,
             Fab,
             FabExtended,
-            Button,
             IconButton,
         ).install(instance)
     }
@@ -54,3 +48,23 @@ export const RegisterComponents = (...components: Component[]) => ({
             .forEach(e => e())
     },
 }) as Required<Plugin>
+
+/**
+ * Register all custom elements.
+ * 
+ * @example
+ * const app = createApp(App)
+ * app.use(RegisterAllCustomElements)
+ * app.mount('#root')
+ */
+export const RegisterAllCustomElements = {
+    install() {
+        customElements.define('am-ripple', Ripple)
+        customElements.define('am-elevation', Elevation)
+        customElements.define('am-typography', Typography)
+        customElements.define('am-button', Button)
+        customElements.define('am-icon', Icon)
+        customElements.define('am-divider', Divider)
+
+    }
+} as Required<Plugin>
