@@ -1,18 +1,22 @@
-import { defineComponent } from 'vue'
+import { defineSSRCustomElement } from 'vue'
 import { props } from './Divider.type'
-import { css } from 'aphrodite/no-important'
 import { sharedDividerStyles } from './Divider.styles'
 
-export const renderDivider = defineComponent({
-    name: 'MAMVDivider',
+declare module 'vue' {
+    export interface GlobalComponents {
+        'am-divider': typeof renderDivider,
+    }
+}
+
+/**
+ * @alias am-divided
+ */
+export const renderDivider = defineSSRCustomElement({
+    name: 'am-divider',
     props,
     computed: {
         classes() {
-            return css(
-                sharedDividerStyles.root,
-                sharedDividerStyles[this.variant],
-                sharedDividerStyles[this.direction],
-            )
+            return `surface ${this.variant} ${this.direction}`
         },
     },
     render() {
@@ -23,4 +27,7 @@ export const renderDivider = defineComponent({
             ></span>
         )
     },
+    styles: [
+        sharedDividerStyles
+    ]
 })
