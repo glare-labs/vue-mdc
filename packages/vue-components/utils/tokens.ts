@@ -205,38 +205,6 @@ export const tokens = {
             letterSpacing: '0.5px',
         },
     },
-
-    // WILL DEPRECATED
-    /**
-     * Spacing V -
-     */
-    spacingVerticalNone: '0',
-    spacingVerticalXXS: '2px',
-    spacingVerticalXS: '4px',
-    spacingVerticalSNudge: '6px',
-    spacingVerticalS: '8px',
-    spacingVerticalMNudge: '10px',
-    spacingVerticalM: '12px',
-    spacingVerticalL: '16px',
-    spacingVerticalXL: '20px',
-    spacingVerticalXXL: '24px',
-    spacingVerticalXXXL: '32px',
-
-    /**
-     * Spacing H |
-     */
-    spacingHorizontalNone: '0',
-    spacingHorizontalXXS: '2px',
-    spacingHorizontalXS: '4px',
-    spacingHorizontalSNudge: '6px',
-    spacingHorizontalS: '8px',
-    spacingHorizontalMNudge: '10px',
-    spacingHorizontalM: '12px',
-    spacingHorizontalL: '16px',
-    spacingHorizontalXL: '20px',
-    spacingHorizontalXXL: '24px',
-    spacingHorizontalXXXL: '32px',
-
 } as const
 
 export function makeComponentExternTokens<T extends Record<string, string>>(componentTokens: Record<string, string>) {
@@ -298,4 +266,10 @@ export function makeVar(...tokens: string[]): string {
 export function makeVarWithDefault(tokens: string[], value: string | number): string {
     if (!Array.isArray(tokens)) throw new Error(`The first arguments ${tokens} is not a string[]`)
     return `${makeVar(...tokens).split(')', 1)}, ${value}${')'.repeat(tokens.length)}`
+}
+
+export function makeValues(...tokens: any[]): string {
+    console.log(tokens.join(', '))
+
+    return tokens.join(', ')
 }
