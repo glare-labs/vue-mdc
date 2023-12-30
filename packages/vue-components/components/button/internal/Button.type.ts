@@ -1,9 +1,6 @@
-import { sharedEmits, sharedProps } from '../../../utils/shared.type'
-import { PropType, SlotsType } from 'vue'
+import { PropType } from 'vue'
 
 export const props = {
-
-    ...sharedProps,
 
     /**
      * @default filled
@@ -62,13 +59,3 @@ export const props = {
     },
 
 }
-
-export const slots = Object as SlotsType<{
-    default?: void
-    icon?: void
-}>
-
-export const emits = [
-    ...sharedEmits,
-
-]
