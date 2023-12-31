@@ -2,8 +2,6 @@ import { defineComponent } from 'vue'
 import { props, slots } from './FabExtended.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './FabExtended.styles'
-import { Elevation } from '../../../../components/elevation'
-import { Ripple } from '../../../../components/ripple'
 
 export const renderFabExtended = defineComponent({
     name: 'MAMVFabExtended',
@@ -31,15 +29,12 @@ export const renderFabExtended = defineComponent({
                 disabled={this.disabled}
                 aria-disabled={this.disabled}
             >
-                <Elevation></Elevation>
-                <Ripple disabled={this.disabled}></Ripple>
+                <am-elevation></am-elevation>
+                <am-ripple disabled={this.disabled}></am-ripple>
                 {this.iconPosition === 'left' && this.$slots.icon && this.$slots.icon()}
                 {this.$slots.default && this.$slots.default()}
                 {this.iconPosition === 'right' && this.$slots.icon && this.$slots.icon()}
             </button>
         )
     },
-    components: {
-        Ripple,
-    }
 })

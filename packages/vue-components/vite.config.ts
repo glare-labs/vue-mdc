@@ -18,13 +18,12 @@ export default defineConfig({
             fileName: 'index',
             formats: ['es'],
         },
-
         rollupOptions: {
             external: [
                 'vue',
                 'material-symbols',
-                './components/**/test/*.test.{ts,tsx}',
-                './components/labs/**/*',
+                '/components/**/test/*.test.{ts,tsx}',
+                '/components/labs/**/*',
             ],
             output: {
                 globals: {
@@ -39,6 +38,9 @@ export default defineConfig({
         vueJsx(),
         dts({
             insertTypesEntry: true,
+            exclude: [
+                '/components/labs/**/*'
+            ]
         }),
     ],
 })

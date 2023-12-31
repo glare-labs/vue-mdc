@@ -2,8 +2,6 @@ import { defineComponent } from 'vue'
 import { props, slots } from './Fab.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './Fab.styles'
-import { Elevation } from '../../../elevation'
-import { Ripple } from '../../../ripple'
 
 export const renderFab = defineComponent({
     name: 'MAMVFab',
@@ -34,13 +32,10 @@ export const renderFab = defineComponent({
                 aria-label={this.ariaLabel}
                 aria-aria-labelledby={this.ariaLabelledby}
             >
-                <Elevation></Elevation>
-                <Ripple disabled={this.disabled}></Ripple>
+                <am-elevation></am-elevation>
+                <am-ripple disabled={this.disabled}></am-ripple>
                 {this.$slots.default && this.$slots.default()}
             </button>
         )
-    },
-    components: {
-        Ripple,
     },
 })

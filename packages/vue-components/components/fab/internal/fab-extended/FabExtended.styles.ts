@@ -4,6 +4,7 @@ import { tokens } from '../../../../utils/tokens'
 import { StyleSheet } from 'aphrodite/no-important'
 import { fabExtendedTokens, fabExtendedTokensExtern } from './FabExtended.tokens'
 import { sharedStyles } from '../../../../utils/shared.styles'
+import { rippleTokensExtern } from '../../../../components/ripple'
 
 export const fabStyles = StyleSheet.create({
     root: {
@@ -49,18 +50,54 @@ export const fabStyles = StyleSheet.create({
     primary: {
         [fabExtendedTokens.background]: tokens.color.primary.primaryContainer,
         [fabExtendedTokens.color]: tokens.color.primary.onPrimaryContainer,
+        [iconTokensExtern.color]: tokens.color.primary.onPrimaryContainer,
+        ':hover': {
+            [rippleTokensExtern['hover-color']]: tokens.color.primary.onPrimaryContainer,
+            [rippleTokensExtern['hover-opacity']]: '0.08',
+        },
+        ':active': {
+            [rippleTokensExtern['press-color']]: tokens.color.primary.onPrimaryContainer,
+            [rippleTokensExtern['press-opacity']]: '0.1',
+        }
     },
     secondary: {
         [fabExtendedTokens.background]: tokens.color.secondary.secondaryContainer,
         [fabExtendedTokens.color]: tokens.color.secondary.onSecondaryContainer,
+        [iconTokensExtern.color]: tokens.color.secondary.onSecondaryContainer,
+        ':hover': {
+            [rippleTokensExtern['hover-color']]: tokens.color.secondary.onSecondaryContainer,
+            [rippleTokensExtern['hover-opacity']]: '0.08',
+        },
+        ':active': {
+            [rippleTokensExtern['press-color']]: tokens.color.secondary.onSecondaryContainer,
+            [rippleTokensExtern['press-opacity']]: '0.1',
+        }
     },
     tertiary: {
         [fabExtendedTokens.background]: tokens.color.tertiary.tertiaryContainer,
         [fabExtendedTokens.color]: tokens.color.tertiary.onTertiaryContainer,
+        [iconTokensExtern.color]: tokens.color.tertiary.onTertiaryContainer,
+        ':hover': {
+            [rippleTokensExtern['hover-color']]: tokens.color.tertiary.onTertiaryContainer,
+            [rippleTokensExtern['hover-opacity']]: '0.08',
+        },
+        ':active': {
+            [rippleTokensExtern['press-color']]: tokens.color.tertiary.onTertiaryContainer,
+            [rippleTokensExtern['press-opacity']]: '0.1',
+        }
     },
     surface: {
         [fabExtendedTokens.background]: tokens.color.surface.surfaceContainer,
         [fabExtendedTokens.color]: tokens.color.surface.onSurface,
+        [iconTokensExtern.color]: tokens.color.surface.onSurface,
+        ':hover': {
+            [rippleTokensExtern['hover-color']]: tokens.color.surface.onSurface,
+            [rippleTokensExtern['hover-opacity']]: '0.08',
+        },
+        ':active': {
+            [rippleTokensExtern['press-color']]: tokens.color.surface.onSurface,
+            [rippleTokensExtern['press-opacity']]: '0.1',
+        }
     },
 
     /**
@@ -108,11 +145,10 @@ export const fabStyles = StyleSheet.create({
     disabledRoot: {
         ...sharedStyles.disabled,
 
-        filter: 'grayscale(1)',
-        backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 75%, gray 25%)`,
-        color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 5%, gray 95%)`,
-        borderColor: 'transparent',
-        boxShadow: 'none',
+        backgroundColor: `color-mix(in srgb, ${tokens.color.surface.surface} 12%, white 12%)`,
+        color: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, white 38%)`,
+        [iconTokensExtern.color]: `color-mix(in srgb, ${tokens.color.surface.onSurface} 38%, white 38%)`,
+
         [elevationTokensExtern.level]: '0',
         ':hover': {
             [elevationTokensExtern.level]: '0',
