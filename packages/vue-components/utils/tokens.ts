@@ -33,6 +33,8 @@ export const tokens = {
         },
         surface: {
             surface: 'var(--md-sys-color-surface)',
+            surfaceDim: 'var(--md-sys-color-surface-dim)',
+            surfaceBright: 'var(--md-sys-color-surface-bright)',
             onSurface: 'var(--md-sys-color-on-surface)',
             surfaceVariant: 'var(--md-sys-color-surface-variant)',
             onSurfaceVariant: 'var(--md-sys-color-on-surface-variant)',
@@ -228,18 +230,17 @@ export function makeComponentTokens<T extends Readonly<string[]>>(componentName:
     }>
 }
 
-function toKebabCase(s: string) {
-    if (s.includes('-') && s == s.toLowerCase()) return s
-    const arr = []
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] >= 'A' && s[i] <= 'Z') {
-            arr.push('-')
-            arr.push(s[i].toLowerCase())
-        } else {
-            arr.push(s[i])
-        }
-    }
-    return arr.join('')
+/**
+ * 
+ * @example
+ *   MAMVButton -> m-a-m-v-button
+ */
+export function toKebabCase(str: string) {
+    return str.split('').map((letter, idx) => {
+        return letter.toUpperCase() === letter
+            ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`
+            : letter
+    }).join('')
 }
 
 /**
