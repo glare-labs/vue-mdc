@@ -1,4 +1,4 @@
-import { PropType, SlotsType } from 'vue'
+import type { PropType, SlotsType } from 'vue'
 
 export const props = {
     /**

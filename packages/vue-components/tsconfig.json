@@ -21,6 +21,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
     "baseUrl": ".",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -45,6 +46,7 @@
     "./test-report/**/*",
     "./dist/**/*",
     "./**/*.test.tsx",
-    "./**/*.test.ts"
+    "./**/*.test.ts",
+    "./**/labs/*"
   ],
 }

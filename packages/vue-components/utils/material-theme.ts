@@ -1,4 +1,4 @@
-import { argbFromHex, MaterialDynamicColors, Theme, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
+import { argbFromHex, MaterialDynamicColors, type Theme, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
 
 /**
  * A Mapping of color token name to MCU HCT color function generator.

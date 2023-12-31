@@ -5,7 +5,7 @@ module.exports = {
     },
     'extends': [
         'eslint:recommended',
-        'plugin:@typescript-eslint/recommended'
+        'plugin:@typescript-eslint/recommended',
     ],
     'overrides': [
         {
@@ -13,12 +13,12 @@ module.exports = {
                 'node': true
             },
             'files': [
-                '.eslintrc.{js,cjs}'
+                '.eslintrc.{js,cjs}',
             ],
             'parserOptions': {
                 'sourceType': 'script'
-            }
-        }
+            },
+        },
     ],
     'parser': '@typescript-eslint/parser',
     'parserOptions': {
@@ -26,7 +26,7 @@ module.exports = {
         'sourceType': 'module'
     },
     'plugins': [
-        '@typescript-eslint'
+        '@typescript-eslint',
     ],
     'rules': {
         'indent': [
@@ -79,5 +79,6 @@ module.exports = {
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/ban-ts-comment': 'off',
-    },
+        'vue/html-closing-bracket-newline': 'off'
+    }
 }
