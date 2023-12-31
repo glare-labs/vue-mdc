@@ -1,7 +1,8 @@
-import { defineSSRCustomElement } from 'vue'
+import { defineComponent } from 'vue'
 import { props } from './Ripple.type'
 import { sharedRippleStyles } from './Ripple.styles'
 import { tokens } from '../../../utils/tokens'
+import { css } from 'aphrodite/no-important'
 
 enum State {
     /**
@@ -49,19 +50,24 @@ const TOUCH_DELAY_MS = 150
 
 declare module 'vue' {
     export interface GlobalComponents {
-        'am-ripple': typeof renderRipple,
+        'Am-Ripple': typeof renderRipple,
     }
 }
 
 /**
  * @alias am-ripple
  */
-export const renderRipple = defineSSRCustomElement({
+export const renderRipple = defineComponent({
     name: 'AmRipple',
     props,
     computed: {
         classes() {
-            return `surface ${this.hovered ? 'hovered' : ''} ${this.pressed ? 'pressed' : ''} ${this.disabled ? 'disabled' : ''}`
+            return css(
+                sharedRippleStyles.surface,
+                this.hovered && sharedRippleStyles.hovered,
+                this.pressed && sharedRippleStyles.pressed,
+                this.disabled && sharedRippleStyles.disabled,
+            )
         }
     },
     render() {
@@ -269,7 +275,4 @@ export const renderRipple = defineSSRCustomElement({
             return pointerType === 'touch'
         },
     },
-    styles: [
-        sharedRippleStyles,
-    ]
 })

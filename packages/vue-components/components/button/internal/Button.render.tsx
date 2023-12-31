@@ -1,22 +1,41 @@
-import { defineSSRCustomElement } from 'vue'
-import { props } from './Button.type'
+import { defineComponent } from 'vue'
+import { props, slots } from './Button.type'
 import { sharedButtonStyles } from './Button.styles'
+import { Ripple } from '../../ripple'
+import { Elevation } from '../../elevation'
+import { css } from 'aphrodite/no-important'
+
 
 declare module 'vue' {
     export interface GlobalComponents {
-        'am-button': typeof renderButton,
+        'Am-Button': typeof renderButton,
     }
 }
 
 /**
  * @alias am-button
  */
-export const renderButton = defineSSRCustomElement({
+export const renderButton = defineComponent({
     name: 'AmButton',
     props,
+    slots,
     computed: {
         classes() {
-            return `surface ${this.shape} ${this.size} ${this.appearance} ${this.disabled ? 'disabled' : ''} ${this.iconOnly ? 'icon-only' : ''} ${this.iconPosition === 'left' ? 'icon-start' : 'icon-end'}`
+            return ({
+                surface: css(
+                    sharedButtonStyles.surface,
+                    sharedButtonStyles[this.shape],
+                    sharedButtonStyles[this.appearance],
+                    this.disabled && sharedButtonStyles.disabled
+                ),
+                container: css(
+                    sharedButtonStyles.content,
+                ),
+                label: css(
+                    sharedButtonStyles.label,
+                ),
+
+            })
         },
     },
     render() {
@@ -24,26 +43,33 @@ export const renderButton = defineSSRCustomElement({
             <div
                 role='button'
                 aria-disabled={this.disabled}
-                class={`surface container ${this.shape} ${this.size} ${this.appearance} ${this.disabled ? 'disabled' : ''}`}
+                class={this.classes.surface}
             >
 
-                <am-ripple disabled={this.disabled}></am-ripple>
-                <am-elevation></am-elevation>
+                <Ripple disabled={this.disabled}></Ripple>
+                <Elevation></Elevation>
 
                 <button
                     type={this.type}
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
-                    class="content"
+                    class={this.classes.container}
                 >
-                    {this.iconPosition === 'left' && <slot name="icon"></slot>}
-                    {!this.iconOnly && <slot class="label"></slot>}
-                    {this.iconPosition === 'right' && <slot name="icon"></slot>}
+                    {this.iconPosition === 'left' && this.$slots.icon && this.$slots.icon()}
+
+                    {
+                        !this.iconOnly &&
+                        <span class={this.classes.label}>
+                            {this.$slots.default && this.$slots.default()}
+                        </span>
+                    }
+                    {this.iconPosition === 'right' && this.$slots.icon && this.$slots.icon()}
                 </button>
             </div >
         )
     },
-    styles: [
-        sharedButtonStyles
-    ]
+    components: {
+        Ripple,
+        Elevation
+    }
 })

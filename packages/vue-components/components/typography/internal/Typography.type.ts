@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import type { PropType, SlotsType } from 'vue'
 
 export const props = {
 
@@ -17,3 +17,7 @@ export const props = {
     },
 
 }
+
+export const slots = Object as SlotsType<{
+    default?: void
+}>

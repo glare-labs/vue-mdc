@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import type { PropType, SlotsType } from 'vue'
 
 export const props = {
 
@@ -27,14 +27,6 @@ export const props = {
     },
 
     /**
-     * @default 'medium
-     */
-    size: {
-        default: 'medium',
-        type: String as PropType<'small' | 'medium' | 'large'>
-    },
-
-    /**
      * @default left
      */
     iconPosition: {
@@ -59,3 +51,8 @@ export const props = {
     },
 
 }
+
+export const slots = Object as SlotsType<{
+    default?: void
+    icon?: void
+}>
