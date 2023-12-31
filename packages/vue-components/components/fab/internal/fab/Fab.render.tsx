@@ -3,8 +3,14 @@ import { props, slots } from './Fab.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './Fab.styles'
 
+declare module 'vue' {
+    export interface GlobalComponents {
+        'Am-Fab': typeof renderFab,
+    }
+}
+
 export const renderFab = defineComponent({
-    name: 'MAMVFab',
+    name: 'AmFab',
     props,
     slots,
     computed: {

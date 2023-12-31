@@ -12,7 +12,7 @@ declare module 'vue' {
  * @alias am-icon
  */
 export const renderIcon = defineSSRCustomElement({
-    name: 'am-icon',
+    name: 'AmIcon',
     props,
     computed: {
         classes() {

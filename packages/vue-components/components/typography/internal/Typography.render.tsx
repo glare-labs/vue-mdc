@@ -12,11 +12,11 @@ declare module 'vue' {
  * @alias am-typography
  */
 export const renderTypography = defineSSRCustomElement({
-    name: 'am-typography',
+    name: 'AmTypography',
     props,
     render() {
         return (
-            <span class="surface headline-large">
+            <span class={`surface ${this.variant}`}>
                 <slot></slot>
             </span>
         )

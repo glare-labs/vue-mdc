@@ -12,7 +12,7 @@ declare module 'vue' {
  * @alias am-elevation
  */
 export const renderElevation = defineSSRCustomElement({
-    name: 'am-elevation',
+    name: 'AmElevation',
     render() {
         return (
             <span

@@ -57,7 +57,7 @@ declare module 'vue' {
  * @alias am-ripple
  */
 export const renderRipple = defineSSRCustomElement({
-    name: 'am-ripple',
+    name: 'AmRipple',
     props,
     computed: {
         classes() {

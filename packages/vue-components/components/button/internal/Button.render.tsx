@@ -12,7 +12,7 @@ declare module 'vue' {
  * @alias am-button
  */
 export const renderButton = defineSSRCustomElement({
-    name: 'am-button',
+    name: 'AmButton',
     props,
     computed: {
         classes() {

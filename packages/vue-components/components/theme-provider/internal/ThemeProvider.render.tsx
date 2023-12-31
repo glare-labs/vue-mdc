@@ -2,8 +2,14 @@ import { GenerateMaterialTheme } from '../../../utils/material-theme'
 import { defineComponent } from 'vue'
 import { emits, props, slots } from './ThemeProvider.type'
 
+declare module 'vue' {
+    export interface GlobalComponents {
+        'Am-Theme-Provider': typeof renderThemeProvider,
+    }
+}
+
 export const renderThemeProvider = defineComponent({
-    name: 'MAMVThemeProvider',
+    name: 'AmThemeProvider',
     props,
     slots,
     emits,

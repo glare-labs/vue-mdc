@@ -12,7 +12,7 @@ declare module 'vue' {
  * @alias am-divided
  */
 export const renderDivider = defineSSRCustomElement({
-    name: 'am-divider',
+    name: 'AmDivider',
     props,
     computed: {
         classes() {

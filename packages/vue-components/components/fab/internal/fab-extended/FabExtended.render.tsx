@@ -3,8 +3,14 @@ import { props, slots } from './FabExtended.type'
 import { css } from 'aphrodite/no-important'
 import { fabStyles } from './FabExtended.styles'
 
+declare module 'vue' {
+    export interface GlobalComponents {
+        'Am-Fab-Extended': typeof renderFabExtended,
+    }
+}
+
 export const renderFabExtended = defineComponent({
-    name: 'MAMVFabExtended',
+    name: 'AmFabExtended',
     props,
     slots,
     computed: {

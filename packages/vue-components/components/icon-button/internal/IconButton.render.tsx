@@ -3,8 +3,14 @@ import { props, slots } from './IconButton.type'
 import { css } from 'aphrodite/no-important'
 import { sharedIconButtonStyles } from './IconButton.styles'
 
+declare module 'vue' {
+    export interface GlobalComponents {
+        'Am-Icon-Button': typeof renderIconButton,
+    }
+}
+
 export const renderIconButton = defineComponent({
-    name: 'MAMVIconButton',
+    name: 'AmIconButton',
     props,
     slots,
     data: () => ({

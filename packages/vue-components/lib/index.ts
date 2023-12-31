@@ -7,34 +7,36 @@ import { Ripple } from '../components/ripple'
 import { ThemeProvider } from '../components/theme-provider'
 import { Typography } from '../components/typography'
 import { IconButton } from '../components/icon-button'
-import { RegisterAllComponents, RegisterComponents, RegisterAllCustomElements } from '../utils/register-components'
-import { Checkbox } from '../components/labs/checkbox'
+import { RegisterAllComponents, RegisterComponents } from '../utils/register-components'
+import { tokens } from '../utils/tokens'
 
 export {
     /**
      * Those are stable
      */
     ThemeProvider,
-    Divider,
+    Button,
+    Ripple,
     Elevation,
     Typography,
 
     /**
      * Those are ready to use
-    */
-    Ripple,
+     */
+    Divider,
     Icon,
     Fab,
     FabExtended,
-    Button,
     IconButton,
 
     /**
-     * Unstable
+     * Plugins
      */
-    Checkbox,
-
     RegisterAllComponents,
     RegisterComponents,
-    RegisterAllCustomElements,
+
+    /**
+     * Design system
+     */
+    tokens
 }
