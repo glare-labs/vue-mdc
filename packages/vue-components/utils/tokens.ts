@@ -209,6 +209,9 @@ export const tokens = {
     },
 } as const
 
+/**
+ * @deprecated
+ */
 export function makeComponentExternTokens<T extends Record<string, string>>(componentTokens: Record<string, string>) {
     const e = new Object() as Record<string, string>
     for (const i in componentTokens) {
@@ -217,8 +220,9 @@ export function makeComponentExternTokens<T extends Record<string, string>>(comp
 
     return e as Readonly<T>
 }
-export function makeComponentTokens<T extends Readonly<string[]>>(componentName: string, componentTokenNames: T) {
-    const e = new Object() as Record<string, string>
+
+export function makeComponentTokens<C extends string, T extends string>(componentName: C, componentTokenNames: T[]) {
+    const e = new Object() as Record<string, `--mamv-${string}-${T}`>
 
     const componentNameKebabCase = toKebabCase(componentName)
     for (const i of componentTokenNames) {
@@ -226,8 +230,19 @@ export function makeComponentTokens<T extends Readonly<string[]>>(componentName:
     }
 
     return e as Readonly<{
-        [V in typeof componentTokenNames[number]]: string
+        [V in typeof componentTokenNames[number]]: `--mamv-${C}-${V}`
     }>
+}
+export function makeComponentInnerTokens<C extends string, N extends string, T extends string>(tokens: Record<N, `--mamv-${C}-${T}`>) {
+    const e = new Object() as Record<string, string>
+
+    for (const i in tokens) {
+        e[i] = `${tokens[i]}-inner`
+    }
+
+    return e as {
+        [K in keyof typeof tokens]: `--mamv-${C}-${K}-inner`
+    }
 }
 
 /**
