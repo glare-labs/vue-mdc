@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import { props } from './Divider.type'
-import { sharedDividerStyles } from './Divider.styles'
-import { css } from 'aphrodite/no-important'
+import css from './Divider.module.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -17,11 +16,11 @@ export const renderDivider = defineComponent({
     props,
     computed: {
         classes() {
-            return css(
-                sharedDividerStyles.surface,
-                sharedDividerStyles[this.direction],
-                sharedDividerStyles[this.variant],
-            )
+            return [
+                css.surface,
+                css[this.direction],
+                css[this.variant],
+            ]
         },
     },
     render() {

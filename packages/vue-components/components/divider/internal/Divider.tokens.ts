@@ -1,18 +1,15 @@
-import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../../utils/tokens'
 
-const tokens = [
-    'color',
-    'thickness',
-    'width',
-    'height',
-    'margin-left',
-    'margin-right',
-    'margin-bottom',
-    'margin-top',
-] as const
-
-export const dividerTokens = makeComponentTokens<typeof tokens>(
+export const dividerTokens = makeComponentTokens(
     'divider',
-    tokens
+    [
+        'color',
+        'thickness',
+        'width',
+        'height',
+        'margin-left',
+        'margin-right',
+        'margin-bottom',
+        'margin-top',
+    ]
 )
-export const dividerTokensExtern = makeComponentExternTokens<typeof dividerTokens>(dividerTokens)
