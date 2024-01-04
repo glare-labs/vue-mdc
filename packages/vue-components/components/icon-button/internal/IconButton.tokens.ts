@@ -1,19 +1,16 @@
-import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../../utils/tokens'
 
-const tokens = [
-    'container-color',
-    'unselect-container-color',
-    'selected-container-color',
-    'color',
-    'toggle-unselect-color',
-    'toggle-selected-color',
-    'width',
-    'height',
-    'shape',
-] as const
-
-export const iconButtonTokens = makeComponentTokens<typeof tokens>(
+export const iconButtonTokens = makeComponentTokens(
     'icon-button',
-    tokens
+    [
+        'container-color',
+        'unselect-container-color',
+        'selected-container-color',
+        'color',
+        'toggle-unselect-color',
+        'toggle-selected-color',
+        'width',
+        'height',
+        'shape',
+    ]
 )
-export const iconButtonTokensExtern = makeComponentExternTokens<typeof iconButtonTokens>(iconButtonTokens)

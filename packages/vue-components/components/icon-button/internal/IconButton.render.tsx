@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './IconButton.type'
-import { css } from 'aphrodite/no-important'
-import { sharedIconButtonStyles } from './IconButton.styles'
+import { IconButtonStyle } from './IconButton.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -9,6 +8,9 @@ declare module 'vue' {
     }
 }
 
+/**
+ * @alias Am-Icon-Button
+ */
 export const renderIconButton = defineComponent({
     name: 'AmIconButton',
     props,
@@ -18,14 +20,13 @@ export const renderIconButton = defineComponent({
     }),
     computed: {
         classes() {
-            return css(
-                sharedIconButtonStyles.root,
-                sharedIconButtonStyles[this.size],
-                sharedIconButtonStyles[this.appearance],
-                sharedIconButtonStyles[this.shape],
-                this.toggle ? this.selected ? sharedIconButtonStyles['toggle-selected'] : sharedIconButtonStyles['toggle-unselect'] : sharedIconButtonStyles['no-toggle'],
-                this.disabled && sharedIconButtonStyles.disabled,
-            )
+            return [
+                IconButtonStyle.surface,
+                IconButtonStyle.appearance[this.appearance],
+                IconButtonStyle.shape[this.shape],
+                this.toggle ? this.selected ? IconButtonStyle.toggle['toggle-selected'] : IconButtonStyle.toggle['toggle-unselect'] : IconButtonStyle.toggle['no-toggle'],
+                this.disabled && IconButtonStyle.disabled,
+            ]
         },
     },
     render() {
