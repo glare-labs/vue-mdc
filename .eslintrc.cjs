@@ -79,6 +79,7 @@ module.exports = {
         'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
         '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-namespace': 'off',
         'vue/html-closing-bracket-newline': 'off'
     }
 }
