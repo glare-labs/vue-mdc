@@ -1,5 +1,5 @@
 .surface {
-    --mamv-icon-color: var(--md-sys-color-on-surface);
+    --mamv-icon-color-inner: var(--md-sys-color-on-surface);
 
     line-height: var(--mamv-icon-line-height, var(--mamv-icon-line-height-inner));
     font-size: var(--mamv-icon-font-size, var(--mamv-icon-font-size-inner));
