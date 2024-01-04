@@ -1,15 +1,12 @@
-import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../../utils/tokens'
 
-const tokens = [
-    'color',
-    'font-size',
-    'line-height',
-    'font-weight',
-    'letter-spacing',
-] as const
-
-export const typographyTokens = makeComponentTokens<typeof tokens>(
+export const typographyTokens = makeComponentTokens(
     'typography',
-    tokens
+    [
+        'color',
+        'font-size',
+        'line-height',
+        'font-weight',
+        'letter-spacing',
+    ]
 )
-export const typographyTokensExtern = makeComponentExternTokens<typeof typographyTokens>(typographyTokens)

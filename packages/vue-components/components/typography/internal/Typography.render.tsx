@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Typography.type'
-import { sharedTypographyStyles } from './Typography.styles'
-import { css } from 'aphrodite/no-important'
+import { TypographyStyles } from './Typography.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -18,10 +17,10 @@ export const renderTypography = defineComponent({
     slots,
     computed: {
         classes() {
-            return css(
-                sharedTypographyStyles.surface,
-                sharedTypographyStyles[this.variant]
-            )
+            return [
+                TypographyStyles.surface,
+                TypographyStyles.fonts[this.variant]
+            ]
         }
     },
     render() {
