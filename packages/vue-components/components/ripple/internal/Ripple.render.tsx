@@ -96,6 +96,9 @@ export const renderRipple = defineComponent({
         growAnimation: null as Animation | null,
     }),
     methods: {
+        trigger() {
+            this.handleClick()
+        },
         handlePointerenter() {
             if (this.disabled) return
 
