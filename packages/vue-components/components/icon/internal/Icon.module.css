@@ -1,0 +1,35 @@
+.surface {
+    --mamv-icon-color: var(--md-sys-color-on-surface);
+
+    line-height: var(--mamv-icon-line-height, var(--mamv-icon-line-height-inner));
+    font-size: var(--mamv-icon-font-size, var(--mamv-icon-font-size-inner));
+    font-family: var(--mamv-icon-font-family, var(--mamv-icon-font-family-inner));
+    color: var(--mamv-icon-color, var(--mamv-icon-color-inner));
+
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+.small {
+    --mamv-icon-font-size-inner: 22px;
+    --mamv-icon-line-height-inner: 22px;
+}
+.medium {
+    --mamv-icon-font-size-inner: 24px;
+    --mamv-icon-line-height-inner: 24px;
+}
+.large {
+    --mamv-icon-font-size-inner: 44px;
+    --mamv-icon-line-height-inner: 44px;
+}
+
+.outlined {
+    --mamv-icon-font-family-inner: 'Material Symbols Outlined';
+}
+.rounded {
+    --mamv-icon-font-family-inner: 'Material Symbols Rounded';
+}
+.sharp {
+    --mamv-icon-font-family-inner: 'Material Symbols Sharp';
+}

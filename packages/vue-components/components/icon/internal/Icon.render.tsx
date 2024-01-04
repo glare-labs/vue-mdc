@@ -1,8 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Icon.type'
-import { sharedIconStyles } from './Icon.styles'
-import { css } from 'aphrodite/no-important'
-
+import css from './Icon.module.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -19,11 +17,11 @@ export const renderIcon = defineComponent({
     slots,
     computed: {
         classes() {
-            return css(
-                sharedIconStyles.surface,
-                sharedIconStyles[this.size],
-                sharedIconStyles[this.variant]
-            )
+            return [
+                css.surface,
+                css[this.size],
+                css[this.variant]
+            ]
         }
     },
     render() {
