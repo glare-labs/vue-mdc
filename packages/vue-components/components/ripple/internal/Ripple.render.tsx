@@ -1,8 +1,7 @@
 import { defineComponent } from 'vue'
 import { props } from './Ripple.type'
-import { sharedRippleStyles } from './Ripple.styles'
 import { tokens } from '../../../utils/tokens'
-import { css } from 'aphrodite/no-important'
+import css from './Ripple.module.css'
 
 enum State {
     /**
@@ -62,12 +61,12 @@ export const renderRipple = defineComponent({
     props,
     computed: {
         classes() {
-            return css(
-                sharedRippleStyles.surface,
-                this.hovered && sharedRippleStyles.hovered,
-                this.pressed && sharedRippleStyles.pressed,
-                this.disabled && sharedRippleStyles.disabled,
-            )
+            return [
+                css.surface,
+                this.hovered && css.hovered,
+                this.pressed && css.pressed,
+                this.disabled && css.disabled,
+            ]
         }
     },
     render() {

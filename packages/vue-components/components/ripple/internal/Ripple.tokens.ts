@@ -1,14 +1,11 @@
-import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../../utils/tokens'
 
-const tokens = [
-    'hover-color',
-    'hover-opacity',
-    'press-color',
-    'press-opacity',
-] as const
-
-export const rippleTokens = makeComponentTokens<typeof tokens>(
+export const rippleTokens = makeComponentTokens(
     'ripple',
-    tokens
+    [
+        'hovered-color',
+        'hovered-opacity',
+        'pressed-color',
+        'pressed-opacity',
+    ]
 )
-export const rippleTokensExtern = makeComponentExternTokens<typeof rippleTokens>(rippleTokens)
