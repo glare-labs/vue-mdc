@@ -5,6 +5,7 @@ import { elevationTokens } from '../../elevation/internal/Elevation.tokens'
 import { iconTokens } from '../../icon/internal/Icon.tokens'
 import { makeComponentInnerTokens, tokens } from '../../../utils/tokens'
 import { iconButtonTokens } from './IconButton.tokens'
+import { rippleTokens } from '../../ripple/internal/Ripple.tokens'
 
 export namespace IconButtonStyle {
 
@@ -73,6 +74,7 @@ export namespace IconButtonStyle {
             [innerTokens.color]: tokens.color.primary.onPrimary,
             [innerTokens['toggle-unselect-color']]: tokens.color.primary.primary,
             [innerTokens['toggle-selected-color']]: tokens.color.primary.onPrimary,
+            [rippleTokens['hovered-color']]: tokens.color.primary.onPrimary,
             [innerTokens['container-color']]: tokens.color.primary.primary,
             [innerTokens['unselect-container-color']]: tokens.color.surface.surfaceContainerHighest,
             [innerTokens['selected-container-color']]: tokens.color.primary.primary,
@@ -81,6 +83,7 @@ export namespace IconButtonStyle {
             [innerTokens.color]: tokens.color.secondary.onSecondaryContainer,
             [innerTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
             [innerTokens['toggle-selected-color']]: tokens.color.secondary.onSecondaryContainer,
+            [rippleTokens['hovered-color']]: tokens.color.secondary.onSecondaryContainer,
             [innerTokens['container-color']]: tokens.color.secondary.secondaryContainer,
             [innerTokens['unselect-container-color']]: tokens.color.surface.surfaceContainerHighest,
             [innerTokens['selected-container-color']]: tokens.color.secondary.secondaryContainer,
@@ -88,15 +91,16 @@ export namespace IconButtonStyle {
         outlined: {
             [innerTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
             [innerTokens['toggle-selected-color']]: tokens.color.surface.inverseOnSurface,
+            [rippleTokens['hovered-color']]: tokens.color.surface.inverseOnSurface,
             [innerTokens['container-color']]: 'transparent',
             [innerTokens['unselect-container-color']]: 'transparent',
             [innerTokens['selected-container-color']]: tokens.color.surface.inverseSurface,
             outline: `1px solid ${tokens.color.outline.outline}`,
         },
         standard: {
-            // [innerTokens.color]: tokens.color.secondary.onSecondaryContainer,
             [innerTokens['toggle-unselect-color']]: tokens.color.surface.onSurfaceVariant,
             [innerTokens['toggle-selected-color']]: tokens.color.primary.primary,
+            [rippleTokens['hovered-color']]: tokens.color.primary.primary,
             [innerTokens['container-color']]: 'transparent',
             [innerTokens['unselect-container-color']]: 'transparent',
             [innerTokens['selected-container-color']]: 'transparent',
