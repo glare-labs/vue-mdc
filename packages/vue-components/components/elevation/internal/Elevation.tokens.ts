@@ -1,12 +1,9 @@
-import { makeComponentExternTokens, makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../../utils/tokens'
 
-const tokens = [
-    'level',
-    'color',
-] as const
-
-export const elevationTokens = makeComponentTokens<typeof tokens>(
+export const elevationTokens = makeComponentTokens(
     'elevation',
-    tokens
+    [
+        'level',
+        'shadow-color',
+    ]
 )
-export const elevationTokensExtern = makeComponentExternTokens<typeof elevationTokens>(elevationTokens)

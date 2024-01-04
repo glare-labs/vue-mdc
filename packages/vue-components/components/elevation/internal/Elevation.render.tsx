@@ -1,7 +1,5 @@
 import { defineComponent } from 'vue'
-import { sharedElevationStyles } from './Elevation.styles'
-import { css } from 'aphrodite/no-important'
-
+import css from './Elevation.module.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -18,7 +16,7 @@ export const renderElevation = defineComponent({
         return (
             <span
                 aria-hidden="true"
-                class={css(sharedElevationStyles.surface)}
+                class={css.surface}
             >
             </span>
         )
