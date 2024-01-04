@@ -16,6 +16,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
+    "jsxImportSource": "vue",
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
@@ -36,17 +37,17 @@
     "./components/**/*.d.ts",
     "./components/**/*.tsx",
     "./components/**/*.d.tsx",
+    "./components/**/*.module.css",
     "./lib/**/*.ts",
     "./lib/**/*.d.ts",
     "./utils/**/*.ts",
     "./utils/**/*.d.ts",
-    "./vite.config.ts"
+    "./types/*.d.ts",
   ],
   "exclude": [
     "./test-report/**/*",
     "./dist/**/*",
     "./**/*.test.tsx",
     "./**/*.test.ts",
-    "./**/labs/*"
   ],
 }
