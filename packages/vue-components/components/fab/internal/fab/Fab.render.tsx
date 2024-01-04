@@ -1,7 +1,6 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Fab.type'
-import { css } from 'aphrodite/no-important'
-import { fabStyles } from './Fab.styles'
+import { FabStyles } from './Fab.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -15,28 +14,24 @@ export const renderFab = defineComponent({
     slots,
     computed: {
         classes() {
-            return {
-                root: css(
-                    fabStyles.root,
-                    fabStyles[this.variant],
-                    fabStyles[`${this.size}Shape`],
-                    fabStyles[this.size],
-                    fabStyles[`${this.size}IconSize`],
-                    this.lowered ? fabStyles.containerElevationLow : this.size === 'large' ? fabStyles.containerElevationHigh : fabStyles.containerElevation,
-                    this.disabled && fabStyles.disabledRoot,
-                ),
-            }
+            return [
+                FabStyles.surface,
+                FabStyles.variant[this.variant],
+                FabStyles.shape[`${this.size}Shape`],
+                FabStyles.size[this.size],
+                FabStyles.iconSize[`${this.size}IconSize`],
+                this.lowered ? FabStyles.elevationLevel.containerElevationLow : this.size === 'large' ? FabStyles.elevationLevel.containerElevationHigh : FabStyles.elevationLevel.containerElevation,
+                this.disabled && FabStyles.disabledRoot,
+            ]
         }
     },
     render() {
         return (
             <button
-                class={this.classes.root}
+                class={this.classes}
                 role='button'
                 disabled={this.disabled}
                 aria-disabled={this.disabled}
-                aria-label={this.ariaLabel}
-                aria-aria-labelledby={this.ariaLabelledby}
             >
                 <am-elevation></am-elevation>
                 <am-ripple disabled={this.disabled}></am-ripple>

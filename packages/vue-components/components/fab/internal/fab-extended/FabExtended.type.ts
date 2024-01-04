@@ -37,6 +37,6 @@ export const props = {
 }
 
 export const slots = Object as SlotsType<{
-    default: void
+    default?: void
     icon?: void
 }>

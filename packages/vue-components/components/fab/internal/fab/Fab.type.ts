@@ -1,9 +1,6 @@
-import { sharedProps } from '../../../../utils/shared.type'
 import type { PropType, SlotsType } from 'vue'
 
 export const props = {
-
-    ...sharedProps,
 
     /**
      * @default surface
@@ -40,5 +37,5 @@ export const props = {
 }
 
 export const slots = Object as SlotsType<{
-    default: void
+    default?: void
 }>

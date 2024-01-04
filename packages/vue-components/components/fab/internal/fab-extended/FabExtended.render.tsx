@@ -1,7 +1,8 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './FabExtended.type'
-import { css } from 'aphrodite/no-important'
-import { fabStyles } from './FabExtended.styles'
+import { FabExtendedStyles } from './FabExtended.css'
+import { Ripple } from '../../../ripple'
+import { Elevation } from '../../../elevation'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -15,32 +16,34 @@ export const renderFabExtended = defineComponent({
     slots,
     computed: {
         classes() {
-            return {
-                root: css(
-                    fabStyles.root,
-                    fabStyles[this.variant],
-                    fabStyles.containerLabel,
-                    fabStyles.containerIcon,
-                    this.lowered ? fabStyles.containerElevationLow : fabStyles.containerElevation,
-                    this.disabled && fabStyles.disabledRoot,
-                ),
-            }
+            return [
+                FabExtendedStyles.surface,
+                FabExtendedStyles.variant[this.variant],
+                FabExtendedStyles.label,
+                FabExtendedStyles.icon,
+                this.lowered ? FabExtendedStyles.elevationLevel.containerElevationLow : FabExtendedStyles.elevationLevel.containerElevation,
+                this.disabled && FabExtendedStyles.disabled,
+            ]
         }
     },
     render() {
         return (
             <button
-                class={this.classes.root}
+                class={this.classes}
                 role='button'
                 disabled={this.disabled}
                 aria-disabled={this.disabled}
             >
-                <am-elevation></am-elevation>
-                <am-ripple disabled={this.disabled}></am-ripple>
+                <Elevation></Elevation>
+                <Ripple disabled={this.disabled}></Ripple>
                 {this.iconPosition === 'left' && this.$slots.icon && this.$slots.icon()}
                 {this.$slots.default && this.$slots.default()}
                 {this.iconPosition === 'right' && this.$slots.icon && this.$slots.icon()}
             </button>
         )
     },
+    components: {
+        Ripple,
+        Elevation,
+    }
 })
