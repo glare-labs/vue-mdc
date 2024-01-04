@@ -8,6 +8,7 @@
     transition-timing-function: inherit;
 
     --mamv-elevation-level-inner: var(--mamv-elevation-level, 0);
+    --mamv-elevation-shadow-color-inner: var(--mamv-elevation-shadow-color, var(--md-sys-color-shadow, #000000));
 }
 
 .surface::after {
@@ -33,10 +34,7 @@
     --l5-spread: calc(2   * clamp(0, var(--mamv-elevation-level-inner) - 4, 1));
     --spread:    calc(1px * (var(--l1to4-spread) + var(--l5-spread)));
 
-    box-shadow: 
-        0px var(--y) var(--blur) var(--spread) 
-        var(--mamv-elevation-shadow-color, var(--mamv-elevation-shadow-color-inner, var(--md-sys-color-shadow, #000000)))
-    ;
+    box-shadow: 0px var(--y) var(--blur) var(--spread) var(--mamv-elevation-shadow-color-inner);
 }
 
 .surface::before {
@@ -49,7 +47,7 @@
     transition-property: box-shadow, opacity;
     opacity: 0.3;
 
-    --l1-y:            clamp(0; var(--mamv-elevation-level-inner)    , 1);
+    --l1-y:            clamp(0, var(--mamv-elevation-level-inner)    , 1);
     --l4-y:            clamp(0, var(--mamv-elevation-level-inner) - 3, 1);
     --l5-y: calc(2   * clamp(0, var(--mamv-elevation-level-inner) - 4, 1));
     --y:    calc(1px * (var(--l1-y) + var(--l4-y) + var(--l5-y)));
@@ -59,8 +57,5 @@
     --l5-blur:          clamp(0, var(--mamv-elevation-level-inner) - 4, 1);
     --blur:    calc(1px * (var(--l1-blur) + var(--l3-blur) + var(--l5-blur)));
 
-    box-shadow: 
-        0px var(--y) var(--blur) 0px 
-        var(--mamv-elevation-shadow-color, var(--mamv-elevation-shadow-color-inner, var(--md-sys-color-shadow, #000000)))
-    ;
+    box-shadow: 0px var(--y) var(--blur) 0px var(--mamv-elevation-shadow-color-inner);
 }
