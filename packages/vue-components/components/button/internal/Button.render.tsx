@@ -1,10 +1,9 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Button.type'
-import { sharedButtonStyles } from './Button.styles'
+import { ButtonStyles } from './Button.css'
 import { Ripple } from '../../ripple'
 import { Elevation } from '../../elevation'
-import { css } from 'aphrodite/no-important'
-
+// import css from './Button.module.css'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -22,18 +21,18 @@ export const renderButton = defineComponent({
     computed: {
         classes() {
             return ({
-                surface: css(
-                    sharedButtonStyles.surface,
-                    sharedButtonStyles[this.shape],
-                    sharedButtonStyles[this.appearance],
-                    this.disabled && sharedButtonStyles.disabled
-                ),
-                container: css(
-                    sharedButtonStyles.content,
-                ),
-                label: css(
-                    sharedButtonStyles.label,
-                ),
+                container: [
+                    ButtonStyles.container,
+                    ButtonStyles.shape[this.shape],
+                    ButtonStyles.appearance[this.appearance],
+                    this.disabled && ButtonStyles.disabled,
+                ],
+                button: [
+                    ButtonStyles.button
+                ],
+                label: [
+                    ButtonStyles.label,
+                ],
 
             })
         },
@@ -43,7 +42,7 @@ export const renderButton = defineComponent({
             <div
                 role='button'
                 aria-disabled={this.disabled}
-                class={this.classes.surface}
+                class={this.classes.container}
             >
 
                 <Ripple disabled={this.disabled}></Ripple>
@@ -53,7 +52,7 @@ export const renderButton = defineComponent({
                     type={this.type}
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
-                    class={this.classes.container}
+                    class={this.classes.button}
                 >
                     {this.iconPosition === 'left' && this.$slots.icon && this.$slots.icon()}
 
