@@ -1,2 +1,3 @@
-export * from './internal/Checkbox.tokens'
+
+export { checkboxTokens } from './internal/Checkbox.tokens'
 export { renderCheckbox as Checkbox } from './internal/Checkbox.render'

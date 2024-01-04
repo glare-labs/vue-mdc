@@ -1,14 +1,11 @@
-import { sharedProps } from '../../../../utils/shared.type'
-import { PropType } from 'vue'
+import type { PropType } from 'vue'
 
 export const props = {
-
-    ...sharedProps,
 
     /**
      * @default false
      */
-    defaultChecked: {
+    modelValue: {
         default: false,
         type: Boolean as PropType<boolean>,
     },
@@ -36,4 +33,16 @@ export const props = {
         default: false,
         type: Boolean as PropType<boolean>
     },
+
+    /**
+     * @default false
+     */
+    required: {
+        default: false,
+        type: Boolean as PropType<boolean>
+    }
 }
+
+export const emits = [
+    'update:modelValue'
+]
