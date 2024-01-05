@@ -1,0 +1,19 @@
+
+.surface {
+    --mamv-layout-padding-padding-inner: var(--mamv-layout-padding-padding);
+    --mamv-layout-padding-padding-left-inner: var(--mamv-layout-padding-padding-left, var(--mamv-layout-padding-padding-inner, 4px));
+    --mamv-layout-padding-padding-right-inner: var(--mamv-layout-padding-padding-right, var(--mamv-layout-padding-padding-inner, 4px));
+    --mamv-layout-padding-padding-top-inner: var(--mamv-layout-padding-padding-top, var(--mamv-layout-padding-padding-inner, 4px));
+    --mamv-layout-padding-padding-bottom-inner: var(--mamv-layout-padding-padding-bottom, var(--mamv-layout-padding-padding-inner, 4px));
+
+    padding-left: var(--mamv-layout-padding-padding-left-inner);
+    padding-right: var(--mamv-layout-padding-padding-right-inner);
+    padding-top: var(--mamv-layout-padding-padding-top-inner);
+    padding-bottom: var(--mamv-layout-padding-padding-bottom-inner);
+
+    margin: 0;
+    border: none;
+    outline: none;
+    position: relative;
+    display: inline-block;
+}
