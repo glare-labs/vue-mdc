@@ -31,5 +31,5 @@ const renderPadding = defineComponent({
 })
 
 export {
-    renderPadding as Padding
+    renderPadding as Padding,
 }
