@@ -1,0 +1,21 @@
+
+.surface {
+    --mamv-layout-window-container-color-inner: var(--mamv-layout-window-container-color, var(--md-sys-color-background));
+
+    background-color: var(--mamv-layout-window-container-color-inner);
+
+    --mamv-layout-window-container-height-inner: var(--mamv-layout-window-container-height, 100svh);
+    --mamv-layout-window-container-width-inner: var(--mamv-layout-window-container-width, auto);
+
+    height: var(--mamv-layout-window-container-height-inner);
+    width: var(--mamv-layout-window-container-width-inner);
+
+    --mamv-layout-window-container-margin-inner: var(--mamv-layout-window-container-margin, 0px);
+    
+    margin: var(--mamv-layout-window-container-margin-inner);
+    padding: inherit;
+    border: inherit;
+    outline: inherit;
+
+    position: relative;
+}
