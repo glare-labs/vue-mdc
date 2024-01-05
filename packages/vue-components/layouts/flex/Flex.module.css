@@ -1,0 +1,34 @@
+
+.surface {
+    --mamv-layout-flex-container-height-inner: var(--mamv-layout-flex-container-height, auto);
+    --mamv-layout-flex-container-width-inner: var(--mamv-layout-flex-container-width, auto);
+
+    height: var(--mamv-layout-flex-container-height-inner);
+    width: var(--mamv-layout-flex-container-width-inner);
+
+    display: flex;
+
+    --mamv-layout-flex-gap-inner: var(--mamv-layout-flex-gap, 0px);
+    
+    gap: var(--mamv-layout-flex-gap-inner);
+
+    margin: inherit;
+    padding: inherit;
+    border: inherit;
+    outline: inherit;
+
+    position: relative;
+}
+
+.vertical {
+    flex-direction: column;
+}
+.horizontal {
+    flex-direction: row;
+}
+.vertical-reverse {
+    flex-direction: column-reverse;
+}
+.horizontal-reverse {
+    flex-direction: row-reverse;
+}
