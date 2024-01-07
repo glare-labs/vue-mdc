@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 .firebase/*
 
+# catalog
+packages/catalog/**/*
+
 .nuxt
 node_modules
 .output
@@ -16,7 +19,6 @@ dist-ssr
 !docs
 *.local
 test-report
-/packages/catalog/mamv
 
 # Editor directories and files
 !.vscode/extensions.json
