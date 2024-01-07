@@ -1,47 +1,11 @@
 {
   "name": "material-anti-mage-vue",
   "author": "bre97-web",
-  "private": false,
-  "version": "0.0.3",
-  "displayName": "Material Anti-Mage Vue",
-  "keywords": [
-    "vue",
-    "components",
-    "lib",
-    "material",
-    "material-design",
-    "material-you"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bre97-web/material-anti-mage-vue.git"
-  },
-  "bugs": {
-    "url": "https://github.com/bre97-web/material-anti-mage-vue/issues"
-  },
-  "homepage": "https://github.com/bre97-web/material-anti-mage-vue",
+  "private": true,
   "license": "MIT",
   "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
   "workspaces": [
-    "packages/catalog",
     "packages/vue-components"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
-  "types": "/dist/index.d.ts",
-  "files": [
-    "dist/**/*",
-    "!packages/**/*",
-    "!scripts/**/*",
-    "!test-reporter/**/*",
-    "!.vscode/**/*",
-    "!packages/**/*",
-    "!readme/**/*"
   ],
   "scripts": {
     "template:c": "node ./scripts/generate-components.js c",
@@ -49,7 +13,6 @@
     "template:l": "node ./scripts/generate-components.js l"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.10.0",
     "@typescript-eslint/eslint-plugin": "^6.16.0",
     "@typescript-eslint/parser": "^6.16.0",
     "eslint": "^8.56.0"

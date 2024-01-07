@@ -1,6 +1,47 @@
 {
-  "name": "vue-components",
+  "name": "material-anti-mage-vue",
+  "author": "bre97-web",
+  "private": false,
+  "version": "0.0.3",
+  "displayName": "Material Anti-Mage Vue",
+  "keywords": [
+    "vue",
+    "components",
+    "lib",
+    "material",
+    "material-design",
+    "material-you"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bre97-web/material-anti-mage-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bre97-web/material-anti-mage-vue/issues"
+  },
+  "homepage": "https://github.com/bre97-web/material-anti-mage-vue",
   "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "/dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "!components/**/*",
+    "!layouts/**/*",
+    "!lib/**/*",
+    "!test-reporter/**/*",
+    "!types/**/*",
+    "!utils/**/*",
+    "!vite-env.d.ts",
+    "!vite.config.ts",
+    "!vitest.config.ts"
+  ],
   "scripts": {
     "build": "vue-tsc && vite build",
     "test": "vitest --ui",

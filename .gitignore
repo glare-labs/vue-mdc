@@ -9,7 +9,7 @@ lerna-debug.log*
 .firebase/*
 
 # catalog
-packages/catalog/**/*
+catalog/**/*
 
 .nuxt
 node_modules

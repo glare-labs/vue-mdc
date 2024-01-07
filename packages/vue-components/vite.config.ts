@@ -8,7 +8,7 @@ import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin'
 // https://vitejs.dev/config/
 export default defineConfig({
     build: {
-        outDir: '../../dist',
+        outDir: './dist',
         emptyOutDir: true,
         cssCodeSplit: true,
         sourcemap: true,
@@ -40,7 +40,7 @@ export default defineConfig({
         dts({
             insertTypesEntry: true,
             exclude: [
-                '/components/labs/**/*'
+                './components/labs/**/*'
             ]
         }),
         vanillaExtractPlugin(),

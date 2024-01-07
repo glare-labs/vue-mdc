@@ -33,11 +33,11 @@
     "composite": true,
   },
   "include": [
-    "./components/**/*.ts",
-    "./components/**/*.d.ts",
-    "./components/**/*.tsx",
-    "./components/**/*.d.tsx",
-    "./components/**/*.module.css",
+    "./**/*.ts",
+    "./**/*.d.ts",
+    "./**/*.tsx",
+    "./**/*.d.tsx",
+    "./**/*.module.css",
     "./lib/**/*.ts",
     "./lib/**/*.d.ts",
     "./utils/**/*.ts",
@@ -49,5 +49,7 @@
     "./dist/**/*",
     "./**/*.test.tsx",
     "./**/*.test.ts",
+    "./components/labs/**/*",
+    "./vitest.config.ts"
   ],
 }
