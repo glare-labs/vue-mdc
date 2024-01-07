@@ -1,5 +1,24 @@
-import { Button, Divider, Elevation, Fab, FabExtended, Icon, IconButton, Ripple, ThemeProvider, Typography } from '../lib'
-import type { Component } from 'vue'
+import {
+    Button,
+    Divider,
+    Elevation,
+    Fab,
+    FabExtended,
+    Icon,
+    IconButton,
+    Ripple,
+    ThemeProvider,
+    Typography,
+    Padding,
+    Margin,
+    Window,
+    Flex,
+    paddingDirective,
+    marginDirective,
+    windowDirective,
+    flexDirective
+} from '../lib'
+import type { App, Component } from 'vue'
 
 
 /**
@@ -11,8 +30,7 @@ import type { Component } from 'vue'
  * app.mount('#root')
  */
 export const RegisterAllComponents = ({
-    // @ts-ignore
-    install: (instance) => {
+    install: (instance: App) => {
         RegisterComponents(
             ThemeProvider,
             Button,
@@ -24,6 +42,10 @@ export const RegisterAllComponents = ({
             Ripple,
             Elevation,
             Divider,
+            Window,
+            Padding,
+            Margin,
+            Flex
         ).install(instance)
     }
 })
@@ -37,10 +59,18 @@ export const RegisterAllComponents = ({
  * app.mount('#root')
  */
 export const RegisterComponents = (...components: Component[]) => ({
-    // @ts-ignore
-    install(instance) {
+    install(instance: App) {
         components
             .map(e => () => instance.component(e.name!, e))
             .forEach(e => e())
     },
+})
+
+export const RegisterAllLayouts = ({
+    install: (instance: App) => {
+        instance.directive('window', windowDirective)
+        instance.directive('padding', paddingDirective)
+        instance.directive('margin', marginDirective)
+        instance.directive('flex', flexDirective)
+    }
 })
