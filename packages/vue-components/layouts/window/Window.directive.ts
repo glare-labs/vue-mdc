@@ -1,7 +1,7 @@
 import type { ObjectDirective } from 'vue'
 
 export const windowDirective: ObjectDirective = {
-    mounted(el, { value }) {
+    mounted(el) {
         el.style.position = 'relative'
         el.style.display = 'block'
         el.style.height = '100svh'

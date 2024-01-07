@@ -12,7 +12,7 @@ const renderWindow = defineComponent({
     slots: Object as SlotsType<{
         default?: void
     }>,
-    setup(props, { slots }) {
+    setup(_, { slots }) {
         return () => (
             <div class={css.surface}>
                 {slots.default && slots.default()}
