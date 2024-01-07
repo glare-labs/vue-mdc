@@ -1,6 +1,8 @@
 import { defineComponent } from 'vue'
 import { props, slots } from './Fab.type'
 import { FabStyles } from './Fab.css'
+import { Ripple } from '../../../ripple'
+import { Elevation } from '../../../elevation'
 
 declare module 'vue' {
     export interface GlobalComponents {
@@ -21,7 +23,7 @@ export const renderFab = defineComponent({
                 FabStyles.size[this.size],
                 FabStyles.iconSize[`${this.size}IconSize`],
                 this.lowered ? FabStyles.elevationLevel.containerElevationLow : this.size === 'large' ? FabStyles.elevationLevel.containerElevationHigh : FabStyles.elevationLevel.containerElevation,
-                this.disabled && FabStyles.disabledRoot,
+                this.disabled && FabStyles.disabled,
             ]
         }
     },
@@ -33,10 +35,14 @@ export const renderFab = defineComponent({
                 disabled={this.disabled}
                 aria-disabled={this.disabled}
             >
-                <am-elevation></am-elevation>
-                <am-ripple disabled={this.disabled}></am-ripple>
+                <Elevation></Elevation>
+                <Ripple disabled={this.disabled}></Ripple>
                 {this.$slots.default && this.$slots.default()}
             </button>
         )
     },
+    components: {
+        Ripple,
+        Elevation,
+    }
 })
