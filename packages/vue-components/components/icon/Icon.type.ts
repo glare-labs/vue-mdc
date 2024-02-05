@@ -3,7 +3,7 @@ import type { PropType, SlotsType } from 'vue'
 export const props = {
 
     /**
-     * @default medium
+     * @default 'medium'
      */
     size: {
         default: 'medium',
@@ -11,7 +11,7 @@ export const props = {
     },
 
     /**
-     * @default outlined
+     * @default 'outlined'
      */
     variant: {
         default: 'outlined',
