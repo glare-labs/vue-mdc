@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 export const props = {
 
     /**
-     * @default middle-inset
+     * @default 'middle-inset'
      */
     variant: {
         default: 'middle-inset',
@@ -11,7 +11,7 @@ export const props = {
     },
 
     /**
-     * @default horizontal
+     * @default 'horizontal'
      */
     direction: {
         default: 'horizontal',
