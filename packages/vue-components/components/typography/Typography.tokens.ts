@@ -1,4 +1,4 @@
-import { makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../utils/tokens'
 
 export const typographyTokens = makeComponentTokens(
     'typography',
