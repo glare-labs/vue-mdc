@@ -1,4 +1,4 @@
-import { makeComponentTokens } from '../../../utils/tokens'
+import { makeComponentTokens } from '../../utils/tokens'
 
 export const rippleTokens = makeComponentTokens(
     'ripple',
@@ -7,5 +7,6 @@ export const rippleTokens = makeComponentTokens(
         'hovered-opacity',
         'pressed-color',
         'pressed-opacity',
+        'layer-shape'
     ]
 )

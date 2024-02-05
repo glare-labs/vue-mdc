@@ -1,7 +1,7 @@
-import { defineComponent } from 'vue'
+import { defineCustomElement } from 'vue'
 import { props } from './Ripple.type'
-import { tokens } from '../../../utils/tokens'
-import css from './Ripple.module.css'
+import { tokens } from '../../utils/tokens'
+import { styles } from './Ripple.styles'
 
 enum State {
     /**
@@ -49,23 +49,24 @@ const TOUCH_DELAY_MS = 150
 
 declare module 'vue' {
     export interface GlobalComponents {
-        'Am-Ripple': typeof renderRipple,
+        'am-ripple': typeof Ripple,
     }
 }
 
 /**
  * @alias am-ripple
  */
-export const renderRipple = defineComponent({
+export const Ripple = defineCustomElement({
     name: 'AmRipple',
     props,
+    styles,
     computed: {
         classes() {
             return [
-                css.surface,
-                this.hovered && css.hovered,
-                this.pressed && css.pressed,
-                this.disabled && css.disabled,
+                'surface',
+                this.hovered && 'hovered',
+                this.pressed && 'pressed',
+                this.disabled && 'disabled',
             ]
         }
     },
