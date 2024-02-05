@@ -15,7 +15,7 @@ export const Typography = defineCustomElement({
     name: 'AmTypography',
     props,
     slots,
-    setup(props, ctx) {
+    setup(props, _) {
 
         /**
          * Generate Styles that are in use only.
