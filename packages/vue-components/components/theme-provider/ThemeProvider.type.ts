@@ -1,29 +1,18 @@
-import type { PropType, SlotsType } from 'vue'
 
-export const props = {
+export interface IThemeProvider {
 
     /**
      * @default false
      */
-    dark: {
-        default: false,
-        type: Boolean as PropType<boolean>
-    },
+    dark?: boolean
 
     /**
      * @default '#2A6B3C'
      */
-    sourceColor: {
-        default: '#2A6B3C',
-        type: String as PropType<string>
-    },
+    sourceColor?: string
 
+    /**
+     * @default 0
+     */
+    contrastLevel?: number
 }
-
-export const slots = Object as SlotsType<{
-    default?: void
-}>
-
-export const emits = [
-    'theme-updated',
-]
