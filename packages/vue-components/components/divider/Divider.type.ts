@@ -1,21 +1,16 @@
-import type { PropType } from 'vue'
 
-export const props = {
+export type DividerVariantType = 'inset-left' | 'middle-inset' | 'inset-right' | 'no-inset'
+export type DividerDirectionType = 'horizontal' | 'vertical'
+
+export interface IDivider {
 
     /**
      * @default 'middle-inset'
      */
-    variant: {
-        default: 'middle-inset',
-        type: String as PropType<'inset-left' | 'middle-inset' | 'inset-right' | 'no-inset'>
-    },
+    variant?: DividerVariantType
 
     /**
      * @default 'horizontal'
      */
-    direction: {
-        default: 'horizontal',
-        type: String as PropType<'horizontal' | 'vertical'>,
-    },
-
+    direction?: DividerDirectionType
 }
