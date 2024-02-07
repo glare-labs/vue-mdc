@@ -1,13 +1,9 @@
-import type { PropType } from 'vue'
 
-export const props = {
+export interface IRipple {
 
     /**
+     * 禁止Ripple的波纹触发
      * @default false
      */
-    disabled: {
-        default: false,
-        type: Boolean as PropType<boolean>
-    },
-
+    disabled?: boolean
 }

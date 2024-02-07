@@ -2,7 +2,7 @@
     <ClassProvider v-slot="{ surface, hover, pressed }">
         <span
             ref="instance"
-            :class="[surface, rippleState.hover && hover, rippleState.pressed && pressed]"
+            :class="[surface, (!props.disabled && rippleState.hover) && hover, (!props.disabled && rippleState.pressed) && pressed]"
             @click="handleClick"
             @pointerenter="handlePointerenter"
             @pointerleave="handlePointerleave"
@@ -16,18 +16,16 @@
 import ClassProvider from './ClassProvider.vue'
 import { tokens } from '../../utils/tokens'
 import { ref } from 'vue'
-import { onMounted } from 'vue'
+import type { IRipple } from './Ripple.type'
 
-const props = withDefaults(defineProps<{
-    disabled?: boolean
-}>(), { disabled: false }
+const props = withDefaults(
+    defineProps<IRipple>(),
+    {
+        disabled: false
+    }
 )
 
 const instance = ref<HTMLElement | null>(null)
-onMounted(() => {
-    console.log(instance.value)
-
-})
 
 enum State {
     /**
@@ -63,8 +61,8 @@ enum State {
      */
     WAITING_FOR_CLICK,
 }
-const PRESS_GROW_MS = 450
-const MINIMUM_PRESS_MS = 225
+const PRESS_GROW_MS = 550
+const MINIMUM_PRESS_MS = 250
 const INITIAL_ORIGIN_SCALE = 0.2
 const PADDING = 10
 const SOFT_EDGE_MINIMUM_SIZE = 75

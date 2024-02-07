@@ -15,7 +15,7 @@ import { tokens } from '../../utils/tokens'
 .surface {
     --_ripple-hover-color: var(--mamv-ripple-hover-color, v-bind('tokens.color.surface.onSurface'));
     --_ripple-pressed-color: var(--mamv-ripple-pressed-color, v-bind('tokens.color.surface.onSurface'));
-    --_ripple-hover-opacity: var(--mamv-ripple-hover-opacity, var(--_current-ripple-hover-opacity, 0.8));
+    --_ripple-hover-opacity: var(--mamv-ripple-hover-opacity, var(--_current-ripple-hover-opacity, 0.08));
     --_ripple-pressed-opacity: var(--mamv-ripple-pressed-opacity, var(--_current-ripple-pressed-opacity, 0.12));
     --_ripple-shape: var(--mamv-ripple-shape);
 
@@ -34,6 +34,7 @@ import { tokens } from '../../utils/tokens'
 .surface::before {
     content: "";
     position: absolute;
+    inset: 0;
     opacity: 0;
     transition: opacity 15ms linear, background-color 15ms linear;
     background-color: var(--_ripple-hover-color, #1d1b20);
