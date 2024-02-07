@@ -11,10 +11,13 @@ const props = defineProps<Required<ITypography>>()
 
 <style module>
 .surface {
+    --_typo-color: var(--mamv-typography-color, var(--_current-typo-color, var(--md-sys-color-on-surface)));
     --_typo-font-size: var(--mamv-typography-font-size, var(--_current-typo-font-size));
     --_typo-line-height: var(--mamv-typography-line-height, var(--_current-typo-line-height));
     --_typo-font-weight: var(--mamv-typography-font-weight, var(--_current-typo-font-weight));
     --_typo-letter-spacing: var(--mamv-typography-letter-spacing, var(--_current-typo-letter-spacing));
+
+    color: var(--_typo-color);
 
     font-size: var(--_typo-font-size);
     line-height: var(--_typo-line-height);
