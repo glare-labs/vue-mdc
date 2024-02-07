@@ -1,24 +1,13 @@
-import type { PropType, SlotsType } from 'vue'
 
-export type TypographyType = 'label-small' | 'label-medium' | 'label-large' |
+export type TypographyTextType =
+    'label-small' | 'label-medium' | 'label-large' |
     'body-small' | 'body-medium' | 'body-large' |
     'title-small' | 'title-medium' | 'title-large' |
     'headline-small' | 'headline-medium' | 'headline-large' |
     'display-small' | 'display-medium' | 'display-large'
 
 
-export const props = {
+export interface ITypography {
 
-    /**
-     * @default 'body-medium'
-     */
-    variant: {
-        default: 'body-medium',
-        type: String as PropType<TypographyType>,
-    },
-
+    variant?: TypographyTextType
 }
-
-export const slots = Object as SlotsType<{
-    default?: void
-}>

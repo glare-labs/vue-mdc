@@ -1,0 +1,129 @@
+<template>
+    <slot :font="[$style.surface, $style[props.variant]]"></slot>
+</template>
+
+<script setup lang="ts">
+import type { ITypography } from './Typography.type'
+
+const props = defineProps<Required<ITypography>>()
+
+</script>
+
+<style module>
+.surface {
+    --_typo-font-size: var(--mamv-typography-font-size, var(--_current-typo-font-size));
+    --_typo-line-height: var(--mamv-typography-line-height, var(--_current-typo-line-height));
+    --_typo-font-weight: var(--mamv-typography-font-weight, var(--_current-typo-font-weight));
+    --_typo-letter-spacing: var(--mamv-typography-letter-spacing, var(--_current-typo-letter-spacing));
+
+    font-size: var(--_typo-font-size);
+    line-height: var(--_typo-line-height);
+    font-weight: var(--_typo-font-weight);
+    letter-spacing: var(--_typo-letter-spacing);
+}
+
+.label-small {
+    --_current-typo-font-size: var(--md-sys-typescale-label-small-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-label-small-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-small-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-small-letter-spacing);
+}
+
+.label-medium {
+    --_current-typo-font-size: var(--md-sys-typescale-label-medium-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-label-medium-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-medium-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-medium-letter-spacing);
+}
+
+.label-large {
+    --_current-typo-font-size: var(--md-sys-typescale-label-large-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-label-large-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-large-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-large-letter-spacing);
+}
+
+.body-small {
+    --_current-typo-font-size: var(--md-sys-typescale-body-small-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-body-small-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-small-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-small-letter-spacing);
+}
+
+.body-medium {
+    --_current-typo-font-size: var(--md-sys-typescale-body-medium-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-body-medium-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-medium-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-medium-letter-spacing);
+}
+
+.body-large {
+    --_current-typo-font-size: var(--md-sys-typescale-body-large-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-body-large-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-large-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-large-letter-spacing);
+}
+
+.title-small {
+    --_current-typo-font-size: var(--md-sys-typescale-title-small-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-title-small-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-small-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-small-letter-spacing);
+}
+
+.title-medium {
+    --_current-typo-font-size: var(--md-sys-typescale-title-medium-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-title-medium-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-medium-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-medium-letter-spacing);
+}
+
+.title-large {
+    --_current-typo-font-size: var(--md-sys-typescale-title-large-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-title-large-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-large-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-large-letter-spacing);
+}
+
+.headline-small {
+    --_current-typo-font-size: var(--md-sys-typescale-headline-small-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-small-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-small-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-small-letter-spacing);
+}
+
+.headline-medium {
+    --_current-typo-font-size: var(--md-sys-typescale-headline-medium-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-medium-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-medium-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-medium-letter-spacing);
+}
+
+.headline-large {
+    --_current-typo-font-size: var(--md-sys-typescale-headline-large-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-large-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-large-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-large-letter-spacing);
+}
+
+.display-small {
+    --_current-typo-font-size: var(--md-sys-typescale-display-small-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-display-small-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-small-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-small-letter-spacing);
+}
+
+.display-medium {
+    --_current-typo-font-size: var(--md-sys-typescale-display-medium-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-display-medium-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-medium-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-medium-letter-spacing);
+}
+
+.display-large {
+    --_current-typo-font-size: var(--md-sys-typescale-display-large-font-size);
+    --_current-typo-line-height: var(--md-sys-typescale-display-large-line-height);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-large-font-weight);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-large-letter-spacing);
+}
+</style>
