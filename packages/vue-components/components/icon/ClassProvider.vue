@@ -1,0 +1,73 @@
+<template>
+    <slot :icon="[$style.surface, $style[props.size], $style[props.variant]]"></slot>
+</template>
+
+<script setup lang="ts">
+import type { IIcon } from './Icon.type'
+
+const props = defineProps<Required<IIcon>>()
+</script>
+
+<style module>
+.surface {
+    --_icon-size: var(--mamv-icon-size, var(--_current-icon-size, 24px));
+    --_icon-color: var(--mamv-icon-color, var(--_current-icon-color, 24px));
+    --_icon-line-height: var(--mamv-icon-line-height, var(--_current-icon-line-height, 24px));
+    --_icon-font-family: var(--mamv-icon-font-family, var(--_current-icon-font-family, 24px));
+
+    --_icon-display: var(--mamv-icon-display);
+    --_icon-position: var(--mamv-icon-position, relative);
+    --_icon-writing-mode: var(--mamv-icon-writing-mode, horizontal-tb);
+    --_icon-fill: var(--mamv-icon-fill, currentColor);
+    --_icon-flex-shrink: var(--mamv-icon-flex-shrink, 0);
+    --_icon-inline-size: var(--mamv-icon-inline-size);
+    --_icon-block-size: var(--mamv-icon-block-size);
+
+
+    line-height: var(--_icon-line-height);
+    font-size: var(--_icon-size);
+    font-family: var(--_icon-font-family);
+    color: var(--_icon-color);
+    display: var(--_icon-display);
+    position: var(--_icon-position);
+    writing-mode: var(--_icon-writing-mode);
+    fill: var(--_icon-fill);
+    flex-shrink: var(--_icon-flex-shrink);
+    inline-size: var(--_icon-inline-size);
+    block-size: var(--_icon-block-size);
+
+    align-items: center;
+    justify-content: center;
+
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+.small {
+    --_current-icon-size: 22px;
+    --_current-icon-line-height: 22px;
+}
+
+.medium {
+    --_current-icon-size: 24px;
+    --_current-icon-line-height: 24px;
+}
+
+.large {
+    --_current-icon-size: 44px;
+    --_current-icon-line-height: 44px;
+}
+
+.outlined {
+    --_current-icon-font-family: 'Material Symbols Outlined';
+}
+
+.rounded {
+    --_current-icon-font-family: 'Material Symbols Rounded';
+}
+
+.sharp {
+    --_current-icon-font-family: 'Material Symbols Sharp';
+}
+</style>

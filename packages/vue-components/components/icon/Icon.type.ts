@@ -1,25 +1,17 @@
-import type { PropType, SlotsType } from 'vue'
 
-export const props = {
+export type IconSizeType = 'small' | 'medium' | 'large'
+export type IconVariantType = 'outlined' | 'rounded' | 'sharp'
+
+export interface IIcon {
 
     /**
      * @default 'medium'
      */
-    size: {
-        default: 'medium',
-        type: String as PropType<'small' | 'medium' | 'large'>,
-    },
+    size?: IconSizeType
 
     /**
      * @default 'outlined'
      */
-    variant: {
-        default: 'outlined',
-        type: String as PropType<'outlined' | 'rounded' | 'sharp'>
-    },
+    variant?: IconVariantType
 
 }
-
-export const slots = Object as SlotsType<{
-    default?: void
-}>
