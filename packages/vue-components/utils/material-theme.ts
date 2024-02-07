@@ -1,74 +1,106 @@
-import { argbFromHex, MaterialDynamicColors, type Theme, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
+import { argbFromHex, MaterialDynamicColors, type Theme, Hct, SchemeContent, hexFromArgb, DynamicScheme } from '@material/material-color-utilities'
+import { toKebabCase } from './tokens'
 
 /**
  * A Mapping of color token name to MCU HCT color function generator.
  */
 const materialColors = {
+    // contentAccentToneDelta: MaterialDynamicColors.contentAccentToneDelta,
+    // highestSurface: MaterialDynamicColors.highestSurface,
+    primaryPaletteKeyColor: MaterialDynamicColors.primaryPaletteKeyColor,
+    secondaryPaletteKeyColor: MaterialDynamicColors.secondaryPaletteKeyColor,
+    tertiaryPaletteKeyColor: MaterialDynamicColors.tertiaryPaletteKeyColor,
+    neutralPaletteKeyColor: MaterialDynamicColors.neutralPaletteKeyColor,
+    neutralVariantPaletteKeyColor: MaterialDynamicColors.neutralVariantPaletteKeyColor,
     background: MaterialDynamicColors.background,
-    'on-background': MaterialDynamicColors.onBackground,
+    onBackground: MaterialDynamicColors.onBackground,
     surface: MaterialDynamicColors.surface,
-    'surface-dim': MaterialDynamicColors.surfaceDim,
-    'surface-bright': MaterialDynamicColors.surfaceBright,
-    'surface-container-lowest': MaterialDynamicColors.surfaceContainerLowest,
-    'surface-container-low': MaterialDynamicColors.surfaceContainerLow,
-    'surface-container': MaterialDynamicColors.surfaceContainer,
-    'surface-container-high': MaterialDynamicColors.surfaceContainerHigh,
-    'surface-container-highest': MaterialDynamicColors.surfaceContainerHighest,
-    'on-surface': MaterialDynamicColors.onSurface,
-    'surface-variant': MaterialDynamicColors.surfaceVariant,
-    'on-surface-variant': MaterialDynamicColors.onSurfaceVariant,
-    'inverse-surface': MaterialDynamicColors.inverseSurface,
-    'inverse-on-surface': MaterialDynamicColors.inverseOnSurface,
+    surfaceDim: MaterialDynamicColors.surfaceDim,
+    surfaceBright: MaterialDynamicColors.surfaceBright,
+    surfaceContainerLowest: MaterialDynamicColors.surfaceContainerLowest,
+    surfaceContainerLow: MaterialDynamicColors.surfaceContainerLow,
+    surfaceContainer: MaterialDynamicColors.surfaceContainer,
+    surfaceContainerHigh: MaterialDynamicColors.surfaceContainerHigh,
+    surfaceContainerHighest: MaterialDynamicColors.surfaceContainerHighest,
+    onSurface: MaterialDynamicColors.onSurface,
+    surfaceVariant: MaterialDynamicColors.surfaceVariant,
+    onSurfaceVariant: MaterialDynamicColors.onSurfaceVariant,
+    inverseSurface: MaterialDynamicColors.inverseSurface,
+    inverseOnSurface: MaterialDynamicColors.inverseOnSurface,
     outline: MaterialDynamicColors.outline,
-    'outline-variant': MaterialDynamicColors.outlineVariant,
+    outlineVariant: MaterialDynamicColors.outlineVariant,
     shadow: MaterialDynamicColors.shadow,
     scrim: MaterialDynamicColors.scrim,
-    'surface-tint': MaterialDynamicColors.surfaceTint,
+    surfaceTint: MaterialDynamicColors.surfaceTint,
     primary: MaterialDynamicColors.primary,
-    'on-primary': MaterialDynamicColors.onPrimary,
-    'primary-container': MaterialDynamicColors.primaryContainer,
-    'on-primary-container': MaterialDynamicColors.onPrimaryContainer,
-    'inverse-primary': MaterialDynamicColors.inversePrimary,
+    onPrimary: MaterialDynamicColors.onPrimary,
+    primaryContainer: MaterialDynamicColors.primaryContainer,
+    onPrimaryContainer: MaterialDynamicColors.onPrimaryContainer,
+    inversePrimary: MaterialDynamicColors.inversePrimary,
     secondary: MaterialDynamicColors.secondary,
-    'on-secondary': MaterialDynamicColors.onSecondary,
-    'secondary-container': MaterialDynamicColors.secondaryContainer,
-    'on-secondary-container': MaterialDynamicColors.onSecondaryContainer,
+    onSecondary: MaterialDynamicColors.onSecondary,
+    secondaryContainer: MaterialDynamicColors.secondaryContainer,
+    onSecondaryContainer: MaterialDynamicColors.onSecondaryContainer,
     tertiary: MaterialDynamicColors.tertiary,
-    'on-tertiary': MaterialDynamicColors.onTertiary,
-    'tertiary-container': MaterialDynamicColors.tertiaryContainer,
-    'on-tertiary-container': MaterialDynamicColors.onTertiaryContainer,
+    onTertiary: MaterialDynamicColors.onTertiary,
+    tertiaryContainer: MaterialDynamicColors.tertiaryContainer,
+    onTertiaryContainer: MaterialDynamicColors.onTertiaryContainer,
     error: MaterialDynamicColors.error,
-    'on-error': MaterialDynamicColors.onError,
-    'error-container': MaterialDynamicColors.errorContainer,
-    'on-error-container': MaterialDynamicColors.onErrorContainer,
+    onError: MaterialDynamicColors.onError,
+    errorContainer: MaterialDynamicColors.errorContainer,
+    onErrorContainer: MaterialDynamicColors.onErrorContainer,
+    primaryFixed: MaterialDynamicColors.primaryFixed,
+    primaryFixedDim: MaterialDynamicColors.primaryFixedDim,
+    onPrimaryFixed: MaterialDynamicColors.onPrimaryFixed,
+    onPrimaryFixedVariant: MaterialDynamicColors.onPrimaryFixedVariant,
+    secondaryFixed: MaterialDynamicColors.secondaryFixed,
+    secondaryFixedDim: MaterialDynamicColors.secondaryFixedDim,
+    onSecondaryFixed: MaterialDynamicColors.onSecondaryFixed,
+    onSecondaryFixedVariant: MaterialDynamicColors.onSecondaryFixedVariant,
+    tertiaryFixed: MaterialDynamicColors.tertiaryFixed,
+    tertiaryFixedDim: MaterialDynamicColors.tertiaryFixedDim,
+    onTertiaryFixed: MaterialDynamicColors.onTertiaryFixed,
+    onTertiaryFixedVariant: MaterialDynamicColors.onTertiaryFixedVariant,
 }
 
-export function GenerateMaterialTheme(
+export function generateMaterialTheme(
     sourceColor: string,
-    dark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    dark = window.matchMedia('(prefers-color-scheme: dark)').matches,
+    contrastLevel = 0,
+) {
+    return createThemeFromSourceColor(sourceColor, dark, contrastLevel)
+}
+
+export function generateMaterialThemeStyleText(
+    sourceColor: string,
+    dark = window.matchMedia('(prefers-color-scheme: dark)').matches,
+    contrastLevel = 0
 ): string {
     // Generate Styles
-    const theme = createThemeFromSourceColor(sourceColor, dark)
+    const theme = createThemeFromSourceColor(sourceColor, dark, contrastLevel)
 
     // Generate StyleText
-    const styleText = createStyleText(theme)
-
-    return styleText
+    return createStyleText(theme)
 }
-function createStyleText(theme: Theme): string {
+
+function createStyleText(theme: Record<string, any>): string {
     let styleString = ''
     for (const [k, v] of Object.entries(theme)) {
         styleString += `--md-sys-color-${k}: ${v};`
     }
     return styleString
 }
-function createThemeFromSourceColor(color: string, isDark: boolean): Theme {
-    const scheme = new SchemeContent(Hct.fromInt(argbFromHex(color)), isDark, 0)
+function createThemeFromSourceColor(color: string, isDark: boolean, contrastLevel: number) {
+    const scheme = new SchemeContent(Hct.fromInt(argbFromHex(color)), isDark, contrastLevel)
 
     const theme: Record<string, any> = {}
 
     for (const [key, value] of Object.entries(materialColors)) {
-        theme[key] = hexFromArgb(value.getArgb(scheme))
+        /**
+         * onSurface -> on-surface
+         */
+        theme[toKebabCase(key)] = hexFromArgb(value.getArgb(scheme))
     }
-    return theme as Theme
+
+    return theme as typeof materialColors
 }
