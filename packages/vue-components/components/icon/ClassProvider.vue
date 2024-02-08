@@ -11,6 +11,7 @@ const props = defineProps<Required<IIcon>>()
 <style module>
 .surface {
     --_icon-size: var(--mamv-icon-size, var(--_current-icon-size, 24px));
+    --_icon-opacity: var(--mamv-icon-opacity, var(--_current-icon-opacity, 1));
     --_icon-color: var(--mamv-icon-color, var(--_current-icon-color, 24px));
     --_icon-line-height: var(--mamv-icon-line-height, var(--_current-icon-line-height, 24px));
     --_icon-font-family: var(--mamv-icon-font-family, var(--_current-icon-font-family, 24px));
@@ -35,6 +36,7 @@ const props = defineProps<Required<IIcon>>()
     flex-shrink: var(--_icon-flex-shrink);
     inline-size: var(--_icon-inline-size);
     block-size: var(--_icon-block-size);
+    opacity: var(--_icon-opacity);
 
     align-items: center;
     justify-content: center;
