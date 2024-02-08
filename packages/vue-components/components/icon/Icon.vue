@@ -4,7 +4,10 @@
         :variant="props.variant"
         v-slot="{ icon }"
     >
-        <span :class="icon">
+        <span
+            v-bind="$attrs"
+            :class="icon"
+        >
             <slot></slot>
         </span>
     </ClassProvider>
