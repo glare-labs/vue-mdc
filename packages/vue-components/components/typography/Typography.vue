@@ -3,7 +3,10 @@
         :variant="props.variant"
         v-slot="{ font }"
     >
-        <span :class="font">
+        <span
+            v-bind="$attrs"
+            :class="font"
+        >
             <slot></slot>
         </span>
     </ClassProvider>
