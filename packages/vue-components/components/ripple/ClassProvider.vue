@@ -7,14 +7,12 @@
 </template>
 
 <script setup lang="ts">
-import { tokens } from '../../utils/tokens'
-
 </script>
 
 <style module>
 .surface {
-    --_ripple-hover-color: var(--mamv-ripple-hover-color, v-bind('tokens.color.surface.onSurface'));
-    --_ripple-pressed-color: var(--mamv-ripple-pressed-color, v-bind('tokens.color.surface.onSurface'));
+    --_ripple-hover-color: var(--mamv-ripple-hover-color, var(--md-sys-color-on-surface));
+    --_ripple-pressed-color: var(--mamv-ripple-pressed-color, var(--md-sys-color-on-surface));
     --_ripple-hover-opacity: var(--mamv-ripple-hover-opacity, var(--_current-ripple-hover-opacity, 0.08));
     --_ripple-pressed-opacity: var(--mamv-ripple-pressed-opacity, var(--_current-ripple-pressed-opacity, 0.12));
     --_ripple-shape: var(--mamv-ripple-shape);
