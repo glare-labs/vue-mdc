@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-import { tokens } from '../../utils/tokens'
 import type { IButton } from './Button.type'
 
 const props = defineProps<Required<IButton>>()
@@ -19,7 +18,7 @@ const props = defineProps<Required<IButton>>()
 .surface {
 
     --_button-container-height: var(--mamv-button-container-height, 40px);
-    --_button-container-shape: var(--mamv-button-container-shape, v-bind('tokens.shape.corner.full'));
+    --_button-container-shape: var(--mamv-button-container-shape, 9999px);
     --_button-container-color: var(--mamv-button-container-color, var(--_current-button-container-color, transparent));
     --_button-container-opacity: var(--mamv-button-container-opacity, var(--_current-button-container-opacity, 1));
     --_button-label-color: var(--mamv-button-label-color, var(--_current-button-label-color));
@@ -45,9 +44,9 @@ const props = defineProps<Required<IButton>>()
     text-wrap: nowrap;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     vertical-align: top;
-    transition-duration: v-bind('tokens.motion.duration.medium1');
+    transition-duration: 250ms;
     transition-property: box-shadow;
-    transition-timing-function: v-bind('tokens.motion.easing.standard');
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
     cursor: pointer;
     border-radius: var(--_button-container-shape);
     padding-block: calc(var(--_button-container-height) - max(var(--_label-text-line-height), var(--_icon-size))/2);
@@ -117,65 +116,69 @@ const props = defineProps<Required<IButton>>()
 }
 
 .elevated {
-    --_current-button-container-color: v-bind('tokens.color.surface.surfaceContainerLow');
-    --_current-button-label-color: v-bind('tokens.color.primary.primary');
+    --_current-button-container-color: var(--md-sys-color-surface-container-low);
+    --_current-button-label-color: var(--md-sys-color-primary);
 }
 
 .filled {
-    --_current-button-container-color: v-bind('tokens.color.primary.primary');
-    --_current-button-label-color: v-bind('tokens.color.primary.onPrimary');
+    --_current-button-container-color: var(--md-sys-color-primary);
+    --_current-button-label-color: var(--md-sys-color-on-primary);
 }
 
 .filled-tonal {
-    --_current-button-container-color: v-bind('tokens.color.secondary.secondaryContainer');
-    --_current-button-label-color: v-bind('tokens.color.secondary.onSecondaryContainer');
+    --_current-button-container-color: var(--md-sys-color-secondary-container);
+    --_current-button-label-color: var(--md-sys-color-on-secondary-container);
 
 }
 
 .outlined {
-    --_button-border-color: v-bind('tokens.color.outline.outline');
+    --_button-border-color: var(--md-sys-color-outline);
     --_button-border-width: 1px;
-    --_current-button-label-color: v-bind('tokens.color.primary.primary');
+    --_current-button-label-color: var(--md-sys-color-primary);
+
 }
 
 .text {
-    --_current-button-label-color: v-bind('tokens.color.primary.primary');
+    --_current-button-label-color: var(--md-sys-color-primary);
+
 }
 
 :is(.filled, .filled-tonal):hover {
-    --mamv-elevation-level: v-bind('tokens.elevation.level1');
+    --mamv-elevation-level: 1;
 }
 
 :is(.filled, .filled-tonal):active {
-    --mamv-elevation-level: v-bind('tokens.elevation.level0');
+    --mamv-elevation-level: 0;
 }
 
 
 :is(.elevated):hover {
-    --mamv-elevation-level: v-bind('tokens.elevation.level2');
+    --mamv-elevation-level: 2;
 }
 
 :is(.elevated),
 :is(.elevated):active {
-    --mamv-elevation-level: v-bind('tokens.elevation.level1');
+    --mamv-elevation-level: 1;
 }
 
 :is(.filled):hover,
 :is(.filled):active {
-    --mamv-ripple-hover-color: v-bind('tokens.color.primary.onPrimary');
-    --mamv-ripple-pressed-color: v-bind('tokens.color.primary.onPrimary');
+    --mamv-ripple-hover-color: var(--md-sys-color-primary);
+    --mamv-ripple-pressed-color: var(--md-sys-color-on-primary);
+
 }
 
 :is(.elevated, .outlined, .text):hover,
 :is(.elevated, .outlined, .text):active {
-    --mamv-ripple-hover-color: v-bind('tokens.color.primary.primary');
-    --mamv-ripple-pressed-color: v-bind('tokens.color.primary.primary');
+    --mamv-ripple-hover-color: var(--md-sys-color-primary);
+    --mamv-ripple-pressed-color: var(--md-sys-color-primary);
+
 }
 
 :is(.filled-tonal):hover,
 :is(.filled-tonal):active {
-    --mamv-ripple-hover-color: v-bind('tokens.color.secondary.onSecondaryContainer');
-    --mamv-ripple-pressed-color: v-bind('tokens.color.secondary.onSecondaryContainer');
+    --mamv-ripple-hover-color: var(--md-sys-color-on-secondary-container);
+    --mamv-ripple-pressed-color: var(--md-sys-color-on-secondary-container);
 }
 
 :is(.filled, .elevated, .filled-tonal, .outlined, .text):hover {
