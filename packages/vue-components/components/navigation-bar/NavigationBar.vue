@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import type { INavigationBar, INavigationBarProvider } from './NavigationBar.type'
 import { navigationBarProvider } from './NavigationBar.type'
 import { provide } from 'vue'
@@ -76,6 +76,10 @@ const setActiveIndex = (index: number) => {
     emits('update:modelValue', activeIndex.value)
     emits('change', activeIndex.value)
 }
+
+watch(() => props.modelValue, () => {
+    setActiveIndex(props.modelValue)
+})
 
 provide<INavigationBarProvider>(navigationBarProvider, {
     currentIndex: computed(() => activeIndex.value),
