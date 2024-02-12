@@ -36,6 +36,7 @@
     opacity: 0;
     transition: opacity 15ms linear, background-color 15ms linear;
     background-color: var(--_ripple-hover-color, #1d1b20);
+    pointer-events: none;
 }
 
 .surface::after {
@@ -48,6 +49,7 @@
             var(--_ripple-pressed-color, #1d1b20),
             max(calc(100% - 70px), 65%),
             transparent 100%);
+    pointer-events: none;
 }
 
 .hover::before {
