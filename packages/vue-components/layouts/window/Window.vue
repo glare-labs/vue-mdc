@@ -4,7 +4,10 @@
         v-bind="$attrs"
     >
 
-        <header>
+        <header
+            v-if="$slots['header']"
+            :class="[$style.header]"
+        >
             <slot name="header"></slot>
         </header>
 
@@ -47,7 +50,12 @@ const props = withDefaults(defineProps<Partial<IWindowLayout>>(), {
     min-height: v-bind('props.minHeight');
 }
 
+.header {
+    background-color: var(--md-sys-color-surface-container-low);
+}
+
 .body {
+    background-color: var(--md-sys-color-surface-container);
     display: flex;
     flex-grow: 1;
     overflow: clip;
@@ -56,9 +64,11 @@ const props = withDefaults(defineProps<Partial<IWindowLayout>>(), {
 .content {
     flex-grow: 1;
     overflow: auto;
+    background-color: var(--md-sys-color-surface);
 }
 
 .nav {
+    background-color: var(--md-sys-color-surface-container);
     flex-grow: 0;
     flex-shrink: 0;
     height: 100%;
