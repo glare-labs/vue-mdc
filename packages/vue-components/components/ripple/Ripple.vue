@@ -74,6 +74,7 @@ const TOUCH_DELAY_MS = 150
 /**
  * Events that the ripple listens to.
  */
+// @ts-ignore
 const EVENTS = [
     'click',
     'contextmenu',
@@ -258,6 +259,7 @@ const determineRippleSize = () => {
     rippleScale = `${(maxRadius + softEdgeSize) / initialSize}`
     rippleSize = `${initialSize}px`
 }
+// @ts-ignore
 const inBounds = ({ x, y }: PointerEvent) => {
     if (instance.value === null) return
     const { top, left, bottom, right } = instance.value.getBoundingClientRect()
