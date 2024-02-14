@@ -1,63 +1,55 @@
-import { Button, buttonTokens } from '../components/button'
-import { Divider, dividerTokens } from '../components/divider'
-import { Elevation, elevationTokens } from '../components/elevation'
-import { Fab, FabExtended, fabExtendedTokens, fabTokens } from '../components/fab'
-import { Icon, iconTokens } from '../components/icon'
-import { Ripple, rippleTokens } from '../components/ripple'
-import { ThemeProvider } from '../components/theme-provider'
-import { Typography, typographyTokens } from '../components/typography'
-import { IconButton, iconButtonTokens } from '../components/icon-button'
-import { RegisterAllComponents, RegisterAllLayouts, RegisterComponents } from '../utils/register-components'
+import Elevation from '../components/elevation/Elevation.vue'
+import Button from '../components/button/Button.vue'
+import Ripple from '../components/ripple/Ripple.vue'
+import ThemeProvider from '../components/theme-provider/ThemeProvider.vue'
+import Typography from '../components/typography/Typography.vue'
+import Icon from '../components/icon/Icon.vue'
+import Divider from '../components/divider/Divider.vue'
+import IconButton from '../components/icon-button/IconButton.vue'
+import Fab from '../components/fab/Fab.vue'
+import Checkbox from '../components/checkbox/Checkbox.vue'
+import NavigationBar from '../components/navigation-bar/NavigationBar.vue'
+import NavigationTab from '../components/navigation-tab/NavigationTab.vue'
+import Card from '../components/card/Card.vue'
+import ContainerStyleProvider from '../components/container/ContainerStyleProvider.vue'
+
+import Window from '../layouts/window/Window.vue'
+
+import {
+    RegisterAllComponents,
+    RegisterComponents,
+    RegisterAllLayouts,
+    RegisterLayouts,
+} from '../utils/register-components'
 import { tokens } from '../utils/tokens'
-import { Checkbox, checkboxTokens } from '../components/checkbox'
-import { Window } from '../layouts/window/Window.render'
-import { windowDirective } from '../layouts/window/Window.directive'
-import { Flex } from '../layouts/flex/Flex.render'
-import { flexDirective } from '../layouts/flex/Flex.directive'
-import { Padding } from '../layouts/padding/Padding.render'
-import { paddingDirective } from '../layouts/padding/Padding.directive'
-import { Margin } from '../layouts/margin/Margin.render'
-import { marginDirective } from '../layouts/margin/Margin.directive'
 
 export {
     /**
      * Those are stable
      */
-    ThemeProvider,
+    Elevation,
     Button,
     Ripple,
-    Elevation,
+    ThemeProvider,
     Typography,
     Icon,
     Divider,
-
-    /**
-     * Those are ready to use
-     */
-    Fab,
-    FabExtended,
     IconButton,
+    Fab,
 
     /**
      * Unstable
      */
     Checkbox,
+    NavigationBar,
+    NavigationTab,
+    Card,
+    ContainerStyleProvider,
 
     /**
      * Layouts
      */
     Window,
-    Padding,
-    Margin,
-    Flex,
-
-    /**
-     * Directives
-     */
-    windowDirective,
-    paddingDirective,
-    marginDirective,
-    flexDirective,
 
     /**
      * Plugins
@@ -65,19 +57,10 @@ export {
     RegisterAllComponents,
     RegisterComponents,
     RegisterAllLayouts,
+    RegisterLayouts,
 
     /**
      * Design system
      */
     tokens,
-    buttonTokens,
-    elevationTokens,
-    dividerTokens,
-    fabTokens,
-    fabExtendedTokens,
-    iconTokens,
-    iconButtonTokens,
-    rippleTokens,
-    typographyTokens,
-    checkboxTokens,
 }
