@@ -1,4 +1,4 @@
-import { argbFromHex, MaterialDynamicColors, type Theme, Hct, SchemeContent, hexFromArgb, DynamicScheme } from '@material/material-color-utilities'
+import { argbFromHex, MaterialDynamicColors, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
 import { toKebabCase } from './tokens'
 
 /**
