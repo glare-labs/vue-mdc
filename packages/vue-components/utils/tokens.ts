@@ -1,82 +1,86 @@
 
+/**
+ * Now, global property tokens are completely decoupled from components. 
+ * All components no longer rely on the tokens property, but tokens are still available for use.
+ * 
+ * Tokens provide a convenient way to access CSS variables.
+ */
 export const tokens = {
 
     color: {
-        primary: {
-            primary: 'var(--md-sys-color-primary)',
-            onPrimary: 'var(--md-sys-color-on-primary)',
-            primaryContainer: 'var(--md-sys-color-primary-container)',
-            onPrimaryContainer: 'var(--md-sys-color-on-primary-container)',
-            inversePrimary: 'var(--md-sys-color-inverse-primary)',
-        },
-        secondary: {
-            secondary: 'var(--md-sys-color-secondary)',
-            onSecondary: 'var(--md-sys-color-on-secondary)',
-            secondaryContainer: 'var(--md-sys-color-secondary-container)',
-            onSecondaryContainer: 'var(--md-sys-color-on-secondary-container)',
-        },
-        tertiary: {
-            tertiary: 'var(--md-sys-color-tertiary)',
-            onTertiary: 'var(--md-sys-color-on-tertiary)',
-            tertiaryContainer: 'var(--md-sys-color-tertiary-container)',
-            onTertiaryContainer: 'var(--md-sys-color-on-tertiary-container)',
-        },
-        error: {
-            error: 'var(--md-sys-color-error)',
-            onError: 'var(--md-sys-color-on-error)',
-            errorContainer: 'var(--md-sys-color-error-container)',
-            onErrorContainer: 'var(--md-sys-color-on-error-container)',
-        },
-        background: {
-            background: 'var(--md-sys-color-background)',
-            onBackground: 'var(--md-sys-color-on-background)',
-        },
-        surface: {
-            surface: 'var(--md-sys-color-surface)',
-            surfaceDim: 'var(--md-sys-color-surface-dim)',
-            surfaceBright: 'var(--md-sys-color-surface-bright)',
-            onSurface: 'var(--md-sys-color-on-surface)',
-            surfaceVariant: 'var(--md-sys-color-surface-variant)',
-            onSurfaceVariant: 'var(--md-sys-color-on-surface-variant)',
-            surfaceContainerLowest: 'var(--md-sys-color-surface-container-lowest)',
-            surfaceContainerLow: 'var(--md-sys-color-surface-container-low)',
-            surfaceContainer: 'var(--md-sys-color-surface-container)',
-            surfaceContainerHigh: 'var(--md-sys-color-surface-container-high)',
-            surfaceContainerHighest: 'var(--md-sys-color-surface-container-highest)',
-            inverseSurface: 'var(--md-sys-color-inverse-surface)',
-            inverseOnSurface: 'var(--md-sys-color-inverse-on-surface)',
-        },
-        outline: {
-            outline: 'var(--md-sys-color-outline)',
-            outlineVariant: 'var(--md-sys-color-outline-variant)',
-        },
-        shadow: {
-            shadow: 'var(--md-sys-color-shadow)',
-        },
-        scrim: {
-            scrim: 'var(--md-sys-color-scrim)',
-        }
+        primaryPaletteKeyColor: '--md-sys-color-primary-palette-key-color',
+        secondaryPaletteKeyColor: '--md-sys-color-secondary-palette-key-color',
+        tertiaryPaletteKeyColor: '--md-sys-color-tertiary-palette-key-color',
+        neutralPaletteKeyColor: '--md-sys-color-neutral-palette-key-color',
+        neutralVariantPaletteKeyColor: '--md-sys-color-neutral-variant-palette-key-color',
+        background: '--md-sys-color-background',
+        onBackground: '--md-sys-color-on-background',
+        surface: '--md-sys-color-surface',
+        surfaceDim: '--md-sys-color-surface-dim',
+        surfaceBright: '--md-sys-color-surface-bright',
+        surfaceContainerLowest: '--md-sys-color-surface-container-lowest',
+        surfaceContainerLow: '--md-sys-color-surface-container-low',
+        surfaceContainer: '--md-sys-color-surface-container',
+        surfaceContainerhigh: '--md-sys-color-surface-container-high',
+        surfaceContainerHighest: '--md-sys-color-surface-container-highest',
+        onSurface: '--md-sys-color-on-surface',
+        surfaceVariant: '--md-sys-color-surface-variant',
+        onSurfaceVariant: '--md-sys-color-on-surface-variant',
+        inverseSurface: '--md-sys-color-inverse-surface',
+        inverseOnSurface: '--md-sys-color-inverse-on-surface',
+        outline: '--md-sys-color-outline',
+        outlineVariant: '--md-sys-color-outline-variant',
+        shadow: '--md-sys-color-shadow',
+        scrim: '--md-sys-color-scrim',
+        surfaceTint: '--md-sys-color-surface-tint',
+        primary: '--md-sys-color-primary',
+        onPrimary: '--md-sys-color-on-primary',
+        primaryContainer: '--md-sys-color-primary-container',
+        onPrimaryContainer: '--md-sys-color-on-primary-container',
+        inversePrimary: '--md-sys-color-inverse-primary',
+        secondary: '--md-sys-color-secondary',
+        onSecondary: '--md-sys-color-on-secondary',
+        secondaryContainer: '--md-sys-color-secondary-container',
+        onSecondaryContainer: '--md-sys-color-on-secondary-container',
+        tertiary: '--md-sys-color-tertiary',
+        onTertiary: '--md-sys-color-on-tertiary',
+        tertiaryContainer: '--md-sys-color-tertiary-container',
+        onTertiaryContainer: '--md-sys-color-on-tertiary-container',
+        error: '--md-sys-color-error',
+        onError: '--md-sys-color-on-error',
+        errorContainer: '--md-sys-color-error-container',
+        onErrorContainer: '--md-sys-color-on-error-container',
+        primaryFixed: '--md-sys-color-primary-fixed',
+        primaryFixedDim: '--md-sys-color-primary-fixed-dim',
+        onPrimaryFixed: '--md-sys-color-on-primary-fixed',
+        onPrimaryFixedVariant: '--md-sys-color-on-primary-fixed-variant',
+        secondaryFixed: '--md-sys-color-secondary-fixed',
+        secondaryFixedDim: '--md-sys-color-secondary-fixed-dim',
+        onSecondaryFixed: '--md-sys-color-on-secondary-fixed',
+        onSecondaryFixedVariant: '--md-sys-color-on-secondary-fixed-variant',
+        tertiaryFixed: '--md-sys-color-tertiary-fixed',
+        tertiaryFixedDim: '--md-sys-color-tertiary-fixed-dim',
+        onTertiaryFixed: '--md-sys-color-on-tertiary-fixed',
+        onTertiaryFixedVariant: '--md-sys-color-on-tertiary-fixed-variant',
     },
 
     shape: {
-        corner: {
-            full: '9999px',
-            extraLarge: '28px',
-            large: '16px',
-            medium: '12px',
-            small: '8px',
-            extraSmall: '4px',
-            none: '0'
-        },
+        full: '9999px',
+        extraLarge: '28px',
+        large: '16px',
+        medium: '12px',
+        small: '8px',
+        extraSmall: '4px',
+        none: '0'
     },
 
     elevation: {
-        level5: '5',
-        level4: '4',
-        level3: '3',
-        level2: '2',
-        level1: '1',
-        level0: '0',
+        level5: 5,
+        level4: 4,
+        level3: 3,
+        level2: 2,
+        level1: 1,
+        level0: 0,
     },
 
     motion: {
@@ -220,7 +224,9 @@ export function makeComponentExternTokens<T extends Record<string, string>>(comp
 
     return e as Readonly<T>
 }
-
+/**
+ * @deprecated
+ */
 export function makeComponentTokens<C extends string, T extends string>(componentName: C, componentTokenNames: T[]) {
     const e = new Object() as Record<string, `--mamv-${string}-${T}`>
 
@@ -233,6 +239,9 @@ export function makeComponentTokens<C extends string, T extends string>(componen
         [V in typeof componentTokenNames[number]]: `--mamv-${C}-${V}`
     }>
 }
+/**
+ * @deprecated
+ */
 export function makeComponentInnerTokens<C extends string, N extends string, T extends string>(tokens: Record<N, `--mamv-${C}-${T}`>) {
     const e = new Object() as Record<string, string>
 
@@ -259,6 +268,8 @@ export function toKebabCase(str: string) {
 }
 
 /**
+ * @deprecated
+ * 
  * Converts string array to CSS variable.
  * 
  * @example
@@ -272,6 +283,8 @@ export function makeVar(...tokens: string[]): string {
 }
 
 /**
+ * @deprecated
+ * 
  * Add a default value to the last CSS variable.
  * 
  * @example
@@ -284,6 +297,9 @@ export function makeVarWithDefault(tokens: string[], value: string | number): st
     return `${makeVar(...tokens).split(')', 1)}, ${value}${')'.repeat(tokens.length)}`
 }
 
+/**
+ * @deprecated
+ */
 export function makeValues(...tokens: any[]): string {
     console.log(tokens.join(', '))
 
