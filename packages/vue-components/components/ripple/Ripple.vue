@@ -8,6 +8,7 @@
             @pointerleave="handlePointerleave"
             @pointerup="handlePointerup"
             @pointerdown="handlePointerdown"
+            v-bind="$attrs"
         ></span>
     </ClassProvider>
 </template>
