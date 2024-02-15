@@ -28,6 +28,14 @@ const props = withDefaults(
 
 const instance = ref<HTMLElement | null>(null)
 
+/**
+ * @license
+ * Copyright 2022 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ * @link
+ * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
+ */
+
 enum State {
     /**
      * Initial state of the control, no touch in progress.
