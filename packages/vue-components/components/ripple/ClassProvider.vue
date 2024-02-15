@@ -16,17 +16,21 @@
     --_ripple-hover-opacity: var(--mamv-ripple-hover-opacity, var(--_current-ripple-hover-opacity, 0.08));
     --_ripple-pressed-opacity: var(--mamv-ripple-pressed-opacity, var(--_current-ripple-pressed-opacity, 0.12));
     --_ripple-shape: var(--mamv-ripple-shape);
-
+    --_ripple-height: var(--mamv-ripple-height);
+    --_ripple-width: var(--mamv-ripple-width);
+    --_ripple-inset: var(--mamv-ripple-inset);
 
     display: flex;
     margin: auto;
     border-radius: inherit;
     position: absolute;
-    inset: 0;
+    inset: var(--_ripple-inset, 0);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
     border-radius: var(--_ripple-shape, inherit);
     z-index: 1;
+    height: var(--_ripple-height, inherit);
+    width: var(--_ripple-width, inherit);
 }
 
 .surface::before {
