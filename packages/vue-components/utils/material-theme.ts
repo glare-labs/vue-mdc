@@ -1,4 +1,4 @@
-import { argbFromHex, MaterialDynamicColors, Hct, SchemeContent, hexFromArgb } from '@material/material-color-utilities'
+import { MaterialDynamicColors, Hct, SchemeContent, hexFromArgb, DynamicScheme } from '@material/material-color-utilities'
 import { toKebabCase } from './tokens'
 
 /**
@@ -63,44 +63,31 @@ const materialColors = {
     onTertiaryFixedVariant: MaterialDynamicColors.onTertiaryFixedVariant,
 }
 
-export function generateMaterialTheme(
-    sourceColor: string,
-    dark = window.matchMedia('(prefers-color-scheme: dark)').matches,
-    contrastLevel = 0,
-) {
-    return createThemeFromSourceColor(sourceColor, dark, contrastLevel)
+export interface IMaterialDynamicThemeGeneratorOptions {
+    isDark: boolean
+    contrastLevel: number
 }
 
-export function generateMaterialThemeStyleText(
-    sourceColor: string,
-    dark = window.matchMedia('(prefers-color-scheme: dark)').matches,
-    contrastLevel = 0
-): string {
-    // Generate Styles
-    const theme = createThemeFromSourceColor(sourceColor, dark, contrastLevel)
-
-    // Generate StyleText
-    return createStyleText(theme)
-}
-
-function createStyleText(theme: Record<string, any>): string {
-    let styleString = ''
-    for (const [k, v] of Object.entries(theme)) {
-        styleString += `--md-sys-color-${k}: ${v};`
-    }
-    return styleString
-}
-function createThemeFromSourceColor(color: string, isDark: boolean, contrastLevel: number) {
-    const scheme = new SchemeContent(Hct.fromInt(argbFromHex(color)), isDark, contrastLevel)
-
-    const theme: Record<string, any> = {}
-
-    for (const [key, value] of Object.entries(materialColors)) {
-        /**
-         * onSurface -> on-surface
-         */
-        theme[toKebabCase(key)] = hexFromArgb(value.getArgb(scheme))
+export class MaterialDynamicThemeGenerator {
+    public static GenerateBySourceColor(argb: number, options: IMaterialDynamicThemeGeneratorOptions) {
+        const scheme = new SchemeContent(Hct.fromInt(argb), options.isDark, options.contrastLevel)
+        const theme: Record<string, any> = {}
+        for (const [key, value] of Object.entries(materialColors)) {
+            theme[toKebabCase(key)] = hexFromArgb(value.getArgb(scheme))
+        }
+        return theme as typeof materialColors
     }
 
-    return theme as typeof materialColors
+    public static GenerateByScheme(scheme: DynamicScheme) {
+        const theme: Record<string, any> = {}
+        for (const [key, value] of Object.entries(materialColors)) {
+            theme[toKebabCase(key)] = hexFromArgb(value.getArgb(scheme))
+        }
+        return theme as typeof materialColors
+    }
+
+    public static ToStyleText(theme: typeof materialColors) {
+        return Object.entries(theme).map(e => `--md-sys-color-${e[0]}: ${e[1]};`).reduce((l, c) => l + c)
+    }
 }
+
