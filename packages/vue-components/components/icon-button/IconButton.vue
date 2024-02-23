@@ -67,6 +67,7 @@ watch(() => props.modelValue, () => {
 }, { immediate: true, })
 
 const handleClick = (e: MouseEvent) => {
+    if (props.disabled) return
     setSelected(!state.selected.value)
     emits('update:modelValue', state.selected.value)
     emits('change', e, state.selected.value)
