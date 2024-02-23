@@ -8,9 +8,10 @@
 </template>
 
 <script setup lang="ts">
-import { generateMaterialThemeStyleText } from '../../utils/material-theme'
+import { MaterialDynamicThemeGenerator } from '../../utils/material-theme'
 import { computed } from 'vue'
 import type { IThemeProvider } from './ThemeProvider.type'
+import { argbFromHex } from '@material/material-color-utilities'
 
 const props = withDefaults(
     defineProps<IThemeProvider>(),
@@ -27,8 +28,12 @@ const emits = defineEmits<{
 
 const themeStyleText = computed(() => {
     emits('theme-update')
-    return generateMaterialThemeStyleText(props.sourceColor, props.dark, props.contrastLevel)
+    return MaterialDynamicThemeGenerator.ToStyleText(MaterialDynamicThemeGenerator.GenerateBySourceColor(argbFromHex(props.sourceColor), {
+        contrastLevel: props.contrastLevel,
+        isDark: props.dark,
+    }))
 })
+
 
 </script>
 
