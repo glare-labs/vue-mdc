@@ -47,7 +47,6 @@ const props = defineProps<Required<IIconButton>>()
     text-decoration: none;
     user-select: none;
     z-index: 0;
-    flex: 1;
     border-radius: var(--_icon-button-container-shape);
     -webkit-tap-highlight-color: transparent;
     height: var(--_icon-button-container-height);
