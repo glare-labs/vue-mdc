@@ -191,11 +191,11 @@ const handleInput = (e: Event) => {
     fill: var(--_checkbox-selected-icon-color);
     height: var(--_checkbox-icon-size);
     width: var(--_checkbox-icon-size);
-    /* overflow-clip-margin: content-box; */
-    /* overflow: hidden; */
+    overflow-clip-margin: content-box;
+    overflow: hidden;
 }
 
-:not(svg) {
+.checkbox:not(svg) {
     transform-origin: 0px 0px;
 }
 
