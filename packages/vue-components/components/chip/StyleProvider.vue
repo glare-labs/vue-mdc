@@ -1,0 +1,175 @@
+<template>
+    <slot
+        :surface="[$style.surface]"
+        :type="{
+            assist: $style.assist,
+            filter: $style.filter,
+            input: $style.input,
+            suggestion: $style.suggestion,
+        }"
+        :outline="[$style.outline]"
+        :button="$style.button"
+        :label="$style.label"
+        :icon="$style.icon"
+        :touchTarget="$style['touch-target']"
+        :background="$style.background"
+        :elevated="$style.elevated"
+        :disabled="$style.disabled"
+    ></slot>
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style module>
+.surface {
+    --_chip-container-height: var(--mamv-chip-container-height, var(--_current-chip-container-height, 32px));
+    --_chip-container-shape: var(--mamv-chip-container-shape, var(--_current-chip-container-shape, 8px));
+    --_chip-container-color: var(--mamv-chip-container-color, var(--_current-chip-container-color, var(--md-sys-color-surface-container-low)));
+    --_chip-container-opacity: var(--mamv-chip-container-opacity, var(--_current-chip-container-opacity, 1));
+    --_chip-container-leading-space: var(--mamv-chip-container-leading-space, var(--_current-chip-container-leading-space, 16px));
+    --_chip-container-trailing-space: var(--mamv-chip-container-trailing-space, var(--_current-chip-container-trailing-space, 16px));
+
+    --_chip-label-color: var(--mamv-chip-label-color, var(--_current-chip-label-color, var(--md-sys-color-on-surface)));
+    --_chip-label-opacity: var(--mamv-chip-label-opacity, var(--_current-chip-label-opacity, 1));
+    --_chip-label-font-size: var(--mamv-chip-label-font-size, var(--_current-chip-label-font-size, var(--md-sys-typescale-label-large-font-size)));
+    --_chip-label-line-height: var(--mamv-chip-label-line-height, var(--_current-chip-label-line-height, var(--md-sys-typescale-label-large-line-height)));
+    --_chip-label-font-weight: var(--mamv-chip-label-font-weight, var(--_current-chip-label-font-weight, var(--md-sys-typescale-label-large-font-weight)));
+
+    --_chip-outline-width: var(--mamv-chip-outline-width, var(--_current-chip-outline-width, 1px));
+    --_chip-outline-color: var(--mamv-chip-outline-color, var(--_current-chip-outline-color, var(--md-sys-color-outline, #79747e)));
+    --_chip-outline-opacity: var(--mamv-chip-outline-opacity, var(--_current-chip-outline-opacity, 1));
+
+    --_chip-icon-color: var(--mamv-chip-icon-color, var(--_current-chip-icon-color, var(--md-sys-color-primary)));
+    --_chip-icon-opacity: var(--mamv-chip-icon-opacity, var(--_current-chip-icon-opacity, 1));
+    --_chip-icon-size: var(--mamv-chip-icon-size, var(--_current-chip-icon-size, 18px));
+    --_chip-icon-space: var(--mamv-chip-icon-space, var(--_current-chip-icon-space, 8px));
+
+
+    --_chip-elevation-level: var(--mamv-chip-elevation-level, var(--_current-chip-elevation-level, 0));
+
+    display: inline-flex;
+    border-radius: var(--_chip-container-shape);
+    cursor: pointer;
+    position: relative;
+    height: var(--_chip-container-height);
+    box-sizing: border-box;
+
+    --mamv-elevation-level: var(--_chip-elevation-level);
+}
+
+.surface:has(.icon) {
+    --_current-chip-container-leading-space: 8px;
+}
+
+.surface:not(.icon) {}
+
+.outline {
+    border-radius: inherit;
+    outline-style: solid;
+    outline-width: var(--_chip-outline-width);
+    outline-color: var(--_chip-outline-color);
+    opacity: var(--_chip-outline-opacity);
+    background-color: transparent;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.button {
+    padding-inline-start: var(--_chip-container-leading-space);
+    padding-inline-end: var(--_chip-container-trailing-space);
+    cursor: inherit;
+    appearance: none;
+    align-items: baseline;
+    background: none;
+    border: none;
+    border-radius: inherit;
+    display: flex;
+    outline: none;
+    text-decoration: none;
+    position: relative;
+}
+
+.icon {
+    color: var(--_chip-icon-color);
+    opacity: var(--_chip-icon-opacity);
+    display: flex;
+    fill: currentColor;
+    position: relative;
+    align-self: center;
+    margin-inline-end: var(--_chip-icon-space);
+    --mamv-icon-size: var(--_chip-icon-size);
+}
+
+.background {
+    border-radius: inherit;
+    position: absolute;
+    inset: 0;
+    background-color: var(--_chip-container-color);
+    opacity: var(--_chip-container-opacity);
+    border-style: none;
+    pointer-events: none;
+}
+
+.label {
+    color: var(--_chip-label-color);
+    font-size: var(--_chip-label-font-size);
+    line-height: var(--_chip-label-line-height);
+    font-weight: var(--_chip-label-font-weight);
+    opacity: var(--_chip-label-opacity);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.touch-target {
+    width: 100%;
+    height: max(48px, 100%);
+    inset: 50% 0 0;
+    position: absolute;
+    transform: translateY(-50%);
+}
+
+.assist,
+.filter,
+.input,
+.suggestion {
+    --_current-chip-container-color: transparent;
+}
+
+.elevated:is(.assist, .filter, .suggestion) {
+    --_current-chip-container-color: var(--md-sys-color-surface-container-low);
+    --_current-chip-elevation-level: 1;
+    --_current-chip-outline-width: 0;
+}
+
+.disabled:is(.elevated:is(.assist, .filter, .suggestion)) {
+    --_chip-container-opacity: 0.12;
+    --_chip-container-color: var(--md-sys-color-on-surface);
+    --_current-chip-label-color: var(--md-sys-color-on-surface);
+    --_current-chip-label-opacity: 0.38;
+    --_current-chip-elevation-level: 0;
+    --_current-chip-outline-width: 0;
+}
+
+.disabled:not(.elevated),
+.disabled:is(.input) {
+    --_current-chip-container-color: transparent;
+    --_current-chip-outline-color: var(--md-sys-color-on-surface);
+    --_current-chip-outline-opacity: 0.12;
+    --_current-chip-label-color: var(--md-sys-color-on-surface);
+    --_current-chip-label-opacity: 0.38;
+    --_current-chip-elevation-level: 0;
+}
+
+.disabled {
+    cursor: default;
+    --mamv-ripple-hover-opacity: 0;
+    --mamv-ripple-pressed-opacity: 0;
+}
+</style>
