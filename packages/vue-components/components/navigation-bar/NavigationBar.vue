@@ -1,6 +1,6 @@
 <template>
     <div
-        :class="[$style.surface]"
+        :class="[$style.surface, $style[props.position]]"
         data-am-navigation-bar
         ref="barRef"
         v-bind="$attrs"
@@ -20,9 +20,10 @@ import { provide } from 'vue'
 import { onMounted } from 'vue'
 import { computed } from 'vue'
 
-const props = withDefaults(defineProps<INavigationBar>(), {
+const props = withDefaults(defineProps<Partial<INavigationBar>>(), {
     defaultActiveIndex: -1,
     modelValue: (p) => p.defaultActiveIndex!,
+    position: 'center',
 })
 
 const emits = defineEmits<{
@@ -113,5 +114,16 @@ provide<INavigationBarProvider>(navigationBarProvider, {
     background-color: var(--_navigation-bar-container-color);
     border-radius: var(--_navigation-bar-container-shape);
 }
+
+.left {
+    justify-content: start;
+}
+
+.center {
+    justify-content: center;
+}
+
+.left {
+    justify-content: end;
+}
 </style>
-components/navigation-bar/navigation

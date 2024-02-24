@@ -1,18 +1,23 @@
 import type { ComputedRef } from 'vue'
 
+export type TNavigationBarPositions = 'left' | 'center' | 'right'
 
 export interface INavigationBar {
 
     /**
      * @default null
      */
-    defaultActiveIndex?: number
+    defaultActiveIndex: number
 
     /**
      * @default null
      */
-    modelValue?: number
+    modelValue: number
 
+    /**
+     * @default 'center'
+     */
+    position: TNavigationBarPositions
 }
 
 export const navigationBarProvider = Symbol()
