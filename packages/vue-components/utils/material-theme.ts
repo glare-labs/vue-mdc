@@ -1,5 +1,5 @@
-import { MaterialDynamicColors, Hct, SchemeContent, hexFromArgb, DynamicScheme, SchemeTonalSpot, DynamicColor } from '@material/material-color-utilities'
-import { toKebabCase } from './tokens'
+import { MaterialDynamicColors, Hct, SchemeContent, hexFromArgb, DynamicScheme, SchemeTonalSpot } from '@material/material-color-utilities'
+import { toKebabCase } from './strings'
 
 
 /**
