@@ -1,3 +1,4 @@
+import type { EMaterialContrastLevel } from '../../utils/material-theme'
 
 export interface IThemeProvider {
 
@@ -14,5 +15,5 @@ export interface IThemeProvider {
     /**
      * @default 0
      */
-    contrastLevel?: number
+    contrastLevel?: number | EMaterialContrastLevel
 }

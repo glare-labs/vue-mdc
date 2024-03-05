@@ -7,8 +7,11 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { MaterialDynamicThemeGenerator } from '../../utils/material-theme'
+<script
+    setup
+    lang="ts"
+>
+import { EMaterialContrastLevel, MaterialDynamicColorGenerator } from '../../utils/material-theme'
 import { computed } from 'vue'
 import type { IThemeProvider } from './ThemeProvider.type'
 import { argbFromHex } from '@material/material-color-utilities'
@@ -18,7 +21,7 @@ const props = withDefaults(
     {
         dark: false,
         sourceColor: '#2A6B3C',
-        contrastLevel: 0,
+        contrastLevel: EMaterialContrastLevel.Default,
     }
 )
 
@@ -28,9 +31,11 @@ const emits = defineEmits<{
 
 const themeStyleText = computed(() => {
     emits('theme-update')
-    return MaterialDynamicThemeGenerator.ToStyleText(MaterialDynamicThemeGenerator.GenerateBySourceColor(argbFromHex(props.sourceColor), {
+    return MaterialDynamicColorGenerator.ToStyleText(MaterialDynamicColorGenerator.GenerateBySourceColor({
+        sourceColor: argbFromHex(props.sourceColor),
         contrastLevel: props.contrastLevel,
         isDark: props.dark,
+
     }))
 })
 
