@@ -13,9 +13,12 @@
     </ClassProvider>
 </template>
 
-<script setup lang="ts">
+<script
+    setup
+    lang="ts"
+>
 import ClassProvider from './ClassProvider.vue'
-import { tokens } from '../../utils/tokens'
+import { EMotionEasing } from '../../utils/tokens'
 import { ref } from 'vue'
 import type { IRipple } from './Ripple.type'
 
@@ -186,7 +189,7 @@ const startPressAnimation = (positionEvent?: Event) => {
         {
             pseudoElement: PRESS_PSEUDO,
             duration: PRESS_GROW_MS,
-            easing: tokens.motion.easing.standard,
+            easing: EMotionEasing.standard,
             fill: ANIMATION_FILL,
         },
     )
@@ -279,5 +282,4 @@ const isTouch = ({ pointerType }: PointerEvent) => {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
