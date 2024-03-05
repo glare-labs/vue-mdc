@@ -14,6 +14,11 @@ import {
     Card,
     ContainerStyleProvider,
     Window,
+    Radio,
+    Switch,
+    LinearProgress,
+    CircularProgress,
+    Chip,
 } from '../lib'
 import type { App, Component } from 'vue'
 
@@ -31,17 +36,22 @@ export const RegisterAllComponents = ({
         instance.component('Am-Elevation', Elevation)
         instance.component('Am-Button', Button)
         instance.component('Am-Ripple', Ripple)
-        instance.component('Am-Theme-Provider', ThemeProvider)
+        instance.component('Am-ThemeProvider', ThemeProvider)
         instance.component('Am-Typography', Typography)
         instance.component('Am-Icon', Icon)
         instance.component('Am-Divider', Divider)
-        instance.component('Am-Icon-Button', IconButton)
+        instance.component('Am-IconButton', IconButton)
         instance.component('Am-Fab', Fab)
         instance.component('Am-Checkbox', Checkbox)
-        instance.component('Am-Navigation-Bar', NavigationBar)
-        instance.component('Am-Navigation-Tab', NavigationTab)
+        instance.component('Am-NavigationBar', NavigationBar)
+        instance.component('Am-NavigationTab', NavigationTab)
         instance.component('Am-Card', Card)
-        instance.component('Am-Container-Style-Provider', ContainerStyleProvider)
+        instance.component('Am-ContainerStyleProvider', ContainerStyleProvider)
+        instance.component('Am-Radio', Radio)
+        instance.component('Am-Switch', Switch)
+        instance.component('Am-LinearProgress', LinearProgress)
+        instance.component('Am-CircularProgress', CircularProgress)
+        instance.component('Am-Chip', Chip)
     }
 }) as any
 
@@ -71,7 +81,7 @@ export const RegisterComponents = (...components: Component[]) => ({
  */
 export const RegisterAllLayouts = ({
     install: (instance: App) => {
-        instance.component('Am-Window-Layout', Window)
+        instance.component('Am-WindowLayout', Window)
     }
 }) as any
 
