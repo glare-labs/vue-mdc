@@ -8,14 +8,11 @@ pnpm-debug.log*
 lerna-debug.log*
 .firebase/*
 
-# catalog
-catalog/**/*
-
-.nuxt
 node_modules
 .output
 dist
 dist-ssr
+build
 !docs
 *.local
 test-report
@@ -29,3 +26,4 @@ test-report
 *.njsproj
 *.sln
 *.sw?
+package-lock.json
