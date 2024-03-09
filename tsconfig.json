@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src/",
+    "outDir": "build",
+    "baseUrl": ".",
+    "strict": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "skipDefaultLibCheck": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+  ],
+  "exclude": [
+    "src/**/labs/**/*",
+    "src/**/test/**/*",
+  ]
+}
