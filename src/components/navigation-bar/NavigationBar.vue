@@ -12,7 +12,10 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script
+    setup
+    lang="ts"
+>
 import { ref, watch } from 'vue'
 import type { INavigationBar, INavigationBarProvider } from './NavigationBar.type'
 import { navigationBarProvider } from './NavigationBar.type'

@@ -7,7 +7,10 @@
     </div>
 </template>
 
-<script setup lang="ts">
+<script
+    setup
+    lang="ts"
+>
 import type { ICard } from './Card.type'
 import Ripple from '../ripple/Ripple.vue'
 import Elevation from '../elevation/Elevation.vue'
@@ -23,7 +26,7 @@ const props = withDefaults(defineProps<Partial<ICard>>(), {
 
 </script>
 
-<style lang="css" module="Card">
+<style module="Card">
 .surface {
     --_card-container-min-width: var(--mamv-card-container-min-width, var(--_current-card-container-min-width, 64px));
     --_card-container-min-height: var(--mamv-card-container-min-height, var(--_current-card-container-min-height, 64px));

@@ -8,7 +8,7 @@
     }"></slot>
 </template>
 
-<style lang="css" module="SurfaceContainer">
+<style module="SurfaceContainer">
 .surface {
     --_container-color: var(--mamv-container-color, var(--_current-container-color, #6750a4));
     background-color: var(--_container-color);
