@@ -27,3 +27,5 @@ test-report
 *.sln
 *.sw?
 package-lock.json
+firebase.json
+.firebaserc
