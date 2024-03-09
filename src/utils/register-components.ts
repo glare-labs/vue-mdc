@@ -13,13 +13,12 @@ import {
     NavigationTab,
     Card,
     ContainerStyleProvider,
-    Window,
     Radio,
     Switch,
     LinearProgress,
     CircularProgress,
     Chip,
-} from '../lib'
+} from '../'
 import type { App, Component } from 'vue'
 
 /**
@@ -70,34 +69,3 @@ export const RegisterComponents = (...components: Component[]) => ({
             .forEach(e => e())
     },
 } as any)
-
-/**
- * Register all MAMV Layouts
- * 
- * @example
- * const app = createApp(App)
- * app.use(RegisterAllLayouts)
- * app.mount('#root')
- */
-export const RegisterAllLayouts = ({
-    install: (instance: App) => {
-        instance.component('Am-WindowLayout', Window)
-    }
-}) as any
-
-/**
- * Register layouts that you need
- * 
- * @example
- * const app = createApp(App)
- * app.use(RegisterComponents(Window))
- * app.mount('#root')
- */
-export const RegisterLayouts = (...components: Component[]) => ({
-    install(instance: App) {
-        components
-            .map(e => () => instance.component(e.name!, e))
-            .forEach(e => e())
-    },
-} as any)
-
