@@ -11,8 +11,6 @@
     align-items: center;
     justify-content: center;
     contain: strict;
-    flex: 1;
-    /* align-self: stretch; */
     vertical-align: middle;
     margin: 4px;
 }
