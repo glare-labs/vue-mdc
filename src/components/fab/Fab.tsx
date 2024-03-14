@@ -1,6 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import css from './Fab.module.css'
 import { Ripple } from '../ripple/Ripple'
+import { Elevation } from '../elevation/Elevation'
 
 export type TFabSize = 'small' | 'medium' | 'large'
 export type TFabVariant = 'primary' | 'secondary' | 'tertiary'
@@ -42,7 +43,7 @@ export const Fab = defineComponent({
         return () => (
             <button class={[css.fab, props.label !== '' && css.extended, css[props.size], css[props.variant]]}>
                 <Ripple></Ripple>
-                {/* <Elevation></Elevation> */}
+                <Elevation></Elevation>
 
                 <div class={css['touch-target']}></div>
                 <span class={css.icon}>
