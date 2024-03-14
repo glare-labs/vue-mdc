@@ -13,6 +13,7 @@ export const RippleTouchedEvent = new Event("riprle-touched")
  */
 
 export const Ripple = defineComponent({
+    name: 'GlareUi-Ripple',
     props: {
         disabled: {
             type: Boolean,
