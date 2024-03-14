@@ -1,0 +1,37 @@
+.surface {
+    --_navigation-bar-container-height: var(--glare-ui-navigation-bar-container-height, 80px);
+    --_navigation-bar-container-min-width: var(--glare-ui-navigation-bar-container-min-width, 48px);
+    --_navigation-bar-container-color: var(--glare-ui-navigation-bar-container-color, var(--md-sys-color-surface-container));
+    --_navigation-bar-container-shape: var(--glare-ui-navigation-bar-container-shape, 0px);
+
+    position: relative;
+    display: inline-flex;
+    gap: 0px;
+    box-sizing: border-box;
+    margin: 0;
+    transition-duration: 250ms;
+    transition-property: background, border, color, box-shadow;
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    z-index: 0;
+    user-select: none;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    height: var(--_navigation-bar-container-height);
+    min-width: var(--_navigation-bar-container-min-width);
+    background-color: var(--_navigation-bar-container-color);
+    border-radius: var(--_navigation-bar-container-shape);
+}
+
+.left {
+    justify-content: start;
+}
+
+.center {
+    justify-content: center;
+}
+
+.left {
+    justify-content: end;
+}
