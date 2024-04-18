@@ -26,6 +26,10 @@
 
 .checkbox[touch-target="wrapper"] {
     margin: max(0px, (48px - var(--_checkbox-container-size, 18px))/2);
+    --glare-ui-ripple-shape: 9999px;
+    --glare-ui-ripple-width: 40px;
+    --glare-ui-ripple-height: 40px;
+    --glare-ui-ripple-inset: 1;
 }
 
 .input {
