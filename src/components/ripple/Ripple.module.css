@@ -17,7 +17,7 @@
     border-radius: var(--_ripple-shape, inherit);
     height: var(--_ripple-height, inherit);
     width: var(--_ripple-width, inherit);
-    z-index: 1;
+    pointer-events: none;
 }
 
 .surface::before {

@@ -1,8 +1,10 @@
-import { defineComponent, onMounted, ref } from 'vue'
+import { PropType, defineComponent } from 'vue'
 import css from './Ripple.module.css'
 import { EMotionEasing } from '../../utils/tokens'
+import { AttachableController } from '../../utils/attachable-controller'
+import { isServer } from '../../utils/is-server'
 
-export const RippleTouchedEvent = new Event("riprle-touched")
+export const RippleTouchedEvent = new Event("ripple-touched")
 
 /**
  * @license
@@ -12,214 +14,249 @@ export const RippleTouchedEvent = new Event("riprle-touched")
  * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
  */
 
+
+enum State {
+    /**
+     * Initial state of the control, no touch in progress.
+     *
+     * Transitions:
+     *   - on touch down: transition to `TOUCH_DELAY`.
+     *   - on mouse down: transition to `WAITING_FOR_CLICK`.
+     */
+    INACTIVE,
+    /**
+     * Touch down has been received, waiting to determine if it's a swipe or
+     * scroll.
+     *
+     * Transitions:
+     *   - on touch up: begin press; transition to `WAITING_FOR_CLICK`.
+     *   - on cancel: transition to `INACTIVE`.
+     *   - after `Configuration.touchDelayMs`: begin press; transition to `HOLDING`.
+     */
+    TOUCH_DELAY,
+    /**
+     * A touch has been deemed to be a press
+     *
+     * Transitions:
+     *  - on up: transition to `WAITING_FOR_CLICK`.
+     */
+    HOLDING,
+    /**
+     * The user touch has finished, transition into rest state.
+     *
+     * Transitions:
+     *   - on click end press; transition to `INACTIVE`.
+     */
+    WAITING_FOR_CLICK,
+}
+
+const Configuration = {
+    pressGrowMs: 550,
+    minimumPressMs: 250,
+    initialOriginScale: 0.2,
+    padding: 10,
+    softEdgeMinimumSize: 75,
+    softEdgeContainerRadio: 0.35,
+    pressPseudo: '::after',
+    animationFill: 'forwards' as FillMode,
+    touchDelayMs: 150,
+}
+
+/**
+ * Events that the ripple listens to.
+ */
+const Events = [
+    'click',
+    'contextmenu',
+    'pointercancel',
+    'pointerdown',
+    'pointerenter',
+    'pointerleave',
+    'pointerup',
+]
+
+const Props = {
+    disabled: {
+        default: false,
+        type: Boolean as PropType<boolean>,
+    },
+}
+
 export const Ripple = defineComponent({
     name: 'GlareUi-Ripple',
-    props: {
-        disabled: {
-            type: Boolean,
-            default: false,
+    props: Props,
+    data(vm) {
+        return {
+            attachableController: null as null | AttachableController,
+            state: {
+                hover: false,
+                pressed: false,
+                rippleState: State.INACTIVE,
+                rippleStartEvent: null as PointerEvent | null | undefined,
+            },
+            checkBoundsAfterContextMenu: false,
+            initialSize: 0,
+            rippleScale: '',
+            rippleSize: '',
+            growAnimation: null as Animation | null,
         }
     },
-    setup(props, ctx) {
-        enum State {
-            /**
-             * Initial state of the control, no touch in progress.
-             *
-             * Transitions:
-             *   - on touch down: transition to `TOUCH_DELAY`.
-             *   - on mouse down: transition to `WAITING_FOR_CLICK`.
-             */
-            INACTIVE,
-            /**
-             * Touch down has been received, waiting to determine if it's a swipe or
-             * scroll.
-             *
-             * Transitions:
-             *   - on touch up: begin press; transition to `WAITING_FOR_CLICK`.
-             *   - on cancel: transition to `INACTIVE`.
-             *   - after `TOUCH_DELAY_MS`: begin press; transition to `HOLDING`.
-             */
-            TOUCH_DELAY,
-            /**
-             * A touch has been deemed to be a press
-             *
-             * Transitions:
-             *  - on up: transition to `WAITING_FOR_CLICK`.
-             */
-            HOLDING,
-            /**
-             * The user touch has finished, transition into rest state.
-             *
-             * Transitions:
-             *   - on click end press; transition to `INACTIVE`.
-             */
-            WAITING_FOR_CLICK,
-        }
-        const PRESS_GROW_MS = 550
-        const MINIMUM_PRESS_MS = 250
-        const INITIAL_ORIGIN_SCALE = 0.2
-        const PADDING = 10
-        const SOFT_EDGE_MINIMUM_SIZE = 75
-        const SOFT_EDGE_CONTAINER_RATIO = 0.35
-        const PRESS_PSEUDO = '::after'
-        const ANIMATION_FILL = 'forwards'
-        const TOUCH_DELAY_MS = 150
-
-        /**
-         * Events that the ripple listens to.
-         */
-        // @ts-ignore
-        const EVENTS = [
-            'click',
-            'contextmenu',
-            'pointercancel',
-            'pointerdown',
-            'pointerenter',
-            'pointerleave',
-            'pointerup',
-        ]
-        const rippleState = {
-            hover: ref(false),
-            pressed: ref(false),
-            state: State.INACTIVE,
-            rippleStartEvent: null as PointerEvent | null | undefined,
-        }
-        let initialSize = 0
-        let rippleScale = ''
-        let rippleSize = ''
-        let growAnimation = null as Animation | null
-        const instance = ref<HTMLElement | null>(null)
-
+    computed: {
+        root(): HTMLElement {
+            return this.$el
+        },
+    },
+    mounted() {
+        this.attachableController = new AttachableController(this.root, this.onControlChange.bind(this))
+    },
+    methods: {
+        onControlChange(prev: HTMLElement | null, next: HTMLElement | null) {
+            if (isServer) return
+            for (const event of Events) {
+                prev?.removeEventListener(event, this.handleEvent)
+                next?.addEventListener(event, this.handleEvent)
+            }
+        },
         /**
          * Event handles
          */
-        const handlePointerenter = () => {
-            if (props.disabled) return
-            rippleState.hover.value = true
-        }
-        const handlePointerleave = () => {
-            if (props.disabled) return
-            rippleState.hover.value = false
-            if (rippleState.state !== State.INACTIVE) {
-                endPressAnimation()
+        handlePointerenter() {
+            if (this.disabled) return
+            this.state.hover = true
+        },
+        handlePointerleave() {
+            if (this.disabled) return
+            this.state.hover = false
+            if (this.state.rippleState !== State.INACTIVE) {
+                this.endPressAnimation()
             }
-        }
-        const handlePointerup = () => {
-            if (props.disabled) return
-            if (rippleState.state === State.HOLDING) {
-                rippleState.state = State.WAITING_FOR_CLICK
+        },
+        handlePointerup() {
+            if (this.disabled) return
+            if (this.state.rippleState === State.HOLDING) {
+                this.state.rippleState = State.WAITING_FOR_CLICK
                 return
             }
-            if (rippleState.state === State.TOUCH_DELAY) {
-                rippleState.state = State.WAITING_FOR_CLICK
-                startPressAnimation(rippleState.rippleStartEvent || undefined)
+            if (this.state.rippleState === State.TOUCH_DELAY) {
+                this.state.rippleState = State.WAITING_FOR_CLICK
+                this.startPressAnimation(this.state.rippleStartEvent || undefined)
                 return
             }
-        }
-        const handlePointerdown = async (event: PointerEvent) => {
-            if (props.disabled) return
-            rippleState.rippleStartEvent = event
-            if (!isTouch(event)) {
-                rippleState.state = State.WAITING_FOR_CLICK
-                startPressAnimation(event)
+        },
+        async handlePointerdown(event: PointerEvent) {
+            if (this.disabled) return
+            this.state.rippleStartEvent = event
+            if (!this.isTouch(event)) {
+                this.state.rippleState = State.WAITING_FOR_CLICK
+                this.startPressAnimation(event)
                 return
             }
+            // after a longpress contextmenu event, an extra `pointerdown` can be
+            // dispatched to the pressed element. Check that the down is within
+            // bounds of the element in this case.
+            if (this.checkBoundsAfterContextMenu && !this.inBounds(event)) {
+                return
+            }
+
+            this.checkBoundsAfterContextMenu = false
+
             // Wait for a hold after touch delay
-            rippleState.state = State.TOUCH_DELAY
+            this.state.rippleState = State.TOUCH_DELAY
             await new Promise((resolve) => {
-                setTimeout(resolve, TOUCH_DELAY_MS)
+                setTimeout(resolve, Configuration.touchDelayMs)
             })
-            if (rippleState.state !== State.TOUCH_DELAY) return
-            rippleState.state = State.HOLDING
-            startPressAnimation(event)
-        }
-        const handlePointercancel = (event: PointerEvent) => {
-            if (!shouldReactToEvent(event)) {
+            if (this.state.rippleState !== State.TOUCH_DELAY) return
+            this.state.rippleState = State.HOLDING
+            this.startPressAnimation(event)
+        },
+        handlePointercancel(event: PointerEvent) {
+            if (!this.shouldReactToEvent(event)) return
+            this.endPressAnimation()
+        },
+        handleClick() {
+            if (this.disabled) return
+            if (this.state.rippleState === State.WAITING_FOR_CLICK) {
+                this.endPressAnimation()
                 return
             }
-
-            endPressAnimation()
-        }
-        const handleClick = () => {
-            if (props.disabled) return
-            if (rippleState.state === State.WAITING_FOR_CLICK) {
-                endPressAnimation()
-                return
-            }
-            if (rippleState.state === State.INACTIVE) {
+            if (this.state.rippleState === State.INACTIVE) {
                 // keyboard synthesized click event
-                startPressAnimation()
-                endPressAnimation()
+                this.startPressAnimation()
+                this.endPressAnimation()
             }
-        }
-
+        },
+        handleContextmenu() {
+            if (this.disabled) return
+            this.checkBoundsAfterContextMenu = true
+            this.endPressAnimation()
+        },
         /**
          * Animations about
          */
-        const startPressAnimation = (positionEvent?: Event) => {
-            rippleState.pressed.value = true
-            growAnimation?.cancel()
-            determineRippleSize()
-            const { startPoint, endPoint } = getTranslationCoordinates(positionEvent)!
+        startPressAnimation(positionEvent?: Event) {
+            this.state.pressed = true
+            this.growAnimation?.cancel()
+            this.determineRippleSize()
+            const { startPoint, endPoint } = this.getTranslationCoordinates(positionEvent)!
             const translateStart = `${startPoint.x}px, ${startPoint.y}px`
             const translateEnd = `${endPoint.x}px, ${endPoint.y}px`
 
-            if (instance.value === null) return
-            growAnimation = instance.value.animate(
+            if (this.root === null) return
+            this.growAnimation = this.root.animate(
                 {
                     top: [0, 0],
                     left: [0, 0],
-                    height: [rippleSize, rippleSize],
-                    width: [rippleSize, rippleSize],
+                    height: [this.rippleSize, this.rippleSize],
+                    width: [this.rippleSize, this.rippleSize],
                     transform: [
                         `translate(${translateStart}) scale(1)`,
-                        `translate(${translateEnd}) scale(${rippleScale})`,
+                        `translate(${translateEnd}) scale(${this.rippleScale})`,
                     ],
                 },
                 {
-                    pseudoElement: PRESS_PSEUDO,
-                    duration: PRESS_GROW_MS,
+                    pseudoElement: Configuration.pressPseudo,
+                    duration: Configuration.pressGrowMs,
                     easing: EMotionEasing.standard,
-                    fill: ANIMATION_FILL,
+                    fill: Configuration.animationFill,
                 },
             )
-        }
-        const getTranslationCoordinates = (positionEvent?: Event) => {
-            if (instance.value === null) return
-            const { height, width } = instance.value.getBoundingClientRect()
+        },
+        getTranslationCoordinates(positionEvent?: Event) {
+            if (this.root === null) return
+            const { height, width } = this.root.getBoundingClientRect()
             // end in the center
             const endPoint = {
-                x: (width - initialSize) / 2,
-                y: (height - initialSize) / 2,
+                x: (width - this.initialSize) / 2,
+                y: (height - this.initialSize) / 2,
             }
             let startPoint = {
                 x: width / 2,
                 y: height / 2,
             }
             if (positionEvent instanceof PointerEvent) {
-                startPoint = getNormalizedPointerEventCoords(positionEvent)!
+                startPoint = this.getNormalizedPointerEventCoords(positionEvent)!
             }
 
             // center around start point
             startPoint = {
-                x: startPoint.x - initialSize / 2,
-                y: startPoint.y - initialSize / 2,
+                x: startPoint.x - this.initialSize / 2,
+                y: startPoint.y - this.initialSize / 2,
             }
 
             return { startPoint, endPoint }
-        }
-        const getNormalizedPointerEventCoords = (pointerEvent: PointerEvent) => {
-            if (instance.value === null) return
+        },
+        getNormalizedPointerEventCoords(pointerEvent: PointerEvent) {
+            if (this.root === null) return
             const { scrollX, scrollY } = window
-            const { left, top } = instance.value.getBoundingClientRect()
+            const { left, top } = this.root.getBoundingClientRect()
             const documentX = scrollX + left
             const documentY = scrollY + top
             const { pageX, pageY } = pointerEvent
             return { x: pageX - documentX, y: pageY - documentY }
-        }
-        const endPressAnimation = async () => {
-            rippleState.state = State.INACTIVE
-            const animation = growAnimation
+        },
+        async endPressAnimation() {
+            this.state.rippleState = State.INACTIVE
+            const animation = this.growAnimation
             let pressAnimationPlayState = Infinity
             if (typeof animation?.currentTime === 'number') {
                 pressAnimationPlayState = animation.currentTime
@@ -227,78 +264,100 @@ export const Ripple = defineComponent({
                 pressAnimationPlayState = animation.currentTime.to('ms').value
             }
 
-            if (pressAnimationPlayState >= MINIMUM_PRESS_MS) {
-                rippleState.pressed.value = false
+            if (pressAnimationPlayState >= Configuration.minimumPressMs) {
+                this.state.pressed = false
                 return
             }
 
             await new Promise((resolve) => {
-                setTimeout(resolve, MINIMUM_PRESS_MS - pressAnimationPlayState)
+                setTimeout(resolve, Configuration.minimumPressMs - pressAnimationPlayState)
             })
 
-            if (growAnimation !== animation) {
+            if (this.growAnimation !== animation) {
                 // A new press animation was started. The old animation was canceled and
                 // should not finish the pressed state.
                 return
             }
 
-            rippleState.pressed.value = false
-        }
-        const determineRippleSize = () => {
-            if (instance.value === null) return
-            const { height, width } = instance.value.getBoundingClientRect()
+            this.state.pressed = false
+        },
+        determineRippleSize() {
+            if (this.root === null) return
+            const { height, width } = this.root.getBoundingClientRect()
             const maxDim = Math.max(height, width)
             const softEdgeSize = Math.max(
-                SOFT_EDGE_CONTAINER_RATIO * maxDim,
-                SOFT_EDGE_MINIMUM_SIZE,
+                Configuration.softEdgeContainerRadio * maxDim,
+                Configuration.softEdgeMinimumSize,
             )
 
-            const initialSizeNew = Math.floor(maxDim * INITIAL_ORIGIN_SCALE)
+            const initialSizeNew = Math.floor(maxDim * Configuration.initialOriginScale)
             const hypotenuse = Math.sqrt(width ** 2 + height ** 2)
-            const maxRadius = hypotenuse + PADDING
+            const maxRadius = hypotenuse + Configuration.padding
 
-            initialSize = initialSizeNew
-            rippleScale = `${(maxRadius + softEdgeSize) / initialSize}`
-            rippleSize = `${initialSize}px`
-        }
+            this.initialSize = initialSizeNew
+            this.rippleScale = `${(maxRadius + softEdgeSize) / this.initialSize}`
+            this.rippleSize = `${this.initialSize}px`
+        },
         // @ts-ignore
-        const inBounds = ({ x, y }: PointerEvent) => {
-            if (instance.value === null) return
-            const { top, left, bottom, right } = instance.value.getBoundingClientRect()
+        inBounds({ x, y }: PointerEvent) {
+            if (this.root === null) return
+            const { top, left, bottom, right } = this.root.getBoundingClientRect()
             return x >= left && x <= right && y >= top && y <= bottom
-        }
-        const isTouch = ({ pointerType }: PointerEvent) => {
+        },
+        isTouch({ pointerType }: PointerEvent) {
             return pointerType === 'touch'
-        }
-        const shouldReactToEvent = (event: PointerEvent) => {
-            if (props.disabled || !event.isPrimary) return false
+        },
+        shouldReactToEvent(event: PointerEvent) {
+            if (this.disabled || !event.isPrimary) return false
 
             if (
-                rippleState.rippleStartEvent &&
-                rippleState.rippleStartEvent.pointerId !== event.pointerId
+                this.state.rippleStartEvent &&
+                this.state.rippleStartEvent.pointerId !== event.pointerId
             ) {
                 return false
             }
 
             if (event.type === 'pointerenter' || event.type === 'pointerleave') {
-                return !isTouch(event)
+                return !this.isTouch(event)
             }
 
             const isPrimaryButton = event.buttons === 1
-            return isTouch(event) || isPrimaryButton
+            return this.isTouch(event) || isPrimaryButton
+        },
+        async handleEvent(e: Event) {
+            switch (e.type) {
+                case 'click':
+                    this.handleClick()
+                    break
+                case 'contextmenu':
+                    this.handleContextmenu()
+                    break
+                case 'pointercancel':
+                    this.handlePointercancel(e as PointerEvent)
+                    break
+                case 'pointerdown':
+                    await this.handlePointerdown(e as PointerEvent)
+                    break
+                case 'pointerenter':
+                    this.handlePointerenter()
+                    break
+                case 'pointerleave':
+                    this.handlePointerleave()
+                    break
+                case 'pointerup':
+                    this.handlePointerup()
+                    break
+                default:
+                    break
+            }
         }
-
-        return () => (
+    },
+    render() {
+        return (
             <span
-                ref={instance}
-                class={[css.surface, rippleState.hover.value && css.hover, rippleState.pressed.value && css.pressed]}
-                onClickCapture={handleClick}
-                onPointercancel={handlePointercancel}
-                onPointerenter={handlePointerenter}
-                onPointerleave={handlePointerleave}
-                onPointerup={handlePointerup}
-                onPointerdown={handlePointerdown}
+                aria-hidden="true"
+                class={[css.surface, this.state.hover && css.hover, this.state.pressed && css.pressed]}
             ></span>
         )
-    },
+    }
 })
