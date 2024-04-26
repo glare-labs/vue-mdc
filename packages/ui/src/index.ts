@@ -19,6 +19,13 @@ export * from './components/button/Button'
 export * from './components/navigation-bar/NavigationBar'
 export * from './components/navigation-tab/NavigationTab'
 export * from './components/glare-provider/GlareProvider'
+export * from './components/navigation-drawer/NavigationDrawerItem'
+
+/**
+ * Symbols and Types
+ */
+export * from './components/navigation-drawer/NavigationDrawerProvide'
+
 
 /**
  * Utils
