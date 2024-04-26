@@ -56,7 +56,7 @@ export const GlareProvider = defineComponent({
             }
         }
 
-        watch(props, () => {
+        watch(() => props, () => {
             setThemeConfiguration({
                 contrastLevel: props.contrastLevel,
                 dark: props.dark,

@@ -41,7 +41,7 @@ export enum EMotionEasing {
     standard = 'cubic-bezier(0.2, 0, 0, 1)',
     standardAccelerate = 'cubic-bezier(0.3, 0, 1, 1)',
     standardDecelerate = 'cubic-bezier(0, 0, 0, 1)',
-    emphasized = 'cubic-beziercubic-bezier(0.2, 0, 0, 1)',
+    emphasized = 'cubic-bezier(0.2, 0, 0, 1)',
     emphasizedAccelerate = 'cubic-bezier(0.3, 0, 0.8, 0.15)',
     emphasizedDecelerate = 'cubic-bezier(0.05, 0.7, 0.1, 1)',
     legacy = 'cubic-bezier(0.4, 0, 0.2, 1)',

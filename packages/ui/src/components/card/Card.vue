@@ -11,10 +11,19 @@
     setup
     lang="ts"
 >
-import type { ICard } from './Card.type'
 import Ripple from '../ripple/Ripple.vue'
 import Elevation from '../elevation/Elevation.vue'
 
+type TCardVariant = 'filled' | 'filled-tonal' | 'outlined' | 'elevated'
+interface ICard {
+
+    disabledElevation: boolean
+    disabledRipple: boolean
+
+    disabled: boolean
+
+    variant: TCardVariant
+}
 
 const props = withDefaults(defineProps<Partial<ICard>>(), {
     disabled: false,
@@ -87,4 +96,4 @@ const props = withDefaults(defineProps<Partial<ICard>>(), {
 .elevated:focus {
     --_current-card-elevation-level: 1;
 }
-</style>
+</style>./Card

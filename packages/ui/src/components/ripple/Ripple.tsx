@@ -1,4 +1,4 @@
-import { PropType, defineComponent } from 'vue'
+import { PropType, defineComponent, useSSRContext } from 'vue'
 import css from './Ripple.module.css'
 import { EMotionEasing } from '../../utils/tokens'
 import { AttachableController } from '../../utils/attachable-controller'
@@ -111,7 +111,7 @@ export const Ripple = defineComponent({
     },
     methods: {
         onControlChange(prev: HTMLElement | null, next: HTMLElement | null) {
-            if (isServer) return
+            if (typeof window === 'undefined') return
             for (const event of Events) {
                 prev?.removeEventListener(event, this.handleEvent)
                 next?.addEventListener(event, this.handleEvent)

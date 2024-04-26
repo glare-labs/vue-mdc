@@ -160,7 +160,7 @@ interface AttachableControllerHost extends HTMLElement {
 
 let FOR_ATTRIBUTE_OBSERVER: MutationObserver | undefined
 
-if (!isServer) {
+if (typeof window !== 'undefined') {
     /**
      * A global `MutationObserver` that reacts to `for` attribute changes on
      * `Attachable` elements. If the `for` attribute changes, the controller will
