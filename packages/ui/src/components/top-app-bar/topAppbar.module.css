@@ -1,0 +1,12 @@
+.on-scroll {
+    --_shared-top-app-bar-container-color: var(--glare-ui-shared-top-app-bar-container-color, var(--md-sys-color-surface-container, #F3EDF7));
+    --_shared-top-app-bar-container-shadow-color: var(--glare-ui-shared-top-app-bar-on-scroll-container-shadow-color, var(--md-sys-color-shadow, #000000));
+    --_shared-top-app-bar-container-elevation-level: 2;
+    --_shared-top-app-bar-container-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+    --_shared-top-app-bar-container-transition-duration: 250ms;
+}
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
