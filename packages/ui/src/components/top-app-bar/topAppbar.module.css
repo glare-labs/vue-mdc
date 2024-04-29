@@ -1,12 +1,42 @@
-.on-scroll {
-    --_shared-top-app-bar-container-color: var(--glare-ui-shared-top-app-bar-container-color, var(--md-sys-color-surface-container, #F3EDF7));
-    --_shared-top-app-bar-container-shadow-color: var(--glare-ui-shared-top-app-bar-on-scroll-container-shadow-color, var(--md-sys-color-shadow, #000000));
-    --_shared-top-app-bar-container-elevation-level: 2;
-    --_shared-top-app-bar-container-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-    --_shared-top-app-bar-container-transition-duration: 250ms;
+.base {
+    --_current-container-color: var(--variant-container-color-default);
+    --shared-container-color: var(--glare-ui-shared-top-app-bar-container-color, var(--_current-container-color));
+    --variant-container-color-default: var(--glare-ui-shared-top-app-bar-container-color-default, var(--_access-shared-top-app-bar-container-color-default, var(--md-sys-color-surface, #FEF7FF)));
+    --variant-container-color-on-scroll: var(--glare-ui-shared-top-app-bar-container-color-on-scroll, var(--_access-shared-top-app-bar-container-color-on-scroll, var(--md-sys-color-surface-container, #F3EDF7)));
+
+    --_current-container-elevation-color: var(--variant-container-elevation-color-default);
+    --_current-container-elevation-level: var(--variant-container-elevation-level-default);
+    --shared-container-elevation-color: var(--glare-ui-shared-top-app-bar-container-elevation-color, var(--_current-container-elevation-color));
+    --shared-container-elevation-level: var(--glare-ui-shared-top-app-bar-container-elevation-level, var(--_current-container-elevation-level));
+    --variant-container-elevation-color-default: var(--glare-ui-shared-top-app-bar-container-elevation-color-default, var(--_access-shared-top-app-bar-container-elevation-color-default, var(--md-sys-color-shadow, #000000)));
+    --variant-container-elevation-level-default: var(--glare-ui-shared-top-app-bar-container-elevation-level-default, var(--_access-shared-top-app-bar-container-elevation-level-default, 0));
+    --variant-container-elevation-color-on-scroll: var(--glare-ui-shared-top-app-bar-container-elevation-color-on-scroll, var(--_access-shared-top-app-bar-container-elevation-color-on-scroll, var(--md-sys-color-shadow, #000000)));
+    --variant-container-elevation-level-on-scroll: var(--glare-ui-shared-top-app-bar-container-elevation-level-on-scroll, var(--_access-shared-top-app-bar-container-elevation-level-on-scroll, 2));
+
+    --_current-container-position: relative;
+    --shared-container-position: var(--glare-ui-shared-top-app-bar-container-position, var(--_current-container-position));
+
+    --_current-container-transition-duration: var(--variant-container-transition-duration-default);
+    --shared-container-transition-duration: var(--glare-ui-shared-top-app-bar-transition-duration, var(--_current-container-transition-duration));
+    --_current-container-transition-timing-function: var(--variant-container-transition-timing-function-default);
+    --shared-container-transition-timing-function: var(--glare-ui-shared-top-app-bar-transition-timing-function, var(--_current-container-transition-timing-function));
+    --variant-container-transition-duration-default: var(--glare-ui-shared-top-app-bar-container-transition-duration-default, var(--_access-shared-top-app-bar-container-transition-duration-default, 250ms));
+    --variant-container-transition-timing-function-default: var(--glare-ui-shared-top-app-bar-container-transition-timing-function-default, var(--_access-shared-top-app-bar-container-transition-timing-function-default, ubic-bezier(0.2, 0, 0, 1)));
+    --variant-container-transition-duration-on-scroll: var(--glare-ui-shared-top-app-bar-container-transition-duration-on-scroll, var(--_access-shared-top-app-bar-container-transition-duration-on-scroll, 250ms));
+    --variant-container-transition-timing-function-on-scroll: var(--glare-ui-shared-top-app-bar-container-transition-timing-function-on-scroll, var(--_access-shared-top-app-bar-container-transition-timing-function-on-scroll, ubic-bezier(0.2, 0, 0, 1)));
+
 }
+
+.on-scroll {
+    --_current-container-color: var(--variant-container-color-on-scroll);
+    --_current-container-elevation-color: var(--variant-container-elevation-color-on-scroll);
+    --_current-container-elevation-level: var(--variant-container-elevation-level-on-scroll);
+    --_current-container-transition-timing-function: var(--variant-container-transition-timing-function-on-scroll);
+    --_current-container-transition-duration: var(--variant-container-transition-duration-on-scroll);
+}
+
 .sticky {
-    position: sticky;
+    --_current-container-position: sticky;
     top: 0;
     z-index: 1;
 }
