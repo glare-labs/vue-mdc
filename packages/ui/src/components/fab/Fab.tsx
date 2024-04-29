@@ -34,10 +34,19 @@ export const Fab = defineComponent({
         },
     },
     slots: {} as SlotsType<{
-        default: void,
-        icon: void
+        default?: void
     }>,
     setup(props, { slots }) {
+        const renderIcon = (
+            <span class={css.icon}>
+                {slots.default && slots.default()}
+            </span>
+        )
+        const renderLabel = (
+            <span class={css.label}>
+                {props.label}
+            </span>
+        )
 
 
         return () => (
@@ -46,13 +55,9 @@ export const Fab = defineComponent({
                 <Elevation></Elevation>
 
                 <div class={css['touch-target']}></div>
-                <span class={css.icon}>
-                    {slots.icon && slots.icon()}
-                </span>
 
-                <span class={css.label}>
-                    {slots.default && slots.default()}
-                </span>
+                {renderIcon}
+                {renderLabel}
             </button>
         )
     },

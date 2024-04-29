@@ -34,19 +34,21 @@
     cursor: pointer;
     transition-duration: 280ms;
     transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-    position: relative;
 
+    position: relative;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
     padding: 0;
-    transition-property: background-color;
+    transition-property: background-color, color;
     border-width: 0px;
     outline: none;
     z-index: 0;
     height: var(--_fab-container-height);
     background-color: var(--_fab-container-color);
     border-radius: var(--_fab-container-shape);
+    flex-shrink: 0;
+    flex-grow: 0;
 
     --glare-ui-ripple-hover-color: var(--_fab-ripple-hover-color);
     --glare-ui-ripple-pressed-color: var(--_fab-ripple-pressed-color);
@@ -74,7 +76,6 @@
     padding-inline-start: 16px;
     padding-inline-end: 20px;
     box-sizing: border-box;
-    width: inherit;
     gap: 4px;
 }
 
@@ -96,7 +97,7 @@
 
 .fab,
 .icon {
-    display: flex;
+    display: inline-flex;
 }
 
 .small {
