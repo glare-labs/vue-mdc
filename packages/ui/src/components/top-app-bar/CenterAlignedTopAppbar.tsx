@@ -1,47 +1,10 @@
-import { PropType, SlotsType, defineComponent } from 'vue'
-import css from './CenterAlignedTopAppbar.module.css'
+import { SlotsType, defineComponent } from 'vue'
 import { Elevation } from '../elevation/Elevation'
+import { propsShared } from './TopAppbar'
+import css from './CenterAlignedTopAppbar.module.css'
+import cssShared from './topAppbar.module.css'
 
-const props = {
-
-    /**
-     * CenterAlignedTopAppbar组件显示的标题
-     * 
-     * @default 'Untitled'
-     */
-    title: {
-        type: String as PropType<string>,
-        default: 'Untitled'
-    },
-
-    /**
-     * 强制启用sticky样式, 启用后此组件将粘滞在[top: 0]的位置
-     * @example
-     * ```html
-     * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
-     *   <CenterAlignedTopAppbar title="Title" forcedSticky></CenterAlignedTopAppbar>
-     * </div>
-     * ```
-     */
-    forcedSticky: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    },
-
-    /**
-     * 强制启用on-scroll样式, 通常情况下on-scroll样式在页面或盒子进度条滚动后出现
-     * @example
-     * ```html
-     * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
-     *   <CenterAlignedTopAppbar title="Title" forcedOnScroll></CenterAlignedTopAppbar>
-     * </div>
-     * ```
-     */
-    forcedOnScroll: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    }
-}
+const props = propsShared
 const slots = {} as SlotsType<{
     /**
      * 位于TopAppbar左侧的图标按钮
@@ -86,7 +49,12 @@ export const CenterAlignedTopAppbar = defineComponent({
         )
 
         return (
-            <div data-is-top-app-bar="true" data-is-forced-sticky={this.forcedSticky} data-is-forced-on-scroll={this.forcedOnScroll} class={[css.container, this.forcedSticky && css.sticky, this.forcedOnScroll && css['on-scroll']]}>
+            <div
+                data-is-top-app-bar="true"
+                data-is-forced-sticky={this.forcedSticky}
+                data-is-forced-on-scroll={this.forcedOnScroll}
+                class={[css.container, cssShared.base, this.forcedSticky && cssShared.sticky, this.forcedOnScroll && cssShared['on-scroll']]}
+            >
                 {renderLeadingIcon}
                 {renderTitle}
                 {renderTrailingIcon}
