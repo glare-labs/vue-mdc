@@ -1,7 +1,6 @@
-import { PropType, SlotsType, computed, defineComponent, onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref } from 'vue'
+import { PropType, SlotsType, defineComponent } from 'vue'
 import css from './CenterAlignedTopAppbar.module.css'
 import { Elevation } from '../elevation/Elevation'
-import { nextTick } from 'process'
 
 const props = {
 
@@ -16,31 +15,29 @@ const props = {
     },
 
     /**
-     * CenterAlignedTopAppbar组件监听的目标元素, 目标元素可以是CSS选择器字符串, 也可以是'window'或'document'字符串
+     * 强制启用sticky样式, 启用后此组件将粘滞在[top: 0]的位置
      * @example
      * ```html
-     * <CenterAlignedTopAppbar title="Title" container="window" sticky></CenterAlignedTopAppbar>
-     * <CenterAlignedTopAppbar title="Title" container="document"></CenterAlignedTopAppbar>
-     * <CenterAlignedTopAppbar title="Title" container="#app"></CenterAlignedTopAppbar>
+     * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
+     *   <CenterAlignedTopAppbar title="Title" forcedSticky></CenterAlignedTopAppbar>
+     * </div>
      * ```
-     * 
-     * 当被监听的对象的scrollTop属性值大于64时, 激活此组件的sticky效果. 通常情况下, 建议您设置sticky属性值为true
-     * 
-     * @default 'window'
      */
-    container: {
-        type: String as PropType<string | 'window' | 'document'>,
-        default: 'window'
+    forcedSticky: {
+        type: Boolean as PropType<boolean>,
+        default: false
     },
 
     /**
-     * CenterAlignedTopAppbar组件是否激活sticky状态
-     * 
-     * 当sticky设置为true时, 此组件会附着在页面的top为0px的位置
-     * 
-     * @default false
+     * 强制启用on-scroll样式, 通常情况下on-scroll样式在页面或盒子进度条滚动后出现
+     * @example
+     * ```html
+     * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
+     *   <CenterAlignedTopAppbar title="Title" forcedOnScroll></CenterAlignedTopAppbar>
+     * </div>
+     * ```
      */
-    sticky: {
+    forcedOnScroll: {
         type: Boolean as PropType<boolean>,
         default: false
     }
@@ -70,67 +67,6 @@ export const CenterAlignedTopAppbar = defineComponent({
     slots,
     emits,
     setup(props, ctx) {
-        const targetElement = computed<Element | null | Document | (Window & typeof globalThis)>(() => {
-            if (typeof window === 'undefined' || typeof document === 'undefined') {
-                return document.querySelector(props.container)
-            }
-            if (props.container === 'window') {
-                return window
-            } else if (props.container === 'document') {
-                return document
-            }
-            return document.querySelector(props.container)
-        })
-
-        const isScrolled = ref(false)
-        const updateIsScrolled = (target: (EventTarget | HTMLElement | Document | Window | null)) => {
-            if (target === null) return
-            /**
-             * + types
-             *   - target.scrollTop: target is an HTMLElement
-             *   - target.scrollingElement.scrollTop: target may be document or window object
-             * 
-             */
-            // @ts-ignore
-            const top = target.scrollTop ?? target.scrollingElement.scrollTop
-
-            /**
-             * the height of the TopAppbar is 64px
-             */
-            if (top > 64) {
-                isScrolled.value = true
-            } else {
-                isScrolled.value = false
-            }
-        }
-
-
-        const handleScrolled = (e: Event) => {
-            updateIsScrolled(e.target)
-        }
-        const attach = () => {
-            targetElement.value?.addEventListener('scroll', handleScrolled)
-        }
-        const detach = () => {
-            targetElement.value?.removeEventListener('scroll', handleScrolled)
-        }
-
-        onMounted(() => {
-            attach()
-        })
-        onBeforeUpdate(() => {
-            detach()
-        })
-        onUpdated(() => {
-            attach()
-        })
-        onBeforeUnmount(() => {
-            detach()
-        })
-
-        return {
-            isScrolled
-        }
     },
     render() {
         const renderLeadingIcon = (
@@ -149,10 +85,8 @@ export const CenterAlignedTopAppbar = defineComponent({
             </span>
         )
 
-        const containerStyles = [css.container, this.isScrolled && css['on-scroll'], this.sticky && css.sticky]
-
         return (
-            <div class={containerStyles}>
+            <div data-is-top-app-bar="true" data-is-forced-sticky={this.forcedSticky} data-is-forced-on-scroll={this.forcedOnScroll} class={[css.container, this.forcedSticky && css.sticky, this.forcedOnScroll && css['on-scroll']]}>
                 {renderLeadingIcon}
                 {renderTitle}
                 {renderTrailingIcon}
