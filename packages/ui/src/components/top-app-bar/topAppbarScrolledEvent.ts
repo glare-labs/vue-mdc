@@ -10,10 +10,10 @@ const removeTopAppbarOnScrollStyles = (element: HTMLElement) => {
     }
 }
 const addTopAppbarOnScrollStyles = (element: HTMLElement) => {
-    if (element.getAttribute('data-is-forced-sticky') !== 'false' && !element.classList.contains(css.sticky)) {
+    if (element.getAttribute('data-is-forced-sticky') === 'false' && !element.classList.contains(css.sticky)) {
         element.classList.add(css.sticky)
     }
-    if (element.getAttribute('data-is-forced-on-scroll') !== 'false' && !element.classList.contains(css['on-scroll'])) {
+    if (element.getAttribute('data-is-forced-on-scroll') === 'false' && !element.classList.contains(css['on-scroll'])) {
         element.classList.add(css['on-scroll'])
     }
 }
@@ -44,7 +44,7 @@ export const topAppbarScrolledEvent = (e: Event) => {
         return
     }
     if (target.scrollTop - topAppbar.offsetTop !== 0 && target.scrollTop !== 0) {
-        removeTopAppbarOnScrollStyles(topAppbar)
+        addTopAppbarOnScrollStyles(topAppbar)
         return
     }
 
