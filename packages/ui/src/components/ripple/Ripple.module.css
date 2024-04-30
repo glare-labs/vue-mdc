@@ -1,55 +1,70 @@
 .surface {
-    --_ripple-hover-color: var(--glare-ui-ripple-hover-color, var(--md-sys-color-on-surface));
-    --_ripple-pressed-color: var(--glare-ui-ripple-pressed-color, var(--md-sys-color-on-surface));
-    --_ripple-hover-opacity: var(--glare-ui-ripple-hover-opacity, var(--_current-ripple-hover-opacity, 0.08));
-    --_ripple-pressed-opacity: var(--glare-ui-ripple-pressed-opacity, var(--_current-ripple-pressed-opacity, 0.12));
-    --_ripple-shape: var(--glare-ui-ripple-shape);
-    --_ripple-height: var(--glare-ui-ripple-height);
-    --_ripple-width: var(--glare-ui-ripple-width);
-    --_ripple-inset: var(--glare-ui-ripple-inset);
+    --state-layer-color: var(--variant-state-layer-color-default);
+    --variant-state-layer-color-default: var(--glare-ui-ripple-state-layer-color-default, var(--_access-shared-ripple-state-layer-color-default, unset));
+    --variant-state-layer-color-hover: var(--glare-ui-ripple-state-layer-color-hover, var(--_access-shared-ripple-state-layer-color-hover, var(--md-sys-color-on-surface, #1D1B20)));
+    --variant-state-layer-color-pressed: var(--glare-ui-ripple-state-layer-color-pressed, var(--_access-shared-ripple-state-layer-color-pressed, var(--md-sys-color-on-surface, #1D1B20)));
+
+    --state-layer-opacity: var(--variant-state-layer-opacity-default);
+    --variant-state-layer-opacity-default: var(--glare-ui-ripple-state-layer-opacity-default, var(--_access-shared-ripple-state-layer-opacity-default, 0));
+    --variant-state-layer-opacity-hover: var(--glare-ui-ripple-state-layer-opacity-hover, var(--_access-shared-ripple-state-layer-opacity-hover, 0.08));
+    --variant-state-layer-opacity-pressed: var(--glare-ui-ripple-state-layer-opacity-pressed, var(--_access-shared-ripple-state-layer-opacity-pressed, 0.12));
+
+    --shape: var(--glare-ui-ripple-shape, var(--_access-shared-ripple-state-layer-shape));
+    --height: var(--glare-ui-ripple-height, var(--_access-shared-ripple-state-layer-height));
+    --width: var(--glare-ui-ripple-width, var(--_access-shared-ripple-state-layer-width));
+
+    --transition-duration: var(--variant-transition-duration-default);
+    --variant-transition-duration-default: var(--glare-ui-ripple-state-layer-color-default, var(--_access-shared-ripple-transition-duration-default, 150ms));
+    --variant-transition-duration-hover: var(--glare-ui-ripple-state-layer-color-hover, var(--_access-shared-ripple-transition-duration-hover, 150ms));
+    --variant-transition-duration-pressed: var(--glare-ui-ripple-state-layer-color-pressed, var(--_access-shared-ripple-transition-duration-pressed, 375ms));
+    --variant-transition-duration-pressed-after: var(--glare-ui-ripple-state-layer-color-pressed-after, var(--_access-shared-ripple-transition-duration-pressed-after, 105ms));
+
+    --touch-target: var(--glare-ui-ripple-touch-target, var(--glare-ui-ripple-inset, var(--_access-shared-ripple-touch-target, 0)));
+    --z-index: var(--glare-ui-ripple-z-index, var(--_access-shared-ripple-z-index, 1));
 
     display: flex;
     margin: auto;
     position: absolute;
-    inset: var(--_ripple-inset, 0);
     overflow: hidden;
     -webkit-tap-highlight-color: transparent;
-    border-radius: var(--_ripple-shape, inherit);
-    height: var(--_ripple-height, inherit);
-    width: var(--_ripple-width, inherit);
     pointer-events: none;
+    z-index: var(--z-index);
+    border-radius: var(--shape, inherit);
+    height: var(--height, inherit);
+    width: var(--width, inherit);
+    /* inset: var(--touch-target); */
+    inset: unset;
 }
 
-.surface::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 15ms linear, background-color 15ms linear;
-    background-color: var(--_ripple-hover-color, #1d1b20);
-    z-index: 1;
-}
-
+.surface::before,
 .surface::after {
     content: "";
     position: absolute;
-    opacity: 0;
-    transition: opacity 375ms linear;
+    inset: 0;
+    /* inset: var(--touch-target); */
+    opacity: var(--state-layer-opacity);
+    transition-duration: var(--transition-duration);
+    transition-timing-function: linear;
+}
+.surface::before {
+    transition-property: opacity, background-color;
+    background-color: var(--state-layer-color, #1d1b20);
+}
+.surface::after {
+    --transition-duration: var(--variant-transition-duration-pressed);
+    transition-property: opacity;
     transform-origin: center center;
-    background: radial-gradient(closest-side,
-            var(--_ripple-pressed-color, #1d1b20),
-            max(calc(100% - 70px), 65%),
-            transparent 100%);
-    z-index: 1;
+    background: radial-gradient(closest-side, var(--state-layer-color, #1d1b20), max(calc(100% - 70px), 65%), transparent 100%);
 }
 
 .hover::before {
-    opacity: var(--_ripple-hover-opacity);
+    --state-layer-opacity: var(--variant-state-layer-opacity-hover);
+    --state-layer-color: var(--variant-state-layer-color-hover);
+    --transition-duration: var(--variant-transition-duration-hover);
 }
 
 .pressed::after {
-    transition-duration: 105ms;
-    opacity: var(--_ripple-pressed-opacity);
+    --state-layer-opacity: var(--variant-state-layer-opacity-pressed);
+    --state-layer-color: var(--variant-state-layer-color-pressed);
+    --transition-duration: var(--variant-transition-duration-pressed-after);
 }
-
-.disabled {}

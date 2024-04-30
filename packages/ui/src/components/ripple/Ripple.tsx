@@ -2,9 +2,6 @@ import { PropType, defineComponent, useSSRContext } from 'vue'
 import css from './Ripple.module.css'
 import { EMotionEasing } from '../../utils/tokens'
 import { AttachableController } from '../../utils/attachable-controller'
-import { isServer } from '../../utils/is-server'
-
-export const RippleTouchedEvent = new Event("ripple-touched")
 
 /**
  * @license
