@@ -1,194 +1,151 @@
-.surface {
-
-    --_button-container-height: var(--glare-ui-button-container-height, 40px);
-    --_button-container-shape: var(--glare-ui-button-container-shape, 9999px);
-    --_button-container-color: var(--glare-ui-button-container-color, var(--_current-button-container-color, transparent));
-    --_button-container-opacity: var(--glare-ui-button-container-opacity, var(--_current-button-container-opacity, 1));
-    --_button-label-color: var(--glare-ui-button-label-color, var(--_current-button-label-color));
-    --_button-label-opacity: var(--glare-ui-button-label-opacity, var(--_current-button-label-opacity, 1));
-    --_button-border-width: var(--glare-ui-button-border-width, var(--_current-button-border-width, 0));
-    --_button-border-color: var(--glare-ui-button-border-color, var(--_current-button-border-color, transparent));
-    --_button-border-opacity: var(--glare-ui-button-border-opacity, var(--_current-button-border-opacity, 1));
-    --_button-leading-space: var(--glare-ui-button-leading-space, var(--_current-button-leading-space, 24px));
-    --_button-trailing-space: var(--glare-ui-button-trailing-space, var(--_current-button-trailing-space, 24px));
-    --_button-icon-size: var(--glare-ui-button-icon-size, var(--_current-button-icon-size, 18px));
-    --_button-icon-color: var(--glare-ui-button-icon-color, var(--_current-button-icon-color, var(--_current-button-label-color)));
-
-    user-select: none;
-    cursor: pointer;
-    outline: none;
-    box-sizing: border-box;
-    display: inline-flex;
-    gap: 8px;
-    place-content: center;
-    place-items: center;
-    position: relative;
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    vertical-align: top;
-    transition-duration: 250ms;
-    transition-property: box-shadow;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
-    cursor: pointer;
-    border-radius: var(--_button-container-shape);
-    padding-block: calc(var(--_button-container-height) - max(var(--_label-text-line-height), var(--_icon-size))/2);
-    padding-inline-start: var(--_button-leading-space);
-    padding-inline-end: var(--_button-trailing-space);
-    min-height: var(--_button-container-height);
-}
-
-.background {
-    background-color: var(--_button-container-color);
-    border-radius: inherit;
-    inset: 0;
-    position: absolute;
-    opacity: var(--_button-container-opacity);
-}
-
-.outline {
-    border-width: var(--_button-border-width);
-    border-color: var(--_button-border-color);
-    opacity: var(--_button-border-opacity);
-    border-radius: inherit;
-    border-style: solid;
-    box-sizing: border-box;
-    position: absolute;
-    inset: 0;
-}
-
-.button {
-    border-radius: inherit;
-    cursor: inherit;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    outline: none;
-    appearance: none;
-    vertical-align: middle;
-    background: rgba(0, 0, 0, 0);
-    text-decoration: none;
-    min-width: calc(64px - var(--_button-leading-space) - var(--_button-trailing-space));
-    width: 100%;
-    z-index: 0;
-    height: 100%;
-    font: inherit;
-    color: var(--_button-label-color);
-    opacity: var(--_button-label-opacity);
-    padding: 0;
-    gap: inherit;
-    --glare-ui-icon-color: var(--_button-icon-color);
-    --glare-ui-icon-size: var(--_button-icon-size);
-    --glare-ui-icon-inline-size: var(--_button-icon-size);
-    --glare-ui-icon-block-size: var(--_button-icon-size);
-    --glare-ui-icon-display: inline-flex;
-    --glare-ui-icon-position: relative;
-    --glare-ui-icon-writing-mode: horizontal-tb;
-    --glare-ui-icon-fill: currentColor;
-    --glare-ui-icon-flex-shrink: 0;
-
-    font-size: var(--md-sys-typescale-label-large-font-size);
-    line-height: var(--md-sys-typescale-label-large-line-height);
-    font-weight: var(--md-sys-typescale-label-large-font-weight);
-    letter-spacing: var(--md-sys-typescale-label-large-letter-spacing);
-}
-
-.label {
-    text-overflow: inherit;
-}
-
-:is(.button, .button > .label) {
-    text-overflow: inherit;
-}
-
-.elevated {
-    --_current-button-container-color: var(--md-sys-color-surface-container-low);
-    --_current-button-label-color: var(--md-sys-color-primary);
-}
 
 .filled {
-    --_current-button-container-color: var(--md-sys-color-primary);
-    --_current-button-label-color: var(--md-sys-color-on-primary);
+    --_access-shared-button-container-color-default: var(--glare-ui-button-container-color-default, var(--md-sys-color-primary, #6750A4));    
+    --_access-shared-button-container-color-disabled: var(--glare-ui-button-container-color-disabled);
+    --_access-shared-button-label-color-default: var(--glare-ui-button-label-color-default, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-button-label-color-disabled: var(--glare-ui-button-label-color-disabled);
+    --_access-shared-button-icon-color-default: var(--glare-ui-button-icon-color-default, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-button-icon-color-disabled: var(--glare-ui-button-icon-color-disabled);
+    --_access-shared-button-state-layer-color-default: var(--glare-ui-button-state-layer-color-default,var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-button-state-layer-color-hover: var(--glare-ui-button-state-layer-color-hover, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-button-state-layer-color-pressed: var(--glare-ui-button-state-layer-color-pressed, var(--md-sys-color-on-primary, #FFFFFF));
 }
-
 .filled-tonal {
-    --_current-button-container-color: var(--md-sys-color-secondary-container);
-    --_current-button-label-color: var(--md-sys-color-on-secondary-container);
-
+    --_access-shared-button-container-color-default: var(--glare-ui-button-container-color-default, var(--md-sys-color-secondary-container, #E8DEF8));    
+    --_access-shared-button-container-color-disabled: var(--glare-ui-button-container-color-disabled);    
+    --_access-shared-button-label-color-default: var(--glare-ui-button-label-color-default, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-button-label-color-disabled: var(--glare-ui-button-label-color-disabled);
+    --_access-shared-button-icon-color-default: var(--glare-ui-button-icon-color-default, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-button-icon-color-disabled: var(--glare-ui-button-icon-color-disabled);
+    --_access-shared-button-state-layer-color-default: var(--glare-ui-button-state-layer-color-default, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-button-state-layer-color-hover: var(--glare-ui-button-state-layer-color-hover, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-button-state-layer-color-pressed: var(--glare-ui-button-state-layer-color-pressed, var(--md-sys-color-on-secondary-container, #1D192B));
+}
+.outlined {
+    --_access-shared-button-container-color-default: var(--glare-ui-button-container-color-default, transparent);    
+    --_access-shared-button-container-color-disabled: var(--glare-ui-button-container-color-disabled, transparent);
+    --_access-shared-button-label-color-default: var(--glare-ui-button-label-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-label-color-disabled: var(--glare-ui-button-label-color-disabled);
+    --_access-shared-button-icon-color-default: var(--glare-ui-button-icon-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-icon-color-disabled: var(--glare-ui-button-icon-color-disabled);
+    --_access-shared-button-state-layer-color-default: var(--glare-ui-button-state-layer-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-hover: var(--glare-ui-button-state-layer-color-hover, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-pressed: var(--glare-ui-button-state-layer-color-pressed, var(--md-sys-color-primary, #6750A4));
+}
+.text {
+    --_access-shared-button-container-color-default: var(--glare-ui-button-container-color-default, transparent);
+    --_access-shared-button-container-color-disabled: var(--glare-ui-button-container-color-disabled, transparent);
+    --_access-shared-button-label-color-default: var(--glare-ui-button-label-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-label-color-disabled: var(--glare-ui-button-label-color-disabled);
+    --_access-shared-button-icon-color-default: var(--glare-ui-button-icon-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-icon-color-disabled: var(--glare-ui-button-icon-color-disabled);
+    --_access-shared-button-state-layer-color-default: var(--glare-ui-button-state-layer-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-hover: var(--glare-ui-button-state-layer-color-hover, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-pressed: var(--glare-ui-button-state-layer-color-pressed, var(--md-sys-color-primary, #6750A4));
+}
+.elevated {
+    --_access-shared-button-container-color-default: var(--glare-ui-button-container-color-default, var(--md-sys-color-surface-container-low, #F7F2FA));
+    --_access-shared-button-container-color-disabled: var(--glare-ui-button-container-color-disabled);
+    --_access-shared-button-label-color-default: var(--glare-ui-button-label-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-label-color-disabled: var(--glare-ui-button-label-color-disabled);
+    --_access-shared-button-icon-color-default: var(--glare-ui-button-icon-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-icon-color-disabled: var(--glare-ui-button-icon-color-disabled);
+    --_access-shared-button-state-layer-color-default: var(--glare-ui-button-state-layer-color-default, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-hover: var(--glare-ui-button-state-layer-color-hover, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-button-state-layer-color-pressed: var(--glare-ui-button-state-layer-color-pressed, var(--md-sys-color-primary, #6750A4));
 }
 
 .outlined {
-    --_button-border-color: var(--md-sys-color-outline);
-    --_button-border-width: 1px;
-    --_current-button-label-color: var(--md-sys-color-primary);
-
+    --_access-shared-button-outline-width-default: var(--glare-ui-button-outline-width-default, 1px);
+    --_access-shared-button-outline-width-disabled: var(--glare-ui-button-outline-width-disabled, 1px);
 }
-
+.filled,
+.filled-tonal,
+.elevated,
 .text {
-    --_current-button-label-color: var(--md-sys-color-primary);
-
+    --_access-shared-button-outline-width-default: var(--glare-ui-button-outline-width-default, 0px);
+    --_access-shared-button-outline-width-disabled: var(--glare-ui-button-outline-width-disabled, 0px);
+}
+.filled,
+.filled-tonal,
+.elevated,
+.outlined {
+    --_access-shared-button-padding-start: var(--glare-ui-button-padding-start);
+    --_access-shared-button-padding-end: var(--glare-ui-button-padding-end);
+}
+.text {
+    --_access-shared-button-padding-start: var(--glare-ui-button-padding-start, 12px);
+    --_access-shared-button-padding-end: var(--glare-ui-button-padding-end, 12px);
 }
 
-:is(.filled, .filled-tonal):hover {
-    --glare-ui-elevation-level: 1;
+.elevated,
+.elevated:active,
+.elevated:focus,
+.elevated:hover:active {
+    --_access-shared-button-elevation-level: var(--glare-ui-button-elevation-level, 1);
+}
+.elevated:hover {
+    --_access-shared-button-elevation-level: var(--glare-ui-button-elevation-level, 2);
 }
 
-:is(.filled, .filled-tonal):active {
-    --glare-ui-elevation-level: 0;
+.filled-tonal,
+.filled-tonal:active,
+.filled-tonal:focus,
+.filled-tonal:hover:active,
+.filled,
+.filled:active,
+.filled:focus,
+.filled:hover:active {
+    --_access-shared-button-elevation-level: var(--glare-ui-button-elevation-level, 0);
+}
+.filled-tonal:hover,
+.filled:hover {
+    --_access-shared-button-elevation-level: var(--glare-ui-button-elevation-level, 1);
+}
+
+.outlined,
+.text {
+    --_access-shared-button-elevation-level: var(--glare-ui-button-elevation-level, 0);
 }
 
 
-:is(.elevated):hover {
-    --glare-ui-elevation-level: 2;
-}
+.filled,
+.filled-tonal,
+.elevated,
+.outlined,
+.text {
+    --_access-shared-button-min-height: var(--glare-ui-button-min-height);
+    --_access-shared-button-shape: var(--glare-ui-button-shape);
+    --_access-shared-button-leading-space: var(--glare-ui-button-leading-space);
+    --_access-shared-button-trailing-space: var(--glare-ui-button-trailing-space);
 
-:is(.elevated),
-:is(.elevated):active {
-    --glare-ui-elevation-level: 1;
-}
+    --_access-shared-button-container-opacity-default: var(--glare-ui-button-container-opacity-default);
+    --_access-shared-button-container-opacity-disabled: var(--glare-ui-button-container-opacity-disabled);
+    --_access-shared-button-label-opacity-default: var(--glare-ui-button-label-opacity-default);
+    --_access-shared-button-label-opacity-disabled: var(--glare-ui-button-label-opacity-disabled);
+    --_access-shared-button-outline-opacity-default: var(--glare-ui-button-outline-opacity-default);
+    --_access-shared-button-outline-opacity-disabled: var(--glare-ui-button-outline-opacity-disabled);
+    --_access-shared-button-outline-style-default: var(--glare-ui-button-outline-style-default);
+    --_access-shared-button-outline-style-disabled: var(--glare-ui-button-outline-style-disabled);
+    --_access-shared-button-outline-color-default: var(--glare-ui-button-outline-color-default);
+    --_access-shared-button-outline-color-disabled: var(--glare-ui-button-outline-color-disabled);
 
-:is(.filled):hover,
-:is(.filled):active {
-    --glare-ui-ripple-hover-color: var(--md-sys-color-primary);
-    --glare-ui-ripple-pressed-color: var(--md-sys-color-on-primary);
+    --_access-shared-button-label-font: var(--glare-ui-button-label-font);
+    --_access-shared-button-label-line-height: var(--glare-ui-button-label-line-height);
+    --_access-shared-button-label-font-size: var(--glare-ui-button-label-font-size);
+    --_access-shared-button-label-font-weight: var(--glare-ui-button-label-font-weight);
+    --_access-shared-button-label-letter-spacing: var(--glare-ui-button-label-letter-spacing);
 
-}
+    --_access-shared-button-icon-opacity-default: var(--glare-ui-button-color-opacity-default);
+    --_access-shared-button-icon-opacity-disabled: var(--glare-ui-button-color-opacity-disabled);
+    --_access-shared-button-icon-size: var(--glare-ui-button-color-size);
 
-:is(.elevated, .outlined, .text):hover,
-:is(.elevated, .outlined, .text):active {
-    --glare-ui-ripple-hover-color: var(--md-sys-color-primary);
-    --glare-ui-ripple-pressed-color: var(--md-sys-color-primary);
+    --_access-shared-button-state-layer-opacity-default: var(--glare-ui-button-state-layer-opacity-default);
+    --_access-shared-button-state-layer-opacity-hover: var(--glare-ui-button-state-layer-opacity-hover);
+    --_access-shared-button-state-layer-opacity-pressed: var(--glare-ui-button-state-layer-opacity-pressed);
 
-}
+    --_access-shared-button-elevation-color: var(--glare-ui-button-elevation-color);
 
-:is(.filled-tonal):hover,
-:is(.filled-tonal):active {
-    --glare-ui-ripple-hover-color: var(--md-sys-color-on-secondary-container);
-    --glare-ui-ripple-pressed-color: var(--md-sys-color-on-secondary-container);
-}
-
-:is(.filled, .elevated, .filled-tonal, .outlined, .text):hover {
-    --glare-ui-ripple-hover-opacity: 0.08;
-}
-
-:is(.filled, .elevated, .filled-tonal, .outlined, .text):active {
-    --glare-ui-ripple-pressed-opacity: 0.12;
-}
-
-.disabled,
-.disabled:hover,
-.disabled:active,
-.disabled:focus {
-    --glare-ui-elevation-level: 0;
-    --_current-button-container-color: var(--md-sys-color-on-surface);
-    --_current-button-container-opacity: 0.12;
-    --_current-button-border-color: var(--md-sys-color-on-surface);
-    --_current-button-border-opacity: 0.12;
-    --_current-button-label-color: var(--md-sys-color-on-surface);
-    --_current-button-label-opacity: 0.38;
-    --glare-ui-ripple-hover-opacity: 0;
-    --glare-ui-ripple-pressed-opacity: 0;
-    pointer-events: none;
-    cursor: default;
+    --_access-shared-button-transition-duration: var(--glare-ui-button-transition-duration);
+    --_access-shared-button-transition-timing-function: var(--glare-ui-button-transition-timing-function);
 }
