@@ -1,28 +1,28 @@
 .level-0 {
-    --_current-elevation-level: 0;
+    --_current-level: 0;
 }
 
 .level-1 {
-    --_current-elevation-level: 1;
+    --_current-level: 1;
 }
 
 .level-2 {
-    --_current-elevation-level: 2;
+    --_current-level: 2;
 }
 
 .level-3 {
-    --_current-elevation-level: 3;
+    --_current-level: 3;
 }
 
 .level-4 {
-    --_current-elevation-level: 4;
+    --_current-level: 4;
 }
 
 .level-5 {
-    --_current-elevation-level: 5;
+    --_current-level: 5;
 }
 
-.surface {
+.elevation {
     border-radius: inherit;
     inset: 0;
     position: absolute;
@@ -31,11 +31,11 @@
     transition-timing-function: inherit;
     pointer-events: none;
 
-    --_elevation-level: var(--glare-ui-elevation-level, var(--_current-elevation-level, 0));
-    --_elevation-shadow-color: var(--glare-ui-elevation-shadow-color, var(--glare-ui-elevation-color,var(--_current-elevation-shadow-color, #000000)));
+    --level: var(--glare-ui-elevation-level, var(--_access-shared-elevation-level, var(--_current-level, 0)));
+    --color: var(--glare-ui-elevation-color, var(--_access-shared-elevation-color, var(--_current-color, var(--md-sys-color-shadow, #000000))));
 }
 
-.surface::after {
+.elevation::after {
     content: "";
     border-radius: inherit;
     inset: 0;
@@ -45,23 +45,23 @@
     transition-property: box-shadow, opacity;
     opacity: 0.15;
 
-    --l1-y: clamp(0, var(--_elevation-level), 1);
-    --l2-y: clamp(0, var(--_elevation-level) - 1, 1);
-    --l3to5-y: calc(2 * clamp(0, var(--_elevation-level) - 2, 3));
+    --l1-y: clamp(0, var(--level), 1);
+    --l2-y: clamp(0, var(--level) - 1, 1);
+    --l3to5-y: calc(2 * clamp(0, var(--level) - 2, 3));
     --y: calc(1px * (var(--l1-y) + var(--l2-y) + var(--l3to5-y)));
 
-    --l1to2-blur: calc(3 * clamp(0, var(--_elevation-level), 2));
-    --l3to5-blur: calc(2 * clamp(0, var(--_elevation-level) - 2, 3));
+    --l1to2-blur: calc(3 * clamp(0, var(--level), 2));
+    --l3to5-blur: calc(2 * clamp(0, var(--level) - 2, 3));
     --blur: calc(1px * (var(--l1to2-blur) + var(--l3to5-blur)));
 
-    --l1to4-spread: clamp(0, var(--_elevation-level), 4);
-    --l5-spread: calc(2 * clamp(0, var(--_elevation-level) - 4, 1));
+    --l1to4-spread: clamp(0, var(--level), 4);
+    --l5-spread: calc(2 * clamp(0, var(--level) - 4, 1));
     --spread: calc(1px * (var(--l1to4-spread) + var(--l5-spread)));
 
-    box-shadow: 0px var(--y) var(--blur) var(--spread) var(--_elevation-shadow-color);
+    box-shadow: 0px var(--y) var(--blur) var(--spread) var(--color);
 }
 
-.surface::before {
+.elevation::before {
     content: "";
     inset: 0;
     border-radius: inherit;
@@ -71,15 +71,15 @@
     transition-property: box-shadow, opacity;
     opacity: 0.3;
 
-    --l1-y: clamp(0, var(--_elevation-level), 1);
-    --l4-y: clamp(0, var(--_elevation-level) - 3, 1);
-    --l5-y: calc(2 * clamp(0, var(--_elevation-level) - 4, 1));
+    --l1-y: clamp(0, var(--level), 1);
+    --l4-y: clamp(0, var(--level) - 3, 1);
+    --l5-y: calc(2 * clamp(0, var(--level) - 4, 1));
     --y: calc(1px * (var(--l1-y) + var(--l4-y) + var(--l5-y)));
 
-    --l1-blur: calc(2 * clamp(0, var(--_elevation-level), 1));
-    --l3-blur: clamp(0, var(--_elevation-level) - 2, 1);
-    --l5-blur: clamp(0, var(--_elevation-level) - 4, 1);
+    --l1-blur: calc(2 * clamp(0, var(--level), 1));
+    --l3-blur: clamp(0, var(--level) - 2, 1);
+    --l5-blur: clamp(0, var(--level) - 4, 1);
     --blur: calc(1px * (var(--l1-blur) + var(--l3-blur) + var(--l5-blur)));
 
-    box-shadow: 0px var(--y) var(--blur) 0px var(--_elevation-shadow-color);
+    box-shadow: 0px var(--y) var(--blur) 0px var(--color);
 }
