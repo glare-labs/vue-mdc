@@ -1,63 +1,58 @@
-.surface {
-    --_icon-size: var(--glare-ui-icon-size, var(--_current-icon-size, 24px));
-    --_icon-opacity: var(--glare-ui-icon-opacity, var(--_current-icon-opacity, 1));
-    --_icon-color: var(--glare-ui-icon-color, var(--_current-icon-color, var(--md-sys-color-on-surface, #191d19)));
-    --_icon-line-height: var(--glare-ui-icon-line-height, var(--_current-icon-line-height, 24px));
-    --_icon-font-family: var(--glare-ui-icon-font-family, var(--_current-icon-font-family, 24px));
+.icon {
+    --position: var(--glare-ui-icon-position, --_access-shared-icon-position, relative);
 
-    --_icon-display: var(--glare-ui-icon-display);
-    --_icon-position: var(--glare-ui-icon-position, relative);
-    --_icon-writing-mode: var(--glare-ui-icon-writing-mode, horizontal-tb);
-    --_icon-fill: var(--glare-ui-icon-fill, currentColor);
-    --_icon-flex-shrink: var(--glare-ui-icon-flex-shrink, 0);
-    --_icon-inline-size: var(--glare-ui-icon-inline-size);
-    --_icon-block-size: var(--glare-ui-icon-block-size);
+    --color: var(--glare-ui-icon-color, --_access-shared-icon-color, var(--md-sys-color-on-surface, #1D1B20));
+    --fill: var(--glare-ui-icon-fill, --_access-shared-icon-fill, var(--md-sys-color-on-surface, #1D1B20));
+    --opacity: var(--glare-ui-icon-opacity, var(--_access-shared-icon-opacity, 1));
 
+    --_current-size: var(--variant-size-medium);
+    --size: var(--glare-ui-icon-size, var(--_access-shared-icon-size, var(--_current-size)));
+    --variant-size-small: var(--_access-shared-icon-size-small, 22px);
+    --variant-size-medium: var(--_access-shared-icon-size-medium, 24px);
+    --variant-size-large: var(--_access-shared-icon-size-large, 44px);
 
-    line-height: var(--_icon-line-height);
-    font-size: var(--_icon-size);
-    font-family: var(--_icon-font-family);
-    color: var(--_icon-color);
-    display: var(--_icon-display);
-    position: var(--_icon-position);
-    writing-mode: var(--_icon-writing-mode);
-    fill: var(--_icon-fill);
-    flex-shrink: var(--_icon-flex-shrink);
-    inline-size: var(--_icon-inline-size);
-    block-size: var(--_icon-block-size);
-    opacity: var(--_icon-opacity);
+    --font: var(--glare-ui-icon-font, var(--_access-shared-icon-font, var(--_current-font)));
+    --line-height: var(--glare-ui-icon-line-height, var(--_access-shared-icon-line-height, --_current-size));
+    --writing-mode: var(--glare-ui-icon-writing-mode, var(--_access-shared-icon-writing-mode, ltr));
 
-    align-items: center;
-    justify-content: center;
+    font-size: var(--size);
+    font-family: var(--font);
+    line-height: var(--line-height);
+    color: var(--color);
+    position: var(--position);
+    writing-mode: var(--writing-mode);
+    fill: var(--fill);
+    opacity: var(--opacity);
+
+    display: inline-flex;
+    place-content: center;
+    place-items: center;
 
     pointer-events: none;
     user-select: none;
     z-index: 0;
 }
 
-.small {
-    --_current-icon-size: 22px;
-    --_current-icon-line-height: 22px;
+.icon.small {
+    --_current-size: var(--variant-size-small);
 }
 
-.medium {
-    --_current-icon-size: 24px;
-    --_current-icon-line-height: 24px;
+.icon.medium {
+    --_current-size: var(--variant-size-medium);
 }
 
-.large {
-    --_current-icon-size: 44px;
-    --_current-icon-line-height: 44px;
+.icon.large {
+    --_current-size: var(--variant-size-large);
 }
 
-.outlined {
-    --_current-icon-font-family: 'Material Symbols Outlined';
+.icon.outlined {
+    --font: 'Material Symbols Outlined';
 }
 
-.rounded {
-    --_current-icon-font-family: 'Material Symbols Rounded';
+.icon.rounded {
+    --font: 'Material Symbols Rounded';
 }
 
-.sharp {
-    --_current-icon-font-family: 'Material Symbols Sharp';
+.icon.sharp {
+    --font: 'Material Symbols Sharp';
 }

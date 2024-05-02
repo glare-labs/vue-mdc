@@ -15,27 +15,67 @@ export const enum EIconVariant {
     Sharp = 'sharp',
 }
 
+const props = {
+    /**
+     * 图标大小
+     * 
+     * + size
+     *   - small
+     *   - medium
+     *   - large
+     * 
+     * 可以导入枚举对象EIconSize来传入大小
+     * ```html
+     * <Icon :size="EIconSize.Large">send</Icon>
+     * <Icon :size="EIconSize.Medium">send</Icon>
+     * <Icon :size="EIconSize.Small">send</Icon>
+     * ```
+     * 
+     * @default small
+     */
+    size: {
+        type: String as PropType<TIconSize>,
+        default: EIconSize.Medium,
+    },
+
+    /**
+     * 图标变体
+     * 
+     * _此选项仅在项目安装了依赖项`material-symbols`时有效_
+     * 
+     * + variant
+     *   - sharp
+     *   - rounded
+     *   - outlined
+     * 
+     * sharp更锐利, rounded更平滑, outlined较为一般化
+     * 
+     * 可以导入枚举对象EIconSize来传入大小
+     * ```html
+     * <Icon :variant="EIconVariant.Sharp">send</Icon>
+     * ```
+     * 
+     * @default rounded
+     */
+    variant: {
+        type: String as PropType<TIconVariant>,
+        default: EIconVariant.Rounded,
+    },
+}
+const slots = {} as SlotsType<{
+    default?: void
+}>
+
 export const Icon = defineComponent({
     name: 'GlareUi-Icon',
-    props: {
-        size: {
-            type: String as PropType<TIconSize>,
-            default: EIconSize.Medium,
-        },
-        variant: {
-            type: String as PropType<TIconVariant>,
-            default: EIconVariant.Rounded,
-        },
-    },
-    slots: {} as SlotsType<{
-        default: void
-    }>,
-    setup(props, { slots }) {
-
-        return () => (
-            <span class={[css.surface, css[props.size], css[props.variant]]}>
-                {slots.default && slots.default()}
+    props,
+    slots,
+    render() {
+        return (
+            <span class={[css.icon, css[this.size], css[this.variant]]}>
+                {this.$slots.default && this.$slots.default()}
             </span>
+
         )
-    },
+    }
 })
