@@ -15,7 +15,7 @@
 
     --transition-duration: var(--variant-transition-duration-default);
     --variant-transition-duration-default: var(--glare-ui-ripple-state-layer-color-default, var(--_access-shared-ripple-transition-duration-default, 150ms));
-    --variant-transition-duration-hover: var(--glare-ui-ripple-state-layer-color-hover, var(--_access-shared-ripple-transition-duration-hover, 150ms));
+    --variant-transition-duration-hover: var(--glare-ui-ripple-state-layer-color-hover, var(--_access-shared-ripple-transition-duration-hover, 75ms));
     --variant-transition-duration-pressed: var(--glare-ui-ripple-state-layer-color-pressed, var(--_access-shared-ripple-transition-duration-pressed, 375ms));
     --variant-transition-duration-pressed-after: var(--glare-ui-ripple-state-layer-color-pressed-after, var(--_access-shared-ripple-transition-duration-pressed-after, 105ms));
 
@@ -32,8 +32,8 @@
     border-radius: var(--shape, inherit);
     height: var(--height, inherit);
     width: var(--width, inherit);
-    /* inset: var(--touch-target); */
-    inset: unset;
+    inset: var(--touch-target);
+    pointer-events: none;
 }
 
 .surface::before,
@@ -41,10 +41,10 @@
     content: "";
     position: absolute;
     inset: 0;
-    /* inset: var(--touch-target); */
     opacity: var(--state-layer-opacity);
     transition-duration: var(--transition-duration);
     transition-timing-function: linear;
+    pointer-events: none;
 }
 .surface::before {
     transition-property: opacity, background-color;
@@ -57,13 +57,13 @@
     background: radial-gradient(closest-side, var(--state-layer-color, #1d1b20), max(calc(100% - 70px), 65%), transparent 100%);
 }
 
-.hover::before {
+.hover.surface::before {
     --state-layer-opacity: var(--variant-state-layer-opacity-hover);
     --state-layer-color: var(--variant-state-layer-color-hover);
     --transition-duration: var(--variant-transition-duration-hover);
 }
 
-.pressed::after {
+.pressed.surface::after {
     --state-layer-opacity: var(--variant-state-layer-opacity-pressed);
     --state-layer-color: var(--variant-state-layer-color-pressed);
     --transition-duration: var(--variant-transition-duration-pressed-after);
