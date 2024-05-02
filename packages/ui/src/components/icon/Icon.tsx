@@ -1,12 +1,13 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import css from './Icon.module.css'
+import css from './icon.module.css'
 
-export type TIconSize = 'small' | 'medium' | 'large'
+export type TIconSize = 'small' | 'medium' | 'semi-large' | 'large'
 export type TIconVariant = 'outlined' | 'rounded' | 'sharp'
 
 export const enum EIconSize {
     Small = 'small',
     Medium = 'medium',
+    SemiLarge = 'semi-large',
     Large = 'large',
 }
 export const enum EIconVariant {
@@ -22,12 +23,14 @@ const props = {
      * + size
      *   - small
      *   - medium
+     *   - semi-large
      *   - large
      * 
      * 可以导入枚举对象EIconSize来传入大小
      * ```html
      * <Icon :size="EIconSize.Large">send</Icon>
      * <Icon :size="EIconSize.Medium">send</Icon>
+     * <Icon :size="EIconSize.SemiLarge">send</Icon>
      * <Icon :size="EIconSize.Small">send</Icon>
      * ```
      * 
