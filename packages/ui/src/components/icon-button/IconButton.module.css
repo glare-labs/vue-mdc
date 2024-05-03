@@ -1,219 +1,116 @@
-.surface {
-    --_icon-button-container-width: var(--glare-ui-icon-button-container-width, var(--_current-icon-button-container-width, 40px));
-    --_icon-button-container-height: var(--glare-ui-icon-button-container-height, var(--_current-icon-button-container-height, 40px));
-    --_icon-button-container-color: var(--glare-ui-icon-button-container-color, var(--_current-icon-button-container-color, transparent));
-    --_icon-button-container-opacity: var(--glare-ui-icon-button-container-opacity, var(--_current-icon-button-container-opacity, 1));
-    --_icon-button-container-shape: var(--glare-ui-icon-button-container-shape, var(--_current-icon-button-container-shape, 9999px));
-    --_icon-button-border-width: var(--glare-ui-icon-button-border-width, var(--_current-icon-button-border-width, 0));
-    --_icon-button-border-color: var(--glare-ui-icon-button-border-color, var(--_current-icon-button-border-color, var(--md-sys-color-outline, #79747e)));
-    --_icon-button-border-opacity: var(--glare-ui-icon-button-border-opacity, var(--_current-icon-button-border-opacity, 1));
-    --_icon-button-icon-color: var(--glare-ui-icon-button-icon-color, var(--_current-icon-button-icon-color, var(--md-sys-color-on-surface, #1d1b20)));
-    --_icon-button-icon-opacity: var(--glare-ui-icon-button-icon-opacity, var(--_current-icon-button-icon-opacity, 1));
-
-    --_icon-button-ripple-hover-color: var(--glare-ui-icon-button-ripple-hover-color, var(--_current-icon-button-ripple-hover-color, #49454f));
-    --_icon-button-ripple-pressed-color: var(--glare-ui-icon-button-ripple-pressed-color, var(--_current-icon-button-ripple-pressed-color, #49454f));
-
-    background: none;
-    border: none;
-    box-sizing: border-box;
-    cursor: pointer;
-    display: inline-flex;
-    place-items: center;
-    place-content: center;
-    justify-content: center;
-    outline: none;
-    padding: 0;
-    position: relative;
-    text-decoration: none;
-    user-select: none;
-    z-index: 0;
-    border-radius: var(--_icon-button-container-shape);
-    -webkit-tap-highlight-color: transparent;
-    height: var(--_icon-button-container-height);
-    width: var(--_icon-button-container-width);
-
-    --glare-ui-icon-color: var(--_icon-button-icon-color);
-    --glare-ui-icon-opacity: var(--_icon-button-icon-opacity);
-
-}
-
-:is(.standard, .filled, .filled-tonal, .outlined):hover {
-    --glare-ui-ripple-hover-color: var(--_icon-button-ripple-hover-color);
-}
-
-:is(.standard, .filled, .filled-tonal, .outlined):active {
-    --glare-ui-ripple-pressed-color: var(--_icon-button-ripple-pressed-color);
-}
-
-
-:is(.standard, .outlined):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-surface-variant);
-}
-
-:is(.standard, .outlined):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-surface-variant);
-}
-
-:is(.filled):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-primary);
-}
-
-:is(.filled):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-primary);
-}
-
-:is(.filled-tonal):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-secondary-container);
-}
-
-:is(.filled-tonal):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-secondary-container);
-
-}
-
-
-.toggle.unselected:is(.filled):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-primary);
-}
-
-.toggle.unselected:is(.filled):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-primary);
-}
-
-.toggle.selected:is(.filled):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-primary);
-}
-
-.toggle.selected:is(.filled):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-primary);
-}
-
-.toggle.unselected:is(.filled-tonal):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-surface-variant);
-}
-
-.toggle.unselected:is(.filled-tonal):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-surface-variant);
-}
-
-.toggle.selected:is(.filled-tonal):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-on-secondary-container);
-}
-
-.toggle.selected:is(.filled-tonal):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-on-secondary-container);
-}
-
-
-.toggle.selected:is(.outlined):hover {
-    --_current-icon-button-ripple-hover-color: var(--md-sys-color-inverse-on-surface);
-}
-
-.toggle.selected:is(.outlined):active {
-    --_current-icon-button-ripple-pressed-color: var(--md-sys-color-inverse-on-surface);
-}
-
-.touch {
-    position: absolute;
-    height: max(48px, 100%);
-    width: max(48px, 100%);
-}
-
-.background {
-    border-radius: inherit;
-    inset: 0;
-    position: absolute;
-    background-color: var(--_icon-button-container-color);
-    opacity: var(--_icon-button-container-opacity);
-}
-
-.outline {
-    border-radius: inherit;
-    border-style: solid;
-    box-sizing: border-box;
-    inset: 0;
-    position: absolute;
-    border-width: var(--_icon-button-border-width);
-    border-color: var(--_icon-button-border-color);
-    opacity: var(--_icon-button-border-opacity);
-}
-
-.standard,
-.toggle.unselected.standard:not(.disabled) {
-    --_current-icon-button-container-color: transparent;
-    --_current-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
-}
-
-.toggle.selected.standard:not(.disabled) {
-    --_current-icon-button-icon-color: var(--md-sys-color-primary);
-}
 
 .filled {
-    --_current-icon-button-container-color: var(--md-sys-color-primary);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-primary);
-}
+    --_access-shared-icon-button-icon-color-enabled:    var(--glare-ui-icon-button-icon-color-enabled,    var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-icon-color-unselected: var(--glare-ui-icon-button-icon-color-unselected, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-icon-color-selected:   var(--glare-ui-icon-button-icon-color-selected,   var(--md-sys-color-on-primary, #FFFFFF));
 
-.toggle.unselected.filled:not(.disabled) {
-    --_current-icon-button-container-color: var(--md-sys-color-surface-container-highest);
-    --_current-icon-button-icon-color: var(--md-sys-color-primary);
-}
+    --_access-shared-icon-button-container-color-enabled:    var(--glare-ui-icon-button-container-color-enabled,    var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-container-color-unselected: var(--glare-ui-icon-button-container-color-unselected, var(--md-sys-color-surface-container-highest, #E6E0E9));
+    --_access-shared-icon-button-container-color-selected:   var(--glare-ui-icon-button-container-color-selected,   var(--md-sys-color-primary, #6750A4));
 
-.toggle.selected.filled:not(.disabled) {
-    --_current-icon-button-container-color: var(--md-sys-color-primary);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-primary);
+    --_access-shared-icon-button-state-layer-color-enabled-enabled: var(--glare-ui-icon-button-state-layer-color-enabled-enabled, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-state-layer-color-enabled-hover: var(--glare-ui-icon-button-state-layer-color-enabled-hover, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-state-layer-color-enabled-pressed: var(--glare-ui-icon-button-state-layer-color-enabled-pressed, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-state-layer-color-unselected-enabled: var(--glare-ui-icon-button-state-layer-color-unselected-enabled, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-state-layer-color-unselected-hover: var(--glare-ui-icon-button-state-layer-color-unselected-hover, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-state-layer-color-unselected-pressed: var(--glare-ui-icon-button-state-layer-color-unselected-pressed, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-state-layer-color-selected-enabled: var(--glare-ui-icon-button-state-layer-color-selected-enabled, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-state-layer-color-selected-hover: var(--glare-ui-icon-button-state-layer-color-selected-hover, var(--md-sys-color-on-primary, #FFFFFF));
+    --_access-shared-icon-button-state-layer-color-selected-pressed: var(--glare-ui-icon-button-state-layer-color-selected-pressed, var(--md-sys-color-on-primary, #FFFFFF));
 }
-
 .filled-tonal {
-    --_current-icon-button-container-color: var(--md-sys-color-secondary-container);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-secondary-container);
+    --_access-shared-icon-button-icon-color-enabled:    var(--glare-ui-icon-button-icon-color-enabled,    var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-icon-color-unselected: var(--glare-ui-icon-button-icon-color-unselected, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-icon-color-selected:   var(--glare-ui-icon-button-icon-color-selected,   var(--md-sys-color-on-secondary-container, #1D192B));
+
+    --_access-shared-icon-button-container-color-enabled:    var(--glare-ui-icon-button-container-color-enabled,    var(--md-sys-color-secondary-container, #E8DEF8));
+    --_access-shared-icon-button-container-color-unselected: var(--glare-ui-icon-button-container-color-unselected, var(--md-sys-color-surface-container-highest, #E6E0E9));
+    --_access-shared-icon-button-container-color-selected:   var(--glare-ui-icon-button-container-color-selected,   var(--md-sys-color-secondary-container, #E8DEF8));
+
+    --_access-shared-icon-button-state-layer-color-enabled-enabled: var(--glare-ui-icon-button-state-layer-color-enabled-enabled, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-state-layer-color-enabled-hover: var(--glare-ui-icon-button-state-layer-color-enabled-hover, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-state-layer-color-enabled-pressed: var(--glare-ui-icon-button-state-layer-color-enabled-pressed, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-state-layer-color-unselected-enabled: var(--glare-ui-icon-button-state-layer-color-unselected-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-hover: var(--glare-ui-icon-button-state-layer-color-unselected-hover, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-pressed: var(--glare-ui-icon-button-state-layer-color-unselected-pressed, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-selected-enabled: var(--glare-ui-icon-button-state-layer-color-selected-enabled, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-state-layer-color-selected-hover: var(--glare-ui-icon-button-state-layer-color-selected-hover, var(--md-sys-color-on-secondary-container, #1D192B));
+    --_access-shared-icon-button-state-layer-color-selected-pressed: var(--glare-ui-icon-button-state-layer-color-selected-pressed, var(--md-sys-color-on-secondary-container, #1D192B));
+}
+.outlined {
+    --_access-shared-icon-button-icon-color-enabled: var(--glare-ui-icon-button-icon-color-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-icon-color-unselected: var(--glare-ui-icon-button-icon-color-unselected, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-icon-color-selected: var(--glare-ui-icon-button-icon-color-selected, var(--md-sys-color-inverse-on-surface, #F5EFF7));
+
+    --_access-shared-icon-button-container-color-enabled: var(--glare-ui-container-button-container-color-enabled, transparent);
+    --_access-shared-icon-button-container-color-unselected: var(--glare-ui-icon-button-container-color-unselected, transparent);
+    --_access-shared-icon-button-container-color-selected: var(--glare-ui-icon-button-container-color-selected, var(--md-sys-color-inverse-surface, #322F35));
+
+    --_access-shared-icon-button-state-layer-color-enabled-enabled: var(--glare-ui-icon-button-state-layer-color-enabled-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-enabled-hover: var(--glare-ui-icon-button-state-layer-color-enabled-hover, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-enabled-pressed: var(--glare-ui-icon-button-state-layer-color-enabled-pressed, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-enabled: var(--glare-ui-icon-button-state-layer-color-unselected-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-hover: var(--glare-ui-icon-button-state-layer-color-unselected-hover, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-pressed: var(--glare-ui-icon-button-state-layer-color-unselected-pressed, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-selected-enabled: var(--glare-ui-icon-button-state-layer-color-selected-enabled, var(--md-sys-color-inverse-on-surface, #F5EFF7));
+    --_access-shared-icon-button-state-layer-color-selected-hover: var(--glare-ui-icon-button-state-layer-color-selected-hover, var(--md-sys-color-inverse-on-surface, #F5EFF7));
+    --_access-shared-icon-button-state-layer-color-selected-pressed: var(--glare-ui-icon-button-state-layer-color-selected-pressed, var(--md-sys-color-inverse-on-surface, #F5EFF7));
+
+    --_access-shared-icon-button-outline-width-enabled: var(--glare-ui-icon-button-outline-width-enabled, 1px);
+    --_access-shared-icon-button-outline-width-unselected: var(--glare-ui-icon-button-outline-width-unselected, 1px);
+    --_access-shared-icon-button-outline-width-selected: var(--glare-ui-icon-button-outline-width-selected, 1px);
+    --_access-shared-icon-button-outline-width-disabled: var(--glare-ui-icon-button-outline-width-disabled, 1px);
+}
+.standard {
+    --_access-shared-icon-button-icon-color-enabled: var(--glare-ui-icon-button-icon-color-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-icon-color-unselected: var(--glare-ui-icon-button-icon-color-unselected, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-icon-color-selected: var(--glare-ui-icon-button-icon-color-selected, var(--md-sys-color-primary, #6750A4));
+
+    --_access-shared-icon-button-state-layer-color-enabled-enabled: var(--glare-ui-icon-button-state-layer-color-enabled-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-enabled-hover: var(--glare-ui-icon-button-state-layer-color-enabled-hover, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-enabled-pressed: var(--glare-ui-icon-button-state-layer-color-enabled-pressed, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-enabled: var(--glare-ui-icon-button-state-layer-color-unselected-enabled, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-hover: var(--glare-ui-icon-button-state-layer-color-unselected-hover, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-unselected-pressed: var(--glare-ui-icon-button-state-layer-color-unselected-pressed, var(--md-sys-color-on-surface-variant, #49454F));
+    --_access-shared-icon-button-state-layer-color-selected-enabled: var(--glare-ui-icon-button-state-layer-color-selected-enabled, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-state-layer-color-selected-hover: var(--glare-ui-icon-button-state-layer-color-selected-hover, var(--md-sys-color-primary, #6750A4));
+    --_access-shared-icon-button-state-layer-color-selected-pressed: var(--glare-ui-icon-button-state-layer-color-selected-pressed, var(--md-sys-color-primary, #6750A4));
 }
 
-.toggle.unselected.filled-tonal:not(.disabled) {
-    --_current-icon-button-container-color: var(--md-sys-color-surface-container-highest);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-surface-variant);
+.filled,
+.filled-tonal,
+.standard {
+    --_access-shared-icon-button-outline-width-enabled: var(--glare-ui-icon-button-outline-width-enabled, 0px);
+    --_access-shared-icon-button-outline-width-unselected: var(--glare-ui-icon-button-outline-width-unselected, 0px);
+    --_access-shared-icon-button-outline-width-selected: var(--glare-ui-icon-button-outline-width-selected, 0px);
+    --_access-shared-icon-button-outline-width-disabled: var(--glare-ui-icon-button-outline-width-disabled, 0px);
 }
 
-.toggle.selected.filled-tonal:not(.disabled) {
-    --_current-icon-button-container-color: var(--md-sys-color-secondary-container);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-secondary-container);
-}
-
+.filled,
+.filled-tonal,
 .outlined,
-.toggle.unselected.outlined:not(.disabled) {
-    --_current-icon-button-border-width: 1px;
-    --_current-icon-button-border-color: var(--md-sys-color-outline);
-    --_current-icon-button-container-color: transparent;
-}
+.standard {
+    --_access-shared-icon-button-outline-color-enabled: var(--glare-ui-icon-button-outline-color-enabled);
+    --_access-shared-icon-button-outline-color-unselected: var(--glare-ui-icon-button-outline-color-unselected);
+    --_access-shared-icon-button-outline-color-selected: var(--glare-ui-icon-button-outline-color-selected);
+    --_access-shared-icon-button-outline-color-disabled: var(--glare-ui-icon-button-outline-color-disabled);
+    --_access-shared-icon-button-outline-opacity-enabled: var(--glare-ui-icon-button-outline-opacity-enabled);
+    --_access-shared-icon-button-outline-opacity-unselected: var(--glare-ui-icon-button-outline-opacity-unselected);
+    --_access-shared-icon-button-outline-opacity-selected: var(--glare-ui-icon-button-outline-opacity-selected);
+    --_access-shared-icon-button-outline-opacity-disabled: var(--glare-ui-icon-button-outline-opacity-disabled);
+    --_access-shared-icon-button-outline-style-enabled: var(--glare-ui-icon-button-outline-style-enabled);
+    --_access-shared-icon-button-outline-style-unselected: var(--glare-ui-icon-button-outline-style-unselected);
+    --_access-shared-icon-button-outline-style-selected: var(--glare-ui-icon-button-outline-style-selected);
+    --_access-shared-icon-button-outline-style-disabled: var(--glare-ui-icon-button-outline-style-disabled);
 
-.toggle.selected.outlined:not(.disabled) {
-    --_current-icon-button-container-color: var(--md-sys-color-inverse-surface);
-    --_current-icon-button-icon-color: var(--md-sys-color-inverse-on-surface);
-}
+    --_access-shared-icon-button-icon-color-disabled: var(--glare-ui-icon-button-icon-color-disabled);
 
-.disabled,
-.disabled:hover,
-.disabled:active,
-.disabled:focus {
-    --_current-icon-button-container-opacity: 0.12;
-    --_current-icon-button-icon-opacity: 0.38;
-    --_current-icon-button-border-opacity: 0.38;
-    --glare-ui-ripple-hover-opacity: 0;
-    --glare-ui-ripple-pressed-opacity: 0;
-    pointer-events: none;
-    cursor: default;
-}
+    --_access-shared-icon-button-size: var(--glare-ui-icon-button-size, var(--_access-shared-icon-button-size));
+    --_access-shared-icon-button-touch-target-size: var(--glare-ui-icon-button-touch-target-size,var(--_access-shared-icon-button-touch-target-size));
+    --_access-shared-icon-button-shape: var(--glare-ui-icon-button-touch-target-shape);
+    --_access-shared-icon-button-transition-duration: var(--glare-ui-icon-button-touch-target-transition-duration);
+    --_access-shared-icon-button-transition-timing-function: var(--glare-ui-icon-button-touch-target-transition-timing-function);
 
-.disabled.standard {
-    --_current-icon-button-icon-color: var(--md-sys-color-on-surface);
-}
+    --_access-shared-icon-button-icon-size: var(--glare-ui-icon-button-icon-size);
 
-.disabled.outlined {
-    --_current-icon-button-icon-color: var(--md-sys-color-on-surface);
-    --_current-icon-button-border-color: var(--md-sys-color-on-surface);
-}
-
-.disabled.filled,
-.disabled.filled-tonal {
-    --_current-icon-button-container-color: var(--md-sys-color-on-surface);
-    --_current-icon-button-icon-color: var(--md-sys-color-on-surface);
 }
