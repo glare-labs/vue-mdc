@@ -10,10 +10,10 @@
     --variant-leading-space-with-icon: var(--glare-ui-shared-button-leading-space-with-icon, var(--_access-shared-button-leading-space-with-icon, 16px));
     --variant-trailing-space-with-icon: var(--glare-ui-shared-button-trailing-space-with-icon, var(--_access-shared-button-trailing-space-with-icon, 24px));
 
-    --_access-shared-ripple-state-layer-color-default: var(--glare-ui-shared-button-state-layer-color-default, var(--_access-shared-button-state-layer-color-default, var(--md-sys-color-on-surface, #1D1B20)));
+    --_access-shared-ripple-state-layer-color-enabled: var(--glare-ui-shared-button-state-layer-color-enabled, var(--_access-shared-button-state-layer-color-enabled, var(--md-sys-color-on-surface, #1D1B20)));
     --_access-shared-ripple-state-layer-color-hover: var(--glare-ui-shared-button-state-layer-color-hover, var(--_access-shared-button-state-layer-color-hover, var(--md-sys-color-on-surface, #1D1B20)));
     --_access-shared-ripple-state-layer-color-pressed: var(--glare-ui-shared-button-state-layer-color-pressed, var(--_access-shared-button-state-layer-color-pressed, var(--md-sys-color-on-surface, #1D1B20)));
-    --_access-shared-ripple-state-layer-opacity-default: var(--glare-ui-shared-button-state-layer-opacity-default, var(--_access-shared-button-state-layer-opacity-default, 0));
+    --_access-shared-ripple-state-layer-opacity-enabled: var(--glare-ui-shared-button-state-layer-opacity-enabled, var(--_access-shared-button-state-layer-opacity-enabled, 0));
     --_access-shared-ripple-state-layer-opacity-hover: var(--glare-ui-shared-button-state-layer-opacity-hover, var(--_access-shared-button-state-layer-opacity-hover, 0.08));
     --_access-shared-ripple-state-layer-opacity-pressed: var(--glare-ui-shared-button-state-layer-opacity-pressed, var(--_access-shared-button-state-layer-opacity-pressed, 0.12));
 
@@ -78,14 +78,14 @@
 }
 
 .background {
-    --_current-container-color: var(--variant-container-color-default);
+    --_current-container-color: var(--variant-container-color-enabled);
     --container-color: var(--_current-container-color);
-    --variant-container-color-default: var(--glare-ui-shared-button-container-color-default, var(--_access-shared-button-container-color-default, transparent));
+    --variant-container-color-enabled: var(--glare-ui-shared-button-container-color-enabled, var(--_access-shared-button-container-color-enabled, transparent));
     --variant-container-color-disabled: var(--glare-ui-shared-button-container-color-disabled, var(--_access-shared-button-container-color-disabled, var(--md-sys-color-on-surface,#1D1B20)));
 
-    --_current-container-opacity: var(--variant-container-opacity-default);
+    --_current-container-opacity: var(--variant-container-opacity-enabled);
     --container-opacity: var(--_current-container-opacity);
-    --variant-container-opacity-default: var(--glare-ui-shared-button-container-opacity-default, var(--_access-shared-button-container-opacity-default, 1));
+    --variant-container-opacity-enabled: var(--glare-ui-shared-button-container-opacity-enabled, var(--_access-shared-button-container-opacity-enabled, 1));
     --variant-container-opacity-disabled: var(--glare-ui-shared-button-container-opacity-disabled, var(--_access-shared-button-container-opacity-disabled, 0.12));
 
     background-color: var(--container-color);
@@ -117,14 +117,14 @@
     appearance: none;
 }
 .label {
-    --_current-label-color: var(--variant-label-color-default);
+    --_current-label-color: var(--variant-label-color-enabled);
     --label-color: var(--_current-label-color);
-    --variant-label-color-default: var(--glare-ui-shared-button-label-color-default, var(--_access-shared-button-label-color-default, var(--md-sys-color-on-surface, #1D1B20)));
+    --variant-label-color-enabled: var(--glare-ui-shared-button-label-color-enabled, var(--_access-shared-button-label-color-enabled, var(--md-sys-color-on-surface, #1D1B20)));
     --variant-label-color-disabled: var(--glare-ui-shared-button-label-color-disabled, var(--_access-shared-button-label-color-disabled, var(--md-sys-color-on-surface, #1D1B20)));
 
-    --_current-label-opacity: var(--variant-label-opacity-default);
+    --_current-label-opacity: var(--variant-label-opacity-enabled);
     --label-opacity: var(--_current-label-opacity);
-    --variant-label-opacity-default: var(--glare-ui-shared-button-label-opacity-default, var(--_access-shared-button-label-opacity-default, 1));
+    --variant-label-opacity-enabled: var(--glare-ui-shared-button-label-opacity-enabled, var(--_access-shared-button-label-opacity-enabled, 1));
     --variant-label-opacity-disabled: var(--glare-ui-shared-button-label-opacity-disabled, var(--_access-shared-button-label-opacity-disabled, 0.38));
 
     --label-font: var(--glare-ui-shared-button-label-font, var(--_access-shared-button-label-font, var(--md-sys-typescale-label-large-font, "Roboto")));
@@ -150,14 +150,14 @@
 .icon {
     --icon-size: var(--glare-ui-shared-icon-size, var(--_access-shared-button-icon-size, 18px));
 
-    --_current-icon-color: var(--variant-icon-color-default);
+    --_current-icon-color: var(--variant-icon-color-enabled);
     --icon-color: var(--_current-icon-color);
-    --variant-icon-color-default: var(--glare-ui-shared-button-icon-color-default, var(--_access-shared-button-icon-color-default, var(--md-sys-color-on-surface, #1D1B20)));
+    --variant-icon-color-enabled: var(--glare-ui-shared-button-icon-color-enabled, var(--_access-shared-button-icon-color-enabled, var(--md-sys-color-on-surface, #1D1B20)));
     --variant-icon-color-disabled: var(--glare-ui-shared-button-icon-color-disabled, var(--_access-shared-button-icon-color-disabled, var(--md-sys-color-on-surface, #1D1B20)));
 
-    --_current-icon-opacity: var(--variant-icon-opacity-default);
+    --_current-icon-opacity: var(--variant-icon-opacity-enabled);
     --icon-opacity: var(--_current-icon-opacity);
-    --variant-icon-opacity-default: var(--glare-ui-shared-button-icon-opacity-default, var(--_access-shared-button-icon-opacity-default, 1));
+    --variant-icon-opacity-enabled: var(--glare-ui-shared-button-icon-opacity-enabled, var(--_access-shared-button-icon-opacity-enabled, 1));
     --variant-icon-opacity-disabled: var(--glare-ui-shared-button-icon-opacity-disabled, var(--_access-shared-button-icon-opacity-disabled, 0.38));
     
     opacity: var(--icon-opacity);
@@ -188,24 +188,24 @@
     --_current-trailing-space: var(--variant-leading-space-with-icon);
 }
 .outline {
-    --_current-outline-color: var(--variant-outline-color-default);
+    --_current-outline-color: var(--variant-outline-color-enabled);
     --outline-color: var(--_current-outline-color);
-    --variant-outline-color-default: var(--glare-ui-shared-button-outline-color-default, var(--_access-shared-button-outline-color-default, var(--md-sys-color-outline, #79747E)));
+    --variant-outline-color-enabled: var(--glare-ui-shared-button-outline-color-enabled, var(--_access-shared-button-outline-color-enabled, var(--md-sys-color-outline, #79747E)));
     --variant-outline-color-disabled: var(--glare-ui-shared-button-outline-color-disabled, var(--_access-shared-button-outline-color-disabled, var(--md-sys-color-outline, #79747E)));
 
-    --_current-outline-opacity: var(--variant-outline-opacity-default);
+    --_current-outline-opacity: var(--variant-outline-opacity-enabled);
     --outline-opacity: var(--_current-outline-opacity);
-    --variant-outline-opacity-default: var(--glare-ui-shared-button-outline-opacity-default, var(--_access-shared-button-outline-opacity-default, 1));
+    --variant-outline-opacity-enabled: var(--glare-ui-shared-button-outline-opacity-enabled, var(--_access-shared-button-outline-opacity-enabled, 1));
     --variant-outline-opacity-disabled: var(--glare-ui-shared-button-outline-opacity-disabled, var(--_access-shared-button-outline-opacity-disabled, 0.12));
 
-    --_current-outline-style: var(--variant-outline-style-default);
+    --_current-outline-style: var(--variant-outline-style-enabled);
     --outline-style: var(--_current-outline-style);
-    --variant-outline-style-default: var(--glare-ui-shared-button-outline-style-default, var(--_access-shared-button-outline-style-default, solid));
+    --variant-outline-style-enabled: var(--glare-ui-shared-button-outline-style-enabled, var(--_access-shared-button-outline-style-enabled, solid));
     --variant-outline-style-disabled: var(--glare-ui-shared-button-outline-style-disabled, var(--_access-shared-button-outline-style-disabled, solid));
 
-    --_current-outline-width: var(--variant-outline-width-default);
+    --_current-outline-width: var(--variant-outline-width-enabled);
     --outline-width: var(--_current-outline-width);
-    --variant-outline-width-default: var(--glare-ui-shared-button-outline-width-default, var(--_access-shared-button-outline-width-default, 1px));
+    --variant-outline-width-enabled: var(--glare-ui-shared-button-outline-width-enabled, var(--_access-shared-button-outline-width-enabled, 1px));
     --variant-outline-width-disabled: var(--glare-ui-shared-button-outline-width-disabled, var(--_access-shared-button-outline-width-disabled, 1px));
 
     border-style: var(--outline-style);
