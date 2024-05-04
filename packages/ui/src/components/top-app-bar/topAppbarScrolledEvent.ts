@@ -1,25 +1,19 @@
-import css from './topAppbar.module.css'
+import css from './base.module.css'
 
 
 const removeTopAppbarOnScrollStyles = (element: HTMLElement) => {
-    if (element.getAttribute('data-is-forced-sticky') === 'false' && element.classList.contains(css.sticky)) {
-        element.classList.remove(css.sticky)
-    }
-    if (element.getAttribute('data-is-forced-on-scroll') === 'false' && element.classList.contains(css['on-scroll'])) {
+    if (element.getAttribute('data-is-forced-sticky') === 'false' && element.classList.contains(css['on-scroll'])) {
         element.classList.remove(css['on-scroll'])
     }
 }
 const addTopAppbarOnScrollStyles = (element: HTMLElement) => {
-    if (element.getAttribute('data-is-forced-sticky') === 'false' && !element.classList.contains(css.sticky)) {
-        element.classList.add(css.sticky)
-    }
-    if (element.getAttribute('data-is-forced-on-scroll') === 'false' && !element.classList.contains(css['on-scroll'])) {
+    if (element.getAttribute('data-is-forced-sticky') === 'false' && !element.classList.contains(css['on-scroll'])) {
         element.classList.add(css['on-scroll'])
     }
 }
 
 /**
- * 用于管理CenterAlignedTopAppbar组件启用与关闭[sticky状态]和[on-scroll状态]的scroll事件处理函数
+ * 用于管理CenterAlignedTopAppbar组件启用与关闭[on-scroll状态]的scroll事件处理函数
  * @example
  * ```html
  * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
