@@ -1,50 +1,30 @@
 import { SlotsType, defineComponent } from 'vue'
 import { Elevation } from '../elevation/Elevation'
-import { propsShared } from './TopAppbar'
-import css from './CenterAlignedTopAppbar.module.css'
-import cssShared from './topAppbar.module.css'
+import { propsShared, ISlotsShared } from './base'
+import css from './topAppbar.module.css'
+import cssBase from './base.module.css'
 
 const props = propsShared
-const slots = {} as SlotsType<{
-    /**
-     * 位于TopAppbar左侧的图标按钮
-     * 
-     * **不应该设置多个图标**
-     */
-    leadingIcon?: void
-
-    /**
-     * 位于TopAppbar左侧的图标按钮
-     * 
-     * **不应该设置多个图标**
-     */
-    trailingIcon?: void
-}>
-const emits = {
-
-}
+const slots = {} as SlotsType<ISlotsShared>
 
 export const CenterAlignedTopAppbar = defineComponent({
     name: 'GlareUi-CenterAlignedTopAppbar',
     props,
     slots,
-    emits,
-    setup(props, ctx) {
-    },
     render() {
         const renderLeadingIcon = (
-            <span class={css['leading-icon']}>
+            <span class={cssBase['leading-icon']}>
                 {this.$slots.leadingIcon && this.$slots.leadingIcon()}
             </span>
         )
         const renderTrailingIcon = (
-            <span class={css['trailing-icon']}>
+            <span class={cssBase['trailing-icon']}>
                 {this.$slots.trailingIcon && this.$slots.trailingIcon()}
             </span>
         )
         const renderTitle = (
-            <span class={css.headline}>
-                {this.title}
+            <span class={cssBase.headline}>
+                {this.headline}
             </span>
         )
 
@@ -52,12 +32,16 @@ export const CenterAlignedTopAppbar = defineComponent({
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                data-is-forced-on-scroll={this.forcedOnScroll}
-                class={[css.container, cssShared.base, this.forcedSticky && cssShared.sticky, this.forcedOnScroll && cssShared['on-scroll']]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css['center-aligned']]}
             >
-                {renderLeadingIcon}
-                {renderTitle}
-                {renderTrailingIcon}
+                <div aria-hidden="true" class={cssBase.background}></div>
+                <div aria-hidden="true" class={cssBase.outline}></div>
+
+                <div class={cssBase['center-aligned-grid']}>
+                    {renderLeadingIcon}
+                    {renderTitle}
+                    {renderTrailingIcon}
+                </div>
                 <Elevation></Elevation>
             </div>
         )

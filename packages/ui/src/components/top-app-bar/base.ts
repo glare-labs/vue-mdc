@@ -1,4 +1,4 @@
-import { PropType } from 'vue'
+import { PropType, SlotsType } from 'vue'
 
 export const propsShared = {
 
@@ -7,7 +7,7 @@ export const propsShared = {
      * 
      * @default 'Untitled'
      */
-    title: {
+    headline: {
         type: String as PropType<string>,
         default: 'Untitled'
     },
@@ -25,18 +25,20 @@ export const propsShared = {
         type: Boolean as PropType<boolean>,
         default: false
     },
+}
+
+export interface ISlotsShared {
+    /**
+     * 位于TopAppbar左侧的图标按钮
+     * 
+     * **不应该设置多个图标**
+     */
+    leadingIcon?: void
 
     /**
-     * 强制启用on-scroll样式, 通常情况下on-scroll样式在页面或盒子进度条滚动后出现
-     * @example
-     * ```html
-     * <div class="max-h-screen min-h-screen overflow-auto" @scroll="topAppbarScrolledEvent">
-     *   <CenterAlignedTopAppbar title="Title" forcedOnScroll></CenterAlignedTopAppbar>
-     * </div>
-     * ```
+     * 位于TopAppbar左侧的图标按钮
+     * 
+     * **不应该设置多个图标**
      */
-    forcedOnScroll: {
-        type: Boolean as PropType<boolean>,
-        default: false
-    }
+    trailingIcon?: void
 }
