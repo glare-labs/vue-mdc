@@ -227,6 +227,6 @@
 
 .touch {
     position: absolute;
-    width: max(48px, 100%);
-    height: max(48px, 100%);
+    width: var(--touch-target-size, max(48px, 100%));
+    height: var(--touch-target-size, max(48px, 100%));
 }
