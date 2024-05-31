@@ -3,9 +3,12 @@
     --elevation-color: var(--_current-elevation-color);
     --variant-elevation-color-enabled: var(--glare-ui-shared-top-app-bar-elevation-color-enabled, var(--_access-shared-top-app-bar-elevation-color-enabled, var(--md-sys-color-shadow, #000000)));
     --variant-elevation-color-on-scroll: var(--glare-ui-shared-top-app-bar-elevation-color-on-scroll, var(--_access-shared-top-app-bar-elevation-color-on-scroll, var(--md-sys-color-shadow, #000000)));
-    --_current-elevation-level: var(--variant-elevation-level-enabled);
-    --variant-elevation-level-enabled: var(--glare-ui-shared-top-app-bar-elevation-level-enabled, var(--_access-shared-top-app-bar-elevation-level-enabled, 0));
+    
+    --_current-elevation-level: var(--variant-elevation-level-disabled);
+    --variant-elevation-level-disabled: var(--glare-ui-shared-top-app-bar-elevation-level-disabled, var(--_access-shared-top-app-bar-elevation-level-disabled, 0));
+    --variant-elevation-level-on-top: var(--glare-ui-shared-top-app-bar-elevation-level-on-top, var(--_access-shared-top-app-bar-elevation-level-on-top, 2));
     --variant-elevation-level-on-scroll: var(--glare-ui-shared-top-app-bar-elevation-level-on-scroll, var(--_access-shared-top-app-bar-elevation-level-on-scroll, 2));
+    --variant-elevation-level-always: var(--glare-ui-shared-top-app-bar-elevation-level-always, var(--_access-shared-top-app-bar-elevation-level-always, 2));
     
     --_access-shared-elevation-color: var(--_current-elevation-color);
     --_access-shared-elevation-level: var(--_current-elevation-level);
@@ -63,7 +66,6 @@
 }
 .container.on-scroll {
     --_current-elevation-color: var(--variant-elevation-color-on-scroll);
-    --_current-elevation-level: var(--variant-elevation-level-on-scroll);
     --_current-transition-timing-function: var(--variant-transition-timing-function-on-scroll);
     --_current-transition-duration: var(--variant-transition-duration-on-scroll);
     --_current-position: var(--variant-position-on-scroll);
@@ -234,4 +236,19 @@
 .container>.large-grid>.headline {
     grid-column: 1 / span 2;
     grid-row: 2;
+}
+
+.responsive-grid {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+}
+
+.container.always-shadow {
+    --_current-elevation-level: var(--variant-elevation-level-always);
+}
+.container.on-scroll.on-scroll-shadow {
+    --_current-elevation-level: var(--variant-elevation-level-on-scroll);
+}
+.container:not(.on-scroll).on-top-shadow {
+    --_current-elevation-level: var(--variant-elevation-level-on-top);
 }

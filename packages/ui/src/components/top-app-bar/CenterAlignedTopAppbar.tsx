@@ -28,11 +28,23 @@ export const CenterAlignedTopAppbar = defineComponent({
             </span>
         )
 
+        const shadowMode = []
+        if(this.alwaysShadow) {
+            shadowMode.push(cssBase['always-shadow'])
+        } else {
+            if(this.onTopShadow) {
+                shadowMode.push(cssBase['on-top-shadow'])
+            }
+            if(this.onScrollShadow) {
+                shadowMode.push(cssBase['on-scroll-shadow'])
+            }
+        }
+
         return (
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css['center-aligned']]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css['center-aligned'], ...shadowMode]}
             >
                 <div aria-hidden="true" class={cssBase.background}></div>
                 <div aria-hidden="true" class={cssBase.outline}></div>

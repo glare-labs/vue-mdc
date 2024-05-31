@@ -25,6 +25,26 @@ export const propsShared = {
         type: Boolean as PropType<boolean>,
         default: false
     },
+
+    /**
+     * 启用阴影
+     */
+    alwaysShadow: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+
+    onScrollShadow: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+
+    onTopShadow: {
+        type: Boolean as PropType<boolean>,
+        default: false
+    },
+
+
 }
 
 export interface ISlotsShared {

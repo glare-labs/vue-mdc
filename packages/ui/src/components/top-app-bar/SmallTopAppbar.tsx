@@ -18,11 +18,24 @@ export const SmallTopAppbar = defineComponent({
         const renderLeadingIcon = this.$slots.leadingIcon && <span class={cssBase['leading-icon']}>{this.$slots.leadingIcon()}</span>
         const renderTrailingIcons = this.$slots.trailingIcons && <span class={cssBase['trailing-icons']}>{this.$slots.trailingIcons()}</span>
         const renderTitle = <span class={cssBase.headline}>{this.headline}</span>
+
+        const shadowMode = []
+        if(this.alwaysShadow) {
+            shadowMode.push(cssBase['always-shadow'])
+        } else {
+            if(this.onTopShadow) {
+                shadowMode.push(cssBase['on-top-shadow'])
+            }
+            if(this.onScrollShadow) {
+                shadowMode.push(cssBase['on-scroll-shadow'])
+            }
+        }
+
         return (
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.small]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.small, ...shadowMode]}
             >
                 <Elevation></Elevation>
 

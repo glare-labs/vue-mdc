@@ -1,3 +1,5 @@
+
+
 .center-aligned,
 .small {
     --_access-shared-top-app-bar-padding-top:     var(--glare-ui-top-app-bar-padding-top, 0px);
@@ -5,8 +7,6 @@
     --_access-shared-top-app-bar-padding-left:    var(--glare-ui-top-app-bar-padding-left, 16px);
     --_access-shared-top-app-bar-padding-right:   var(--glare-ui-top-app-bar-padding-right, 16px);
     --_access-shared-top-app-bar-height:          var(--glare-ui-top-app-bar-height, 64px);
-    --_access-shared-top-app-bar-elevation-level-enabled:   var(--glare-ui-top-app-bar-elevation-level-enabled, 0);
-    --_access-shared-top-app-bar-elevation-level-on-scroll: var(--glare-ui-top-app-bar-elevation-level-on-scroll, 2);
 
     --_access-shared-top-app-bar-headline-font:            var(--glare-ui-top-app-bar-headline-font);
     --_access-shared-top-app-bar-headline-line-height:     var(--glare-ui-top-app-bar-headline-line-height);
@@ -93,4 +93,8 @@
     
     --_access-shared-top-app-bar-elevation-color-enabled:   var(--glare-ui-top-app-bar-elevation-color-enabled);
     --_access-shared-top-app-bar-elevation-color-on-scroll: var(--glare-ui-top-app-bar-elevation-color-on-scroll);
+    --_access-shared-top-app-bar-elevation-level-disabled:   var(--glare-ui-top-app-bar-elevation-level-disabled, 0);
+    --_access-shared-top-app-bar-elevation-level-on-scroll: var(--glare-ui-top-app-bar-elevation-level-on-scroll, 2);
+    --_access-shared-top-app-bar-elevation-level-on-top: var(--glare-ui-top-app-bar-elevation-level-on-top, 2);
+    --_access-shared-top-app-bar-elevation-level-always: var(--glare-ui-top-app-bar-elevation-level-always, 2);
 }
