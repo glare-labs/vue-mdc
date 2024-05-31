@@ -15,9 +15,9 @@ const props = {
         default: false,
     }
 }
-const emits = {
-    'update:modelValue': (modelValue: boolean) => modelValue,
-}
+const emits = [
+    'update:modelValue'
+]
 const slots = {} as SlotsType<{
     default: void
 }>
