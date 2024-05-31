@@ -28,8 +28,6 @@ export const Checkbox = defineComponent({
             this.checked = val
         },
         checked(val: boolean) {
-            console.log('u')
-
             this.$emit('update:modelValue', val)
         }
     },
@@ -39,7 +37,7 @@ export const Checkbox = defineComponent({
             prevDisabled: false,
             prevIndeterminate: false,
             checked: vm.defaultSelected ?? vm.modelValue ?? false,
-            indeterminate: vm.indeterminate,
+            innterIndeterminate: vm.indeterminate,
         })
     },
     created() {
@@ -52,7 +50,7 @@ export const Checkbox = defineComponent({
             const prevNone = !this.prevChecked && !this.prevIndeterminate
             const prevChecked = this.prevChecked && !this.prevIndeterminate
             const prevIndeterminate = this.prevIndeterminate
-            const isChecked = this.checked && !this.indeterminate
+            const isChecked = this.checked && !this.innterIndeterminate
             const isIndeterminate = this.indeterminate
 
             return ([
@@ -72,7 +70,7 @@ export const Checkbox = defineComponent({
         handleInput(e: Event) {
             const target = e.target as HTMLInputElement
             this.checked = target.checked
-            this.indeterminate = target.indeterminate
+            this.innterIndeterminate = target.indeterminate
         },
     },
     render() {
