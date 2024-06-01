@@ -160,3 +160,11 @@
 .tertiary:active {
     --_current-fab-ripple-pressed-color: var(--md-sys-color-on-tertiary-container);
 }
+
+.disable-elevation.fab,
+.disable-elevation.fab:hover,
+.disable-elevation.fab:hover:active,
+.disable-elevation.fab:active,
+.disable-elevation.fab:focus {
+    --_current-fab-elevation-level: 0;
+}

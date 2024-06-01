@@ -32,6 +32,10 @@ export const Fab = defineComponent({
             type: String as PropType<TFabVariant>,
             default: EFabVariant.Secondary,
         },
+        disableElevation: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        }
     },
     slots: {} as SlotsType<{
         default?: void
@@ -50,7 +54,7 @@ export const Fab = defineComponent({
 
 
         return () => (
-            <button class={[css.fab, props.label !== '' && css.extended, css[props.size], css[props.variant]]}>
+            <button class={[css.fab, props.label !== '' && css.extended, css[props.size], css[props.variant], props.disableElevation && css['disable-elevation']]}>
                 <Ripple></Ripple>
                 <Elevation></Elevation>
 
