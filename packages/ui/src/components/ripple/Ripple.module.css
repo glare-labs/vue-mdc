@@ -57,12 +57,14 @@
     background: radial-gradient(closest-side, var(--state-layer-color), max(calc(100% - 70px), 65%), transparent 100%);
 }
 
+.surface[data-hover="true"]::before,
 .hover.surface::before {
     --state-layer-opacity: var(--variant-state-layer-opacity-hover);
     --state-layer-color: var(--variant-state-layer-color-hover);
     --transition-duration: var(--variant-transition-duration-hover);
 }
 
+.surface[data-pressed="true"]::after,
 .pressed.surface::after {
     --state-layer-opacity: var(--variant-state-layer-opacity-pressed);
     --state-layer-color: var(--variant-state-layer-color-pressed);
