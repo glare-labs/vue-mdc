@@ -1,4 +1,4 @@
-.surface {
+.typography {
     --_typo-color: var(--glare-ui-typography-color, var(--_current-typo-color, var(--md-sys-color-on-surface)));
     --_typo-font-size: var(--glare-ui-typography-font-size, var(--_current-typo-font-size));
     --_typo-line-height: var(--glare-ui-typography-line-height, var(--_current-typo-line-height));
@@ -14,106 +14,106 @@
 }
 
 .label-small {
-    --_current-typo-font-size: var(--md-sys-typescale-label-small-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-label-small-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-label-small-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-label-small-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-label-small-font-size, 11px);
+    --_current-typo-line-height: var(--md-sys-typescale-label-small-line-height, 16px);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-small-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-small-letter-spacing, 0.5px);
 }
 
 .label-medium {
-    --_current-typo-font-size: var(--md-sys-typescale-label-medium-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-label-medium-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-label-medium-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-label-medium-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-label-medium-font-size, 12px);
+    --_current-typo-line-height: var(--md-sys-typescale-label-medium-line-height, 16px);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-medium-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-medium-letter-spacing, 0.5px);
 }
 
 .label-large {
-    --_current-typo-font-size: var(--md-sys-typescale-label-large-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-label-large-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-label-large-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-label-large-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-label-large-font-size, 14px);
+    --_current-typo-line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+    --_current-typo-font-weight: var(--md-sys-typescale-label-large-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-label-large-letter-spacing, 0.1px);
 }
 
 .body-small {
-    --_current-typo-font-size: var(--md-sys-typescale-body-small-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-body-small-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-body-small-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-body-small-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-body-small-font-size, 12px);
+    --_current-typo-line-height: var(--md-sys-typescale-body-small-line-height, 20px);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-small-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-small-letter-spacing, 0.1px);
 }
 
 .body-medium {
-    --_current-typo-font-size: var(--md-sys-typescale-body-medium-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-body-medium-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-body-medium-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-body-medium-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-body-medium-font-size, 14px);
+    --_current-typo-line-height: var(--md-sys-typescale-body-medium-line-height, 20px);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-medium-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-medium-letter-spacing, 0.25px);
 }
 
 .body-large {
-    --_current-typo-font-size: var(--md-sys-typescale-body-large-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-body-large-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-body-large-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-body-large-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-body-large-font-size, 16px);
+    --_current-typo-line-height: var(--md-sys-typescale-body-large-line-height, 24px);
+    --_current-typo-font-weight: var(--md-sys-typescale-body-large-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-body-large-letter-spacing, 0.5px);
 }
 
 .title-small {
-    --_current-typo-font-size: var(--md-sys-typescale-title-small-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-title-small-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-title-small-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-title-small-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-title-small-font-size, 14px);
+    --_current-typo-line-height: var(--md-sys-typescale-title-small-line-height, 20px);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-small-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-small-letter-spacing, 0.1px);
 }
 
 .title-medium {
-    --_current-typo-font-size: var(--md-sys-typescale-title-medium-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-title-medium-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-title-medium-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-title-medium-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-title-medium-font-size, 16px);
+    --_current-typo-line-height: var(--md-sys-typescale-title-medium-line-height, 24px);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-medium-font-weight, 500);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-medium-letter-spacing, 0.15px);
 }
 
 .title-large {
-    --_current-typo-font-size: var(--md-sys-typescale-title-large-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-title-large-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-title-large-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-title-large-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-title-large-font-size, 22px);
+    --_current-typo-line-height: var(--md-sys-typescale-title-large-line-height, 28px);
+    --_current-typo-font-weight: var(--md-sys-typescale-title-large-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-title-large-letter-spacing, 0px);
 }
 
 .headline-small {
-    --_current-typo-font-size: var(--md-sys-typescale-headline-small-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-headline-small-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-headline-small-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-small-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-headline-small-font-size, 24px);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-small-line-height, 32px);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-small-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-small-letter-spacing, 0);
 }
 
 .headline-medium {
-    --_current-typo-font-size: var(--md-sys-typescale-headline-medium-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-headline-medium-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-headline-medium-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-medium-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-headline-medium-font-size, 28px);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-medium-line-height, 36px);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-medium-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-medium-letter-spacing, 0);
 }
 
 .headline-large {
-    --_current-typo-font-size: var(--md-sys-typescale-headline-large-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-headline-large-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-headline-large-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-large-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-headline-large-font-size, 32px);
+    --_current-typo-line-height: var(--md-sys-typescale-headline-large-line-height, 40px);
+    --_current-typo-font-weight: var(--md-sys-typescale-headline-large-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-headline-large-letter-spacing, 0);
 }
 
 .display-small {
-    --_current-typo-font-size: var(--md-sys-typescale-display-small-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-display-small-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-display-small-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-display-small-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-display-small-font-size, 36px);
+    --_current-typo-line-height: var(--md-sys-typescale-display-small-line-height, 44px);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-small-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-small-letter-spacing, 0);
 }
 
 .display-medium {
-    --_current-typo-font-size: var(--md-sys-typescale-display-medium-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-display-medium-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-display-medium-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-display-medium-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-display-medium-font-size, 45px);
+    --_current-typo-line-height: var(--md-sys-typescale-display-medium-line-height, 52px);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-medium-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-medium-letter-spacing, 0);
 }
 
 .display-large {
-    --_current-typo-font-size: var(--md-sys-typescale-display-large-font-size);
-    --_current-typo-line-height: var(--md-sys-typescale-display-large-line-height);
-    --_current-typo-font-weight: var(--md-sys-typescale-display-large-font-weight);
-    --_current-typo-letter-spacing: var(--md-sys-typescale-display-large-letter-spacing);
+    --_current-typo-font-size: var(--md-sys-typescale-display-large-font-size, 57px);
+    --_current-typo-line-height: var(--md-sys-typescale-display-large-line-height, 64px);
+    --_current-typo-font-weight: var(--md-sys-typescale-display-large-font-weight, 400);
+    --_current-typo-letter-spacing: var(--md-sys-typescale-display-large-letter-spacing, -0.25px);
 }
