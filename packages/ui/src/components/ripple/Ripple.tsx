@@ -1,4 +1,4 @@
-import { PropType, Ref, defineComponent, onMounted, ref } from 'vue'
+import { PropType, Ref, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
 import css from './Ripple.module.css'
 import { RippleAttachableController } from './RippleAttachableController'
 
@@ -21,6 +21,10 @@ class RippleComponent {
                 return
             }
             rippleAttachableController.value = new RippleAttachableController(root.value)
+            rippleAttachableController.value.hostConnected()
+        })
+        onBeforeUnmount(() => {
+            rippleAttachableController.value?.hostDisconnected()
         })
 
 
