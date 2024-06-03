@@ -14,10 +14,10 @@
     --width: var(--glare-ui-ripple-width, var(--_access-shared-ripple-state-layer-width));
 
     --transition-duration: var(--variant-transition-duration-enabled);
-    --variant-transition-duration-enabled: var(--glare-ui-ripple-state-layer-color-enabled, var(--_access-shared-ripple-transition-duration-enabled, 150ms));
-    --variant-transition-duration-hover: var(--glare-ui-ripple-state-layer-color-hover, var(--_access-shared-ripple-transition-duration-hover, 75ms));
-    --variant-transition-duration-pressed: var(--glare-ui-ripple-state-layer-color-pressed, var(--_access-shared-ripple-transition-duration-pressed, 375ms));
-    --variant-transition-duration-pressed-after: var(--glare-ui-ripple-state-layer-color-pressed-after, var(--_access-shared-ripple-transition-duration-pressed-after, 105ms));
+    --variant-transition-duration-enabled: var(--glare-ui-ripple-state-layer-transition-duration-enabled, var(--_access-shared-ripple-transition-duration-enabled, 150ms));
+    --variant-transition-duration-hover: var(--glare-ui-ripple-state-layer-transition-duration-hover, var(--_access-shared-ripple-transition-duration-hover, 75ms));
+    --variant-transition-duration-pressed: var(--glare-ui-ripple-state-layer-transition-duration-pressed, var(--_access-shared-ripple-transition-duration-pressed, 375ms));
+    --variant-transition-duration-pressed-after: var(--glare-ui-ripple-state-layer-transition-duration-pressed-after, var(--_access-shared-ripple-transition-duration-pressed-after, 105ms));
 
     --touch-target: var(--glare-ui-ripple-touch-target, var(--glare-ui-ripple-inset, var(--_access-shared-ripple-touch-target, 0)));
     --z-index: var(--glare-ui-ripple-z-index, var(--_access-shared-ripple-z-index, 1));
