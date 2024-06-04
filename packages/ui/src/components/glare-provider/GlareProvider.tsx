@@ -1,18 +1,15 @@
 import { PropType, SlotsType, computed, defineComponent, ref, watch } from 'vue'
 import { EMaterialContrastLevel, EMaterialVariant, MaterialThemeGenerator, TColor, type TMaterialContrastLevel, type TMaterialVariant } from '../../utils/material-theme'
+import { Version } from '../../utils/Version'
 import typoCss from '../typography/MaterialTypographyImplement.module.css'
 
 export const GlareContextInjection = Symbol()
 
-type TSlots = {
-    default: void
-}
 type TThemeConfiguration = {
     sourceColor: TColor
     dark: boolean
     contrastLevel: TMaterialContrastLevel
     variant: TMaterialVariant
-
 }
 
 class GlareProviderComponent {
@@ -35,7 +32,11 @@ class GlareProviderComponent {
             type: Number as PropType<TMaterialVariant>
         },
     }
-    private static readonly slots = {} as SlotsType<TSlots>
+    private static readonly slots = {} as SlotsType<{
+        default: {
+            version: string
+        }
+    }>
 
     public static readonly component = defineComponent({
         name: this.name,
@@ -76,7 +77,9 @@ class GlareProviderComponent {
             return () => (
                 <div ref={root} class={typoCss.typography}>
                     <style>{ tokensStyleText.value }</style>
-                    {slots.default && slots.default()}
+                    {slots.default && slots.default({
+                        version: Version.version
+                    })}
                 </div>
             )
         },
