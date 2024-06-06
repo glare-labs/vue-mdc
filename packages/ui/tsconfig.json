@@ -2,42 +2,43 @@
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
-    "pretty": true,
+
+    "forceConsistentCasingInFileNames": true,
+
+    "verbatimModuleSyntax": true,
+    "preserveConstEnums": true,
+    "isolatedModules": true,
+
+    "baseUrl": "./packages/ui/",
     "sourceMap": false,
     "strict": true,
+
     "target": "ESNext",
-    "baseUrl": ".",
-    "outDir": "../preview-page/src/build",
     "lib": [
       "ESNext",
       "DOM",
       "DOM.Iterable"
     ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
-    "isolatedModules": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    
     "composite": true,
     "declaration": true,
-    "preserveConstEnums": true
   },
   "include": [
-    "./src/index.ts",
-    "./src/types/*.d.ts",
-    "./src/utils/**/*.ts",
-    "./src/components/**/*.tsx",
-    "./src/components/**/*.ts",
-    "./src/components/**/*.d.ts",
+    "./src/**/*",
   ],
   "exclude": [
     "./src/components/**/test/*",

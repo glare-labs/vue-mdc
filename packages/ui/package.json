@@ -1,6 +1,7 @@
 {
   "name": "@glare-labs/ui",
-  "version": "0.0.5",
+  "version": "0.0.1",
+  "private": "true",
   "publishConfig": {
     "access": "public"
   },
@@ -45,7 +46,8 @@
     "ui"
   ],
   "scripts": {
-    "compile": "npx vite build"
+    "compile": "npx vite build",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "vue": "^3.4.23"

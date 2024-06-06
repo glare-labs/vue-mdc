@@ -12,12 +12,6 @@
   "scripts": {
     "dev": "npm run dev -w dev-page",
     "compile": "npm run compile -w @glare-labs/ui",
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "fix": "gts fix"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "gts": "^5.3.0"
+    "lint": "npm run lint -w @glare-labs/ui"
   }
 }
