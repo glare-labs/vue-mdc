@@ -37,8 +37,8 @@ export * from './components/bottom-app-bar/BottomAppbar'
 /**
  * Symbols and Types
  */
-export * from './components/navigation-drawer/NavigationDrawerProvide'
-export * from './utils/attachable-controller'
+export * from './components/navigation-drawer/NavigationDrawerContext'
+export * from './utils/AttachableController'
 
 /**
  * Utils
@@ -53,5 +53,7 @@ export {
 export {
     ComponentRegister
 } from './utils/ComponentRegister'
-
+export {
+    DirectiveRegister
+} from './utils/DirectiveRegister'
 
