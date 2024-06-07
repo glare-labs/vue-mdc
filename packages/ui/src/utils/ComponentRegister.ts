@@ -40,7 +40,7 @@ export class ComponentRegister {
             instance.component(`${this.Prefix}-ripple`, Ripple)
             instance.component(`${this.Prefix}-icon`, Icon)
 
-            instance.component(`${this.Prefix}-glare-provider`, GlareProvider)
+            instance.component(`${this.Prefix}-provider`, GlareProvider)
             instance.component(`${this.Prefix}-divider`, Divider)
             instance.component(`${this.Prefix}-button`, Button)
             instance.component(`${this.Prefix}-icon-button`, IconButton)
