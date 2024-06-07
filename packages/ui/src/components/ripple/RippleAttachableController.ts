@@ -1,7 +1,7 @@
 import { RippleState } from './RippleState'
 import { RippleConfiguration } from './RippleConfiguration'
 import { EMotionEasing } from '../../utils/tokens'
-import { AttachableController } from '../../utils/attachable-controller'
+import { AttachableController } from '../../utils/AttachableController'
 import { ref } from 'vue'
 
 /**
@@ -25,7 +25,7 @@ const Events = [
     'pointerup',
 ]
 
-export class RippleAttachableController extends AttachableController {
+export class RippleAttachableController {
 
     private _hover = ref(false)
     private _pressed = ref(false)
@@ -60,14 +60,26 @@ export class RippleAttachableController extends AttachableController {
     private growAnimation: null | Animation = null
     private disabled = false
 
+    private controller: null | AttachableController = null
+    private get host() {
+        if (typeof this.controller === 'undefined' || this.controller === null || typeof this.controller.host === 'undefined' || this.controller.host === null) {
+            throw new Error(`Controller initialization failed for RippleAttachableController. This may be an internal error. Please report it.`)
+        }
+        return this.controller.host
+    }
+
     constructor(root: HTMLElement) {
-        super(root, (prev, next) => {
-            if (typeof window === 'undefined') return
-            for (const event of Events) {
-                prev?.removeEventListener(event, this.handleEvent.bind(this))
-                next?.addEventListener(event, this.handleEvent.bind(this))
-            }
-        })
+        this.controller = new AttachableController(root, this.onControlChange)
+    }
+
+    private onControlChange = (prev: HTMLElement | null, next: HTMLElement | null) => {
+        if (typeof window === 'undefined') {
+            return
+        }
+        for (const event of Events) {
+            prev?.removeEventListener(event, this.handleEvent)
+            next?.addEventListener(event, this.handleEvent)
+        }
     }
 
     /**
@@ -277,7 +289,7 @@ export class RippleAttachableController extends AttachableController {
         const isPrimaryButton = event.buttons === 1
         return this.isTouch(event) || isPrimaryButton
     }
-    private async handleEvent(e: Event) {
+    private handleEvent = async (e: Event) => {
         switch (e.type) {
             case 'click':
                 this.handleClick()

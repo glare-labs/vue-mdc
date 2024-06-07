@@ -1,6 +1,7 @@
-import { PropType, Ref, defineComponent, onBeforeUnmount, onMounted, ref } from 'vue'
+import { type PropType, type Ref, defineComponent, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
 import css from './Ripple.module.css'
 import { RippleAttachableController } from './RippleAttachableController'
+import { AttachableControllerSymbol, type AttachableControllerHost } from '../../utils/AttachableController'
 
 
 class RippleComponent {
@@ -11,36 +12,36 @@ class RippleComponent {
             type: Boolean as PropType<boolean>,
         },
     }
-    private static readonly setup = () => {
-        const root = ref<null | HTMLElement>(null)
-        let rippleAttachableController: Ref<null | RippleAttachableController> = ref(null)
-
-        onMounted(() => {
-            if(root.value === null || typeof root.value === 'undefined') {
-                console.warn(`Ripple component init faild`)
-                return
-            }
-            rippleAttachableController.value = new RippleAttachableController(root.value)
-            rippleAttachableController.value.hostConnected()
-        })
-        onBeforeUnmount(() => {
-            rippleAttachableController.value?.hostDisconnected()
-        })
-
-
-        return () => (
-            <span
-                aria-hidden="true"
-                class={[css.surface]}
-                ref={root}
-            ></span>
-        )
-    }
 
     public static readonly component = defineComponent({
         name: this.name,
         props: this.props,
-        setup: this.setup
+        setup: (_) => {
+            const root = ref<null | HTMLElement>(null)
+    
+            onMounted(() => {
+                if(root.value === null || typeof root.value === 'undefined') {
+                    console.warn(`Ripple component init faild`)
+                    return
+                }
+    
+                new RippleAttachableController(root.value);
+    
+                (root.value as AttachableControllerHost)[AttachableControllerSymbol]?.hostConnected()
+            })
+            onBeforeUnmount(() => {
+                (root.value as AttachableControllerHost)[AttachableControllerSymbol]?.hostDisconnected()
+            })
+    
+    
+            return () => (
+                <span
+                    aria-hidden="true"
+                    class={[css.surface]}
+                    ref={root}
+                ></span>
+            )
+        }
     })
 }
 
