@@ -84,14 +84,6 @@ export interface ReactiveController {
 }
 
 /**
- * @license
- * Copyright 2023 Google LLC
- * SPDX-License-Identifier: Apache-2.0
- */
-
-import { isServer } from './is-server'
-
-/**
  * An element that can be attached to an associated controlling element.
  */
 export interface Attachable {
@@ -154,7 +146,7 @@ export const AttachableControllerSymbol = Symbol('attachableController')
  * The host of an `AttachableController`. The controller will add itself to
  * the host so it can be retrieved in a global `MutationObserver`.
  */
-interface AttachableControllerHost extends HTMLElement {
+export interface AttachableControllerHost extends HTMLElement {
     [AttachableControllerSymbol]?: AttachableController
 }
 
@@ -200,29 +192,29 @@ if (typeof window !== 'undefined') {
  */
 export class AttachableController implements ReactiveController, Attachable {
     get htmlFor() {
-        return this.host.getAttribute('for')
+        return this._host.getAttribute('for')
     }
 
     set htmlFor(htmlFor: string | null) {
         if (htmlFor === null) {
-            this.host.removeAttribute('for')
+            this._host.removeAttribute('for')
         } else {
-            this.host.setAttribute('for', htmlFor)
+            this._host.setAttribute('for', htmlFor)
         }
     }
 
     get control() {
-        if (this.host.hasAttribute('for')) {
-            if (!this.htmlFor || !this.host.isConnected) {
+        if (this._host.hasAttribute('for')) {
+            if (!this.htmlFor || !this._host.isConnected) {
                 return null
             }
 
             return (
-                this.host.getRootNode() as Document | ShadowRoot
+                this._host.getRootNode() as Document | ShadowRoot
             ).querySelector<HTMLElement>(`#${this.htmlFor}`)
         }
 
-        return this.currentControl || this.host.parentElement
+        return this.currentControl || this._host.parentElement
     }
     set control(control: HTMLElement | null) {
         if (control) {
@@ -232,26 +224,29 @@ export class AttachableController implements ReactiveController, Attachable {
         }
     }
 
+    get host() {
+        return this._host
+    }
+
     private currentControl: HTMLElement | null = null;
 
     /**
      * Creates a new controller for an `Attachable` element.
      *
-     * @param host The `Attachable` element.
+     * @param _host The `Attachable` element.
      * @param onControlChange A callback with two parameters for the previous and
      *     next control. An `Attachable` element may perform setup or teardown
      *     logic whenever the control changes.
      */
     constructor(
-        private readonly host: AttachableControllerHost,
+        protected readonly _host: AttachableControllerHost,
         private readonly onControlChange: (
             prev: HTMLElement | null,
             next: HTMLElement | null,
         ) => void,
     ) {
-        host[AttachableControllerSymbol] = this
-        FOR_ATTRIBUTE_OBSERVER?.observe(host, { attributeFilter: ['for'] })
-        this.hostConnected()
+        _host[AttachableControllerSymbol] = this
+        FOR_ATTRIBUTE_OBSERVER?.observe(_host, { attributeFilter: ['for'] })
     }
 
     attach(control: HTMLElement) {
@@ -262,14 +257,14 @@ export class AttachableController implements ReactiveController, Attachable {
         this.setCurrentControl(control)
         // When imperatively attaching, remove the `for` attribute so
         // that the attached control is used instead of a referenced one.
-        this.host.removeAttribute('for')
+        this._host.removeAttribute('for')
     }
 
     detach() {
         this.setCurrentControl(null)
         // When imperatively detaching, add an empty `for=""` attribute. This will
         // ensure the control is `null` rather than the `parentElement`.
-        this.host.setAttribute('for', '')
+        this._host.setAttribute('for', '')
     }
 
     /** @private */
