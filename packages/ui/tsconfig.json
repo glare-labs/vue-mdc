@@ -38,7 +38,8 @@
     "declaration": true,
   },
   "include": [
-    "./src/**/*",
+    "./src/**/*", 
+    "./types/declaration.d.ts",
   ],
   "exclude": [
     "./src/components/**/test/*",

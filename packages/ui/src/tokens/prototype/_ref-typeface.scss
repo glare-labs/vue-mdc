@@ -1,0 +1,7 @@
+@function values($hardcoded: true) {
+    @return ('brand': if($hardcoded, (Roboto), null),
+        'plain': if($hardcoded, (Roboto), null),
+        'weight-bold': if($hardcoded, 700, null),
+        'weight-medium': if($hardcoded, 500, null),
+        'weight-regular': if($hardcoded, 400, null));
+}
