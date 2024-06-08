@@ -1,12 +1,10 @@
-import { type PropType, type SlotsType, computed, defineComponent, ref, watch } from 'vue'
-import { MaterialTheme, type TMaterialColorTokens, type TSourceColorHex } from '../../theme/MaterialTheme'
+import { type DeepReadonly, type PropType, type SlotsType, type UnwrapNestedRefs, type VNodeRef, type WritableComputedRef, computed, defineComponent, onMounted, provide, readonly, ref, watch } from 'vue'
+import { MaterialTheme, type TMaterialColorTokens, type TSourceColorHex } from '../../utils/theme/MaterialTheme'
 import { Version } from '../../utils/Version'
-import typoCss from '../typography/MaterialTypographyImplement.module.css'
-import { EMaterialContrastLevel, type TMaterialContrastLevel } from '../../theme/MaterialContrastLevel'
-import { EMaterialVariant, type TMaterialVariant } from '../../theme/MaterialVariant'
+import { EMaterialContrastLevel, type TMaterialContrastLevel } from '../../utils/theme/MaterialContrastLevel'
+import { EMaterialVariant, type TMaterialVariant } from '../../utils/theme/MaterialVariant'
 import { argbFromHex, Hct } from '@material/material-color-utilities'
-
-export const GlareContextInjection = Symbol()
+import { GlareProviderContext, type TGlareProviderContext } from './Context'
 
 type TThemeConfiguration = {
     sourceColor: TSourceColorHex
@@ -16,10 +14,10 @@ type TThemeConfiguration = {
 }
 
 class GlareProviderComponent {
-    private static readonly name = 'GlareUi-GlareProvider'
-    private static readonly props = {
+    protected name = 'GlareUi-GlareProvider'
+    protected props = {
         sourceColor: {
-            default: '#123456',
+            default: '#1d4e20',
             type: String as PropType<TSourceColorHex>
         },
         dark: {
@@ -31,11 +29,15 @@ class GlareProviderComponent {
             type: Number as PropType<TMaterialContrastLevel>
         },
         variant: {
-            default: EMaterialVariant.TONAL_SPOT,
+            default: EMaterialVariant.CONTENT,
             type: Number as PropType<TMaterialVariant>
         },
+        disableRipple: {
+            default: false,
+            type: Boolean as PropType<boolean>
+        },
     }
-    private static readonly slots = {} as SlotsType<{
+    protected slots = {} as SlotsType<{
         default: {
             version: string
             sourceColor: TSourceColorHex
@@ -45,64 +47,101 @@ class GlareProviderComponent {
             colorTokens: TMaterialColorTokens
         }
     }>
+    protected emits = []
 
-    public static readonly component = defineComponent({
+    public component = defineComponent({
         name: this.name,
         props: this.props,
         slots: this.slots,
-        setup(props, { slots }) {
-            const root = ref<null | HTMLElement>(null)
-
+        setup(props) {
             /**
              * 用于生成颜色的主题配置
              */
-            const themeConfiguration = ref<TThemeConfiguration>({
+            const _themeConfiguration = ref<TThemeConfiguration>({
                 sourceColor: props.sourceColor,
                 dark: props.dark,
                 contrastLevel: props.contrastLevel,
                 variant: props.variant,
             })
-            const setThemeConfiguration = (optional?: Partial<TThemeConfiguration>) => {
-                themeConfiguration.value = {
-                    ...themeConfiguration.value,
-                    ...optional
+            const themeConfiguration = computed({
+                get: () => ({
+                    contrastLevel: _themeConfiguration.value.contrastLevel,
+                    isDark: _themeConfiguration.value.dark,
+                    sourceColor: _themeConfiguration.value.sourceColor,
+                    variant: _themeConfiguration.value.variant,
+                }),
+                set: (optional?: Partial<TThemeConfiguration>) => {
+                    _themeConfiguration.value = {
+                        ..._themeConfiguration.value,
+                        ...optional
+                    }
                 }
-            }
-            watch(() => props, (c) => {
-                console.log('u', c);
-                
-                setThemeConfiguration({
-                    contrastLevel: props.contrastLevel,
-                    dark: props.dark,
-                    sourceColor: props.sourceColor,
-                    variant: props.variant,
+            })
+            watch(props, (changes) => {
+                themeConfiguration.value = ({
+                    contrastLevel: changes.contrastLevel,
+                    dark: changes.dark,
+                    sourceColor: changes.sourceColor,
+                    variant: changes.variant,
                 })
+            }, {
+                immediate: false,
             })
 
-            const theme = computed(() => MaterialTheme.generate({
-                    contrastLevel: themeConfiguration.value.contrastLevel,
-                    isDark: themeConfiguration.value.dark,
-                    sourceColor: Hct.fromInt(argbFromHex(themeConfiguration.value.sourceColor)),
-                    variant: themeConfiguration.value.variant,
+            const theme = computed(() => {
+                /**
+                 * New token prefix: --gu-sys-color-*
+                 */
+                let materialThemeGenerator = new MaterialTheme().setTokenPrefix('gu-sys-color').generate({...themeConfiguration.value, sourceColor: Hct.fromInt(argbFromHex(themeConfiguration.value!.sourceColor!))})
+                const guTokens = materialThemeGenerator
+
+                materialThemeGenerator = new MaterialTheme().setTokenPrefix('md-sys-color').generate({...themeConfiguration.value, sourceColor: Hct.fromInt(argbFromHex(themeConfiguration.value!.sourceColor!))})
+                const mdTokens = materialThemeGenerator
+                
+
+                return ({
+                    tokens: guTokens.tokens,
+                    styleText: `.glare-provider {${guTokens.styleText()}; ${mdTokens.styleText()}};`,
                 })
-            )
-            const themeStyleTokens = computed(() => theme.value.styleText())
+            })
     
-            return () => (
-                <div ref={root} class={typoCss.typography}>
-                    <style>{ themeStyleTokens.value }</style>
-                    {slots.default && slots.default({
-                        version: Version.version,
-                        contrastLevel: themeConfiguration.value.contrastLevel,
-                        dark: themeConfiguration.value.dark,
-                        sourceColor: themeConfiguration.value.sourceColor,
-                        variant: themeConfiguration.value.variant,
-                        colorTokens: theme.value.tokens
-                    })}
+            provide<DeepReadonly<UnwrapNestedRefs<TGlareProviderContext>>>(GlareProviderContext, readonly({
+                theme,
+                themeConfiguration: _themeConfiguration,
+                setThemeConfiguration: (optional?: Partial<TThemeConfiguration>) => {
+                    _themeConfiguration.value = {
+                        ..._themeConfiguration.value,
+                        ...optional
+                    }
+                },
+                disableRipple: props.disableRipple,
+            }))
+
+
+
+            return {
+                theme,
+                _themeConfiguration,
+            }
+        },
+        render() {
+            return (
+                <div class={'glare-provider'}>
+                    <style>{ this.theme.styleText }</style>
+                    {
+                        this.$slots.default && this.$slots.default({
+                            version: Version.version,
+                            contrastLevel: this._themeConfiguration.contrastLevel,
+                            dark: this._themeConfiguration.dark,
+                            sourceColor: this._themeConfiguration.sourceColor,
+                            variant: this._themeConfiguration.variant,
+                            colorTokens: this.theme.tokens
+                        })
+                    }
                 </div>
             )
-        },
+        }
     })
 }
 
-export const GlareProvider = GlareProviderComponent.component
+export const GlareProvider = new GlareProviderComponent().component
