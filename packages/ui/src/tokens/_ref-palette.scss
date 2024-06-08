@@ -1,0 +1,8 @@
+@use './internal/validate';
+@use './prototype/ref-palette';
+@use './prototype/supported-ref-palette';
+
+@function values($hardcoded: true) {
+  @return validate.values(ref-palette.values($hardcoded),
+    $supported-tokens: supported-ref-palette.$tokens );
+}

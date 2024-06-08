@@ -1,0 +1,61 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use './internal/validate';
+@use './ref-palette';
+@use './prototype/color';
+@use './prototype/supported-color';
+
+
+$_default-dark: (
+  'gu-ref-palette': ref-palette.values(),
+);
+
+@function values-dark(
+  $deps: $_default-dark,
+  $exclude-custom-properties: false
+) {
+  $tokens: color.values-dark($deps);
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      @if $value != null {
+        $tokens: map.set(
+          $tokens,
+          $token,
+          var(--gu-sys-color-#{$token}, #{$value})
+        );
+      }
+    }
+  }
+
+  @return validate.values($tokens, $supported-tokens: supported-color.$tokens);
+}
+
+$_default-light: (
+  'gu-ref-palette': ref-palette.values(),
+);
+
+@function values-light(
+  $deps: $_default-light,
+  $exclude-custom-properties: false
+) {
+  $tokens: color.values-light($deps);
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      @if $value != null {
+        $tokens: map.set(
+          $tokens,
+          $token,
+          var(--gu-sys-color-#{$token}, #{$value})
+        );
+      }
+    }
+  }
+
+  @return validate.values($tokens, $supported-tokens: supported-color.$tokens);
+}
