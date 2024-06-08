@@ -1,0 +1,132 @@
+@use 'sass:map';
+@use '../../tokens/typescale';
+
+$typescales: typescale.values();
+
+.typography {
+    font-family: var(--font);
+    font-size: var(--size);
+    font-weight: var(--weight);
+    line-height: var(--line-height);
+    letter-spacing: var(--tracking);
+}
+
+.display-large {
+    --font: #{map.get($typescales, 'display-large-font')};
+    --size: #{map.get($typescales, 'display-large-size')};
+    --weight: #{map.get($typescales, 'display-large-weight')};
+    --line-height: #{map.get($typescales, 'display-large-line-height')};
+    --tracking: #{map.get($typescales, 'display-large-tracking')};
+}
+
+.display-medium {
+    --font: #{map.get($typescales, 'display-medium-font')};
+    --size: #{map.get($typescales, 'display-medium-size')};
+    --weight: #{map.get($typescales, 'display-medium-weight')};
+    --line-height: #{map.get($typescales, 'display-medium-line-height')};
+    --tracking: #{map.get($typescales, 'display-medium-tracking')};
+}
+
+.display-small {
+    --font: #{map.get($typescales, 'display-small-font')};
+    --size: #{map.get($typescales, 'display-small-size')};
+    --weight: #{map.get($typescales, 'display-small-weight')};
+    --line-height: #{map.get($typescales, 'display-small-line-height')};
+    --tracking: #{map.get($typescales, 'display-small-tracking')};
+}
+
+.headline-large {
+    --font: #{map.get($typescales, 'headline-large-font')};
+    --size: #{map.get($typescales, 'headline-large-size')};
+    --weight: #{map.get($typescales, 'headline-large-weight')};
+    --line-height: #{map.get($typescales, 'headline-large-line-height')};
+    --tracking: #{map.get($typescales, 'headline-large-tracking')};
+}
+
+.headline-medium {
+    --font: #{map.get($typescales, 'headline-medium-font')};
+    --size: #{map.get($typescales, 'headline-medium-size')};
+    --weight: #{map.get($typescales, 'headline-medium-weight')};
+    --line-height: #{map.get($typescales, 'headline-medium-line-height')};
+    --tracking: #{map.get($typescales, 'headline-medium-tracking')};
+}
+
+.headline-small {
+    --font: #{map.get($typescales, 'headline-small-font')};
+    --size: #{map.get($typescales, 'headline-small-size')};
+    --weight: #{map.get($typescales, 'headline-small-weight')};
+    --line-height: #{map.get($typescales, 'headline-small-line-height')};
+    --tracking: #{map.get($typescales, 'headline-small-tracking')};
+}
+
+.title-large {
+    --font: #{map.get($typescales, 'title-large-font')};
+    --size: #{map.get($typescales, 'title-large-size')};
+    --weight: #{map.get($typescales, 'title-large-weight')};
+    --line-height: #{map.get($typescales, 'title-large-line-height')};
+    --tracking: #{map.get($typescales, 'title-large-tracking')};
+}
+
+.title-medium {
+    --font: #{map.get($typescales, 'title-medium-font')};
+    --size: #{map.get($typescales, 'title-medium-size')};
+    --weight: #{map.get($typescales, 'title-medium-weight')};
+    --line-height: #{map.get($typescales, 'title-medium-line-height')};
+    --tracking: #{map.get($typescales, 'title-medium-tracking')};
+}
+
+.title-small {
+    --font: #{map.get($typescales, 'title-small-font')};
+    --size: #{map.get($typescales, 'title-small-size')};
+    --weight: #{map.get($typescales, 'title-small-weight')};
+    --line-height: #{map.get($typescales, 'title-small-line-height')};
+    --tracking: #{map.get($typescales, 'title-small-tracking')};
+}
+
+.label-large {
+    --font: #{map.get($typescales, 'label-large-font')};
+    --size: #{map.get($typescales, 'label-large-size')};
+    --weight: #{map.get($typescales, 'label-large-weight')};
+    --line-height: #{map.get($typescales, 'label-large-line-height')};
+    --tracking: #{map.get($typescales, 'label-large-tracking')};
+}
+
+.label-medium {
+    --font: #{map.get($typescales, 'label-medium-font')};
+    --size: #{map.get($typescales, 'label-medium-size')};
+    --weight: #{map.get($typescales, 'label-medium-weight')};
+    --line-height: #{map.get($typescales, 'label-medium-line-height')};
+    --tracking: #{map.get($typescales, 'label-medium-tracking')};
+}
+
+.label-small {
+    --font: #{map.get($typescales, 'label-small-font')};
+    --size: #{map.get($typescales, 'label-small-size')};
+    --weight: #{map.get($typescales, 'label-small-weight')};
+    --line-height: #{map.get($typescales, 'label-small-line-height')};
+    --tracking: #{map.get($typescales, 'label-small-tracking')};
+}
+
+.body-large {
+    --font: #{map.get($typescales, 'body-large-font')};
+    --size: #{map.get($typescales, 'body-large-size')};
+    --weight: #{map.get($typescales, 'body-large-weight')};
+    --line-height: #{map.get($typescales, 'body-large-line-height')};
+    --tracking: #{map.get($typescales, 'body-large-tracking')};
+}
+
+.body-medium {
+    --font: #{map.get($typescales, 'body-medium-font')};
+    --size: #{map.get($typescales, 'body-medium-size')};
+    --weight: #{map.get($typescales, 'body-medium-weight')};
+    --line-height: #{map.get($typescales, 'body-medium-line-height')};
+    --tracking: #{map.get($typescales, 'body-medium-tracking')};
+}
+
+.body-small {
+    --font: #{map.get($typescales, 'body-small-font')};
+    --size: #{map.get($typescales, 'body-small-size')};
+    --weight: #{map.get($typescales, 'body-small-weight')};
+    --line-height: #{map.get($typescales, 'body-small-line-height')};
+    --tracking: #{map.get($typescales, 'body-small-tracking')};
+}

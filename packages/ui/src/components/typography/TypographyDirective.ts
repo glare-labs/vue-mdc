@@ -1,6 +1,6 @@
-import { Directive } from 'vue'
-import { TTypographyVariant } from './TypographyVariant'
-import css from './Typography.module.css'
+import { type Directive } from 'vue'
+import { type TTypographyVariant } from './TypographyVariant'
+import css from './_typography.module.scss'
 
 class TypographyDirective {
     private static readonly variants = [
@@ -34,7 +34,7 @@ class TypographyDirective {
                 typoName = 'body-medium'
             }
 
-            el.classList.remove(css.typography, css[binding.oldValue || typoName])
+            el.classList.remove(css.typography, css[typoName])
             el.classList.add(css.typography, css[typoName])
         }
     }

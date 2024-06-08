@@ -1,7 +1,6 @@
 import { type PropType, defineComponent } from 'vue'
-import css from './Typography.module.css'
-import { ETypographyVariant, TTypographyVariant } from './TypographyVariant'
-
+import css from './_typography.module.scss'
+import { ETypographyVariant, type TTypographyVariant } from './TypographyVariant'
 
 export const Typography = defineComponent({
     name: 'GlareUi-Typography',
@@ -13,7 +12,7 @@ export const Typography = defineComponent({
     },
     render() {
         return (
-            <span class={[css.typography, css[this.variant]]}>
+            <span class={[css['typography'], css[this.variant]]}>
                 {this.$slots.default && this.$slots.default()}
             </span>
         )
