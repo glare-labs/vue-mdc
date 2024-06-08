@@ -1,5 +1,5 @@
 import { argbFromHex, Hct, hexFromArgb, SchemeContent, SchemeExpressive, SchemeFidelity, SchemeMonochrome, SchemeNeutral, SchemeTonalSpot, SchemeVibrant } from '@material/material-color-utilities'
-import { Strings } from '../utils/Strings'
+import { Strings } from '../Strings'
 import { MaterialColors, type TMaterialColors } from './MaterialColors'
 import { EMaterialContrastLevel, type TMaterialContrastLevel } from './MaterialContrastLevel'
 import { EMaterialVariant, type TMaterialVariant } from './MaterialVariant'
@@ -43,8 +43,8 @@ class CSSStyleToken {
 
 }
 
-class MaterialThemeGenerator implements IMaterialThemeGenerative {
-    private tokenNamePrefix = 'md-sys-color'
+export class MaterialTheme implements IMaterialThemeGenerative {
+    private tokenNamePrefix = 'gu-sys-color'
 
     public generate(options: Partial<TMaterialThemeConfiguration>) {
         let sourceColorHct: Hct = options.sourceColor ?? Hct.fromInt(argbFromHex('#1beed4'))
@@ -86,21 +86,19 @@ class MaterialThemeGenerator implements IMaterialThemeGenerative {
 
         return {
             tokens: theme as TMaterialColorTokens,
-            styleText: () => this.styling(theme as TMaterialColorTokens)
+            styleText: () => this.styling(theme as TMaterialColorTokens),
         }
     }
 
     public styling(tokens: TMaterialColorTokens) {
-        return `:root {${Object.entries(tokens).map(token => token[1].token).reduce((pre, cur) => `${pre};${cur}`)}}`
+        return `${Object.entries(tokens).map(token => token[1].token).reduce((pre, cur) => `${pre};${cur}`)}`
+    }
+
+    public setTokenPrefix(prefix: string) {
+        this.tokenNamePrefix = prefix
+        return this
     }
 
 }
 
-export class MaterialTheme {
-    private static readonly instance: MaterialThemeGenerator = new MaterialThemeGenerator
-
-    static get generate() {
-        return this.instance.generate.bind(this.instance)
-    }
-}
 
