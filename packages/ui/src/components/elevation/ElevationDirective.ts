@@ -1,6 +1,6 @@
-import { Directive, DirectiveBinding } from 'vue'
-import css from './Elevation.module.css'
-import { TElevationLevel } from './ElevationLevel'
+import { type Directive, type DirectiveBinding } from 'vue'
+import css from './elevation-styles.module.scss'
+import { type TElevationLevel } from './ElevationLevel'
 
 class ElevationDirective {
 
@@ -72,7 +72,7 @@ class ElevationDirective {
             const elevationElement = typeof queriedElevationElement !== 'undefined' && queriedElevationElement !== null ? queriedElevationElement : this.createElevationElement()
 
             const level = this.wrapElevationLevel(binding)
-            elevationElement.style.setProperty('--glare-ui-elevation-level', level)
+            elevationElement.style.setProperty('--gu-elevation-level', level)
 
         },
         updated: (el, binding) => {
@@ -81,8 +81,8 @@ class ElevationDirective {
 
 
             const level = this.wrapElevationLevel(binding)
-            elevationElement.style.removeProperty('--glare-ui-elevation-level')
-            elevationElement.style.setProperty('--glare-ui-elevation-level', level)
+            elevationElement.style.removeProperty('--gu-elevation-level')
+            elevationElement.style.setProperty('--gu-elevation-level', level)
         }
     }
 }
