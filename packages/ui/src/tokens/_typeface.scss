@@ -6,10 +6,11 @@
 @use 'sass:map';
 @use './internal/validate';
 @use './prototype/typeface';
+@use './prototype/supported-typeface';
 
-@function values($hardcoded: true,
+@function values($exclude-hardcoded-values: false,
     $exclude-custom-properties: false) {
-    $tokens: typeface.values($hardcoded: $hardcoded);
+    $tokens: typeface.values($exclude-hardcoded-values: $exclude-hardcoded-values);
 
     @if not $exclude-custom-properties {
         @each $token, $value in $tokens {
@@ -21,5 +22,5 @@
         }
     }
 
-    @return validate.values($tokens, $supported-tokens: $supported-tokens);
+    @return validate.values($tokens, $supported-tokens: supported-typeface.$supported-tokens);
 }

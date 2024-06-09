@@ -5,6 +5,6 @@
 
 @use './prototype/state';
 
-@function values($hardcoded: true) {
-    @return state.values($hardcoded);
+@function values($exclude-hardcoded-values: false) {
+    @return state.values($exclude-hardcoded-values);
 }

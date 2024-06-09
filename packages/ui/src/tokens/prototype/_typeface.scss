@@ -3,10 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@function values($hardcoded: true) {
-    @return ('brand': if($hardcoded, (Roboto), null),
-        'plain': if($hardcoded, (Roboto), null),
-        'weight-bold': if($hardcoded, 700, null),
-        'weight-medium': if($hardcoded, 500, null),
-        'weight-regular': if($hardcoded, 400, null));
+@function values($exclude-hardcoded-values: false) {
+    @return ('brand': if($exclude-hardcoded-values, null, (Roboto)),
+        'plain': if($exclude-hardcoded-values, null, (Roboto)),
+        'weight-bold': if($exclude-hardcoded-values, null, 700),
+        'weight-medium': if($exclude-hardcoded-values, null, 500),
+        'weight-regular': if($exclude-hardcoded-values, null, 400));
 }

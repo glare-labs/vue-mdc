@@ -3,11 +3,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@function values($hardcoded: true) {
-    @return ('level0': if($hardcoded, 0, null),
-        'level-1': if($hardcoded, 1, null),
-        'level-2': if($hardcoded, 3, null),
-        'level-3': if($hardcoded, 6, null),
-        'level-4': if($hardcoded, 8, null),
-        'level-5': if($hardcoded, 12, null));
+@function values($exclude-hardcoded-values: false) {
+    @return ('level-0': if($exclude-hardcoded-values, null, 0),
+        'level-1': if($exclude-hardcoded-values, null, 1),
+        'level-2': if($exclude-hardcoded-values, null, 2),
+        'level-3': if($exclude-hardcoded-values, null, 3),
+        'level-4': if($exclude-hardcoded-values, null, 4),
+        'level-5': if($exclude-hardcoded-values, null, 5));
 }

@@ -5,6 +5,6 @@
 
 @use './prototype/motion';
 
-@function values($hardcoded: true) {
-    @return motion.values($hardcoded);
+@function values($exclude-hardcoded-values: false) {
+    @return motion.values($exclude-hardcoded-values);
 }

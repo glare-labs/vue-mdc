@@ -3,9 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@function values($hardcoded: true) {
-    @return ('dragged-state-layer-opacity': if($hardcoded, 0.16, null),
-        'focus-state-layer-opacity': if($hardcoded, 0.12, null),
-        'hover-state-layer-opacity': if($hardcoded, 0.08, null),
-        'pressed-state-layer-opacity': if($hardcoded, 0.12, null));
+@function values($exclude-hardcoded-values: false) {
+    @return ('dragged-state-layer-opacity': if($exclude-hardcoded-values, null, 0.16),
+        'focus-state-layer-opacity': if($exclude-hardcoded-values, null, 0.12),
+        'hover-state-layer-opacity': if($exclude-hardcoded-values, null, 0.08),
+        'pressed-state-layer-opacity': if($exclude-hardcoded-values, null, 0.12));
 }

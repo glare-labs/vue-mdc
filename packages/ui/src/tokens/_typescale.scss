@@ -14,10 +14,10 @@ $_default: (
 );
 
 @function values($deps: $_default,
-    $hardcoded: true,
+    $exclude-hardcoded-values: false,
     $exclude-custom-properties: false) {
-
-    $tokens: typescale.values($deps, $hardcoded: $hardcoded);
+    $tokens: typescale.values($deps,
+            $exclude-hardcoded-values: $exclude-hardcoded-values );
 
     @if not $exclude-custom-properties {
         @each $token, $value in $tokens {
@@ -30,6 +30,6 @@ $_default: (
     }
 
     @return validate.values($tokens,
-        $supported-tokens: supported-typescale.$tokens,
+        $supported-tokens: supported-typescale.$supported-tokens,
         $unsupported-tokens: supported-typescale.$unsupported-tokens );
 }

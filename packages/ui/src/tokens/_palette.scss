@@ -7,7 +7,7 @@
 @use './prototype/palette';
 @use './prototype/supported-palette';
 
-@function values($hardcoded: true) {
-  @return validate.values(palette.values($hardcoded),
-    $supported-tokens: supported-palette.$tokens );
+@function values($exclude-hardcoded-values: false) {
+  @return validate.values(palette.values($exclude-hardcoded-values),
+    $supported-tokens: supported-palette.$supported-tokens );
 }
