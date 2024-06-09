@@ -1,3 +1,8 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
 @function values($hardcoded: true) {
     @return ('brand': if($hardcoded, (Roboto), null),
         'plain': if($hardcoded, (Roboto), null),

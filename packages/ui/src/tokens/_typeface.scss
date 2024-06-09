@@ -1,15 +1,17 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
 @use 'sass:map';
 @use './internal/validate';
-@use './prototype/ref-typeface';
+@use './prototype/typeface';
 
-@function values($exclude-hardcoded-values: false,
+@function values($hardcoded: true,
     $exclude-custom-properties: false) {
-    $tokens: md-ref-typeface.values($exclude-hardcoded-values: $exclude-hardcoded-values,
-        );
+    $tokens: typeface.values($hardcoded: $hardcoded);
 
     @if not $exclude-custom-properties {
-
-        // Create --md-ref-typeface-* custom properties
         @each $token, $value in $tokens {
             @if $value !=null {
                 $tokens: map.set($tokens,
