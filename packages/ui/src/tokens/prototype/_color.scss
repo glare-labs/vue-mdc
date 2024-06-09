@@ -4,16 +4,15 @@
 //
 
 @use 'sass:map';
-@use './ref-palette';
+@use './palette';
 
 $_default-dark: (
-  'gu-ref-palette': ref-palette.values(),
+  'gu-ref-palette': palette.values(),
 );
 
 // Provide a ref-palette and determine the returned color based on the color of the ref-palette.
 @function values-dark($deps: $_default-dark) {
-  @return (
-    'background': map.get($deps, 'gu-ref-palette', 'neutral6'),
+  @return ('background': map.get($deps, 'gu-ref-palette', 'neutral6'),
     'error': map.get($deps, 'gu-ref-palette', 'error80'),
     'error-container': map.get($deps, 'gu-ref-palette', 'error30'),
     'inverse-on-surface': map.get($deps, 'gu-ref-palette', 'neutral20'),
@@ -61,17 +60,15 @@ $_default-dark: (
     'tertiary': map.get($deps, 'gu-ref-palette', 'tertiary80'),
     'tertiary-container': map.get($deps, 'gu-ref-palette', 'tertiary30'),
     'tertiary-fixed': map.get($deps, 'gu-ref-palette', 'tertiary90'),
-    'tertiary-fixed-dim': map.get($deps, 'gu-ref-palette', 'tertiary80')
-  );
+    'tertiary-fixed-dim': map.get($deps, 'gu-ref-palette', 'tertiary80'));
 }
 
 $_default-light: (
-  'gu-ref-palette': ref-palette.values(),
+  'gu-ref-palette': palette.values(),
 );
 
 @function values-light($deps: $_default-light) {
-  @return (
-    'background': map.get($deps, 'gu-ref-palette', 'neutral98'),
+  @return ('background': map.get($deps, 'gu-ref-palette', 'neutral98'),
     'error': map.get($deps, 'gu-ref-palette', 'error40'),
     'error-container': map.get($deps, 'gu-ref-palette', 'error90'),
     'inverse-on-surface': map.get($deps, 'gu-ref-palette', 'neutral95'),
@@ -119,6 +116,5 @@ $_default-light: (
     'tertiary': map.get($deps, 'gu-ref-palette', 'tertiary40'),
     'tertiary-container': map.get($deps, 'gu-ref-palette', 'tertiary90'),
     'tertiary-fixed': map.get($deps, 'gu-ref-palette', 'tertiary90'),
-    'tertiary-fixed-dim': map.get($deps, 'gu-ref-palette', 'tertiary80')
-  );
+    'tertiary-fixed-dim': map.get($deps, 'gu-ref-palette', 'tertiary80'));
 }
