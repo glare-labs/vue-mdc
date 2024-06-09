@@ -1,0 +1,35 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@function values($hardcoded: true) {
+    @return ('duration-extra-long1': if($hardcoded, 700ms, null),
+        'duration-extra-long2': if($hardcoded, 800ms, null),
+        'duration-extra-long3': if($hardcoded, 900ms, null),
+        'duration-extra-long4': if($hardcoded, 1000ms, null),
+        'duration-long1': if($hardcoded, 450ms, null),
+        'duration-long2': if($hardcoded, 500ms, null),
+        'duration-long3': if($hardcoded, 550ms, null),
+        'duration-long4': if($hardcoded, 600ms, null),
+        'duration-medium1': if($hardcoded, 250ms, null),
+        'duration-medium2': if($hardcoded, 300ms, null),
+        'duration-medium3': if($hardcoded, 350ms, null),
+        'duration-medium4': if($hardcoded, 400ms, null),
+        'duration-short1': if($hardcoded, 50ms, null),
+        'duration-short2': if($hardcoded, 100ms, null),
+        'duration-short3': if($hardcoded, 150ms, null),
+        'duration-short4': if($hardcoded, 200ms, null),
+        'easing-emphasized': if($hardcoded, cubic-bezier(0.2, 0, 0, 1), null),
+        'easing-emphasized-accelerate': if($hardcoded, cubic-bezier(0.3, 0, 0.8, 0.15), null),
+        'easing-emphasized-decelerate': if($hardcoded, cubic-bezier(0.05, 0.7, 0.1, 1), null),
+        'easing-legacy': if($hardcoded, cubic-bezier(0.4, 0, 0.2, 1), null),
+        'easing-legacy-accelerate': if($hardcoded, cubic-bezier(0.4, 0, 1, 1), null),
+        'easing-legacy-decelerate': if($hardcoded, cubic-bezier(0, 0, 0.2, 1), null),
+        'easing-linear': if($hardcoded, cubic-bezier(0, 0, 1, 1), null),
+        'easing-standard': if($hardcoded, cubic-bezier(0.2, 0, 0, 1), null),
+        'easing-standard-accelerate': if($hardcoded, cubic-bezier(0.3, 0, 1, 1), null),
+        'easing-standard-decelerate': if($hardcoded, cubic-bezier(0, 0, 0, 1), null),
+        /* Type "motion_path" is not supported. */
+        'path': null);
+}

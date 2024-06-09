@@ -1,0 +1,11 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@function values($hardcoded: true) {
+    @return ('dragged-state-layer-opacity': if($hardcoded, 0.16, null),
+        'focus-state-layer-opacity': if($hardcoded, 0.12, null),
+        'hover-state-layer-opacity': if($hardcoded, 0.08, null),
+        'pressed-state-layer-opacity': if($hardcoded, 0.12, null));
+}

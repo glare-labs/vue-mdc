@@ -1,0 +1,13 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@function values($hardcoded: true) {
+    @return ('level0': if($hardcoded, 0, null),
+        'level-1': if($hardcoded, 1, null),
+        'level-2': if($hardcoded, 3, null),
+        'level-3': if($hardcoded, 6, null),
+        'level-4': if($hardcoded, 8, null),
+        'level-5': if($hardcoded, 12, null));
+}
