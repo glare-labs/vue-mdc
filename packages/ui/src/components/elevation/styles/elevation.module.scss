@@ -1,3 +1,5 @@
 @use './elevation';
 
-@include elevation.styles();
+.elevation {
+    @include elevation.styles();
+}

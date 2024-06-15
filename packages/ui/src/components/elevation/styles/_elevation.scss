@@ -1,8 +1,9 @@
 @use 'sass:map';
-@use '../../../tokens/components/elevation';
+@use 'sass:list';
+@use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: elevation.$supported-tokens;
+    $supported-tokens: tokens.$component-elevation-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,9 +17,9 @@
 }
 
 @mixin styles() {
-    $tokens: elevation.values($exclude-custom-properties: false);
+    $tokens: tokens.component-elevation-values($exclude-custom-properties: false);
 
-    .elevation {
+    & {
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
@@ -26,7 +27,7 @@
         --_level: var(--gu-elevation-level, var(--_current-level, 0))
     }
 
-    .elevation {
+    & {
         border-radius: inherit;
         inset: 0;
         position: absolute;
