@@ -25,7 +25,7 @@ $supported-tokens: (
 
   @if not $exclude-custom-properties {
     @each $token, $value in $tokens {
-      $tokens: map.set($tokens, $token, var(--md-icon-#{$token}, #{$value}));
+      $tokens: map.set($tokens, $token, var(--gu-icon-#{$token}, #{$value}));
     }
   }
 
