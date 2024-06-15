@@ -1,5 +1,5 @@
 import { type Directive, type DirectiveBinding } from 'vue'
-import css from './elevation-styles.module.scss'
+import css from './styles/elevation.module.scss'
 import { type TElevationLevel } from './ElevationLevel'
 
 class ElevationDirective {

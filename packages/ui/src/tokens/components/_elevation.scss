@@ -1,0 +1,32 @@
+@use 'sass:list';
+@use 'sass:map';
+@use '../internal/validate.scss';
+@use '../color';
+@use '../elevation';
+
+$supported-tokens: (
+    'level',
+    'shadow-color'
+);
+
+$_default-theme: (
+    'gu-sys-color': color.values-light(),
+    'gu-sys-elevation': elevation.values(),
+);
+
+@function values($deps: $_default-theme, $hardcoded: true, $exclude-custom-properties: false) {
+    $tokens: (
+        'level': map.get($deps, 'gu-sys-elevation', 'level-0'),
+        'shadow-color': map.get($deps, 'gu-sys-color', 'shadow')
+    );
+
+@if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+        $tokens: map.set($tokens,
+                $token,
+                var(--gu-elevation-#{$token}, #{$value}));
+    }
+}
+
+@return validate.values($tokens, $supported-tokens: $supported-tokens);
+}
