@@ -1,5 +1,5 @@
 import { type Directive } from 'vue'
-import css from './Ripple.module.css'
+import css from './styles/ripple.module.scss'
 import { RippleAttachableController } from './RippleAttachableController'
 import { AttachableControllerSymbol, type AttachableControllerHost } from '../../utils/AttachableController'
 
@@ -9,11 +9,11 @@ class RippleDirective {
         const rippleElement = document.createElement('div')
         rippleElement.setAttribute('aria-hidden', 'true')
         rippleElement.setAttribute('data-standalone', 'true')
-        rippleElement.classList.add(css.surface)
+        rippleElement.classList.add(css.ripple)
         return rippleElement
     }
     private static readonly queryRippleElement = (el: HTMLElement) => {
-        return el.querySelector<AttachableControllerHost>(`div.${css.surface}[data-standalone="true"]`)
+        return el.querySelector<AttachableControllerHost>(`div.${css.ripple}[data-standalone="true"]`)
     }
     private static readonly isRippleColorProperty = (color: string) => {
         if (typeof color === 'string') {
@@ -44,7 +44,7 @@ class RippleDirective {
 
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
             queriedRippleElement[AttachableControllerSymbol]?.hostConnected()
@@ -57,14 +57,14 @@ class RippleDirective {
 
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
         },
         beforeUnmount: (el) => {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector \`div.${css.surface}[data-standalone="true"]\` was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector \`div.${css.ripple}[data-standalone="true"]\` was not found. This is an internal bug, please report it.`)
             } else {
                 queriedRippleElement[AttachableControllerSymbol]?.hostDisconnected()
             }
@@ -75,13 +75,13 @@ class RippleDirective {
         mounted: (el, binding) => {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
 
             const isColorProperty = this.isRippleColorProperty(binding.value)
             if (isColorProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-state-layer-color-${state}`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-color`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-color and v-ripple-pressed-color only accept strings and must be valid CSS color values.`)
             }
@@ -89,13 +89,13 @@ class RippleDirective {
         updated: (el, binding) => {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
 
             const isColorProperty = this.isRippleColorProperty(binding.value)
             if (isColorProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-state-layer-color-${state}`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-color`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-color and v-ripple-pressed-color only accept strings and must be valid CSS color values.`)
             }
@@ -108,13 +108,13 @@ class RippleDirective {
         mounted: (el, binding) => {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-state-layer-opacity-${state}`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--glare-ui-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }
@@ -122,21 +122,18 @@ class RippleDirective {
         updated: (el, binding) => {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
-                console.warn(`The DOM object with the target selector 'div.\${css.surface}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
+                console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-state-layer-opacity-${state}`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--glare-ui-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }
         }
     })
-
-    public static readonly hoverOpacityDirective: Directive<HTMLElement, number> = this.opacityProgress('hover')
-    public static readonly pressedOpacityDirective: Directive<HTMLElement, number> = this.opacityProgress('pressed')
 
 }
 
@@ -151,5 +148,3 @@ class RippleDirective {
 export const vRipple = RippleDirective.rippleDirective
 export const vRippleHoverColor = RippleDirective.hoverColorDirective
 export const vRipplePressedColor = RippleDirective.pressedColorDirective
-export const vRippleHoverOpacity = RippleDirective.hoverOpacityDirective
-export const vRipplePressedOpacity = RippleDirective.pressedOpacityDirective
