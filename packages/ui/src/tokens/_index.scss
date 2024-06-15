@@ -1,3 +1,8 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
 @forward './color' as color-*;
 @forward './elevation' as elevation-*;
 @forward './motion' as motion-*;
@@ -6,3 +11,58 @@
 @forward './typeface' as typeface-*;
 @forward './typescale' as typescale-*;
 @forward './shape' as shape-*;
+@forward './icon' as icon-*;
+
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@forward './components/component-assist-chip' as component-assist-chip-*;
+@forward './components/component-badge' as component-badge-*;
+@forward './components/component-checkbox' as component-checkbox-*;
+@forward './components/component-circular-progress' as component-circular-progress-*;
+@forward './components/component-dialog' as component-dialog-*;
+@forward './components/component-divider' as component-divider-*;
+@forward './components/component-elevated-button' as component-elevated-button-*;
+@forward './components/component-elevated-card' as component-elevated-card-*;
+@forward './components/component-elevation' as component-elevation-*;
+@forward './components/component-fab' as component-fab-*;
+@forward './components/component-fab-branded' as component-fab-branded-*;
+@forward './components/component-filled-button' as component-filled-button-*;
+@forward './components/component-filled-card' as component-filled-card-*;
+@forward './components/component-filled-field' as component-filled-field-*;
+@forward './components/component-filled-icon-button' as component-filled-icon-button-*;
+@forward './components/component-filled-select' as component-filled-select-*;
+@forward './components/component-filled-text-field' as component-filled-text-field-*;
+@forward './components/component-filled-tonal-button' as component-filled-tonal-button-*;
+@forward './components/component-filled-tonal-icon-button' as component-filled-tonal-icon-button-*;
+@forward './components/component-filter-chip' as component-filter-chip-*;
+@forward './components/component-focus-ring' as component-focus-ring-*;
+@forward './components/component-full-screen-dialog' as component-full-screen-dialog-*;
+@forward './components/component-icon' as component-icon-*;
+@forward './components/component-icon-button' as component-icon-button-*;
+@forward './components/component-input-chip' as component-input-chip-*;
+@forward './components/component-item' as component-item-*;
+@forward './components/component-linear-progress' as component-linear-progress-*;
+@forward './components/component-list' as component-list-*;
+@forward './components/component-list-item' as component-list-item-*;
+@forward './components/component-menu' as component-menu-*;
+@forward './components/component-menu-item' as component-menu-item-*;
+@forward './components/component-navigation-bar' as component-navigation-bar-*;
+@forward './components/component-navigation-drawer' as component-navigation-drawer-*;
+@forward './components/component-outlined-button' as component-outlined-button-*;
+@forward './components/component-outlined-card' as component-outlined-card-*;
+@forward './components/component-outlined-field' as component-outlined-field-*;
+@forward './components/component-outlined-icon-button' as component-outlined-icon-button-*;
+@forward './components/component-outlined-segmented-button' as component-outlined-segmented-button-*;
+@forward './components/component-outlined-select' as component-outlined-select-*;
+@forward './components/component-outlined-text-field' as component-outlined-text-field-*;
+@forward './components/component-primary-tab' as component-primary-tab-*;
+@forward './components/component-radio' as component-radio-*;
+@forward './components/component-ripple' as component-ripple-*;
+@forward './components/component-secondary-tab' as component-secondary-tab-*;
+@forward './components/component-slider' as component-slider-*;
+@forward './components/component-suggestion-chip' as component-suggestion-chip-*;
+@forward './components/component-switch' as component-switch-*;
+@forward './components/component-text-button' as component-text-button-*;

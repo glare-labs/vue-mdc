@@ -1,0 +1,36 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use '../color';
+@use '../shape';
+@use '../typescale';
+@use './prototype/prototype-badge';
+
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-shape': shape.values(),
+  'gu-sys-typescale': typescale.values(),
+);
+
+$_unsupported-tokens: (
+  'large-label-text-tracking',
+  'large-label-text-type'
+);
+
+@function values($deps: $_default,
+  $exclude-hardcoded-values: false,
+  $exclude-custom-properties: true) {
+  $tokens: prototype-badge.values($deps, $exclude-hardcoded-values);
+  $tokens: map.remove($tokens, $_unsupported-tokens...);
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      $tokens: map.set($tokens, $token, var(--gu-badge-#{$token}, #{$value}));
+    }
+  }
+
+  @return $tokens;
+}
