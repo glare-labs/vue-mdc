@@ -5,10 +5,10 @@
 
 @use 'sass:list';
 @use 'sass:map';
-@use '../../../tokens/components/ripple';
+@use '../../../tokens/components/component-ripple';
 
 @mixin theme($tokens) {
-    $supported-tokens: ripple.$supported-tokens;
+    $supported-tokens: component-ripple.$supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -22,7 +22,7 @@
 }
 
 @mixin styles() {
-    $tokens: ripple.values($exclude-custom-properties: false);
+    $tokens: component-ripple.values($exclude-custom-properties: false);
 
     .ripple[disabled] {
         display: none;
@@ -43,6 +43,7 @@
         margin: auto;
         pointer-events: none;
         -webkit-tap-highlight-color: transparent;
+        z-index: 1;
 
         &::before,
         &::after {
