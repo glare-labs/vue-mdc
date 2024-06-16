@@ -1,0 +1,7 @@
+@use './fab';
+@use './shared';
+
+.fab {
+    @include shared.styles();
+    @include fab.styles();
+}
