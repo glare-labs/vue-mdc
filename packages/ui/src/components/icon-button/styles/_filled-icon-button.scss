@@ -1,0 +1,142 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use '../../ripple/styles/ripple';
+@use '../../../tokens';
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-filled-icon-button-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-filled-icon-button-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-filled-icon-button-values($exclude-custom-properties: false);
+
+    & {
+        // Only use the logical properties.
+        $tokens: map.remove($tokens, 'container-shape');
+
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+    }
+
+    &.icon-button {
+        color: var(--_icon-color);
+
+        &:hover {
+            color: var(--_hover-icon-color);
+        }
+
+        &:focus {
+            color: var(--_focus-icon-color);
+        }
+
+        &:active {
+            color: var(--_pressed-icon-color);
+        }
+
+        &:disabled {
+            color: var(--_disabled-icon-color);
+        }
+
+        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
+    }
+
+    &.icon-button .background {
+        // Background color, separate node for opacity changes
+        background-color: var(--_container-color);
+        border-radius: inherit;
+        content: '';
+        inset: 0;
+        position: absolute;
+        z-index: -1; // place behind content
+    }
+
+    &.icon-button.disabled .background,
+    &.icon-button:disabled .background {
+        background-color: var(--_disabled-container-color);
+        opacity: var(--_disabled-container-opacity);
+    }
+
+    &.icon-button.disabled .icon,
+    &.icon-button:disabled .icon {
+        opacity: var(--_disabled-icon-opacity);
+    }
+
+    &.toggle-icon-button {
+
+        &:not(.disabled),
+        &:not(:disabled) {
+            color: var(--_toggle-icon-color);
+
+            &:hover {
+                color: var(--_toggle-hover-icon-color);
+            }
+
+            &:focus {
+                color: var(--_toggle-focus-icon-color);
+            }
+
+            &:active {
+                color: var(--_toggle-pressed-icon-color);
+            }
+        }
+
+        @include ripple.theme((hover-color: var(--_toggle-hover-state-layer-color),
+                pressed-color: var(--_toggle-pressed-state-layer-color),
+            ));
+    }
+
+    &.toggle-icon-button:not(:disabled) .background {
+        // Note: filled icon buttons have three container colors,
+        // "container-color" for regular, then selected/unselected for toggle.
+        background-color: var(--_unselected-container-color);
+    }
+
+    &.selected {
+
+        &:not(.disabled),
+        &:not(:disabled) {
+            color: var(--_toggle-selected-icon-color);
+
+            &:hover {
+                color: var(--_toggle-selected-hover-icon-color);
+            }
+
+            &:focus {
+                color: var(--_toggle-selected-focus-icon-color);
+            }
+
+            &:active {
+                color: var(--_toggle-selected-pressed-icon-color);
+            }
+        }
+
+        @include ripple.theme((hover-color: var(--_toggle-selected-hover-state-layer-color),
+                pressed-color: var(--_toggle-selected-pressed-state-layer-color),
+            ));
+    }
+
+    &.selected:not(.disabled) .background,
+    &.selected:not(:disabled) .background {
+        background-color: var(--_selected-container-color);
+    }
+}

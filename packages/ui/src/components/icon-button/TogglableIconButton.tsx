@@ -1,13 +1,24 @@
 import { type PropType, computed, defineComponent, onBeforeMount, ref, watch, type SlotsType } from 'vue'
-import css from './iconButton.module.css'
-import cssBase from './base.module.css'
 import { Ripple } from '../ripple/Ripple'
-import { BaseIconButton } from './BaseIconButton'
+import { EIconButtonAppearance, type TIconButtonAppearance } from './IconButtonAppearance'
+import { EIconButtonType, type TIconButtonType } from './IconButtonType'
+import css from './styles/icon-button.module.scss'
 
-export class TogglableIconButtonComponent extends BaseIconButton {
-    protected name = 'GlareUi-TogglableIconButton'
-    protected props = {
-        ...super.getProps(),
+export class TogglableIconButtonComponent {
+    private name = 'GlareUi-TogglableIconButton'
+    private props = {
+        appearance: {
+            type: String as PropType<TIconButtonAppearance>,
+            default: EIconButtonAppearance.Standard,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        type: {
+            type: String as PropType<TIconButtonType>,
+            default: EIconButtonType.Button,
+        },
         defaultSelected: {
             type: Boolean as PropType<boolean>,
             default: false,
@@ -17,12 +28,13 @@ export class TogglableIconButtonComponent extends BaseIconButton {
             default: false,
         }
     }
-    protected emits = [
+    private emits = [
         'update:modelValue'
     ]
-    protected slots = {} as SlotsType<{
+    private slots = {} as SlotsType<{
         default: void
     }>
+
     public component = defineComponent({
         name: this.name,
         props: this.props,
@@ -67,7 +79,7 @@ export class TogglableIconButtonComponent extends BaseIconButton {
         },
         render() {
             const renderIcon = (
-                <span class={cssBase.icon}>
+                <span class={css.icon}>
                     {this.$slots.default && this.$slots.default()}
                 </span>
             )
@@ -75,22 +87,24 @@ export class TogglableIconButtonComponent extends BaseIconButton {
             return (
                 <button
                     class={[
-                        cssBase.container,
+                        css['icon-button'],
                         css[this.appearance],
-                        this.disabled && cssBase.disabled,
-                        this.selected ? cssBase.selected : cssBase.unselected
+                        css['toggle-icon-button'],
+                        this.selected && css.selected,
+                        this.disabled && css.disabled,
                     ]}
-                    aria-disabled={this.disabled}
+                    data-component="togglable-icon-button"
                     disabled={this.disabled}
+                    aria-disabled={this.disabled}
                     type={this.type}
                     onClick={this.handleClicked}
                     role='checkbox'
                 >
                     <Ripple></Ripple>
     
-                    <div aria-hidden="true" class={cssBase.touch}></div>
-                    <div aria-hidden="true" class={cssBase.background}></div>
-                    <div aria-hidden="true" class={cssBase.outline}></div>
+                    <div aria-hidden="true" class={css.touch}></div>
+                    <div aria-hidden="true" class={css.background}></div>
+                    <div aria-hidden="true" class={css.outline}></div>
     
                     {renderIcon}
                 </button>

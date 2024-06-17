@@ -1,0 +1,172 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use '../../ripple/styles/ripple';
+@use '../../../tokens';
+@use './shared';
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-outlined-icon-button-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-outlined-icon-button-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-outlined-icon-button-values($exclude-custom-properties: false);
+
+    & {
+        // Only use the logical properties.
+        $tokens: map.remove($tokens, 'container-shape');
+
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+    }
+
+    &.icon-button {
+        color: var(--_icon-color);
+
+        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
+
+        &:hover {
+            color: var(--_hover-icon-color);
+        }
+
+        &:focus {
+            color: var(--_focus-icon-color);
+        }
+
+        &:active {
+            color: var(--_pressed-icon-color);
+        }
+
+        &.disabled,
+        &:disabled {
+            color: var(--_disabled-icon-color);
+        }
+    }
+
+    &.icon-button .background {
+        // Background color, separate node for opacity changes
+        background-color: transparent;
+        border-radius: inherit;
+        content: '';
+        inset: 0;
+        position: absolute;
+        z-index: -1; // place behind content
+    }
+
+    &.icon-button .outline {
+        // Background color, separate node for opacity changes
+        border-radius: inherit;
+        content: '';
+        inset: 0;
+        position: absolute;
+        z-index: -1; // place behind content
+        border-color: var(--_outline-color);
+        border-width: var(--_outline-width);
+        border-style: solid;
+    }
+
+    &.disabled .outline,
+    &:disabled .outline {
+        border-color: var(--_disabled-outline-color);
+        opacity: var(--_disabled-outline-opacity);
+    }
+
+    &.icon-button.disabled .icon,
+    &.icon-button:disabled .icon {
+        opacity: var(--_disabled-icon-opacity);
+    }
+
+    &.icon-button .background {
+        block-size: 100%;
+        border-radius: inherit;
+        box-sizing: border-box;
+        content: '';
+        inline-size: 100%;
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: -1; // place behind content
+    }
+
+    // Selected toggle buttons have no outline.
+    &.icon-button.selected .outline {
+        border-width: 0;
+    }
+
+    // Selected icon button toggle.
+    &.selected {
+        &:not(:disabled) {
+            color: var(--_selected-icon-color);
+
+            &:hover {
+                color: var(--_selected-hover-icon-color);
+            }
+
+            &:focus {
+                color: var(--_selected-focus-icon-color);
+            }
+
+            &:active {
+                color: var(--_selected-pressed-icon-color);
+            }
+        }
+
+        @include ripple.theme((hover-color: var(--_selected-hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_selected-pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
+    }
+
+    &.selected:not(:disabled) .background,
+    &.selected:not(.disabled) .background {
+        background-color: var(--_selected-container-color);
+    }
+
+    &.selected.disabled .background,
+    &.selected:disabled .background {
+        background-color: var(--_disabled-selected-container-color);
+        opacity: var(--_disabled-selected-container-opacity);
+    }
+
+    @media (forced-colors: active) {
+
+        .disabled,
+        &[disabled] {
+            --_disabled-outline-opacity: 1;
+        }
+
+        // Selected button in HCM has an outline.
+        &.selected {
+            & .outline {
+                border-color: CanvasText;
+                border-width: var(--_outline-width);
+            }
+
+            &.disabled .background,
+            &:disabled .background {
+                border-color: GrayText;
+                opacity: 1;
+            }
+        }
+    }
+}
