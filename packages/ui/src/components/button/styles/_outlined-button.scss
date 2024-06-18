@@ -16,7 +16,7 @@
         }
 
         @if $value {
-            --md-outlined-button-#{$token}: #{$value};
+            --gu-outlined-button-#{$token}: #{$value};
         }
     }
 }

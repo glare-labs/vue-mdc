@@ -16,7 +16,7 @@
         }
 
         @if $value {
-            --md-elevated-button-#{$token}: #{$value};
+            --gu-elevated-button-#{$token}: #{$value};
         }
     }
 }
