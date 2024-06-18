@@ -1,7 +1,7 @@
 import { generateUuid } from '../../utils/uuid'
 import { defineComponent } from 'vue'
 import { Ripple } from '../ripple/Ripple'
-import css from './Radio.module.css'
+import css from './styles/radio.module.scss'
 
 export const Radio = defineComponent({
     name: 'GlareUi-Radio',
@@ -53,14 +53,15 @@ export const Radio = defineComponent({
     render() {
         return (
             <div
+                data-component="radio"
                 role="radio"
-                class={[css.surface, this.selected && css.checked, this.disabled && css.disabled]}
+                class={[css.radio, this.selected && css.checked, this.disabled && css.disabled]}
                 onClick={this.clickHandle}
             >
-
                 <Ripple></Ripple>
 
                 <svg
+                    aria-hidden="true"
                     class={css.icon}
                     viewBox="0 0 20 20"
                 >
