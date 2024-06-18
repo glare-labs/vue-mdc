@@ -12,7 +12,7 @@ export const Typography = defineComponent({
     },
     render() {
         return (
-            <span class={[css.typography, css[this.variant]]}>
+            <span data-component="typography" class={[css.typography, css[this.variant]]}>
                 {this.$slots.default && this.$slots.default()}
             </span>
         )

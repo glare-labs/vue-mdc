@@ -37,6 +37,7 @@ export * from './components/bottom-app-bar/BottomAppbar'
  */
 export * from './components/navigation-drawer/NavigationDrawerContext'
 export * from './utils/AttachableController'
+export * from './utils/theme/index'
 
 /**
  * Utils
