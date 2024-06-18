@@ -2,9 +2,7 @@
 /**
  * Components
  */
-export * from './components/typography/Typography'
-export * from './components/typography/TypographyDirective'
-export * from './components/typography/TypographyVariant'
+export * from './components/typography/index'
 export * from './components/switch/Switch'
 export * from './components/ripple/Ripple'
 export * from './components/ripple/RippleAttachableController'

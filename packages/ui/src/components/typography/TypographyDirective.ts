@@ -1,6 +1,6 @@
 import { type Directive } from 'vue'
 import { type TTypographyVariant } from './TypographyVariant'
-import css from './_typography.module.scss'
+import css from './styles/typography.module.scss'
 
 class TypographyDirective {
     private static readonly variants = [
