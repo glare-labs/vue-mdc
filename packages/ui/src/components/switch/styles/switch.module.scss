@@ -1,0 +1,5 @@
+@use './switch';
+
+.switch {
+    @include switch.styles();
+}

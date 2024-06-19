@@ -159,11 +159,11 @@ $_default: (
   @each $shape-token in $shape-tokens {
     @if string.index($token, '#{$shape-token}-')==1 {
       // Add fallback to shorthand for logical shape properties.
-      $value: var(--md-switch-#{$shape-token}, #{$value});
+      $value: var(--gu-switch-#{$shape-token}, #{$value});
     }
   }
 
-  $tokens: map.set($tokens, $token, var(--md-switch-#{$token}, #{$value}));
+  $tokens: map.set($tokens, $token, var(--gu-switch-#{$token}, #{$value}));
 }
 }
 

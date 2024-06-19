@@ -1,6 +1,6 @@
 import { type SlotsType, defineComponent } from 'vue'
-import css from './Switch.module.css'
 import { Ripple } from '../ripple/Ripple'
+import css from './styles/switch.module.scss'
 
 export const Switch = defineComponent({
     name: 'GlareUi-Switch',
@@ -64,13 +64,13 @@ export const Switch = defineComponent({
     render() {
         return (
             <span
-                class={[css.surface, this.disabled && css.disabled, this.selected ? css.selected : css.unselected]}
+                class={[css.switch, this.disabled && css.disabled, this.selected ? css.selected : css.unselected]}
                 onClick={this.selectedHandle}
                 role="switch"
-                data-am-switch
+                aria-disabled={this.disabled}
+                data-component="switch"
             >
                 <input
-                    class={css.input}
                     type="checkbox"
                     role="switch"
                     checked={this.selected}
@@ -78,25 +78,29 @@ export const Switch = defineComponent({
                     aria-disabled={this.disabled}
                 />
 
-                <span class={css.background}></span >
-                <span class={css.outline}></span >
+                <span aria-hidden="true" class={css.background}></span >
+                <span aria-hidden="true" class={css.outline}></span >
 
-                <span class={css['handle-container']}>
-                    <Ripple></Ripple>
+                <span class={css.track}>
+                    <span class={css['handle-container']}>
+                        <Ripple></Ripple>
 
-                    <span class={[css.handle, (this.withIconSelectedOnly || this.withIcon) && css['with-icon']]}>
-                        {
-                            (this.withIconSelectedOnly || this.withIcon) &&
-                            <div class={css.icons}>
-                                {
-                                    this.selected && (this.$slots['on-icon'] ? this.$slots['on-icon']() : <SwitchOnIcon></SwitchOnIcon>)
-                                }
-                                {
-                                    !this.withIconSelectedOnly && !this.selected && (this.$slots['off-icon'] ? this.$slots['off-icon']() : <SwitchOffIcon></SwitchOffIcon>)
-                                }
-                            </div>
-                        }
+                        <span class={[css.handle, (this.withIconSelectedOnly || this.withIcon) && css['with-icon']]}>
+                            {
+                                (this.withIconSelectedOnly || this.withIcon) &&
+                                <div class={css.icons}>
+                                    {
+                                        this.selected && (this.$slots['on-icon'] ? this.$slots['on-icon']() : <SwitchOnIcon></SwitchOnIcon>)
+                                    }
+                                    {
+                                        !this.withIconSelectedOnly && !this.selected && (this.$slots['off-icon'] ? this.$slots['off-icon']() : <SwitchOffIcon></SwitchOffIcon>)
+                                    }
+                                </div>
+                            }
+                        </span>
                     </span>
+
+
                 </span>
             </span >
         )
