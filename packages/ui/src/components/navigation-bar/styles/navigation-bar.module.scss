@@ -1,0 +1,5 @@
+@use './navigation-bar';
+
+.navigation-bar {
+    @include navigation-bar.styles();
+}

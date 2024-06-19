@@ -1,0 +1,64 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use '../../elevation/styles/elevation.scss';
+@use '../../../tokens';
+
+$_motion: tokens.motion-values();
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-navigation-bar-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-navigation-bar-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-navigation-bar-values();
+
+    @layer navigation-bar-styles {
+
+        & {
+            @each $token, $value in $tokens {
+                --_#{$token}: var(--gu-navigation-bar-#{$token}, #{$value});
+            }
+
+            @include elevation.theme(('level': var(--_container-elevation),
+                    'shadow-color': var(--_container-shadow-color),
+                ));
+
+            width: 100%;
+        }
+
+        & {
+            display: flex;
+            position: relative;
+            width: 100%;
+            background-color: var(--_container-color);
+            border-radius: var(--_container-shape);
+            height: var(--_container-height);
+
+            .md3-navigation-bar__tabs-slot-container {
+                display: inherit;
+                width: inherit;
+            }
+        }
+
+        & [data-component="elevation"] {
+            transition-duration: 280ms;
+            transition-timing-function: map.get($_motion, 'emphasized-easing');
+            z-index: 0;
+        }
+    }
+
+}
