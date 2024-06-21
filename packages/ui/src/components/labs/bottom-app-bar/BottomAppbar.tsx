@@ -2,7 +2,7 @@ import { defineComponent } from 'vue'
 import { BottomAppbarBase } from './base'
 import css from './bottomAppbar.module.css'
 import cssBase from './base.module.css'
-import { Elevation } from '../elevation/Elevation'
+import { Elevation } from '../../elevation/Elevation'
 
 class BottomAppbarComponent {
     private static readonly props = BottomAppbarBase.propsShared

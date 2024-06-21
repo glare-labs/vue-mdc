@@ -1,6 +1,6 @@
-
 export * from './CenterAlignedTopAppbar'
 export * from './LargeTopAppbar'
 export * from './MediumTopAppbar'
+export * from './ResponsiveTopAppbar'
 export * from './SmallTopAppbar'
 export * from './topAppbarScrolledEvent'

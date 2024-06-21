@@ -1,31 +1,25 @@
-import { SlotsType, defineComponent } from 'vue'
-import { ISlotsShared, propsShared } from './base'
+
+import { type SlotsType, defineComponent } from 'vue'
+import { type ISlotsShared, propsShared } from './base'
 import css from './topAppbar.module.css'
 import cssBase from './base.module.css'
-import { Elevation } from '../elevation/Elevation'
+import { Elevation } from '../../elevation/Elevation'
 
 const props = propsShared
 const slots = {} as SlotsType<Pick<ISlotsShared, 'leadingIcon'> & {
     trailingIcons: void
 }>
 
-export const MediumTopAppbar = defineComponent({
+export const SmallTopAppbar = defineComponent({
+    name: 'GlareUi-SmallTopAppbar',
     props,
     slots,
     render() {
-        const renderLeadingIcon = (
-            <span class={cssBase['leading-icon']}>
-                {this.$slots.leadingIcon && this.$slots.leadingIcon()}
-            </span>
-        )
-        const renderTrailingIcons = (
-            <span class={cssBase['trailing-icons']}>
-                {this.$slots.trailingIcons && this.$slots.trailingIcons()}
-            </span>
-        )
+        const renderLeadingIcon = this.$slots.leadingIcon && <span class={cssBase['leading-icon']}>{this.$slots.leadingIcon()}</span>
+        const renderTrailingIcons = this.$slots.trailingIcons && <span class={cssBase['trailing-icons']}>{this.$slots.trailingIcons()}</span>
         const renderTitle = <span class={cssBase.headline}>{this.headline}</span>
+
         const shadowMode = []
-        
         if(this.alwaysShadow) {
             shadowMode.push(cssBase['always-shadow'])
         } else {
@@ -41,18 +35,18 @@ export const MediumTopAppbar = defineComponent({
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.medium, ...shadowMode]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.small, ...shadowMode]}
             >
+                <Elevation></Elevation>
+
                 <div aria-hidden="true" class={cssBase.background}></div>
                 <div aria-hidden="true" class={cssBase.outline}></div>
 
-                <div class={cssBase['medium-grid']}>
+                <div class={cssBase['small-grid']}>
                     {renderLeadingIcon}
-                    {renderTrailingIcons}
                     {renderTitle}
+                    {renderTrailingIcons}
                 </div>
-
-                <Elevation></Elevation>
             </div>
         )
     }

@@ -1,4 +1,4 @@
-import { PropType, SlotsType } from 'vue'
+import { type PropType } from 'vue'
 
 export const propsShared = {
 

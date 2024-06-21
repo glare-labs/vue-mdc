@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { Ripple } from '../ripple/Ripple'
-import { Elevation } from '../elevation/Elevation'
+import { Ripple } from '../../ripple/Ripple'
+import { Elevation } from '../../elevation/Elevation'
 import css from './Chip.module.css'
 
 export type TChipType = 'assist' | 'filter' | 'input' | 'suggestion'

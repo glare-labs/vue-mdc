@@ -121,7 +121,7 @@ class GlareProviderComponent {
 
             return {
                 theme,
-                _themeConfiguration,
+                themeConfiguration,
             }
         },
         render() {
@@ -131,10 +131,10 @@ class GlareProviderComponent {
                     {
                         this.$slots.default && this.$slots.default({
                             version: Version.version,
-                            contrastLevel: this._themeConfiguration.contrastLevel,
-                            dark: this._themeConfiguration.dark,
-                            sourceColor: this._themeConfiguration.sourceColor,
-                            variant: this._themeConfiguration.variant,
+                            contrastLevel: this.themeConfiguration!.contrastLevel!,
+                            dark: this.themeConfiguration!.dark!,
+                            sourceColor: this.themeConfiguration!.sourceColor!,
+                            variant: this.themeConfiguration!.variant!,
                             colorTokens: this.theme.tokens
                         })
                     }

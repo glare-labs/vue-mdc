@@ -43,7 +43,6 @@
   ],
   "exclude": [
     "./src/components/**/test/*",
-    "./src/components/**/labs/*",
     "./src/**/*.vue",
     "./src/**/*.test.vue",
     "./src/**/*.test.ts",

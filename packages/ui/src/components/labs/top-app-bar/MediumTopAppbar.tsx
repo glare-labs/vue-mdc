@@ -1,14 +1,15 @@
-import { SlotsType, defineComponent } from 'vue'
-import { Elevation } from '../elevation/Elevation'
-import { propsShared, ISlotsShared } from './base'
+import { type SlotsType, defineComponent } from 'vue'
+import { type ISlotsShared, propsShared } from './base'
 import css from './topAppbar.module.css'
 import cssBase from './base.module.css'
+import { Elevation } from '../../elevation/Elevation'
 
 const props = propsShared
-const slots = {} as SlotsType<ISlotsShared>
+const slots = {} as SlotsType<Pick<ISlotsShared, 'leadingIcon'> & {
+    trailingIcons: void
+}>
 
-export const CenterAlignedTopAppbar = defineComponent({
-    name: 'GlareUi-CenterAlignedTopAppbar',
+export const MediumTopAppbar = defineComponent({
     props,
     slots,
     render() {
@@ -17,18 +18,14 @@ export const CenterAlignedTopAppbar = defineComponent({
                 {this.$slots.leadingIcon && this.$slots.leadingIcon()}
             </span>
         )
-        const renderTrailingIcon = (
-            <span class={cssBase['trailing-icon']}>
-                {this.$slots.trailingIcon && this.$slots.trailingIcon()}
+        const renderTrailingIcons = (
+            <span class={cssBase['trailing-icons']}>
+                {this.$slots.trailingIcons && this.$slots.trailingIcons()}
             </span>
         )
-        const renderTitle = (
-            <span class={cssBase.headline}>
-                {this.headline}
-            </span>
-        )
-
+        const renderTitle = <span class={cssBase.headline}>{this.headline}</span>
         const shadowMode = []
+        
         if(this.alwaysShadow) {
             shadowMode.push(cssBase['always-shadow'])
         } else {
@@ -44,16 +41,17 @@ export const CenterAlignedTopAppbar = defineComponent({
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css['center-aligned'], ...shadowMode]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.medium, ...shadowMode]}
             >
                 <div aria-hidden="true" class={cssBase.background}></div>
                 <div aria-hidden="true" class={cssBase.outline}></div>
 
-                <div class={cssBase['center-aligned-grid']}>
+                <div class={cssBase['medium-grid']}>
                     {renderLeadingIcon}
+                    {renderTrailingIcons}
                     {renderTitle}
-                    {renderTrailingIcon}
                 </div>
+
                 <Elevation></Elevation>
             </div>
         )

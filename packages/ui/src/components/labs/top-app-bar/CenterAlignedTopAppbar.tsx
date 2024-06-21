@@ -1,15 +1,14 @@
-import { SlotsType, defineComponent } from 'vue'
-import { ISlotsShared, propsShared } from './base'
+import { type SlotsType, defineComponent } from 'vue'
+import { Elevation } from '../../elevation/Elevation'
+import { propsShared, type ISlotsShared } from './base'
 import css from './topAppbar.module.css'
 import cssBase from './base.module.css'
-import { Elevation } from '../elevation/Elevation'
 
 const props = propsShared
-const slots = {} as SlotsType<Pick<ISlotsShared, 'leadingIcon'> & {
-    trailingIcons: void
-}>
+const slots = {} as SlotsType<ISlotsShared>
 
-export const LargeTopAppbar = defineComponent({
+export const CenterAlignedTopAppbar = defineComponent({
+    name: 'GlareUi-CenterAlignedTopAppbar',
     props,
     slots,
     render() {
@@ -18,12 +17,16 @@ export const LargeTopAppbar = defineComponent({
                 {this.$slots.leadingIcon && this.$slots.leadingIcon()}
             </span>
         )
-        const renderTrailingIcons = (
-            <span class={cssBase['trailing-icons']}>
-                {this.$slots.trailingIcons && this.$slots.trailingIcons()}
+        const renderTrailingIcon = (
+            <span class={cssBase['trailing-icon']}>
+                {this.$slots.trailingIcon && this.$slots.trailingIcon()}
             </span>
         )
-        const renderTitle = <span class={cssBase.headline}>{this.headline}</span>
+        const renderTitle = (
+            <span class={cssBase.headline}>
+                {this.headline}
+            </span>
+        )
 
         const shadowMode = []
         if(this.alwaysShadow) {
@@ -41,17 +44,16 @@ export const LargeTopAppbar = defineComponent({
             <div
                 data-is-top-app-bar="true"
                 data-is-forced-sticky={this.forcedSticky}
-                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css.large, ...shadowMode]}
+                class={[cssBase.container, this.forcedSticky && cssBase['on-scroll'], css['center-aligned'], ...shadowMode]}
             >
                 <div aria-hidden="true" class={cssBase.background}></div>
                 <div aria-hidden="true" class={cssBase.outline}></div>
 
-                <div class={cssBase['large-grid']}>
+                <div class={cssBase['center-aligned-grid']}>
                     {renderLeadingIcon}
-                    {renderTrailingIcons}
                     {renderTitle}
+                    {renderTrailingIcon}
                 </div>
-
                 <Elevation></Elevation>
             </div>
         )

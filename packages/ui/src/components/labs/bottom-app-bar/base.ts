@@ -1,4 +1,4 @@
-import { PropType, SlotsType } from 'vue'
+import { type PropType, type SlotsType } from 'vue'
 
 export type TBottomAppbarActionButtonShape = 'square' | 'rounded'
 

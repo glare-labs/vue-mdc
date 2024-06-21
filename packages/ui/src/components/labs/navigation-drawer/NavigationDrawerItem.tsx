@@ -1,7 +1,7 @@
-import { PropType, SlotsType, computed, defineComponent, inject, onBeforeMount, onBeforeUnmount, watch } from 'vue'
-import { INavigationDrawerProvider, SNavigationDrawerProvideKey } from './NavigationDrawerProvide'
-import css from './NavigationDrawItem.module.css'
-import { Ripple } from '../ripple/Ripple'
+import { type PropType, type SlotsType, computed, defineComponent, inject, onBeforeMount, onBeforeUnmount, watch } from 'vue'
+import { type INavigationDrawerContext, NavigationDrawerContext } from './NavigationDrawerContext'
+import css from './NavigationDrawerItem.module.css'
+import { Ripple } from '../../ripple/Ripple'
 
 export type TNavigationDrawerItemType = 'headline' | 'divider' | 'indicator'
 export const NavigationDrawerItemTypes = {
@@ -82,9 +82,9 @@ export const NavigationDrawerItem = defineComponent({
     props,
     slots,
     setup(props, ctx) {
-        const injection = inject<INavigationDrawerProvider>(SNavigationDrawerProvideKey)
+        const injection = inject<INavigationDrawerContext>(NavigationDrawerContext)
 
-        const isActive = computed(() => injection?.currentLabelName.value === props.label)
+        const isActive = computed(() => injection?.currentLabelName === props.label)
 
         const handleClicked = () => {
             injection?.setCurrentLabelName(props.label)
@@ -93,7 +93,7 @@ export const NavigationDrawerItem = defineComponent({
             }
         }
 
-        const checkLabel = (label: string) => !injection?.labels.value.includes(label)
+        const checkLabel = (label: string) => !injection?.labels.includes(label)
 
         onBeforeMount(() => {
             if (props.type !== NavigationDrawerItemTypes.Divider && props.label === null) {
@@ -104,15 +104,15 @@ export const NavigationDrawerItem = defineComponent({
             }
         })
         onBeforeUnmount(() => {
-            injection?.labels.value.splice(injection.labels.value.lastIndexOf(props.label), 1)
+            injection?.labels.splice(injection.labels.lastIndexOf(props.label), 1)
         })
 
         watch(() => props.label, (newValue, oldValue) => {
             if (oldValue) {
-                injection?.labels.value.splice(injection.labels.value.lastIndexOf(oldValue), 1)
+                injection?.labels.splice(injection.labels.lastIndexOf(oldValue), 1)
             }
             if (checkLabel(newValue)) {
-                injection?.labels.value.push(newValue)
+                injection?.labels.push(newValue)
             } else {
                 throw new Error(`[label] already exists. The [label] attribute should be treated as a unique value. Please do not make the [label] attribute value of multiple NavigationDrawerItem components the same.`)
             }
