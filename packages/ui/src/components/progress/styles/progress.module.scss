@@ -1,0 +1,10 @@
+@use './circular-progress';
+@use './linear-progress';
+
+.circular-progress {
+    @include circular-progress.styles();
+}
+
+.linear-progress {
+    @include linear-progress.styles();
+}

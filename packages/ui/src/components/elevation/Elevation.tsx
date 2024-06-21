@@ -1,10 +1,10 @@
 import { defineComponent, type PropType } from 'vue'
-import css from './Elevation.module.css'
-import { EElevationLevel, TElevationLevel } from './ElevationLevel'
+import css from './styles/elevation.module.scss'
+import { EElevationLevel, type TElevationLevel } from './ElevationLevel'
 
 class ElevationComponent {
-    private static readonly name = 'GlareUi-Elevation'
-    private static readonly props = {
+    private name = 'GlareUi-Elevation'
+    private props = {
         /**
          * 阴影级数, 取值在0到5之间, 包括0和5
          * 
@@ -19,9 +19,10 @@ class ElevationComponent {
          *   - 5
          * 
          * 可以导入枚举对象EElevationLevel来传入大小
+         * @example
          * ```html
          * <div class="relative w-[32px] h-[32px]">
-         *   <Glare.Elevation :level="EElevationLevel.Level3"></Glare.Elevation>
+         *   <glare.elevation :level="EElevationLevel.Level3"></glare.elevation>
          * </div>
          * ```
          * 
@@ -36,15 +37,15 @@ class ElevationComponent {
         },
     }
 
-    public static readonly component = defineComponent({
+    public component = defineComponent({
         name: this.name,
         props: this.props,
         render() {
             return (
-                <span class={[css.elevation, css[`level-${this.level}`]]}></span>
+                <span data-component="elevation" class={[css.elevation, css[`level-${this.level}`]]}></span>
             )
         },
     })
 }
 
-export const Elevation = ElevationComponent.component
+export const Elevation = new ElevationComponent().component

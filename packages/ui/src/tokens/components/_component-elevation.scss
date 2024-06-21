@@ -1,0 +1,38 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use '../internal/validate';
+@use '../color';
+@use '../elevation';
+
+$supported-tokens: (
+  'level',
+  'shadow-color',
+);
+
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-elevation': elevation.values(),
+);
+
+@function values($deps: $_default,
+  $exclude-hardcoded-values: false,
+  $exclude-custom-properties: true) {
+  $tokens: (
+    'level': map.get($deps, 'gu-sys-elevation', 'level0'),
+    'shadow-color': map.get($deps, 'gu-sys-color', 'shadow'),
+  );
+
+@if not $exclude-custom-properties {
+  @each $token, $value in $tokens {
+    $tokens: map.set($tokens,
+        $token,
+        var(--gu-elevation-#{$token}, #{$value}));
+  }
+}
+
+@return validate.values($tokens, $supported-tokens: $supported-tokens);
+}

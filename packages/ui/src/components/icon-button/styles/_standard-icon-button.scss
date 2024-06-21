@@ -1,0 +1,129 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+// @use '../../focus/focus-ring';
+@use '../../ripple/styles//ripple';
+@use '../../../tokens';
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-icon-button-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-icon-button-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-icon-button-values($exclude-custom-properties: false);
+
+    & {
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+
+        // These custom properties are not used, so set defaults so token tests pass
+        // for <glare-icon-button>.
+        --_container-shape-start-start: 0;
+        --_container-shape-start-end: 0;
+        --_container-shape-end-end: 0;
+        --_container-shape-end-start: 0;
+        --_container-height: 0;
+        --_container-width: 0;
+
+        height: var(--_state-layer-height);
+        width: var(--_state-layer-width);
+    }
+
+    &[touch-target='wrapper'] {
+        margin: max(0px, (48px - var(--_state-layer-height))/2) max(0px, (48px - var(--_state-layer-width))/2);
+    }
+
+    & md-focus-ring {
+        // @include focus-ring.theme(('shape-start-start': var(--_state-layer-shape),
+        //         'shape-start-end': var(--_state-layer-shape),
+        //         'shape-end-end': var(--_state-layer-shape),
+        //         'shape-end-start': var(--_state-layer-shape),
+        //     ));
+    }
+
+    &.icon-button {
+        color: var(--_icon-color);
+
+        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
+
+        &:hover {
+            color: var(--_hover-icon-color);
+        }
+
+        &:focus {
+            color: var(--_focus-icon-color);
+        }
+
+        &:active {
+            color: var(--_pressed-icon-color);
+        }
+
+        &.disabled,
+        &:disabled {
+            color: var(--_disabled-icon-color);
+        }
+    }
+
+    &.icon-button .background {
+        background-color: transparent;
+        border-radius: inherit;
+        content: '';
+        inset: 0;
+        position: absolute;
+        z-index: -1; // place behind content
+    }
+
+    & [data-component='ripple'] {
+        border-radius: var(--_state-layer-shape);
+    }
+
+    &.icon-button.disabled .icon,
+    &.icon-button:disabled .icon {
+        opacity: var(--_disabled-icon-opacity);
+    }
+
+    &.selected {
+
+        &:not(.disabled),
+        &:not(:disabled) {
+            color: var(--_selected-icon-color);
+
+            &:hover {
+                color: var(--_selected-hover-icon-color);
+            }
+
+            &:focus {
+                color: var(--_selected-focus-icon-color);
+            }
+
+            &:active {
+                color: var(--_selected-pressed-icon-color);
+            }
+        }
+
+        @include ripple.theme((hover-color: var(--_selected-hover-state-layer-color),
+                hover-opacity: var(--_selected-hover-state-layer-opacity),
+                pressed-color: var(--_selected-pressed-state-layer-color),
+                pressed-opacity: var(--_selected-pressed-state-layer-opacity),
+            ));
+    }
+}

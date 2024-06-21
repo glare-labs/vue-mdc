@@ -1,0 +1,36 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use '../color';
+@use '../elevation';
+@use '../shape';
+@use '../state';
+@use '../typescale';
+@use './prototype/prototype-navigation-bar';
+
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-elevation': elevation.values(),
+  'gu-sys-shape': shape.values(),
+  'gu-sys-state': state.values(),
+  'gu-sys-typescale': typescale.values(),
+);
+
+@function values($deps: $_default,
+  $exclude-hardcoded-values: false,
+  $exclude-custom-properties: true) {
+  $tokens: prototype-navigation-bar.values($deps, $exclude-hardcoded-values);
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      $tokens: map.set($tokens,
+          $token,
+          var(--gu-navigation-bar-#{$token}, #{$value}));
+    }
+  }
+
+  @return $tokens;
+}

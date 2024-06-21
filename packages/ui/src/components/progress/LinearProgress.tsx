@@ -1,5 +1,5 @@
 import { defineComponent, type PropType } from 'vue'
-import css from './LinearProgress.module.css'
+import css from './styles/progress.module.scss'
 
 export const LinearProgress = defineComponent({
     name: 'GlareUi-LinearProgress',
@@ -42,7 +42,8 @@ export const LinearProgress = defineComponent({
     render() {
         return (
             <div
-                class={[css.surface, css.vars, this.indeterminate && css.indeterminate]}
+                data-component="linear-progress"
+                class={[css['linear-progress'], this.indeterminate && css.indeterminate]}
                 role="progressbar"
                 aria-valuemin="0"
                 aria-valuemax={this.max}
@@ -52,7 +53,7 @@ export const LinearProgress = defineComponent({
                     style={{ display: this.shouldHideDots ? 'block' : 'none' }}
                     class={css.dots}
                 ></div>
-                <div class={css.background} style={this.dotStyles}></div>
+                <div class={css['inactive-track']} style={this.dotStyles}></div>
                 <div class={[css.bar, css['primary-bar']]} style={this.progressStyles}>
                     <div class={css['bar-inner']}></div>
                 </div>

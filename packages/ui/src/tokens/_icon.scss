@@ -1,0 +1,11 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use './prototype/icon';
+
+@function values($exclude-hardcoded-values: false,
+    $exclude-custom-properties: true) {
+    @return icon.values($exclude-hardcoded-values, $exclude-custom-properties);
+}

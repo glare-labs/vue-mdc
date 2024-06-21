@@ -1,35 +1,32 @@
 import { defineComponent, type PropType } from 'vue'
-import css from './Divider.module.css'
+import css from './styles/divider.module.scss'
+import { EDividerVariant, type TDividerVariant } from './DividerVariant'
 
-export type TDividerVariant = 'inset-left' | 'middle-inset' | 'inset-right' | 'no-inset'
-export type TDividerDirection = 'horizontal' | 'vertical'
-
-export const enum EDividerVariant {
-    InsetLeft = 'inset-left',
-    MiddleInset = 'middle-inset',
-    InsetRight = 'inset-right',
-    NoInset = 'no-inset',
-}
-export const enum EDividerDirection {
-    Horizontal = 'horizontal',
-    Vertical = 'vertical',
-}
-
-export const Divider = defineComponent({
-    name: 'GlareUi-Divider',
-    props: {
-        direction: {
-            type: String as PropType<TDividerDirection>,
-            default: EDividerDirection.Horizontal,
-        },
+class DividerComponent {
+    private props = {
         variant: {
             type: String as PropType<TDividerVariant>,
             default: EDividerVariant.MiddleInset,
         },
-    },
-    setup(props, _) {
-        return () => (
-            <span class={[css.surface, css[props.direction], css[props.variant]]}></span>
-        )
-    },
-})
+    }
+
+    public component = defineComponent({
+        name: 'GlareUi-Divider',
+        props: this.props,
+        render() {
+            const isNoInsert = this.variant === EDividerVariant.NoInset
+            const isMiddle = this.variant === EDividerVariant.MiddleInset
+
+            const variant = isNoInsert ? [] : isMiddle ? css.inset : css[this.variant]
+            return (
+                <span
+                    data-component="divider"
+                    aria-hidden="true"
+                    class={[css.divider, variant]}
+                ></span>
+            )
+        }
+    })
+}
+
+export const Divider = new DividerComponent().component

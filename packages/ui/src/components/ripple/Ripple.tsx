@@ -1,9 +1,8 @@
-import { type PropType, type Ref, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
-import css from './Ripple.module.css'
+import { type PropType, defineComponent, inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import css from './styles/ripple.module.scss'
 import { RippleAttachableController } from './RippleAttachableController'
 import { AttachableControllerSymbol, type AttachableControllerHost } from '../../utils/AttachableController'
 import { GlareProviderContext, type TGlareProviderContext } from '../glare-provider/Context'
-
 
 class RippleComponent {
     protected name = `GlareUi-Ripple`
@@ -43,8 +42,9 @@ class RippleComponent {
     
             return () => (
                 <span
+                    data-component="ripple"
                     aria-hidden="true"
-                    class={[css.surface]}
+                    class={[css.ripple]}
                     ref={root}
                 ></span>
             )

@@ -1,0 +1,28 @@
+@use './shared';
+@use './filled-icon-button';
+@use './filled-tonal-icon-button';
+@use './outlined-icon-button';
+@use './standard-icon-button';
+
+.standard,
+.filled,
+.filled-tonal,
+.outlined {
+    @include shared.styles();
+}
+
+.filled {
+    @include filled-icon-button.styles();
+}
+
+.filled-tonal {
+    @include filled-tonal-icon-button.styles();
+}
+
+.outlined {
+    @include outlined-icon-button.styles();
+}
+
+.standard {
+    @include standard-icon-button.styles();
+}

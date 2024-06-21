@@ -1,0 +1,44 @@
+@use './shared';
+@use './icon';
+@use './filled-button';
+@use './filled-tonal-button';
+@use './elevated-button';
+@use './outlined-button';
+@use './text-button';
+@use './elevation';
+
+
+.filled,
+.filled-tonal,
+.elevated,
+.outlined,
+.text {
+    @include shared.styles();
+    @include icon.styles();
+}
+
+.filled,
+.filled-tonal,
+.elevated {
+    @include elevation.styles();
+}
+
+.filled {
+    @include filled-button.styles();
+}
+
+.filled-tonal {
+    @include filled-tonal-button.styles();
+}
+
+.elevated {
+    @include elevated-button.styles();
+}
+
+.outlined {
+    @include outlined-button.styles();
+}
+
+.text {
+    @include text-button.styles();
+}

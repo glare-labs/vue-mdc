@@ -1,0 +1,58 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use '../../../tokens';
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-divider-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-divider-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-divider-values($exclude-custom-properties: false);
+
+    .divider {
+        box-sizing: border-box;
+        color: map.get($tokens, 'color');
+        display: flex;
+        height: map.get($tokens, 'thickness');
+        width: 100%;
+
+        &.inset,
+        &.inset-start {
+            padding-inline-start: 16px;
+        }
+
+        &.inset,
+        &.inset-end {
+            padding-inline-end: 16px;
+        }
+
+        &::before {
+            background: currentColor;
+            content: '';
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+
+    @media (forced-colors: active) {
+        .divider::before {
+            background: CanvasText;
+        }
+    }
+}

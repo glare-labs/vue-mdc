@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import css from './CircularProgress.module.css'
+import css from './styles/progress.module.scss'
 
 export const CircularProgress = defineComponent({
     name: 'GlareUi-CircularProgress',
@@ -20,7 +20,8 @@ export const CircularProgress = defineComponent({
     render() {
         return (
             <div
-                class={[css.surface, this.indeterminate && css.indeterminate]}
+                data-component="circular-progress"
+                class={[css['circular-progress'], this.indeterminate && css.indeterminate]}
                 role="progressbar"
                 aria-valuemin="0"
                 aria-valuemax={this.max}

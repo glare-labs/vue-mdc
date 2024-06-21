@@ -47,7 +47,7 @@ export class ComponentRegister {
             instance.component(`${this.Prefix}-togglable-icon-button`, TogglableIconButton)
             instance.component(`${this.Prefix}-fab`, Fab)
             instance.component(`${this.Prefix}-navigation-bar`, NavigationBar)
-            instance.component(`${this.Prefix}-bavigation-tab`, NavigationTab)
+            instance.component(`${this.Prefix}-navigation-tab`, NavigationTab)
             instance.component(`${this.Prefix}-checkbox`, Checkbox)
             instance.component(`${this.Prefix}-radio`, Radio)
             instance.component(`${this.Prefix}-switch`, Switch)

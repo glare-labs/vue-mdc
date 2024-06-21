@@ -1,23 +1,36 @@
-import { defineComponent } from 'vue'
-import css from './iconButton.module.css'
-import cssBase from './base.module.css'
+import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { Ripple } from '../ripple/Ripple'
-import { BaseIconButton } from './BaseIconButton'
+import { EIconButtonAppearance, type TIconButtonAppearance } from './IconButtonAppearance'
+import { EIconButtonType, type TIconButtonType } from './IconButtonType'
+import css from './styles/icon-button.module.scss'
 
-class IconButtonComponent extends BaseIconButton {
-    protected name: string = 'GlareUi-IconButton'
-    protected props = {
-        ...super.getProps(),
+class IconButtonComponent {
+    private name: string = 'GlareUi-IconButton'
+    private props = {
+        appearance: {
+            type: String as PropType<TIconButtonAppearance>,
+            default: EIconButtonAppearance.Standard,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        type: {
+            type: String as PropType<TIconButtonType>,
+            default: EIconButtonType.Button,
+        },
     }
+    private slots = {} as SlotsType<{
+        default: void
+    }>
     
     public readonly component = defineComponent({
         name: this.name,
         props: this.props,
-        emits: this.emits,
         slots: this.slots,
         render() {
             const renderIcon = (
-                <span class={cssBase.icon}>
+                <span class={css.icon}>
                     {this.$slots.default && this.$slots.default()}
                 </span>
             )
@@ -25,18 +38,20 @@ class IconButtonComponent extends BaseIconButton {
             return (
                 <button
                     class={[
-                        cssBase.container,
+                        css['icon-button'],
                         css[this.appearance],
-                        this.disabled && cssBase.disabled
+                        this.disabled && css.disabled
                     ]}
+                    data-component="icon-button"
                     disabled={this.disabled}
+                    aria-disabled={this.disabled}
                     type={this.type}
                 >
                     <Ripple></Ripple>
     
-                    <div aria-hidden="true" class={cssBase.touch}></div>
-                    <div aria-hidden="true" class={cssBase.background}></div>
-                    <div aria-hidden="true" class={cssBase.outline}></div>
+                    <div aria-hidden="true" class={css.touch}></div>
+                    <div aria-hidden="true" class={css.background}></div>
+                    <div aria-hidden="true" class={css.outline}></div>
     
                     {renderIcon}
                 </button>

@@ -1,5 +1,5 @@
 import { type PropType, defineComponent } from 'vue'
-import css from './_typography.module.scss'
+import css from './styles/typography.module.scss'
 import { ETypographyVariant, type TTypographyVariant } from './TypographyVariant'
 
 export const Typography = defineComponent({
@@ -12,7 +12,7 @@ export const Typography = defineComponent({
     },
     render() {
         return (
-            <span class={[css['typography'], css[this.variant]]}>
+            <span data-component="typography" class={[css.typography, css[this.variant]]}>
                 {this.$slots.default && this.$slots.default()}
             </span>
         )

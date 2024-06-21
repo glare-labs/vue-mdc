@@ -7,9 +7,17 @@
 @use './internal/validate';
 @use './prototype/typeface';
 
-@function values($hardcoded: true,
+$supported-tokens: (
+    'brand',
+    'plain',
+    'weight-bold',
+    'weight-medium',
+    'weight-regular',
+);
+
+@function values($exclude-hardcoded-values: false,
     $exclude-custom-properties: false) {
-    $tokens: typeface.values($hardcoded: $hardcoded);
+    $tokens: typeface.values($exclude-hardcoded-values: $exclude-hardcoded-values);
 
     @if not $exclude-custom-properties {
         @each $token, $value in $tokens {

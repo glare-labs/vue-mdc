@@ -1,0 +1,191 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+// @use '../../focus/focus-ring';
+// @use '../../internal/motion/animation';
+@use '../../ripple/styles/ripple';
+@use '../../../tokens';
+
+$_motion: tokens.motion-values();
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-radio-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --gu-radio-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-radio-values($exclude-custom-properties: false);
+
+    @layer {
+        & {
+            display: inline-flex;
+            height: map.get($tokens, 'icon-size');
+            outline: none;
+            position: relative;
+            vertical-align: top; // Fix extra space when placed inside display: block
+            width: map.get($tokens, 'icon-size');
+            // Remove highlight color for mobile Safari
+            -webkit-tap-highlight-color: transparent;
+            cursor: pointer;
+            place-content: center;
+            place-items: center;
+
+            @include ripple.theme((hover-color: map.get($tokens, 'hover-state-layer-color'),
+                    hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
+                    pressed-color: map.get($tokens, 'pressed-state-layer-color'),
+                    pressed-opacity: map.get($tokens, 'pressed-state-layer-opacity'),
+                ));
+        }
+
+        &.disabled,
+        &:disabled {
+            cursor: default;
+        }
+
+        &[touch-target='wrapper'] {
+            margin: max(0px, ((48px - map.get($tokens, 'icon-size')) / 2));
+        }
+
+        & [data-component="focus-ring"] {
+            height: 44px;
+            inset: unset;
+            width: 44px;
+        }
+
+        &.checked {
+            @include ripple.theme((hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
+                    hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),
+                    pressed-color: map.get($tokens, 'selected-pressed-state-layer-color'),
+                    pressed-opacity: map.get($tokens, 'selected-pressed-state-layer-opacity'),
+                ));
+        }
+
+        // <input> is also the touch target
+        & input {
+            appearance: none;
+            height: 48px;
+            margin: 0;
+            position: absolute;
+            width: 48px;
+            cursor: inherit;
+        }
+
+        &[touch-target='none'] input {
+            width: 100%;
+            height: 100%;
+        }
+
+        & [data-component="ripple"] {
+            border-radius: 50% !important;
+            inset: unset !important;
+            height: map.get($tokens, 'state-layer-size');
+            width: map.get($tokens, 'state-layer-size');
+        }
+
+        & .icon {
+            fill: map.get($tokens, 'icon-color');
+            inset: 0;
+            position: absolute;
+        }
+
+        & .outer.circle {
+            // Outline color enter/exit transition
+            transition: fill 50ms linear;
+        }
+
+        & .inner.circle {
+            opacity: 0;
+            transform-origin: center;
+            transition: opacity 50ms linear;
+        }
+
+        &.checked .icon {
+            fill: map.get($tokens, 'selected-icon-color');
+        }
+
+        &.checked .inner.circle {
+            animation: inner-circle-grow 300ms map.get($_motion, easing-emphasized-decelerate);
+            opacity: 1;
+        }
+
+        @keyframes inner-circle-grow {
+            from {
+                transform: scale(0);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        // Don't animate when disabled
+        &.disabled .circle,
+        &:disabled .circle {
+            animation-duration: 0s;
+            transition-duration: 0s;
+        }
+
+        &:hover .icon {
+            fill: map.get($tokens, 'hover-icon-color');
+        }
+
+        &:focus-within .icon {
+            fill: map.get($tokens, 'focus-icon-color');
+        }
+
+        &:active .icon {
+            fill: map.get($tokens, 'pressed-icon-color');
+        }
+
+        &.disabled .icon,
+        &:disabled .icon {
+            fill: map.get($tokens, 'disabled-unselected-icon-color');
+            opacity: map.get($tokens, 'disabled-unselected-icon-opacity');
+        }
+
+        &:hover .checked .icon {
+            fill: map.get($tokens, 'selected-hover-icon-color');
+        }
+
+        &:focus-within .checked .icon {
+            fill: map.get($tokens, 'selected-focus-icon-color');
+        }
+
+        &:active .checked .icon {
+            fill: map.get($tokens, 'selected-pressed-icon-color');
+        }
+
+        &.disabled .checked .icon,
+        &:disabled .checked .icon {
+            fill: map.get($tokens, 'disabled-selected-icon-color');
+            opacity: map.get($tokens, 'disabled-selected-icon-opacity');
+        }
+    }
+
+    @layer hcm {
+        @media (forced-colors: active) {
+            & .icon {
+                fill: CanvasText;
+            }
+
+            &.disabled .icon,
+            &:disabled .icon {
+                fill: GrayText;
+                opacity: 1;
+            }
+        }
+    }
+}

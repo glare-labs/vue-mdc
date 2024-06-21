@@ -1,0 +1,10 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use './prototype/state';
+
+@function values($exclude-hardcoded-values: false) {
+    @return state.values($exclude-hardcoded-values);
+}

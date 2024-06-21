@@ -26,7 +26,6 @@ As a child element of an element, the position value of its **parent element sho
 
 If necessary, you can modify ripple's CSS variables to customize your theme.
 
-
 ```html
 <style>
 .my-container {
@@ -35,8 +34,8 @@ If necessary, you can modify ripple's CSS variables to customize your theme.
   width: 24px;
 }
 .my-ripple {
-    --glare-ui-ripple-state-layer-color-hover: red;
-    --glare-ui-ripple-state-layer-opacity-hover: 0.5;
+    --gu-ripple-hover-color: red;
+    --gu-ripple-pressed-color: green;
 }
 </style>
 
@@ -61,10 +60,10 @@ When you need to use ripple to wrap the parent element, you can set that to ripp
 }
 
 .my-ripple {
-  --glare-ui-ripple-shape: 50%;
-  --glare-ui-ripple-touch-target: unset;
-  --glare-ui-ripple-width: 48px;
-  --glare-ui-ripple-height: 48px;
+  --gu-ripple-shape: 50%;
+  --gu-ripple-touch-target: unset;
+  --gu-ripple-width: 48px;
+  --gu-ripple-height: 48px;
 
 }
 </style>

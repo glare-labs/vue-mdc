@@ -1,0 +1,74 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use './internal/validate';
+@use './prototype/shape';
+
+$supported-tokens: (
+    'corner-extra-large',
+    'corner-extra-small',
+    'corner-full',
+    'corner-large',
+    'corner-medium',
+    'corner-none',
+    'corner-small',
+);
+
+$unsupported-tokens: (
+    'corner-extra-large-top',
+    'corner-extra-small-top',
+    'corner-large-end',
+    'corner-large-start',
+    'corner-large-top',
+);
+
+@function values($exclude-hardcoded-values: false,
+    $exclude-custom-properties: false) {
+    $original-tokens: shape.values($exclude-hardcoded-values);
+    $tokens: validate.values($original-tokens,
+            $supported-tokens: $supported-tokens,
+            $unsupported-tokens: $unsupported-tokens );
+
+    @if not $exclude-custom-properties {
+        @each $token, $value in $tokens {
+            @if $value !=null {
+                $tokens: map.set($tokens,
+                        $token,
+                        var(--gu-sys-shape-#{$token}, #{$value}));
+            }
+        }
+    }
+
+    $tokens: map.merge($tokens,
+            ('corner-extra-large-top': (map.get($tokens, 'corner-extra-large'),
+                    map.get($tokens, 'corner-extra-large'),
+                    map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-none'),
+                ),
+                'corner-extra-small-top': (map.get($tokens, 'corner-extra-small'),
+                    map.get($tokens, 'corner-extra-small'),
+                    map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-none'),
+                ),
+                'corner-large-end': (map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-large'),
+                    map.get($tokens, 'corner-large'),
+                    map.get($tokens, 'corner-none'),
+                ),
+                'corner-large-start': (map.get($tokens, 'corner-large'),
+                    map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-large'),
+                ),
+                'corner-large-top': (map.get($tokens, 'corner-large'),
+                    map.get($tokens, 'corner-large'),
+                    map.get($tokens, 'corner-none'),
+                    map.get($tokens, 'corner-none'),
+                ),
+            ));
+
+    @return $tokens;
+}

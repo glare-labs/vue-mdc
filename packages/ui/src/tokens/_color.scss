@@ -7,8 +7,58 @@
 @use './internal/validate';
 @use './palette';
 @use './prototype/color';
-@use './prototype/supported-color';
 
+$supported-tokens: (
+  'background',
+  'error',
+  'error-container',
+  'inverse-on-surface',
+  'inverse-primary',
+  'inverse-surface',
+  'on-background',
+  'on-error',
+  'on-error-container',
+  'on-primary',
+  'on-primary-container',
+  'on-primary-fixed',
+  'on-primary-fixed-variant',
+  'on-secondary',
+  'on-secondary-container',
+  'on-secondary-fixed',
+  'on-secondary-fixed-variant',
+  'on-surface',
+  'on-surface-variant',
+  'on-tertiary',
+  'on-tertiary-container',
+  'on-tertiary-fixed',
+  'on-tertiary-fixed-variant',
+  'outline',
+  'outline-variant',
+  'primary',
+  'primary-container',
+  'primary-fixed',
+  'primary-fixed-dim',
+  'scrim',
+  'secondary',
+  'secondary-container',
+  'secondary-fixed',
+  'secondary-fixed-dim',
+  'shadow',
+  'surface',
+  'surface-bright',
+  'surface-container',
+  'surface-container-high',
+  'surface-container-highest',
+  'surface-container-low',
+  'surface-container-lowest',
+  'surface-dim',
+  'surface-tint',
+  'surface-variant',
+  'tertiary',
+  'tertiary-container',
+  'tertiary-fixed',
+  'tertiary-fixed-dim',
+);
 
 $_default-dark: (
   'gu-ref-palette': palette.values(),
@@ -28,7 +78,7 @@ $_default-dark: (
     }
   }
 
-  @return validate.values($tokens, $supported-tokens: supported-color.$tokens);
+  @return validate.values($tokens, $supported-tokens: $supported-tokens);
 }
 
 $_default-light: (
@@ -49,5 +99,5 @@ $_default-light: (
     }
   }
 
-  @return validate.values($tokens, $supported-tokens: supported-color.$tokens);
+  @return validate.values($tokens, $supported-tokens: $supported-tokens);
 }

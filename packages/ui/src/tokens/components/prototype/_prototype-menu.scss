@@ -1,0 +1,35 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+//
+// !!! THIS FILE WAS AUTOMATICALLY GENERATED !!!
+// !!! DO NOT MODIFY IT BY HAND !!!
+// Design system display name: Google Material 3
+// Design system version: v0.192
+// User-configured context group "Audience": "3P"
+// User-configured context group "Platform": "Web"
+// User-configured context group "Scheme": "Dynamic"
+//
+
+@use 'sass:map';
+@use '../../color';
+@use '../../elevation';
+@use '../../shape';
+
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-elevation': elevation.values(),
+  'gu-sys-shape': shape.values(),
+);
+
+@function values($deps: $_default) {
+  @return ('container-color': map.get($deps, 'gu-sys-color', 'surface-container'),
+    'container-elevation': map.get($deps, 'gu-sys-elevation', 'level2'),
+    'container-shadow-color': map.get($deps, 'gu-sys-color', 'shadow'),
+    'container-shape': map.get($deps, 'gu-sys-shape', 'corner-extra-small'),
+    'list-item-selected-container-color': map.get($deps, 'gu-sys-color', 'secondary-container'),
+    'list-item-selected-label-text-color': map.get($deps, 'gu-sys-color', 'on-secondary-container'),
+    'list-item-selected-with-leading-icon-trailing-icon-color': map.get($deps, 'gu-sys-color', 'on-secondary-container'),
+    'menu-list-item-with-leading-icon-icon-color': map.get($deps, 'gu-sys-color', 'on-secondary-container'));
+}

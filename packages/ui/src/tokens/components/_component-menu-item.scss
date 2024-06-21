@@ -1,0 +1,102 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use 'sass:string';
+@use '../internal/validate';
+@use './prototype/prototype-menu';
+@use '../color';
+@use '../elevation';
+@use '../shape';
+@use '../state';
+@use '../typescale';
+@use './component-list-item';
+
+$supported-tokens: (
+  'bottom-space',
+  'container-color',
+  'disabled-opacity',
+  'hover-state-layer-color',
+  'hover-state-layer-opacity',
+  'label-text-color',
+  'label-text-font',
+  'label-text-line-height',
+  'label-text-size',
+  'label-text-weight',
+  'leading-icon-color',
+  'leading-space',
+  'one-line-container-height',
+  'pressed-state-layer-color',
+  'pressed-state-layer-opacity',
+  'selected-container-color',
+  'selected-label-text-color',
+  'supporting-text-color',
+  'supporting-text-font',
+  'supporting-text-line-height',
+  'supporting-text-size',
+  'supporting-text-weight',
+  'top-space',
+  'trailing-icon-color',
+  'trailing-space',
+  'trailing-supporting-text-color',
+  'trailing-supporting-text-font',
+  'trailing-supporting-text-line-height',
+  'trailing-supporting-text-size',
+  'trailing-supporting-text-weight',
+  'two-line-container-height',
+);
+$unsupported-tokens: (
+  'container-elevation',
+  'container-shadow-color',
+  'container-shape',
+  'selected-with-leading-icon-trailing-icon-color',
+  'with-leading-icon-icon-color',
+);
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-elevation': elevation.values(),
+  'gu-sys-shape': shape.values(),
+  'gu-sys-state': state.values(),
+  'gu-sys-typescale': typescale.values(),
+);
+
+@function values($deps: $_default,
+  $exclude-hardcoded-values: false,
+  $exclude-custom-properties: true) {
+  $tokens: prototype-menu.values($deps);
+  $tokens: map.set($tokens, 'container-color', transparent);
+  $tokens: validate.values($tokens,
+      $supported-tokens: $supported-tokens,
+      $unsupported-tokens: $unsupported-tokens,
+      $new-tokens: component-list-item.values($deps),
+      $renamed-tokens: _get-renamed-tokens($tokens));
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      $tokens: map.set($tokens,
+          $token,
+          var(--gu-menu-item-#{$token}, #{$value}));
+    }
+  }
+
+  @return $tokens;
+}
+
+@function _get-renamed-tokens($tokens) {
+  $keys: map.keys($tokens);
+  $renamed-tokens: (
+  );
+
+@each $key in $keys {
+  @each $prefix in ('list-item-', 'menu-list-item-') {
+    @if string.index($key, $prefix)==1 {
+      $renamed-key: string.slice($key, string.length($prefix) + 1);
+      $renamed-tokens: map.set($renamed-tokens, $key, $renamed-key);
+    }
+  }
+}
+
+@return $renamed-tokens;
+}

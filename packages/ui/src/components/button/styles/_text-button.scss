@@ -1,0 +1,40 @@
+//
+// Copyright 2021 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use '../../../tokens';
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$component-text-button-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --md-text-button-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.component-text-button-values($exclude-custom-properties: false,
+        );
+
+    // Only use the logical properties.
+    $tokens: map.remove($tokens, 'container-shape');
+
+    & {
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+
+        --_container-color: none;
+        --_disabled-container-color: none;
+        --_disabled-container-opacity: 0;
+    }
+}

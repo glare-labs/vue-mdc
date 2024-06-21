@@ -1,0 +1,68 @@
+//
+// Copyright 2023 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use 'sass:map';
+@use '../internal/validate';
+@use '../color';
+@use '../elevation';
+@use '../shape';
+@use '../state';
+@use './prototype/prototype-outlined-card';
+
+$supported-tokens: (
+  'container-color',
+  'container-elevation',
+  'container-shadow-color',
+  'container-shape',
+  'outline-color',
+  'outline-width',
+);
+$unsupported-tokens: (
+  'disabled-container-elevation',
+  'disabled-outline-color',
+  'disabled-outline-opacity',
+  'dragged-container-elevation',
+  'dragged-outline-color',
+  'dragged-state-layer-color',
+  'dragged-state-layer-opacity',
+  'focus-container-elevation',
+  'focus-outline-color',
+  'focus-state-layer-color',
+  'focus-state-layer-opacity',
+  'hover-container-elevation',
+  'hover-outline-color',
+  'hover-state-layer-color',
+  'hover-state-layer-opacity',
+  'icon-color',
+  'icon-size',
+  'pressed-container-elevation',
+  'pressed-outline-color',
+  'pressed-state-layer-color',
+  'pressed-state-layer-opacity',
+);
+$_default: (
+  'gu-sys-color': color.values-light(),
+  'gu-sys-elevation': elevation.values(),
+  'gu-sys-shape': shape.values(),
+  'gu-sys-state': state.values(),
+);
+
+@function values($deps: $_default,
+  $exclude-hardcoded-values: false,
+  $exclude-custom-properties: true) {
+  $tokens: validate.values(prototype-outlined-card.values($deps, $exclude-hardcoded-values),
+      $supported-tokens: $supported-tokens,
+      $unsupported-tokens: $unsupported-tokens );
+
+  @if not $exclude-custom-properties {
+    @each $token, $value in $tokens {
+      $tokens: map.set($tokens,
+          $token,
+          var(--gu-outlined-card-#{$token}, #{$value}));
+    }
+  }
+
+  @return $tokens;
+}
