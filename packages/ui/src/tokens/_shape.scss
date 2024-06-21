@@ -6,14 +6,31 @@
 @use 'sass:map';
 @use './internal/validate';
 @use './prototype/shape';
-@use './prototype/supported-shape';
+
+$supported-tokens: (
+    'corner-extra-large',
+    'corner-extra-small',
+    'corner-full',
+    'corner-large',
+    'corner-medium',
+    'corner-none',
+    'corner-small',
+);
+
+$unsupported-tokens: (
+    'corner-extra-large-top',
+    'corner-extra-small-top',
+    'corner-large-end',
+    'corner-large-start',
+    'corner-large-top',
+);
 
 @function values($exclude-hardcoded-values: false,
     $exclude-custom-properties: false) {
     $original-tokens: shape.values($exclude-hardcoded-values);
     $tokens: validate.values($original-tokens,
-            $supported-tokens: supported-shape.$supported-tokens,
-            $unsupported-tokens: supported-shape.$unsupported-tokens );
+            $supported-tokens: $supported-tokens,
+            $unsupported-tokens: $unsupported-tokens );
 
     @if not $exclude-custom-properties {
         @each $token, $value in $tokens {

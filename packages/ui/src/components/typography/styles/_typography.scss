@@ -1,9 +1,8 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../../tokens/prototype/supported-typescale';
 
 @mixin theme($tokens) {
-    $supported-tokens: supported-typescale.$supported-tokens;
+    $supported-tokens: tokens.$typescale-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
