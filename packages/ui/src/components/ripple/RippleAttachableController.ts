@@ -1,6 +1,6 @@
 import { RippleState } from './RippleState'
 import { RippleConfiguration } from './RippleConfiguration'
-import { EMotionEasing } from '../../utils/tokens'
+import { EMotionEasing } from '../../utils/token'
 import { AttachableController } from '../../utils/AttachableController'
 import { ref } from 'vue'
 

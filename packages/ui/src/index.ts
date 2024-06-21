@@ -32,13 +32,7 @@ export * from './utils/theme'
 /**
  * Utils
  */
-export {
-    Tokens,
-    EElevationLevel,
-    EMotionDuration,
-    EMotionEasing,
-    EShape,
-} from './utils/tokens'
+export * from './utils/token'
 export {
     ComponentRegister
 } from './utils/ComponentRegister'
