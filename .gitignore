@@ -31,8 +31,6 @@ test-report
 .fleet
 .idea
 package-lock.json
-firebase.json
-.firebaserc
 packages/ui/tsconfig.tsbuildinfo
 
 # Nuxt dev/build outputs

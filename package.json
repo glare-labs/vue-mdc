@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "dev": "npm run dev -w dev-app",
-    "compile": "npm run compile -w @glare-labs/ui",
+    "compile": "npm run generate -w @glare-labs/ui",
+    "generate": "npm run generate -w dev-app",
     "lint": "npm run lint -w @glare-labs/ui"
   }
 }

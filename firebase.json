@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "glare-ui-dev",
+    "public": "./packages/dev-app/dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "packages/**/*",
+      "docs/**/*"
+    ]
+  }
+}

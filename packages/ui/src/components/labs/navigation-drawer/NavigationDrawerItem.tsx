@@ -1,6 +1,6 @@
 import { type PropType, type SlotsType, computed, defineComponent, inject, onBeforeMount, onBeforeUnmount, watch } from 'vue'
 import { type INavigationDrawerContext, NavigationDrawerContext } from './NavigationDrawerContext'
-import css from './NavigationDrawerItem.module.css'
+import css from './navigationDrawerItem.module.css'
 import { Ripple } from '../../ripple/Ripple'
 
 export type TNavigationDrawerItemType = 'headline' | 'divider' | 'indicator'
