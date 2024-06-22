@@ -8,7 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 .firebase/*
 
+# Node dependencies
 node_modules
+
 .output
 dist
 dist-ssr
@@ -26,6 +28,22 @@ test-report
 *.njsproj
 *.sln
 *.sw?
+.fleet
+.idea
 package-lock.json
 firebase.json
 .firebaserc
+packages/ui/tsconfig.tsbuildinfo
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
+
+# Local env files
+.env
+.env.*
+!.env.example
