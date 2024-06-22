@@ -126,7 +126,7 @@ class GlareProviderComponent {
         },
         render() {
             return (
-                <div class={'glare-provider'}>
+                <div data-component="glare-provider" class={'glare-provider'}>
                     <style>{ this.theme.styleText }</style>
                     {
                         this.$slots.default && this.$slots.default({
