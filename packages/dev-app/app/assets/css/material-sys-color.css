@@ -1,0 +1,294 @@
+.bg-primary {
+    background-color: var(--gu-sys-color-primary);
+}
+.text-primary {
+    color: var(--gu-sys-color-primary);
+}
+.bg-surface-tint {
+    background-color: var(--gu-sys-color-surface-tint);
+}
+.text-surface-tint {
+    color: var(--gu-sys-color-surface-tint);
+}
+.bg-on-primary {
+    background-color: var(--gu-sys-color-on-primary);
+}
+.text-on-primary {
+    color: var(--gu-sys-color-on-primary);
+}
+.bg-primary-container {
+    background-color: var(--gu-sys-color-primary-container);
+}
+.text-primary-container {
+    color: var(--gu-sys-color-primary-container);
+}
+.bg-on-primary-container {
+    background-color: var(--gu-sys-color-on-primary-container);
+}
+.text-on-primary-container {
+    color: var(--gu-sys-color-on-primary-container);
+}
+.bg-secondary {
+    background-color: var(--gu-sys-color-secondary);
+}
+.text-secondary {
+    color: var(--gu-sys-color-secondary);
+}
+.bg-on-secondary {
+    background-color: var(--gu-sys-color-on-secondary);
+}
+.text-on-secondary {
+    color: var(--gu-sys-color-on-secondary);
+}
+.bg-secondary-container {
+    background-color: var(--gu-sys-color-secondary-container);
+}
+.text-secondary-container {
+    color: var(--gu-sys-color-secondary-container);
+}
+.bg-on-secondary-container {
+    background-color: var(--gu-sys-color-on-secondary-container);
+}
+.text-on-secondary-container {
+    color: var(--gu-sys-color-on-secondary-container);
+}
+.bg-tertiary {
+    background-color: var(--gu-sys-color-tertiary);
+}
+.text-tertiary {
+    color: var(--gu-sys-color-tertiary);
+}
+.bg-on-tertiary {
+    background-color: var(--gu-sys-color-on-tertiary);
+}
+.text-on-tertiary {
+    color: var(--gu-sys-color-on-tertiary);
+}
+.bg-tertiary-container {
+    background-color: var(--gu-sys-color-tertiary-container);
+}
+.text-tertiary-container {
+    color: var(--gu-sys-color-tertiary-container);
+}
+.bg-on-tertiary-container {
+    background-color: var(--gu-sys-color-on-tertiary-container);
+}
+.text-on-tertiary-container {
+    color: var(--gu-sys-color-on-tertiary-container);
+}
+.bg-error {
+    background-color: var(--gu-sys-color-error);
+}
+.text-error {
+    color: var(--gu-sys-color-error);
+}
+.bg-on-error {
+    background-color: var(--gu-sys-color-on-error);
+}
+.text-on-error {
+    color: var(--gu-sys-color-on-error);
+}
+.bg-error-container {
+    background-color: var(--gu-sys-color-error-container);
+}
+.text-error-container {
+    color: var(--gu-sys-color-error-container);
+}
+.bg-on-error-container {
+    background-color: var(--gu-sys-color-on-error-container);
+}
+.text-on-error-container {
+    color: var(--gu-sys-color-on-error-container);
+}
+.bg-background {
+    background-color: var(--gu-sys-color-background);
+}
+.text-background {
+    color: var(--gu-sys-color-background);
+}
+.bg-on-background {
+    background-color: var(--gu-sys-color-on-background);
+}
+.text-on-background {
+    color: var(--gu-sys-color-on-background);
+}
+.bg-surface {
+    background-color: var(--gu-sys-color-surface);
+}
+.text-surface {
+    color: var(--gu-sys-color-surface);
+}
+.bg-on-surface {
+    background-color: var(--gu-sys-color-on-surface);
+}
+.text-on-surface {
+    color: var(--gu-sys-color-on-surface);
+}
+.bg-surface-variant {
+    background-color: var(--gu-sys-color-surface-variant);
+}
+.text-surface-variant {
+    color: var(--gu-sys-color-surface-variant);
+}
+.bg-on-surface-variant {
+    background-color: var(--gu-sys-color-on-surface-variant);
+}
+.text-on-surface-variant {
+    color: var(--gu-sys-color-on-surface-variant);
+}
+.bg-outline {
+    background-color: var(--gu-sys-color-outline);
+}
+.text-outline {
+    color: var(--gu-sys-color-outline);
+}
+.bg-outline-variant {
+    background-color: var(--gu-sys-color-outline-variant);
+}
+.text-outline-variant {
+    color: var(--gu-sys-color-outline-variant);
+}
+.bg-shadow {
+    background-color: var(--gu-sys-color-shadow);
+}
+.text-shadow {
+    color: var(--gu-sys-color-shadow);
+}
+.bg-scrim {
+    background-color: var(--gu-sys-color-scrim);
+}
+.text-scrim {
+    color: var(--gu-sys-color-scrim);
+}
+.bg-inverse-surface {
+    background-color: var(--gu-sys-color-inverse-surface);
+}
+.text-inverse-surface {
+    color: var(--gu-sys-color-inverse-surface);
+}
+.bg-inverse-on-surface {
+    background-color: var(--gu-sys-color-inverse-on-surface);
+}
+.text-inverse-on-surface {
+    color: var(--gu-sys-color-inverse-on-surface);
+}
+.bg-inverse-primary {
+    background-color: var(--gu-sys-color-inverse-primary);
+}
+.text-inverse-primary {
+    color: var(--gu-sys-color-inverse-primary);
+}
+.bg-primary-fixed {
+    background-color: var(--gu-sys-color-primary-fixed);
+}
+.text-primary-fixed {
+    color: var(--gu-sys-color-primary-fixed);
+}
+.bg-on-primary-fixed {
+    background-color: var(--gu-sys-color-on-primary-fixed);
+}
+.text-on-primary-fixed {
+    color: var(--gu-sys-color-on-primary-fixed);
+}
+.bg-primary-fixed-dim {
+    background-color: var(--gu-sys-color-primary-fixed-dim);
+}
+.text-primary-fixed-dim {
+    color: var(--gu-sys-color-primary-fixed-dim);
+}
+.bg-on-primary-fixed-variant {
+    background-color: var(--gu-sys-color-on-primary-fixed-variant);
+}
+.text-on-primary-fixed-variant {
+    color: var(--gu-sys-color-on-primary-fixed-variant);
+}
+.bg-secondary-fixed {
+    background-color: var(--gu-sys-color-secondary-fixed);
+}
+.text-secondary-fixed {
+    color: var(--gu-sys-color-secondary-fixed);
+}
+.bg-on-secondary-fixed {
+    background-color: var(--gu-sys-color-on-secondary-fixed);
+}
+.text-on-secondary-fixed {
+    color: var(--gu-sys-color-on-secondary-fixed);
+}
+.bg-secondary-fixed-dim {
+    background-color: var(--gu-sys-color-secondary-fixed-dim);
+}
+.text-secondary-fixed-dim {
+    color: var(--gu-sys-color-secondary-fixed-dim);
+}
+.bg-on-secondary-fixed-variant {
+    background-color: var(--gu-sys-color-on-secondary-fixed-variant);
+}
+.text-on-secondary-fixed-variant {
+    color: var(--gu-sys-color-on-secondary-fixed-variant);
+}
+.bg-tertiary-fixed {
+    background-color: var(--gu-sys-color-tertiary-fixed);
+}
+.text-tertiary-fixed {
+    color: var(--gu-sys-color-tertiary-fixed);
+}
+.bg-on-tertiary-fixed {
+    background-color: var(--gu-sys-color-on-tertiary-fixed);
+}
+.text-on-tertiary-fixed {
+    color: var(--gu-sys-color-on-tertiary-fixed);
+}
+.bg-tertiary-fixed-dim {
+    background-color: var(--gu-sys-color-tertiary-fixed-dim);
+}
+.text-tertiary-fixed-dim {
+    color: var(--gu-sys-color-tertiary-fixed-dim);
+}
+.bg-on-tertiary-fixed-variant {
+    background-color: var(--gu-sys-color-on-tertiary-fixed-variant);
+}
+.text-on-tertiary-fixed-variant {
+    color: var(--gu-sys-color-on-tertiary-fixed-variant);
+}
+.bg-surface-dim {
+    background-color: var(--gu-sys-color-surface-dim);
+}
+.text-surface-dim {
+    color: var(--gu-sys-color-surface-dim);
+}
+.bg-surface-bright {
+    background-color: var(--gu-sys-color-surface-bright);
+}
+.text-surface-bright {
+    color: var(--gu-sys-color-surface-bright);
+}
+.bg-surface-container-lowest {
+    background-color: var(--gu-sys-color-surface-container-lowest);
+}
+.text-surface-container-lowest {
+    color: var(--gu-sys-color-surface-container-lowest);
+}
+.bg-surface-container-low {
+    background-color: var(--gu-sys-color-surface-container-low);
+}
+.text-surface-container-low {
+    color: var(--gu-sys-color-surface-container-low);
+}
+.bg-surface-container {
+    background-color: var(--gu-sys-color-surface-container);
+}
+.text-surface-container {
+    color: var(--gu-sys-color-surface-container);
+}
+.bg-surface-container-high {
+    background-color: var(--gu-sys-color-surface-container-high);
+}
+.text-surface-container-high {
+    color: var(--gu-sys-color-surface-container-high);
+}
+.bg-surface-container-highest {
+    background-color: var(--gu-sys-color-surface-container-highest);
+}
+.text-surface-container-highest {
+    color: var(--gu-sys-color-surface-container-highest);
+}

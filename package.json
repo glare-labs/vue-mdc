@@ -7,10 +7,10 @@
   "author": "bre97-web",
   "workspaces": [
     "packages/ui",
-    "packages/dev-page"
+    "packages/dev-app"
   ],
   "scripts": {
-    "dev": "npm run dev -w dev-page",
+    "dev": "npm run dev -w dev-app",
     "compile": "npm run compile -w @glare-labs/ui",
     "lint": "npm run lint -w @glare-labs/ui"
   }
