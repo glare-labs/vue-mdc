@@ -30,4 +30,8 @@
 
 <script setup lang="ts">
 import { Typography } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Typography'
+})
 </script>

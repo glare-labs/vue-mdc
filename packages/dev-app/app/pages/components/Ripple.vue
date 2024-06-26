@@ -105,6 +105,9 @@
 <script setup lang="ts">
 import { AttachableControllerSymbol, type AttachableControllerHost, Ripple, vRipple, vRippleHoverColor, vRipplePressedColor, Button } from '../../../../ui/src'
 
+definePageMeta({
+    name: 'Ripple'
+})
 
 const handleClick = (mode: 'attach' | 'detach') => {
     const ripple = (document.querySelector('#my-ripple') as AttachableControllerHost)[AttachableControllerSymbol]

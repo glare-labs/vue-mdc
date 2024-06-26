@@ -16,10 +16,10 @@
 <script setup lang="ts">
 import { ETypographyVariant, Typography } from '../../../ui/src'
 
-const props = withDefaults(defineProps<{
+const props = withDefaults(defineProps<Partial<{
     disableHeadline: boolean
     headline: string | null
-}>(), {
+}>>(), {
     disableHeadline: false,
     headline: null
 })

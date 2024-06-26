@@ -63,6 +63,10 @@
 
 <script setup lang="ts">
 import { Elevation, vElevation, Typography, ETypographyVariant } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Elevation'
+})
 </script>
 
 <style>

@@ -21,4 +21,8 @@
 
 <script setup lang="ts">
 import { Checkbox } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Checkbox'
+})
 </script>

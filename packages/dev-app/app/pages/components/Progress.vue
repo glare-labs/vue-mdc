@@ -25,4 +25,8 @@
 
 <script setup lang="ts">
 import { LinearProgress, CircularProgress } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Progress'
+})
 </script>

@@ -31,4 +31,8 @@
 
 <script setup lang="ts">
 import { NavigationBar, NavigationTab, Icon } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'NavigationBar'
+})
 </script>

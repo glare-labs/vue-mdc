@@ -22,6 +22,10 @@
 
 <script setup lang="ts">
 import { ETypographyVariant, Icon, Typography } from '../../../ui/src'
+
+definePageMeta({
+    name: 'Home'
+})
 </script>
 
 <style scoped></style>

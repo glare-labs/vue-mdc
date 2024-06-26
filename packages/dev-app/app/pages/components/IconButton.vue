@@ -73,4 +73,8 @@
 
 <script setup lang="ts">
 import { IconButton, TogglableIconButton, Icon } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'IconButton'
+})
 </script>
