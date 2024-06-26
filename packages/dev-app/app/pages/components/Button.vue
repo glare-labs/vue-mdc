@@ -163,4 +163,8 @@
 
 <script setup lang="ts">
 import { Button, Icon } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Button'
+})
 </script>

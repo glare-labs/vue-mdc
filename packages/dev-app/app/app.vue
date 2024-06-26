@@ -19,7 +19,7 @@
             </IconButton>
           </template>
           <template #end>
-            <IconButton @click="theme.setTheme(e => ({ isDark: !e.isDark }))">
+            <IconButton @click="() => theme.setTheme(e => ({ isDark: !e.isDark }))">
               <Icon>{{ theme.getTheme.isDark ? 'light_mode' : 'dark_mode' }}</Icon>
             </IconButton>
           </template>
@@ -49,25 +49,39 @@
             >
               <h1>Dev App</h1>
             </template>
-            <NavigationDrawerItem
-              label="Home"
-              url="/"
-            ></NavigationDrawerItem>
-            <NavigationDrawerItem type="divider"></NavigationDrawerItem>
-            <NavigationDrawerItem
-              type="headline"
-              label="Component"
-            ></NavigationDrawerItem>
+            <template #default>
+              <NavigationDrawerItem
+                label="Home"
+                url="/"
+              ></NavigationDrawerItem>
 
-            <NavigationDrawerItem
-              v-for="route in routesWithoutIndexPage"
-              :label="route.label"
-              :url="route.url"
-            >
-            </NavigationDrawerItem>
+              <NavigationDrawerItem type="divider"></NavigationDrawerItem>
+              <NavigationDrawerItem
+                type="headline"
+                label="Component"
+              ></NavigationDrawerItem>
+              <NavigationDrawerItem
+                v-for="route in componentRoutes"
+                :label="(route.name as string)"
+                :url="route.path"
+              >
+              </NavigationDrawerItem>
+
+              <NavigationDrawerItem type="divider"></NavigationDrawerItem>
+              <NavigationDrawerItem
+                type="headline"
+                label="Directives"
+              ></NavigationDrawerItem>
+              <NavigationDrawerItem
+                v-for="route in directiveRoutes"
+                :label="(route.name as string)"
+                :url="route.path"
+              >
+              </NavigationDrawerItem>
+            </template>
+
           </NavigationDrawer>
         </nav>
-
       </template>
 
     </NuxtLayout>
@@ -76,6 +90,7 @@
 </template>
 
 <script setup lang="ts">
+import type { RouteRecordRaw } from 'vue-router'
 import { GlareProvider, IconButton, Icon, NavigationDrawer, NavigationDrawerItem } from '../../ui/src'
 
 const theme = useThemeStore()
@@ -84,16 +99,14 @@ const isModal = ref(false)
 const isNavOpen = ref(false)
 
 const router = useRouter()
-const routesWithoutIndexPage = computed<Array<{ label: string, url: string }>>(() => {
+const currentRouteName = computed<string>(() => router.currentRoute.value.name as string)
+const routesWithoutIndexPage = computed<Array<RouteRecordRaw>>(() => {
   const routes = router.getRoutes()
-  routes.splice(routes.findIndex(e => e.name === 'index'), 1)
-  return routes.map(e => ({
-    label: e.name?.toString().replace('examples-', ''),
-    url: e.path,
-  }))
+  routes.splice(routes.findIndex(e => e.name === 'Home'), 1)
+  return routes
 })
-const currentRouteName = computed(() => router.currentRoute.value.name === 'index' ? 'Home' : router.currentRoute.value.name?.toString().replace('examples-', ''))
-
+const componentRoutes = computed(() => routesWithoutIndexPage.value.filter(r => (r.path as string).startsWith('/components')))
+const directiveRoutes = computed(() => routesWithoutIndexPage.value.filter(r => (r.path as string).startsWith('/directives')))
 
 const handleResize = (e: Event) => {
   const target = e.target as Window

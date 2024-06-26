@@ -21,4 +21,8 @@
 
 <script setup lang="ts">
 import { Radio } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Radio'
+})
 </script>

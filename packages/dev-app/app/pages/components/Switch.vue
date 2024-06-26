@@ -21,4 +21,8 @@
 
 <script setup lang="ts">
 import { Switch } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Switch'
+})
 </script>

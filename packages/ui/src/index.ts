@@ -19,6 +19,11 @@ export * from './components/navigation-tab'
 export * from './components/glare-provider'
 
 /**
+ * Directives
+ */
+export * from './directives'
+
+/**
  * Unstable Components
  */
 export * from './components/labs'

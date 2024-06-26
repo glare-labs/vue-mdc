@@ -167,4 +167,8 @@
 
 <script setup lang="ts">
 import { Fab, Icon } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Fab'
+})
 </script>

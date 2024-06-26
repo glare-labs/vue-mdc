@@ -40,4 +40,8 @@
 
 <script setup lang="ts">
 import { Divider, EDividerVariant } from '../../../../ui/src'
+
+definePageMeta({
+    name: 'Divider'
+})
 </script>

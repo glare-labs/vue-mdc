@@ -20,12 +20,12 @@
 <script setup lang="ts">
 import { Typography, ETypographyVariant } from '../../../ui/src'
 
-const props = withDefaults(defineProps<{
+const props = withDefaults(defineProps<Partial<{
     shape: boolean
     outline: boolean
     paddingX: boolean
     headline: string | null
-}>(), {
+}>>(), {
     shape: true,
     outline: true,
     paddingX: true,

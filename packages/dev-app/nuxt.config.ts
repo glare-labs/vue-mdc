@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   future: {
     compatibilityVersion: 4,
   },
-  ssr: true,
+  ssr: false,
   modules: [
     '@pinia/nuxt',
   ],
