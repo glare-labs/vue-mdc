@@ -23,6 +23,10 @@
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
+
+        --_color: var(--gu-typography-color, var(--gu-sys-color-on-surface));
+
+        color: var(--_color);
     }
 
     &.display-large {

@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../../../../tokens';
+
+
+@mixin styles() {
+    $color: tokens.color-values-light();
+
+    & {
+        background-color: map-get($map: $color, $key: 'scrim');
+        display: none;
+        z-index: 1;
+        inset: 0;
+        opacity: 0.32;
+        pointer-events: none;
+    }
+
+    &:not(.absolute) {
+        position: fixed;
+    }
+
+    &.absolute {
+        position: absolute;
+    }
+
+    &.active {
+        display: flex;
+    }
+}

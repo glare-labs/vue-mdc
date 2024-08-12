@@ -1,0 +1,33 @@
+{
+    "Public glare-ui css": {
+        "prefix": "gui",
+        "body": "--glare-ui-$1-$2",
+        "description": "Public css for users"
+    },
+    "Component glare-ui css": {
+        "prefix": "--_access",
+        "body": "--_$1-$2",
+        "description": "Protected css"
+    },
+    "Current component glare-ui css": {
+        "prefix": "--_current",
+        "body": "--_current-$1-$2",
+        "description": "Private"
+    },
+    "Initial property": {
+        "prefix": "gui-proprty",
+        "body": "--$2: var(--glare-ui-$1-$2);"
+    },
+    "Initial property with current value": {
+        "prefix": "gui-proprty",
+        "body": "--$1: var(--glare-ui-$2-$1, var(--_current-$1));"
+    },
+    "Initial property with current value and default": {
+        "prefix": "gui-proprty",
+        "body": "--$2: var(--glare-ui-$1-$2, var(--_current-$2, $defaultValue));"
+    },
+    "Access": {
+        "prefix": "gui-access",
+        "body": "--$2: var(--glare-ui-$1-$2, var(--_access-shared-$1-$2));"
+    },
+}

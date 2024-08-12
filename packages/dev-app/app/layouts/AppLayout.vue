@@ -59,7 +59,7 @@
 
         &>.drawer-wrapper {
             @apply flex-grow-0 flex-shrink-0 overflow-auto;
-            @apply z-10;
+            @apply z-[1];
         }
 
         &>.drawer-wrapper {

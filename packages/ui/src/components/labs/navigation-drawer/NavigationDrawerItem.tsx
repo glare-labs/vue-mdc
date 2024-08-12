@@ -108,13 +108,14 @@ export const NavigationDrawerItem = defineComponent({
         })
 
         watch(() => props.label, (newValue, oldValue) => {
+            if(props.type === 'divider') return
             if (oldValue) {
                 injection?.labels.splice(injection.labels.lastIndexOf(oldValue), 1)
             }
             if (checkLabel(newValue)) {
                 injection?.labels.push(newValue)
             } else {
-                throw new Error(`[label] already exists. The [label] attribute should be treated as a unique value. Please do not make the [label] attribute value of multiple NavigationDrawerItem components the same.`)
+                throw new Error(`Label [${newValue}] already exists. The [label] attribute should be treated as a unique value. Please do not make the [label] attribute value of multiple NavigationDrawerItem components the same.`)
             }
         }, { immediate: true })
 

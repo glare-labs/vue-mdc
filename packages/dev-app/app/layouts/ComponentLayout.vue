@@ -42,6 +42,11 @@ const props = withDefaults(defineProps<Partial<{
         @apply p-3;
     }
 
+    &>.examples {
+        @apply relative;
+    }
+
+
     &.component-card-outline {
         @apply border;
     }

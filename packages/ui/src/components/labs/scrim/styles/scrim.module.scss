@@ -1,0 +1,5 @@
+@use './scrim';
+
+.scrim {
+    @include scrim.styles();
+}

@@ -1,10 +1,11 @@
-import { type DeepReadonly, type PropType, type SlotsType, type UnwrapNestedRefs, type VNodeRef, type WritableComputedRef, computed, defineComponent, onMounted, provide, readonly, ref, watch } from 'vue'
+import { type DeepReadonly, type PropType, type SlotsType, type UnwrapNestedRefs, type VNodeRef, type WritableComputedRef, computed, defineComponent, onMounted, onUnmounted, onUpdated, provide, readonly, ref, watch, watchEffect } from 'vue'
 import { MaterialTheme, type TMaterialColorTokens, type TSourceColorHex } from '../../utils/theme/MaterialTheme'
 import { Version } from '../../utils/Version'
 import { EMaterialContrastLevel, type TMaterialContrastLevel } from '../../utils/theme/MaterialContrastLevel'
 import { EMaterialVariant, type TMaterialVariant } from '../../utils/theme/MaterialVariant'
 import { argbFromHex, Hct } from '@material/material-color-utilities'
 import { GlareProviderContext, type TGlareProviderContext } from './Context'
+import { Log } from '../../utils/log/Log'
 
 type TThemeConfiguration = {
     sourceColor: TSourceColorHex
@@ -64,12 +65,7 @@ class GlareProviderComponent {
                 variant: props.variant,
             })
             const themeConfiguration = computed({
-                get: () => ({
-                    contrastLevel: _themeConfiguration.value.contrastLevel,
-                    isDark: _themeConfiguration.value.dark,
-                    sourceColor: _themeConfiguration.value.sourceColor,
-                    variant: _themeConfiguration.value.variant,
-                }),
+                get: () => _themeConfiguration.value,
                 set: (optional?: Partial<TThemeConfiguration>) => {
                     _themeConfiguration.value = {
                         ..._themeConfiguration.value,
@@ -77,15 +73,18 @@ class GlareProviderComponent {
                     }
                 }
             })
+
             watch(props, (changes) => {
-                themeConfiguration.value = ({
-                    contrastLevel: changes.contrastLevel,
-                    dark: changes.dark,
-                    sourceColor: changes.sourceColor,
-                    variant: changes.variant,
-                })
+                themeConfiguration.value = {
+                    ...themeConfiguration.value,
+                    ...changes,
+                }
             }, {
-                immediate: false,
+                immediate: true,
+                deep: true, 
+                onTrigger: (event) => {
+                    Log.info(({unknown}) => `GlareProvider on trigger, new value: ${unknown(event.newValue)}`)
+                }
             })
 
             const theme = computed(() => {
@@ -98,11 +97,14 @@ class GlareProviderComponent {
                 materialThemeGenerator = new MaterialTheme().setTokenPrefix('md-sys-color').generate({...themeConfiguration.value, sourceColor: Hct.fromInt(argbFromHex(themeConfiguration.value!.sourceColor!))})
                 const mdTokens = materialThemeGenerator
                 
-
                 return ({
                     tokens: guTokens.tokens,
                     styleText: `.glare-provider {${guTokens.styleText()}; ${mdTokens.styleText()}};`,
                 })
+            }, {
+                onTrigger: (event) => {
+                    Log.info(() => `GlapreProvider generated new tokens.`)
+                },
             })
     
             provide<DeepReadonly<UnwrapNestedRefs<TGlareProviderContext>>>(GlareProviderContext, readonly({
@@ -117,7 +119,14 @@ class GlareProviderComponent {
                 disableRipple: props.disableRipple,
             }))
 
-
+            let stylesheet = new CSSStyleSheet();
+            onMounted(() => {
+                stylesheet.replaceSync(theme.value.styleText); 
+                document.adoptedStyleSheets.push(stylesheet) 
+            })
+            onUpdated(() => {
+                stylesheet.replaceSync(theme.value.styleText); 
+            })
 
             return {
                 theme,
@@ -127,7 +136,6 @@ class GlareProviderComponent {
         render() {
             return (
                 <div data-component="glare-provider" class={'glare-provider'}>
-                    <style>{ this.theme.styleText }</style>
                     {
                         this.$slots.default && this.$slots.default({
                             version: Version.version,

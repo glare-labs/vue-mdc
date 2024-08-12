@@ -31,4 +31,14 @@
     },
     "html.format.wrapAttributes": "force-expand-multiline",
     "files.encoding": "utf8",
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "vscode.css-language-features"
+    },
+    "git.ignoreLimitWarning": true,
 }

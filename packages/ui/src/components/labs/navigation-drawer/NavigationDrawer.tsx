@@ -1,4 +1,4 @@
-import { type PropType, type SlotsType, type VNodeRef, computed, defineComponent, onBeforeMount, onMounted, onUpdated, provide, readonly, ref, watch } from 'vue'
+import { type PropType, type SlotsType, Teleport, type VNodeRef, computed, defineComponent, onBeforeMount, onMounted, onUpdated, provide, readonly, ref, watch } from 'vue'
 import css from './navigationDrawer.module.css'
 import { type INavigationDrawerContext, NavigationDrawerContext } from './NavigationDrawerContext'
 
@@ -86,8 +86,8 @@ const emits = {
      *  payload: {}
      * }} payload 
      */
-    drawerOpen: () => {},
-    drawerClosed: () => {},
+    drawerOpen: (payload: unknown) => payload,
+    drawerClosed: (payload: unknown) => payload,
 
     /**
      * @private
@@ -146,6 +146,7 @@ export const NavigationDrawer = defineComponent({
     emits,
     setup(props, { emit }) {
         const root = ref<VNodeRef | null | undefined>(null)
+        const scrim = ref<VNodeRef | null | undefined>(null)
 
         /**
          * [_isOpen]表示导航组件的开关(显示与隐藏)
@@ -161,9 +162,9 @@ export const NavigationDrawer = defineComponent({
                 _isOpen.value = value
                 emit('update:modelValue', value)
                 if(value) {
-                    emit('drawerOpen')
+                    emit('drawerOpen', {})
                 } else {
-                    emit('drawerClosed')
+                    emit('drawerClosed', {})
                 }
             },
         })
@@ -186,14 +187,14 @@ export const NavigationDrawer = defineComponent({
                 return
             }
 
-            const scrim = (root.value as HTMLElement).querySelector(`div.${css.scrim}[data-scrim="true"]`) as HTMLElement
-            if(scrim === null) {
+            const scrimElement = (scrim.value as HTMLElement) as HTMLElement
+            if(typeof scrimElement === 'undefined' || scrimElement === null) {
                 console.warn(`The scrim node for the NavigationDrawer could not be found as expected.`)
+            } else {   
+                Events.map(event => {
+                    scrimElement.addEventListener(event, scrimHandleEvent)
+                })
             }
-
-            Events.map(event => {
-                scrim.addEventListener(event, scrimHandleEvent)
-            })
         }
         const scrimHandleEvent = (e: Event) => {
             const handle = () => {
@@ -251,6 +252,7 @@ export const NavigationDrawer = defineComponent({
             open,
             close,
             root,
+            scrim
         }
     },
     render() {
@@ -273,7 +275,7 @@ export const NavigationDrawer = defineComponent({
             </span>
         )
         const renderScrim = this.modal && (
-            <div aria-hidden="true" class={css.scrim} data-scrim="true">
+            <div ref={e => this.scrim = e} aria-hidden="true" class={[css.scrim, this.isOpen ? css.active :css.inactive]} data-scrim="true">
             </div>
         )
         const renderContent = (
@@ -290,7 +292,9 @@ export const NavigationDrawer = defineComponent({
                 {renderStart}
                 {renderContent}
                 {renderEnd}
-                {renderScrim}
+                <Teleport to="body">
+                    {renderScrim}
+                </Teleport>
             </div>
         )
     }

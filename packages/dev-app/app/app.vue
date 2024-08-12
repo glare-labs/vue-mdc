@@ -45,9 +45,17 @@
           >
             <template
               v-if="isModal"
-              #start
+              #start="{ close }"
             >
-              <h1>Dev App</h1>
+              <div class="start">
+                <Typography :variant="ETypographyVariant.TitleMedium">Dev App</Typography>
+                <IconButton
+                  :appearance="EIconButtonAppearance.Outlined"
+                  @click="close"
+                >
+                  <Icon>close</Icon>
+                </IconButton>
+              </div>
             </template>
             <template #default>
               <NavigationDrawerItem
@@ -91,7 +99,7 @@
 
 <script setup lang="ts">
 import type { RouteRecordRaw } from 'vue-router'
-import { GlareProvider, IconButton, Icon, NavigationDrawer, NavigationDrawerItem } from '../../ui/src'
+import { GlareProvider, IconButton, Icon, NavigationDrawer, NavigationDrawerItem, EIconButtonAppearance, Typography, ETypographyVariant } from '../../ui/src'
 
 const theme = useThemeStore()
 
@@ -127,6 +135,10 @@ onBeforeUnmount(() => {
 
   &.modal {
     @apply fixed left-0 top-0;
+  }
+
+  & .start {
+    @apply flex justify-between items-center;
   }
 
   &>* {
