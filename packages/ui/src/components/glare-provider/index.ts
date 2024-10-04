@@ -1,2 +1,1 @@
-export * from './Context'
-export * from './GlareProvider'
+export * from './glare-provider'
