@@ -1,8 +1,7 @@
-import { RippleState } from './RippleState'
-import { RippleConfiguration } from './RippleConfiguration'
+import { AttachableController } from '../../utils/attachable-controller'
 import { EMotionEasing } from '../../utils/token'
-import { AttachableController } from '../../utils/AttachableController'
-import { ref } from 'vue'
+import { RippleConfiguration } from './ripple-configuration'
+import { RippleState } from './ripple-state'
 
 /**
  * @license
@@ -27,28 +26,40 @@ const Events = [
 
 export class RippleAttachableController {
 
-    private _hover = ref(false)
-    private _pressed = ref(false)
+    private _hover = false
+    private _pressed = false
+    private _disabled = false
 
-    get hover() {
-        return this._hover.value
-    }
-    get hoverRef() {
+    public get hover() {
         return this._hover
     }
-    set hover(hover: boolean) {
-        this._hover.value = hover
+    public set hover(hover: boolean) {
+        if (this._hover === hover) {
+            return
+        }
+        this._hover = hover
         this.host.setAttribute('data-hover', `${hover}`)
     }
-    get pressed() {
-        return this._pressed.value
-    }
-    get pressedRef() {
+    public get pressed() {
         return this._pressed
     }
-    set pressed(pressed: boolean) {
-        this._pressed.value = pressed
+    public set pressed(pressed: boolean) {
+        if (this._pressed === pressed) {
+            return
+        }
+        this._pressed = pressed
         this.host.setAttribute('data-pressed', `${pressed}`)
+    }
+    public get disabled() {
+        return this._disabled
+    }
+    public set disabled(disabled: boolean) {
+        if (this._disabled === disabled) {
+            return
+        }
+        this._disabled = disabled
+        this.host.setAttribute('data-disabled', `${disabled}`)
+
     }
 
     private state = RippleState.INACTIVE
@@ -58,14 +69,19 @@ export class RippleAttachableController {
     private rippleScale = ''
     private rippleSize = ''
     private growAnimation: null | Animation = null
-    private disabled = false
 
-    private controller: null | AttachableController = null
+    private controller: AttachableController
     private get host() {
         if (typeof this.controller === 'undefined' || this.controller === null || typeof this.controller.host === 'undefined' || this.controller.host === null) {
             throw new Error(`Controller initialization failed for RippleAttachableController. This may be an internal error. Please report it.`)
         }
         return this.controller.host
+    }
+    public hostConnected() {
+        this.controller.hostConnected()
+    }
+    public hostDisconnected() {
+        this.controller.hostDisconnected()
     }
 
     constructor(root: HTMLElement) {
@@ -108,7 +124,7 @@ export class RippleAttachableController {
             return
         }
     }
-    async handlePointerdown(event: PointerEvent) {
+    private async handlePointerdown(event: PointerEvent) {
         if (this.disabled) return
         this.startEvent = event
         if (!this.isTouch(event)) {
@@ -134,7 +150,7 @@ export class RippleAttachableController {
         this.state = RippleState.HOLDING
         this.startPressAnimation(event)
     }
-    handlePointercancel(event: PointerEvent) {
+    private handlePointercancel(event: PointerEvent) {
         if (!this.shouldReactToEvent(event)) return
         this.endPressAnimation()
     }
@@ -158,7 +174,7 @@ export class RippleAttachableController {
     /**
      * Animations about
      */
-    startPressAnimation(positionEvent?: Event) {
+    private startPressAnimation(positionEvent?: Event) {
         this.pressed = true
         this.growAnimation?.cancel()
         this.determineRippleSize()
@@ -181,12 +197,12 @@ export class RippleAttachableController {
             {
                 pseudoElement: RippleConfiguration.pressPseudo,
                 duration: RippleConfiguration.pressGrowMs,
-                easing: EMotionEasing.standard,
+                easing: EMotionEasing.Standard,
                 fill: RippleConfiguration.animationFill,
             },
         )
     }
-    getTranslationCoordinates(positionEvent?: Event) {
+    private getTranslationCoordinates(positionEvent?: Event) {
         if (this.host === null) return
         const { height, width } = this.host.getBoundingClientRect()
         // end in the center
@@ -210,7 +226,7 @@ export class RippleAttachableController {
 
         return { startPoint, endPoint }
     }
-    getNormalizedPointerEventCoords(pointerEvent: PointerEvent) {
+    private getNormalizedPointerEventCoords(pointerEvent: PointerEvent) {
         if (this.host === null) return
         const { scrollX, scrollY } = window
         const { left, top } = this.host.getBoundingClientRect()

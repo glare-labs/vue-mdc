@@ -1,3 +1,4 @@
-export * from './Ripple'
-export * from './RippleAttachableController'
-export * from './RippleDirective'
+export * from './ripple'
+export * from './ripple-attachable-controller'
+export * from './ripple-directive'
+
