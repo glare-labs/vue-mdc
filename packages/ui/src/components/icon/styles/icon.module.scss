@@ -1,3 +1,5 @@
 @use './icon';
 
-@include icon.styles();
+.icon {
+    @include icon.styles();
+}

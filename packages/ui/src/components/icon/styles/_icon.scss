@@ -24,10 +24,16 @@
 @mixin styles() {
     $tokens: tokens.component-icon-values($exclude-custom-properties: false);
 
-    .icon {
-        font-size: map.get($tokens, 'size');
-        width: map.get($tokens, 'size');
-        height: map.get($tokens, 'size');
+    & {
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+    }
+
+    & {
+        font-size: var(--_size);
+        width: var(--_size);
+        height: var(--_size);
         color: inherit;
         font-variation-settings: inherit;
         font-weight: 400;

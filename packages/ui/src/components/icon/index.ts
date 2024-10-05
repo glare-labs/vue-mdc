@@ -1,2 +1,3 @@
-export * from './Icon'
-export * from './IconVariant'
+export * from './icon'
+export * from './icon-variant'
+
