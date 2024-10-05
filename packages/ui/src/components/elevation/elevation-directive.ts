@@ -1,6 +1,6 @@
 import { type Directive, type DirectiveBinding } from 'vue'
+import { type TElevationLevel } from './elevation-level'
 import css from './styles/elevation.module.scss'
-import { type TElevationLevel } from './ElevationLevel'
 
 class ElevationDirective {
 
@@ -93,7 +93,7 @@ class ElevationDirective {
  * <div v-elevation="3">
  *  Elevation Box
  * </div>
- * 
+ *
  * v-elevation = 0 | 1 | 2 | 3 | 4 | 5
  * ```
  */
