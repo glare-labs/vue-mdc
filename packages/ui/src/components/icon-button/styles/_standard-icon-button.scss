@@ -27,9 +27,18 @@
     $tokens: tokens.component-icon-button-values($exclude-custom-properties: false);
 
     & {
+        // Only use the logical properties.
+        $tokens: map.remove($tokens, 'container-shape');
+
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
+
+        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
 
         // These custom properties are not used, so set defaults so token tests pass
         // for <glare-icon-button>.
@@ -56,14 +65,10 @@
         //     ));
     }
 
-    &.icon-button {
+    & {
         color: var(--_icon-color);
 
-        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
-                hover-opacity: var(--_hover-state-layer-opacity),
-                pressed-color: var(--_pressed-state-layer-color),
-                pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+
 
         &:hover {
             color: var(--_hover-icon-color);
@@ -83,21 +88,20 @@
         }
     }
 
-    &.icon-button .background {
+    & .background {
         background-color: transparent;
         border-radius: inherit;
-        content: '';
         inset: 0;
         position: absolute;
-        z-index: -1; // place behind content
+        z-index: -1;
     }
 
     & [data-component='ripple'] {
         border-radius: var(--_state-layer-shape);
     }
 
-    &.icon-button.disabled .icon,
-    &.icon-button:disabled .icon {
+    &.disabled .icon,
+    &:disabled .icon {
         opacity: var(--_disabled-icon-opacity);
     }
 

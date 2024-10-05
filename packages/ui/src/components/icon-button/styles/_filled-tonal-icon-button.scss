@@ -35,9 +35,15 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
+
+        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+                hover-opacity: var(--_hover-state-layer-opacity),
+                pressed-color: var(--_pressed-state-layer-color),
+                pressed-opacity: var(--_pressed-state-layer-opacity),
+            ));
     }
 
-    &.icon-button {
+    & {
         color: var(--_icon-color);
 
         &:hover {
@@ -56,29 +62,24 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             color: var(--_disabled-icon-color);
         }
 
-        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
-                hover-opacity: var(--_hover-state-layer-opacity),
-                pressed-color: var(--_pressed-state-layer-color),
-                pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+
     }
 
-    &.icon-button .background {
+    & .background {
         // Background color, separate node for opacity changes
         background-color: var(--_container-color);
         border-radius: inherit;
-        content: '';
         inset: 0;
         position: absolute;
         z-index: -1; // place behind content
     }
 
-    &.icon-button:disabled .background {
+    &:disabled .background {
         background-color: var(--_disabled-container-color);
         opacity: var(--_disabled-container-opacity);
     }
 
-    &.icon-button:disabled .icon {
+    &:disabled .icon {
         opacity: var(--_disabled-icon-opacity);
     }
 

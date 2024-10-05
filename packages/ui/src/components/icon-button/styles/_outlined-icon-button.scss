@@ -33,16 +33,17 @@
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
-    }
-
-    &.icon-button {
-        color: var(--_icon-color);
 
         @include ripple.theme((hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-color: var(--_pressed-state-layer-color),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
             ));
+    }
+
+    & {
+        color: var(--_icon-color);
+
 
         &:hover {
             color: var(--_hover-icon-color);
@@ -62,17 +63,16 @@
         }
     }
 
-    &.icon-button .background {
+    & .background {
         // Background color, separate node for opacity changes
         background-color: transparent;
         border-radius: inherit;
-        content: '';
         inset: 0;
         position: absolute;
         z-index: -1; // place behind content
     }
 
-    &.icon-button .outline {
+    & .outline {
         // Background color, separate node for opacity changes
         border-radius: inherit;
         content: '';
@@ -90,12 +90,12 @@
         opacity: var(--_disabled-outline-opacity);
     }
 
-    &.icon-button.disabled .icon,
-    &.icon-button:disabled .icon {
+    &.disabled .icon,
+    &:disabled .icon {
         opacity: var(--_disabled-icon-opacity);
     }
 
-    &.icon-button .background {
+    & .background {
         block-size: 100%;
         border-radius: inherit;
         box-sizing: border-box;
@@ -108,7 +108,7 @@
     }
 
     // Selected toggle buttons have no outline.
-    &.icon-button.selected .outline {
+    &.selected .outline {
         border-width: 0;
     }
 
