@@ -1,3 +1,5 @@
 @use './ripple';
 
-@include ripple.styles();
+.ripple {
+    @include ripple.styles();
+}

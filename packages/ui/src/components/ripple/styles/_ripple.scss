@@ -24,17 +24,23 @@
 @mixin styles() {
     $tokens: component-ripple.values($exclude-custom-properties: false);
 
-    .ripple[disabled] {
+    & {
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+    }
+
+    &[disabled] {
         display: none;
     }
 
     @media (forced-colors: active) {
-        .ripple {
+        & {
             display: none;
         }
     }
 
-    .ripple {
+    & {
         border-radius: inherit;
         position: absolute;
         inset: 0;
@@ -43,7 +49,6 @@
         margin: auto;
         pointer-events: none;
         -webkit-tap-highlight-color: transparent;
-        z-index: 1;
 
         &::before,
         &::after {

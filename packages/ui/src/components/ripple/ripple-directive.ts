@@ -1,7 +1,7 @@
 import { type Directive } from 'vue'
+import { SAttachableController, type AttachableControllerHost } from '../../utils/attachable-controller'
+import { RippleAttachableController } from './ripple-attachable-controller'
 import css from './styles/ripple.module.scss'
-import { RippleAttachableController } from './RippleAttachableController'
-import { AttachableControllerSymbol, type AttachableControllerHost } from '../../utils/AttachableController'
 
 class RippleDirective {
 
@@ -16,18 +16,10 @@ class RippleDirective {
         return el.querySelector<AttachableControllerHost>(`div.${css.ripple}[data-standalone="true"]`)
     }
     private static readonly isRippleColorProperty = (color: string) => {
-        if (typeof color === 'string') {
-            return true
-        }
-        else {
-            return false
-        }
+        return typeof color === 'string'
     }
     private static readonly isRippleOpacityProperty = (opacity: number) => {
-        if (typeof opacity !== 'number' && (opacity >= 0 && opacity <= 1)) {
-            return true
-        }
-        return false
+        return typeof opacity === 'number' && (opacity >= 0 && opacity <= 1)
     }
 
     public static readonly rippleDirective: Directive<HTMLElement, void> = {
@@ -47,7 +39,7 @@ class RippleDirective {
                 console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
-            queriedRippleElement[AttachableControllerSymbol]?.hostConnected()
+            queriedRippleElement[SAttachableController]?.hostConnected()
         },
         updated: (el) => {
             var positionProperty = el.computedStyleMap().get('position')
@@ -66,7 +58,7 @@ class RippleDirective {
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
                 console.warn(`The DOM object with the target selector \`div.${css.ripple}[data-standalone="true"]\` was not found. This is an internal bug, please report it.`)
             } else {
-                queriedRippleElement[AttachableControllerSymbol]?.hostDisconnected()
+                queriedRippleElement[SAttachableController]?.hostDisconnected()
             }
         }
     }
@@ -114,7 +106,7 @@ class RippleDirective {
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-${state}-opacity`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }
@@ -128,12 +120,15 @@ class RippleDirective {
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--glare-ui-ripple-${state}-opacity`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }
         }
     })
+
+    public static readonly hoverOpacityDirective: Directive<HTMLElement, number> = this.opacityProgress('hover')
+    public static readonly pressedOpacityDirective: Directive<HTMLElement, number> = this.opacityProgress('pressed')
 
 }
 
@@ -148,3 +143,5 @@ class RippleDirective {
 export const vRipple = RippleDirective.rippleDirective
 export const vRippleHoverColor = RippleDirective.hoverColorDirective
 export const vRipplePressedColor = RippleDirective.pressedColorDirective
+export const vRippleHoverOpacity = RippleDirective.hoverOpacityDirective
+export const vRipplePressedOpacity = RippleDirective.pressedOpacityDirective
