@@ -116,6 +116,7 @@
         border-radius: inherit;
         inset: 0;
         position: absolute;
+        z-index: -1;
     }
 
     & .label {

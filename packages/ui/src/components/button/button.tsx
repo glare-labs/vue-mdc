@@ -1,13 +1,13 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { Ripple } from '../ripple/Ripple'
-import { Elevation } from '../elevation/Elevation'
+import { Elevation } from '../elevation/elevation'
+import { Ripple } from '../ripple/ripple'
+import { EButtonAppearance, type TButtonAppearance } from './button-appearance'
+import { EButtonShape, type TButtonShape } from './button-shape'
+import { EButtonType, type TButtonType } from './button-type'
 import css from './styles/button-styles.module.scss'
-import { EButtonType, type TButtonType } from './ButtonType'
-import { EButtonAppearance, type TButtonAppearance } from './ButtonAppearance'
-import { EButtonShape, type TButtonShape } from './ButtonShape'
 
 class ButtonComponent {
-    private props = {
+    private readonly props = {
         appearance: {
             type: String as PropType<TButtonAppearance>,
             default: EButtonAppearance.Filled,
@@ -25,18 +25,20 @@ class ButtonComponent {
             default: EButtonShape.Circular,
         }
     }
-    private slots = {} as SlotsType<{
+
+    private slots = {} as  SlotsType<{
         default: void
         'leading-icon': void
         'trailing-icon': void
     }>
 
-    public component = defineComponent({
+    public readonly component = defineComponent({
         name: 'GlareUi-Button',
         props: this.props,
         slots: this.slots,
         render() {
-            const needElevation = EButtonAppearance.Elevated  === this.appearance || EButtonAppearance.Filled === this.appearance || EButtonAppearance.FilledTonal === this.appearance
+            const elevationButtonArray: Array<TButtonAppearance> = [EButtonAppearance.Elevated, EButtonAppearance.Filled, EButtonAppearance.FilledTonal]
+            const needElevation = elevationButtonArray.includes(this.appearance)
             const needOutline = this.appearance === EButtonAppearance.Outlined
             const iconState = this.$slots['leading-icon'] ? css.left : this.$slots['trailing-icon'] ? css.right : null
 
@@ -55,7 +57,7 @@ class ButtonComponent {
                     {this.$slots['trailing-icon'] && this.$slots['trailing-icon']()}
                 </button>
             )
-    
+
             return (
                 <button
                     data-component="button"
@@ -66,17 +68,17 @@ class ButtonComponent {
                 >
                     <Ripple></Ripple>
 
-                    { needElevation && <Elevation></Elevation>}
-                    { needOutline && <div aria-hidden="true" class={[css.outline]}></div>}
-    
+                    {needElevation && <Elevation></Elevation>}
+                    {needOutline && <div aria-hidden="true" class={[css.outline]}></div>}
+
                     <div aria-hidden="true" class={[css.background]}></div>
-    
+
                     {renderButton}
                 </button>
             )
         }
     })
-    
+
 }
 
 export const Button = new ButtonComponent().component
