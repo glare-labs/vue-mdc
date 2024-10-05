@@ -1,7 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { Ripple } from '../ripple/Ripple'
-import { EIconButtonAppearance, type TIconButtonAppearance } from './IconButtonAppearance'
-import { EIconButtonType, type TIconButtonType } from './IconButtonType'
+import { Ripple } from '../ripple/ripple'
+import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
+import { EIconButtonType, type TIconButtonType } from './icon-button-type'
 import css from './styles/icon-button.module.scss'
 
 class IconButtonComponent {
@@ -23,7 +23,7 @@ class IconButtonComponent {
     private slots = {} as SlotsType<{
         default: void
     }>
-    
+
     public readonly component = defineComponent({
         name: this.name,
         props: this.props,
@@ -34,11 +34,10 @@ class IconButtonComponent {
                     {this.$slots.default && this.$slots.default()}
                 </span>
             )
-    
+
             return (
                 <button
                     class={[
-                        css['icon-button'],
                         css[this.appearance],
                         this.disabled && css.disabled
                     ]}
@@ -48,16 +47,16 @@ class IconButtonComponent {
                     type={this.type}
                 >
                     <Ripple></Ripple>
-    
+
                     <div aria-hidden="true" class={css.touch}></div>
                     <div aria-hidden="true" class={css.background}></div>
                     <div aria-hidden="true" class={css.outline}></div>
-    
+
                     {renderIcon}
                 </button>
             )
         }
-    })    
+    })
 }
 
 export const IconButton = new IconButtonComponent().component

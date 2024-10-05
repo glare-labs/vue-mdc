@@ -1,12 +1,13 @@
-import { type PropType, computed, defineComponent, onBeforeMount, ref, watch, type SlotsType } from 'vue'
-import { Ripple } from '../ripple/Ripple'
-import { EIconButtonAppearance, type TIconButtonAppearance } from './IconButtonAppearance'
-import { EIconButtonType, type TIconButtonType } from './IconButtonType'
+import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { isServer } from '../../utils/is-server'
+import { Ripple } from '../ripple/ripple'
+import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
+import { EIconButtonType, type TIconButtonType } from './icon-button-type'
 import css from './styles/icon-button.module.scss'
 
 export class TogglableIconButtonComponent {
-    private name = 'GlareUi-TogglableIconButton'
-    private props = {
+    private readonly name = 'GlareUi-TogglableIconButton'
+    private readonly props = {
         appearance: {
             type: String as PropType<TIconButtonAppearance>,
             default: EIconButtonAppearance.Standard,
@@ -25,56 +26,57 @@ export class TogglableIconButtonComponent {
         },
         modelValue: {
             type: Boolean as PropType<boolean>,
-            default: false,
+            default: null,
         }
     }
-    private emits = [
-        'update:modelValue'
+    private readonly emits = [
+        'update:modelValue',
+        'change'
     ]
-    private slots = {} as SlotsType<{
+    private readonly slots = {} as SlotsType<{
         default: void
     }>
 
-    public component = defineComponent({
+    public readonly component = defineComponent({
         name: this.name,
         props: this.props,
         emits: this.emits,
         slots: this.slots,
-        setup(props, { emit }) {
-            /**
-             * @private
-             */
-            const _selected = ref(props.modelValue)
-    
-            /**
-             * @public
-             */
-            const selected = computed({
-                get: () => _selected.value,
-                set: (value: boolean) => {
-                    _selected.value = value
-                    emit('update:modelValue', value)
-                }
-            })
-    
-            onBeforeMount(() => {
-                selected.value = props.defaultSelected
-            })
-    
-            watch(() => props.modelValue, (value: boolean) => {
-                selected.value = value
-            })
-    
-            /**
-             * @public
-             */
-            const handleClicked = () => {
-                selected.value = !selected.value
+        mounted() {
+            if(isServer()) {
+                return
             }
-    
-            return {
-                selected,
-                handleClicked
+            (this.$el as HTMLButtonElement).addEventListener('click', this.handleIconButtonClick)
+        },
+        beforeUpdate() {
+            if(this.modelValue !== null) {
+                this.selected = this.modelValue
+            }
+        },
+        beforeUnmount() {
+            (this.$el as HTMLButtonElement).removeEventListener('click', this.handleIconButtonClick)
+        },
+        data: (props) => ({
+            selected: props.defaultSelected || props.modelValue,
+        }),
+        methods: {
+            handleIconButtonClick(e: Event) {
+                e.stopImmediatePropagation()
+                e.preventDefault()
+                this.setSelected(!this.selected)
+            },
+            setSelected(value: boolean) {
+                const changeEvent = new Event('change', {bubbles: true, cancelable: true,})
+                this.$emit('change', changeEvent)
+                const preventChange = !dispatchEvent(changeEvent)
+                if(preventChange) {
+                    return
+                }
+                if(this.selected === value) {
+                    return
+                }
+                this.selected = value
+                this.$emit('update:modelValue', value)
             }
         },
         render() {
@@ -83,11 +85,10 @@ export class TogglableIconButtonComponent {
                     {this.$slots.default && this.$slots.default()}
                 </span>
             )
-    
+
             return (
                 <button
                     class={[
-                        css['icon-button'],
                         css[this.appearance],
                         css['toggle-icon-button'],
                         this.selected && css.selected,
@@ -97,15 +98,14 @@ export class TogglableIconButtonComponent {
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
                     type={this.type}
-                    onClick={this.handleClicked}
                     role='checkbox'
                 >
                     <Ripple></Ripple>
-    
+
                     <div aria-hidden="true" class={css.touch}></div>
                     <div aria-hidden="true" class={css.background}></div>
                     <div aria-hidden="true" class={css.outline}></div>
-    
+
                     {renderIcon}
                 </button>
             )
