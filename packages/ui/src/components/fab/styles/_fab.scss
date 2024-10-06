@@ -124,7 +124,7 @@
         }
 
         &,
-        &[data-component="ripple"] {
+        & [data-component="ripple"] {
             border-start-start-radius: var(--_small-container-shape-start-start);
             border-start-end-radius: var(--_small-container-shape-start-end);
             border-end-start-radius: var(--_small-container-shape-end-start);
@@ -148,7 +148,7 @@
             pressed-color: map.get($colors, pressed-state-layer-color),
         ));
 
-    .icon * {
+    & .icon * {
         color: map.get($colors, icon-color);
     }
 
@@ -164,7 +164,7 @@
         color: map.get($colors, pressed-icon-color);
     }
 
-    .label {
+    & .label {
         color: map.get($colors, label-text-color);
 
         &:hover & {

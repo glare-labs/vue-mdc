@@ -31,27 +31,25 @@ class FabComponent {
     public readonly component = defineComponent({
         props: this.props,
         slots: this.slots,
-        setup(props, { slots }) {
+        render() {
             const renderIcon = (
                 <span class={css.icon}>
-                    {slots.default && slots.default()}
+                    {this.$slots.default && this.$slots.default()}
                 </span>
             )
             const renderLabel = (
                 <span class={css.label}>
-                    {props.label}
+                    {this.label}
                 </span>
             )
-
-            const isMedmiumSize = props.size === EFabSize.Medium
-            const isExtended = props.label.length !== 0
-            if(isExtended && !isMedmiumSize) {
+            const isMediumSize = this.size === EFabSize.Medium
+            const isExtended = this.label.length !== 0
+            if (isExtended && !isMediumSize) {
                 console.warn(`The label and icon can only be set at the same time when the size is medium. If the size attribute of your fab component is not medium, please remove the label attribute.`)
             }
-
-            return () => (
+            return (
                 <button
-                    class={[css.fab, (isExtended && isMedmiumSize) && css.extended, css[props.size], css[props.variant], props.lowered && css.lowered]}
+                    class={[css.fab, (isExtended && isMediumSize) && css.extended, css[this.size], css[this.variant], this.lowered && css.lowered]}
                 >
                     <Ripple></Ripple>
                     <Elevation></Elevation>
@@ -59,10 +57,10 @@ class FabComponent {
                     <span class={css['touch-target']}></span>
 
                     {renderIcon}
-                    { isMedmiumSize && renderLabel}
+                    {isMediumSize && renderLabel}
                 </button>
             )
-        },
+        }
     })
 
 }
