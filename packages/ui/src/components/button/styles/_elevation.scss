@@ -7,7 +7,7 @@
 @use '../../elevation/styles/elevation';
 @use '../../../tokens';
 
-$motion: tokens.motion-values();
+$motion: tokens.md-sys-motion-values();
 
 @mixin styles() {
     & [data-component="elevation"] {

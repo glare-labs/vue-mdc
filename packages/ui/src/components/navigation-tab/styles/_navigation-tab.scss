@@ -7,13 +7,13 @@
 // @use '../../../focus/focus-ring';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
+@use '../../../tokens/internal/animation';
 // @use '../../badge/badge';
 
-$_motion: tokens.motion-values();
 $_animation-duration: 100ms;
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-navigation-bar-supported-tokens;
+    $supported-tokens: tokens.$md-comp-navigation-bar-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -21,13 +21,13 @@ $_animation-duration: 100ms;
         }
 
         @if $value {
-            --gu-navigation-bar-#{$token}: #{$value};
+            --md-navigation-bar-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-navigation-bar-values();
+    $tokens: tokens.md-comp-navigation-bar-values();
 
     & {
         @each $token, $value in $tokens {
@@ -89,8 +89,8 @@ $_animation-duration: 100ms;
         height: 16px;
         margin-top: 4px;
         opacity: 1;
-        transition: tokens.animation-standard(opacity, $_animation-duration),
-            tokens.animation-standard(height, $_animation-duration);
+        transition: animation-standard(opacity, $_animation-duration),
+            animation-standard(height, $_animation-duration);
         z-index: 1;
 
         &--hide-inactive-label:not(.active) & {
@@ -104,8 +104,8 @@ $_animation-duration: 100ms;
         justify-content: center;
         opacity: 0;
         position: absolute;
-        transition: tokens.animation-standard(width, $_animation-duration),
-            tokens.animation-standard(opacity, $_animation-duration);
+        transition: animation-standard(width, $_animation-duration),
+            animation-standard(opacity, $_animation-duration);
         width: 32px;
         background-color: var(--_active-indicator-color);
         border-radius: var(--_active-indicator-shape);

@@ -2,7 +2,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$typescale-supported-tokens;
+    $supported-tokens: tokens.$md-sys-typescale-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -10,13 +10,13 @@
         }
 
         @if $value {
-            --gu-typography-#{$token}: #{$value};
+            --md-typography-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.typescale-values();
+    $tokens: tokens.md-sys-typescale-values();
 
 
     & {

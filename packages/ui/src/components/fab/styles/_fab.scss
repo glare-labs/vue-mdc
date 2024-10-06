@@ -10,7 +10,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-fab-supported-tokens;
+    $supported-tokens: tokens.$md-comp-fab-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -18,14 +18,13 @@
         }
 
         @if $value {
-            --gu-fab-#{$token}: #{$value};
+            --md-fab-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-fab-values($exclude-custom-properties: false,
-        );
+    $tokens: tokens.md-comp-fab-values();
 
     & {
         // Only use the logical properties.

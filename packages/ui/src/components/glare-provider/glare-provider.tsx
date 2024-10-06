@@ -120,14 +120,14 @@ class GlareProviderComponent {
                         contrastLevel: this.contrastLevel,
                         isDark: this.dark,
                         variant: this.variant,
-                        prefix: 'gu-sys-color'
+                        prefix: 'md-sys-color'
                     })
                 } else {
                     theme = new MaterialTokens(this.sourceColorHct, {
                         contrastLevel: this.contrastLevel,
                         isDark: this.dark,
                         variant: this.variant,
-                        prefix: 'gu-sys-color'
+                        prefix: 'md-sys-color'
                     })
                 }
                 return theme.cssText()

@@ -8,7 +8,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-text-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-text-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -22,8 +22,7 @@
 }
 
 @mixin styles() {
-    $tokens: tokens.component-text-button-values($exclude-custom-properties: false,
-        );
+    $tokens: tokens.md-comp-text-button-values();
 
     // Only use the logical properties.
     $tokens: map.remove($tokens, 'container-shape');

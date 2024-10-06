@@ -8,7 +8,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-outlined-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-outlined-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,14 +16,13 @@
         }
 
         @if $value {
-            --gu-outlined-button-#{$token}: #{$value};
+            --md-outlined-button-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-outlined-button-values($exclude-custom-properties: false,
-        );
+    $tokens: tokens.md-comp-outlined-button-values();
 
     & {
         // Only use the logical properties.
@@ -61,7 +60,7 @@
 
     @media (forced-colors: active) {
         &[disabled] .background {
-            // Only outlined buttons change their border when disabled to distinguish
+            // Only outlined buttons change their border when disabled to distinmdish
             // them from other buttons that add a border for increased visibility in
             // HCM.
             border-color: GrayText;

@@ -8,7 +8,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-icon-supported-tokens;
+    $supported-tokens: tokens.$md-comp-icon-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,13 +16,13 @@
         }
 
         @if $value {
-            --gu-icon-#{$token}: #{$value};
+            --md-icon-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-icon-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-icon-values();
 
     & {
         @each $token, $value in $tokens {

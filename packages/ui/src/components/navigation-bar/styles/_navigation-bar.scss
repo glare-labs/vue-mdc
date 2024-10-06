@@ -7,10 +7,10 @@
 @use '../../elevation/styles/elevation.scss';
 @use '../../../tokens';
 
-$_motion: tokens.motion-values();
+$_motion: tokens.md-sys-motion-values();
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-navigation-bar-supported-tokens;
+    $supported-tokens: tokens.$md-comp-navigation-bar-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -18,13 +18,13 @@ $_motion: tokens.motion-values();
         }
 
         @if $value {
-            --gu-navigation-bar-#{$token}: #{$value};
+            --md-navigation-bar-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-navigation-bar-values();
+    $tokens: tokens.md-comp-navigation-bar-values();
 
     @layer navigation-bar-styles {
 

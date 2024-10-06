@@ -3,7 +3,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-elevation-supported-tokens;
+    $supported-tokens: tokens.$md-comp-elevation-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -11,20 +11,20 @@
         }
 
         @if $value {
-            --gu-elevation-#{$token}: #{$value};
+            --md-elevation-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-elevation-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-elevation-values();
 
     & {
         @each $token, $value in $tokens {
             --_#{$token}: #{$value};
         }
 
-        --_level: var(--gu-elevation-level, var(--_current-level, 0))
+        --_level: var(--md-elevation-level, var(--_current-level, 0))
     }
 
     & {

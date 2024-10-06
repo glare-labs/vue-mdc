@@ -5,10 +5,10 @@
 
 @use 'sass:list';
 @use 'sass:map';
-@use '../../../tokens/components/component-ripple';
+@use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: component-ripple.$supported-tokens;
+    $supported-tokens: tokens.$md-comp-ripple-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,13 +16,13 @@
         }
 
         @if $value {
-            --gu-ripple-#{$token}: #{$value};
+            --md-ripple-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: component-ripple.values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-ripple-values();
 
     & {
         @each $token, $value in $tokens {

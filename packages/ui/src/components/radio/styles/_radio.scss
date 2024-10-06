@@ -6,14 +6,14 @@
 @use 'sass:list';
 @use 'sass:map';
 // @use '../../focus/focus-ring';
-// @use '../../internal/motion/animation';
+@use '../../../tokens/internal/animation';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
 
-$_motion: tokens.motion-values();
+$_motion: tokens.md-sys-motion-values();
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-radio-supported-tokens;
+    $supported-tokens: tokens.$md-comp-radio-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -21,13 +21,13 @@ $_motion: tokens.motion-values();
         }
 
         @if $value {
-            --gu-radio-#{$token}: #{$value};
+            --md-radio-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-radio-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-radio-values();
 
     @layer {
         & {

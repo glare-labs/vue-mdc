@@ -8,7 +8,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-filled-tonal-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-filled-tonal-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,14 +16,13 @@
         }
 
         @if $value {
-            --gu-filled-tonal-button-#{$token}: #{$value};
+            --md-filled-tonal-button-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-filled-tonal-button-values($exclude-custom-properties: false,
-        );
+    $tokens: tokens.md-comp-filled-tonal-button-values();
 
     // Only use the logical properties.
     $tokens: map.remove($tokens, 'container-shape');

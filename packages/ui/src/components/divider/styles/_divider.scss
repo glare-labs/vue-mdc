@@ -8,7 +8,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-divider-supported-tokens;
+    $supported-tokens: tokens.$md-comp-divider-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -16,13 +16,13 @@
         }
 
         @if $value {
-            --gu-divider-#{$token}: #{$value};
+            --md-divider-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-divider-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-divider-values();
 
     .divider {
         box-sizing: border-box;

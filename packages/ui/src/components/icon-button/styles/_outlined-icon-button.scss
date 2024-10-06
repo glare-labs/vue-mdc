@@ -10,7 +10,7 @@
 @use './shared';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-outlined-icon-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-outlined-icon-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -18,13 +18,13 @@
         }
 
         @if $value {
-            --gu-outlined-icon-button-#{$token}: #{$value};
+            --md-outlined-icon-button-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-outlined-icon-button-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-outlined-icon-button-values();
 
     & {
         // Only use the logical properties.

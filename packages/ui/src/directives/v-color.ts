@@ -3,7 +3,7 @@ import type { Directive } from 'vue'
 abstract class ColorableElement {
 
     /**
-     * 
+     *
      * @param property 'text' | 'background'
      * @param value hex-like
      */
@@ -14,7 +14,7 @@ abstract class ColorableElement {
 
 class TextColorDirective extends ColorableElement {
 
-    private readonly defaultColor = 'var(--gu-sys-color-on-surface)'
+    private readonly defaultColor = 'var(--md-sys-color-on-surface)'
 
     public readonly directive: Directive<HTMLElement, string> = {
         mounted: (el, binding) => {
@@ -42,7 +42,7 @@ class TextColorDirective extends ColorableElement {
 
 class BackgroundColorDirective extends ColorableElement {
 
-    private readonly defaultColor = 'var(--gu-sys-color-surface)'
+    private readonly defaultColor = 'var(--md-sys-color-surface)'
 
     public readonly directive: Directive<HTMLElement, string> = {
         mounted: (el, binding) => {

@@ -11,7 +11,7 @@
 $_custom-property-prefix: 'filled-tonal-icon-button';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-filled-tonal-icon-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-filled-tonal-icon-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -19,14 +19,13 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
         }
 
         @if $value {
-            --gu-filled-tonal-icon-button-#{$token}: #{$value};
+            --md-filled-tonal-icon-button-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-filled-tonal-icon-button-values($exclude-custom-properties: false,
-        );
+    $tokens: tokens.md-comp-filled-tonal-icon-button-values();
 
     & {
         // Only use the logical properties.

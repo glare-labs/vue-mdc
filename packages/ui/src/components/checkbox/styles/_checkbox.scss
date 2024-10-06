@@ -10,7 +10,7 @@
 @use '../../../tokens';
 
 // Motion token values.
-$_motion: tokens.motion-values();
+$_motion: tokens.md-sys-motion-values();
 // The stroke width of the icon marks.
 $_mark-stroke: 2px;
 // The coordinates in an 18px viewBox of the bottom left corner of the
@@ -21,7 +21,7 @@ $_indeterminate-bottom-left: 4px, -10px;
 $_checkmark-bottom-left: 7px, -14px;
 
 @mixin theme($tokens) {
-    $supported-tokens: $component-checkbox-supported-tokens;
+    $supported-tokens: tokens.$md-comp-checkbox-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -29,13 +29,13 @@ $_checkmark-bottom-left: 7px, -14px;
         }
 
         @if $value {
-            --gu-checkbox-#{$token}: #{$value};
+            --md-checkbox-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-checkbox-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-checkbox-values();
 
     & {
         border-start-start-radius: map.get($tokens, 'container-shape-start-start');

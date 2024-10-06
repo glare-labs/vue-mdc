@@ -7,7 +7,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-linear-progress-supported-tokens;
+    $supported-tokens: tokens.$md-comp-linear-progress-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -15,7 +15,7 @@
         }
 
         @if $value {
-            --gu-linear-progress-#{$token}: #{$value};
+            --md-linear-progress-#{$token}: #{$value};
         }
     }
 }
@@ -28,7 +28,7 @@ $_determinate-easing: cubic-bezier(0.4, 0, 0.6, 1);
 $_indeterminate-duration: 2s;
 
 @mixin styles() {
-    $tokens: tokens.component-linear-progress-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-linear-progress-values();
 
     & {
         @each $token, $value in $tokens {

@@ -29,11 +29,6 @@ class RippleDirective {
             new RippleAttachableController(rippleElement)
         },
         mounted: (el) => {
-            var positionProperty = el.computedStyleMap().get('position')
-            if (typeof positionProperty === 'undefined' || positionProperty.toString() !== 'relative') {
-                console.warn(`The element to which v-ripple is added must be relative. If the position is not relative, the ripple effect will be invalid. Please add \`position: relative\` to the v-ripple element;`)
-            }
-
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
                 console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
@@ -42,11 +37,6 @@ class RippleDirective {
             queriedRippleElement[SAttachableController]?.hostConnected()
         },
         updated: (el) => {
-            var positionProperty = el.computedStyleMap().get('position')
-            if (typeof positionProperty === 'undefined' || positionProperty.toString() !== 'relative') {
-                console.warn(`The element to which v-ripple is added must be relative. If the position is not relative, the ripple effect will be invalid. Please add \`position: relative\` to the v-ripple element;`)
-            }
-
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
                 console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
@@ -73,7 +63,7 @@ class RippleDirective {
 
             const isColorProperty = this.isRippleColorProperty(binding.value)
             if (isColorProperty) {
-                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-color`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--md-ripple-${state}-color`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-color and v-ripple-pressed-color only accept strings and must be valid CSS color values.`)
             }
@@ -87,7 +77,7 @@ class RippleDirective {
 
             const isColorProperty = this.isRippleColorProperty(binding.value)
             if (isColorProperty) {
-                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-color`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--md-ripple-${state}-color`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-color and v-ripple-pressed-color only accept strings and must be valid CSS color values.`)
             }
@@ -106,7 +96,7 @@ class RippleDirective {
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-opacity`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--md-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }
@@ -120,7 +110,7 @@ class RippleDirective {
 
             const isOpacityProperty = this.isRippleOpacityProperty(binding.value)
             if (isOpacityProperty) {
-                queriedRippleElement.style.setProperty(`--gu-ripple-${state}-opacity`, `${binding.value}`)
+                queriedRippleElement.style.setProperty(`--md-ripple-${state}-opacity`, `${binding.value}`)
             } else {
                 console.warn(`The parameters of v-ripple-hover-opacity and v-ripple-pressed-opacity only accept numbers, ranging from 0 to 1.`)
             }

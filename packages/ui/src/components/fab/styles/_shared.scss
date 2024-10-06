@@ -10,7 +10,7 @@
 @use '../../../tokens';
 @use './fab';
 
-$_md-sys-motion: tokens.motion-values();
+$_md-sys-motion: tokens.md-sys-motion-values();
 
 @mixin styles() {
     & {
@@ -30,7 +30,6 @@ $_md-sys-motion: tokens.motion-values();
         margin: max(0px, 48px - var(--_large-container-height));
     }
 
-    &,
     &.icon,
     &.icon * {
         display: flex;

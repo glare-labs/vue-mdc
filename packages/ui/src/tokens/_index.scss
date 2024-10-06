@@ -3,67 +3,64 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@forward './animation' as animation-*;
-@forward './color' as color-*;
-@forward './elevation' as elevation-*;
-@forward './motion' as motion-*;
-@forward './palette' as palette-*;
-@forward './state' as state-*;
-@forward './typeface' as typeface-*;
-@forward './typescale' as typescale-*;
-@forward './shape' as shape-*;
-@forward './icon' as icon-*;
-
-//
-// Copyright 2023 Google LLC
-// SPDX-License-Identifier: Apache-2.0
-//
-
-@forward './components/component-assist-chip' as component-assist-chip-*;
-@forward './components/component-badge' as component-badge-*;
-@forward './components/component-checkbox' as component-checkbox-*;
-@forward './components/component-circular-progress' as component-circular-progress-*;
-@forward './components/component-dialog' as component-dialog-*;
-@forward './components/component-divider' as component-divider-*;
-@forward './components/component-elevated-button' as component-elevated-button-*;
-@forward './components/component-elevated-card' as component-elevated-card-*;
-@forward './components/component-elevation' as component-elevation-*;
-@forward './components/component-fab' as component-fab-*;
-@forward './components/component-fab-branded' as component-fab-branded-*;
-@forward './components/component-filled-button' as component-filled-button-*;
-@forward './components/component-filled-card' as component-filled-card-*;
-@forward './components/component-filled-field' as component-filled-field-*;
-@forward './components/component-filled-icon-button' as component-filled-icon-button-*;
-@forward './components/component-filled-select' as component-filled-select-*;
-@forward './components/component-filled-text-field' as component-filled-text-field-*;
-@forward './components/component-filled-tonal-button' as component-filled-tonal-button-*;
-@forward './components/component-filled-tonal-icon-button' as component-filled-tonal-icon-button-*;
-@forward './components/component-filter-chip' as component-filter-chip-*;
-@forward './components/component-focus-ring' as component-focus-ring-*;
-@forward './components/component-full-screen-dialog' as component-full-screen-dialog-*;
-@forward './components/component-icon' as component-icon-*;
-@forward './components/component-icon-button' as component-icon-button-*;
-@forward './components/component-input-chip' as component-input-chip-*;
-@forward './components/component-item' as component-item-*;
-@forward './components/component-linear-progress' as component-linear-progress-*;
-@forward './components/component-list' as component-list-*;
-@forward './components/component-list-item' as component-list-item-*;
-@forward './components/component-menu' as component-menu-*;
-@forward './components/component-menu-item' as component-menu-item-*;
-@forward './components/component-navigation-bar' as component-navigation-bar-*;
-@forward './components/component-navigation-drawer' as component-navigation-drawer-*;
-@forward './components/component-outlined-button' as component-outlined-button-*;
-@forward './components/component-outlined-card' as component-outlined-card-*;
-@forward './components/component-outlined-field' as component-outlined-field-*;
-@forward './components/component-outlined-icon-button' as component-outlined-icon-button-*;
-@forward './components/component-outlined-segmented-button' as component-outlined-segmented-button-*;
-@forward './components/component-outlined-select' as component-outlined-select-*;
-@forward './components/component-outlined-text-field' as component-outlined-text-field-*;
-@forward './components/component-primary-tab' as component-primary-tab-*;
-@forward './components/component-radio' as component-radio-*;
-@forward './components/component-ripple' as component-ripple-*;
-@forward './components/component-secondary-tab' as component-secondary-tab-*;
-@forward './components/component-slider' as component-slider-*;
-@forward './components/component-suggestion-chip' as component-suggestion-chip-*;
-@forward './components/component-switch' as component-switch-*;
-@forward './components/component-text-button' as component-text-button-*;
+// go/keep-sorted start
+@forward './md-comp-assist-chip' as md-comp-assist-chip-*;
+@forward './md-comp-badge' as md-comp-badge-*;
+@forward './md-comp-checkbox' as md-comp-checkbox-*;
+@forward './md-comp-circular-progress' as md-comp-circular-progress-*;
+@forward './md-comp-dialog' as md-comp-dialog-*;
+@forward './md-comp-divider' as md-comp-divider-*;
+@forward './md-comp-elevated-button' as md-comp-elevated-button-*;
+@forward './md-comp-elevated-card' as md-comp-elevated-card-*;
+@forward './md-comp-elevation' as md-comp-elevation-*;
+@forward './md-comp-fab' as md-comp-fab-*;
+@forward './md-comp-fab-branded' as md-comp-fab-branded-*;
+@forward './md-comp-filled-button' as md-comp-filled-button-*;
+@forward './md-comp-filled-card' as md-comp-filled-card-*;
+@forward './md-comp-filled-field' as md-comp-filled-field-*;
+@forward './md-comp-filled-icon-button' as md-comp-filled-icon-button-*;
+@forward './md-comp-filled-select' as md-comp-filled-select-*;
+@forward './md-comp-filled-text-field' as md-comp-filled-text-field-*;
+@forward './md-comp-filled-tonal-button' as md-comp-filled-tonal-button-*;
+@forward './md-comp-filled-tonal-icon-button' as
+  md-comp-filled-tonal-icon-button-*;
+@forward './md-comp-filter-chip' as md-comp-filter-chip-*;
+@forward './md-comp-focus-ring' as md-comp-focus-ring-*;
+@forward './md-comp-full-screen-dialog' as md-comp-full-screen-dialog-*;
+@forward './md-comp-icon' as md-comp-icon-*;
+@forward './md-comp-icon-button' as md-comp-icon-button-*;
+@forward './md-comp-input-chip' as md-comp-input-chip-*;
+@forward './md-comp-item' as md-comp-item-*;
+@forward './md-comp-linear-progress' as md-comp-linear-progress-*;
+@forward './md-comp-list' as md-comp-list-*;
+@forward './md-comp-list-item' as md-comp-list-item-*;
+@forward './md-comp-menu' as md-comp-menu-*;
+@forward './md-comp-menu-item' as md-comp-menu-item-*;
+@forward './md-comp-navigation-bar' as md-comp-navigation-bar-*;
+@forward './md-comp-navigation-drawer' as md-comp-navigation-drawer-*;
+@forward './md-comp-outlined-button' as md-comp-outlined-button-*;
+@forward './md-comp-outlined-card' as md-comp-outlined-card-*;
+@forward './md-comp-outlined-field' as md-comp-outlined-field-*;
+@forward './md-comp-outlined-icon-button' as md-comp-outlined-icon-button-*;
+@forward './md-comp-outlined-segmented-button' as
+  md-comp-outlined-segmented-button-*;
+@forward './md-comp-outlined-select' as md-comp-outlined-select-*;
+@forward './md-comp-outlined-text-field' as md-comp-outlined-text-field-*;
+@forward './md-comp-primary-tab' as md-comp-primary-tab-*;
+@forward './md-comp-radio' as md-comp-radio-*;
+@forward './md-comp-ripple' as md-comp-ripple-*;
+@forward './md-comp-secondary-tab' as md-comp-secondary-tab-*;
+@forward './md-comp-slider' as md-comp-slider-*;
+@forward './md-comp-suggestion-chip' as md-comp-suggestion-chip-*;
+@forward './md-comp-switch' as md-comp-switch-*;
+@forward './md-comp-test-table' as md-comp-test-table-*;
+@forward './md-comp-text-button' as md-comp-text-button-*;
+@forward './md-ref-palette' as md-ref-palette-*;
+@forward './md-ref-typeface' as md-ref-typeface-*;
+@forward './md-sys-color' as md-sys-color-*;
+@forward './md-sys-elevation' as md-sys-elevation-*;
+@forward './md-sys-motion' as md-sys-motion-*;
+@forward './md-sys-shape' as md-sys-shape-*;
+@forward './md-sys-state' as md-sys-state-*;
+@forward './md-sys-typescale' as md-sys-typescale-*;
+// go/keep-sorted end

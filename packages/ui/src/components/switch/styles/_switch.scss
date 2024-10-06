@@ -9,11 +9,11 @@
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
 
-$_motion: tokens.motion-values();
+$_motion: tokens.md-sys-motion-values();
 $_easing-standard: map.get($_motion, 'easing-standard');
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-switch-supported-tokens;
+    $supported-tokens: tokens.$md-comp-switch-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -21,13 +21,13 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         @if $value {
-            --gu-switch-#{$token}: #{$value};
+            --md-switch-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-switch-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-switch-values();
 
     @layer switch-styles, switch-styles-hcm;
 
@@ -70,11 +70,14 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         // Input is also touch target
         & input {
             appearance: none;
-            height: 48px;
+            height: max(100%, map.get($tokens, 'touch-target-size'));
+            width: max(100%, map.get($tokens, 'touch-target-size'));
             outline: none;
             margin: 0;
             position: absolute;
-            width: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1;
             cursor: inherit;
         }

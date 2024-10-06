@@ -10,7 +10,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$component-icon-button-supported-tokens;
+    $supported-tokens: tokens.$md-comp-icon-button-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -18,13 +18,13 @@
         }
 
         @if $value {
-            --gu-icon-button-#{$token}: #{$value};
+            --md-icon-button-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.component-icon-button-values($exclude-custom-properties: false);
+    $tokens: tokens.md-comp-icon-button-values();
 
     & {
         // Only use the logical properties.

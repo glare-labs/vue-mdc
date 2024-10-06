@@ -72,7 +72,7 @@ class ElevationDirective {
             const elevationElement = typeof queriedElevationElement !== 'undefined' && queriedElevationElement !== null ? queriedElevationElement : this.createElevationElement()
 
             const level = this.wrapElevationLevel(binding)
-            elevationElement.style.setProperty('--gu-elevation-level', level)
+            elevationElement.style.setProperty('--md-elevation-level', level)
 
         },
         updated: (el, binding) => {
@@ -81,8 +81,8 @@ class ElevationDirective {
 
 
             const level = this.wrapElevationLevel(binding)
-            elevationElement.style.removeProperty('--gu-elevation-level')
-            elevationElement.style.setProperty('--gu-elevation-level', level)
+            elevationElement.style.removeProperty('--md-elevation-level')
+            elevationElement.style.setProperty('--md-elevation-level', level)
         }
     }
 }
