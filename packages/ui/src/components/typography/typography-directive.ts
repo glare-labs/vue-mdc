@@ -1,6 +1,6 @@
 import { type Directive } from 'vue'
-import { type TTypographyVariant } from './TypographyVariant'
 import css from './styles/typography.module.scss'
+import { type TTypographyVariant } from './typography-variant'
 
 class TypographyDirective {
     private static readonly variants = [
@@ -20,7 +20,6 @@ class TypographyDirective {
                 console.warn(`Invalid v-typography input parameter '${typoName}', parameter type should be TTypography(${this.variants.join(' | ')}). If the input parameter is invalid, the default value is body-medium.`)
                 typoName = 'body-medium'
             }
-
             el.classList.add(css.typography, css[typoName])
         },
         updated: (el: HTMLElement, binding) => {

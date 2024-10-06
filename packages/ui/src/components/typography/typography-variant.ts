@@ -6,7 +6,7 @@ export type TTypographyVariant =
     'headline-small' | 'headline-medium' | 'headline-large' |
     'display-small' | 'display-medium' | 'display-large'
 
-export const enum ETypographyVariant {
+export enum ETypographyVariant {
     LabelSmall = 'label-small',
     LabelMedium = 'label-medium',
     LabelLarge = 'label-large',

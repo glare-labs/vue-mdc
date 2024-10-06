@@ -1,3 +1,3 @@
-export * from './Typography'
-export * from './TypographyDirective'
-export * from './TypographyVariant'
+export * from './typography'
+export * from './typography-directive'
+export * from './typography-variant'
