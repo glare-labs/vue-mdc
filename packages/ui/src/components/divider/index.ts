@@ -1,2 +1,2 @@
-export * from './Divider'
-export * from './DividerVariant'
+export * from './divider'
+export * from './divider-variant'

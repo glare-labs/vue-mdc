@@ -1,16 +1,16 @@
 import { defineComponent, type PropType } from 'vue'
+import { EDividerVariant, type TDividerVariant } from './divider-variant'
 import css from './styles/divider.module.scss'
-import { EDividerVariant, type TDividerVariant } from './DividerVariant'
 
 class DividerComponent {
-    private props = {
+    private readonly props = {
         variant: {
-            type: String as PropType<TDividerVariant>,
             default: EDividerVariant.MiddleInset,
+            type: String as PropType<TDividerVariant>,
         },
     }
 
-    public component = defineComponent({
+    public readonly component = defineComponent({
         name: 'GlareUi-Divider',
         props: this.props,
         render() {
