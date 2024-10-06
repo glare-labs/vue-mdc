@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
 import { Ripple } from '../ripple/ripple'
 import { EButtonAppearance, type TButtonAppearance } from './button-appearance'
@@ -23,10 +24,18 @@ class ButtonComponent {
         shape: {
             type: String as PropType<TButtonShape>,
             default: EButtonShape.Circular,
+        },
+        href: {
+            type: String as PropType<string>,
+            default: null,
+        },
+        target: {
+            type: String as PropType<TButtonTarget | ''>,
+            default: '',
         }
     }
 
-    private slots = {} as  SlotsType<{
+    private slots = {} as SlotsType<{
         default: void
         'leading-icon': void
         'trailing-icon': void
@@ -41,6 +50,18 @@ class ButtonComponent {
             const needElevation = elevationButtonArray.includes(this.appearance)
             const needOutline = this.appearance === EButtonAppearance.Outlined
             const iconState = this.$slots['leading-icon'] ? css.left : this.$slots['trailing-icon'] ? css.right : null
+            const isLink = this.href !== null
+
+            const renderContent = (
+                <>
+                    <span class={css.touch}></span>
+                    {this.$slots['leading-icon'] && this.$slots['leading-icon']()}
+                    <span class={[css.label]}>
+                        {this.$slots.default()}
+                    </span>
+                    {this.$slots['trailing-icon'] && this.$slots['trailing-icon']()}
+                </>
+            )
 
             const renderButton = (
                 <button
@@ -49,22 +70,25 @@ class ButtonComponent {
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
                 >
-                    <span class={css.touch}></span>
-                    {this.$slots['leading-icon'] && this.$slots['leading-icon']()}
-                    <span class={[css.label]}>
-                        {this.$slots.default()}
-                    </span>
-                    {this.$slots['trailing-icon'] && this.$slots['trailing-icon']()}
+                    {renderContent}
                 </button>
+            )
+            const renderLink = (
+                <a
+                    class={[css.button]}
+                    href={this.href}
+                    target={this.target}
+                >
+                    {renderContent}
+                </a>
             )
 
             return (
-                <button
+                <div
                     data-component="button"
-                    class={[css[this.appearance], iconState]}
+                    class={[css[this.appearance], iconState, this.disabled && css.disabled]}
                     aria-disabled={this.disabled}
                     role='button'
-                    disabled={this.disabled}
                 >
                     <Ripple></Ripple>
 
@@ -73,8 +97,8 @@ class ButtonComponent {
 
                     <div aria-hidden="true" class={[css.background]}></div>
 
-                    {renderButton}
-                </button>
+                    {isLink ? renderLink : renderButton}
+                </div >
             )
         }
     })

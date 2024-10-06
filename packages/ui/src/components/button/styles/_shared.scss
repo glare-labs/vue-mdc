@@ -61,7 +61,7 @@
         //     ));
     }
 
-    &[disabled] {
+    &:is([disabled], .disabled) {
         cursor: default;
         pointer-events: none;
     }
@@ -129,12 +129,12 @@
         text-overflow: inherit;
     }
 
-    &[disabled] .label {
+    &:is([disabled], .disabled) .label {
         color: var(--_disabled-label-text-color);
         opacity: var(--_disabled-label-text-opacity);
     }
 
-    &[disabled] .background {
+    &:is([disabled], .disabled) .background {
         background-color: var(--_disabled-container-color);
         opacity: var(--_disabled-container-opacity);
     }
@@ -147,7 +147,7 @@
             border: 1px solid CanvasText;
         }
 
-        &[disabled] {
+        &:is([disabled], .disabled) {
             --_disabled-icon-color: GrayText;
             --_disabled-icon-opacity: 1;
             --_disabled-container-opacity: 1;
