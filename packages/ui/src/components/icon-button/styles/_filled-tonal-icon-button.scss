@@ -57,7 +57,7 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             color: var(--_pressed-icon-color);
         }
 
-        &:disabled {
+        &:is(:disabled, .disabled, [disabled]) {
             color: var(--_disabled-icon-color);
         }
 
@@ -73,17 +73,17 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
         z-index: -1; // place behind content
     }
 
-    &:disabled .background {
+    &:is(:disabled, .disabled, [disabled]) .background {
         background-color: var(--_disabled-container-color);
         opacity: var(--_disabled-container-opacity);
     }
 
-    &:disabled .icon {
+    &:is(:disabled, .disabled, [disabled]) .icon {
         opacity: var(--_disabled-icon-opacity);
     }
 
     &.toggle-icon-button {
-        &:not(:disabled) {
+        &:not(:is(:disabled, .disabled, [disabled])) {
             color: var(--_toggle-icon-color);
 
             &:hover {
@@ -105,14 +105,14 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
     }
 
     &.toggle-icon-button:not(.disabled) .background,
-    &.toggle-icon-button:not(:disabled) .background {
+    &.toggle-icon-button:not(:is(:disabled, .disabled, [disabled])) .background {
         // Note: filled tonal icon buttons have three container colors,
         // "container-color" for regular, then selected/unselected for toggle.
         background-color: var(--_unselected-container-color);
     }
 
     &.selected {
-        &:not(:disabled) {
+        &:not(:is(:disabled, .disabled, [disabled])) {
             color: var(--_toggle-selected-icon-color);
 
             &:hover {
@@ -133,7 +133,7 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             ));
     }
 
-    &.selected:not(:disabled) .background {
+    &.selected:not(:is(:disabled, .disabled, [disabled])) .background {
         background-color: var(--_selected-container-color);
     }
 }

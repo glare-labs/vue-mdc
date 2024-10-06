@@ -82,8 +82,7 @@
             color: var(--_pressed-icon-color);
         }
 
-        &.disabled,
-        &:disabled {
+        &:is(:disabled, .disabled, [disabled]) {
             color: var(--_disabled-icon-color);
         }
     }
@@ -100,8 +99,7 @@
         border-radius: var(--_state-layer-shape);
     }
 
-    &.disabled .icon,
-    &:disabled .icon {
+    &:is(:disabled, .disabled, [disabled]) .icon {
         opacity: var(--_disabled-icon-opacity);
     }
 
