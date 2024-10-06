@@ -1,34 +1,34 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { Elevation } from '../elevation/elevation'
+import { Ripple } from '../ripple/ripple'
+import { EFabSize, type TFabSize } from './fab-size'
+import { EFabVariant, type TFabVariant } from './fab-variant'
 import css from './styles/fab.module.scss'
-import { Ripple } from '../ripple/Ripple'
-import { Elevation } from '../elevation/Elevation'
-import { EFabSize, type TFabSize } from './FabSize'
-import { EFabVariant, type TFabVariant } from './FabVariant'
 
 class FabComponent {
-    private props = {
+    private readonly props = {
         size: {
-            type: String as PropType<TFabSize>,
             default: EFabSize.Medium,
+            type: String as PropType<TFabSize>,
         },
         label: {
-            type: String,
             default: '',
+            type: String as PropType<string>,
         },
         variant: {
-            type: String as PropType<TFabVariant>,
             default: EFabVariant.Secondary,
+            type: String as PropType<TFabVariant>,
         },
         lowered: {
-            type: Boolean as PropType<boolean>,
             default: false,
+            type: Boolean as PropType<boolean>,
         },
     }
-    private slots = {} as SlotsType<{
+    private readonly slots = {} as SlotsType<{
         default?: void
     }>
 
-    public component = defineComponent({
+    public readonly component = defineComponent({
         props: this.props,
         slots: this.slots,
         setup(props, { slots }) {
@@ -42,29 +42,29 @@ class FabComponent {
                     {props.label}
                 </span>
             )
-    
+
             const isMedmiumSize = props.size === EFabSize.Medium
             const isExtended = props.label.length !== 0
             if(isExtended && !isMedmiumSize) {
                 console.warn(`The label and icon can only be set at the same time when the size is medium. If the size attribute of your fab component is not medium, please remove the label attribute.`)
             }
-    
+
             return () => (
                 <button
                     class={[css.fab, (isExtended && isMedmiumSize) && css.extended, css[props.size], css[props.variant], props.lowered && css.lowered]}
                 >
                     <Ripple></Ripple>
                     <Elevation></Elevation>
-    
+
                     <span class={css['touch-target']}></span>
-    
+
                     {renderIcon}
                     { isMedmiumSize && renderLabel}
                 </button>
             )
         },
     })
-    
+
 }
 
 export const Fab = new FabComponent().component
