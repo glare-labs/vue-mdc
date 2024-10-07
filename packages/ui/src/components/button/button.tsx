@@ -5,7 +5,7 @@ import { Ripple } from '../ripple/ripple'
 import { EButtonAppearance, type TButtonAppearance } from './button-appearance'
 import { EButtonShape, type TButtonShape } from './button-shape'
 import { EButtonType, type TButtonType } from './button-type'
-import css from './styles/button-styles.module.scss'
+import css from './styles/button.module.scss'
 
 class ButtonComponent {
     private readonly props = {

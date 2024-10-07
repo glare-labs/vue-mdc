@@ -315,9 +315,9 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         & [data-component="ripple"] {
-            border-radius: map.get($tokens, 'state-layer-shape');
+            border-radius: map.get($tokens, 'state-layer-shape') !important;
             height: map.get($tokens, 'state-layer-size');
-            inset: unset;
+            inset: unset !important;
             width: map.get($tokens, 'state-layer-size');
         }
 
