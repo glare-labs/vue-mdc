@@ -40,7 +40,8 @@ class NavigationRailTabComponent {
             (this.$el as HTMLElement).removeEventListener('click', this.handleTabClick)
         },
         methods: {
-            handleTabClick() {
+            handleTabClick(e: Event) {
+                e.preventDefault()
                 const tabClickEvent = new CustomEvent<TNavigationRailTabClickEventDetail>(
                     'tab-click',
                     {

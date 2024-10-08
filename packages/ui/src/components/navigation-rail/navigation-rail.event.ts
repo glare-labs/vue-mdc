@@ -4,6 +4,6 @@ export interface INavigationRailEventMap {
 
 export type TNavigationRailChangeEvent = CustomEvent<TNavigationRailChangeEventDetail>
 export type TNavigationRailChangeEventDetail = {
-    activeIndex: number
-    activeElement: HTMLElement
+    indexBeforeUpdate: number
+    indexAfterUpdate: number
 }

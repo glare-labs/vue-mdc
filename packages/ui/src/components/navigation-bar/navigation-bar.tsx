@@ -1,7 +1,8 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { NavigableController } from '../../internal/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
-import { type TNavigationTabClickEventDetail } from '../navigation-tab/navigation-tab-event'
-import { NavigationBarTreeWalker } from './navigation-bar-tree-walker'
+import type { TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
+import type { TNavigationTabClickEvent } from '../navigation-tab'
 import type { INavigationBarEventMap, TNavigationBarChangeEventDetail } from './navigation-bar.event'
 import css from './styles/navigation-bar.module.scss'
 
@@ -41,56 +42,38 @@ class NavigationBarComponent {
             if (isServer()) {
                 return
             }
-
-            this.treewalker = new NavigationBarTreeWalker((this.$el as HTMLElement))
-            if (this.getTabElements().length !== 0) {
-                this.setActiveIndex(this.defaultActiveIndex)
-            }
-            (this.$el as HTMLElement).addEventListener('tab-click', this.handleTabClick)
+            this.navigableController = new NavigableController(this.$el)
+            this.navigableController.host.addEventListener('tab-click', this.handleTabClick)
         },
-
         beforeUnmount() {
-            (this.$el as HTMLElement).removeEventListener('tab-click', this.handleTabClick)
+            this.navigableController?.host.removeEventListener('tab-click', this.handleTabClick)
         },
         data: () => ({
-            activeIndex: -1,
-            activeElement: null as HTMLElement | null,
-            treewalker: null as null | NavigationBarTreeWalker,
+            navigableController: null as null | NavigableController,
         }),
         methods: {
-            getTabElements() {
-                return this.treewalker?.actionButtonElements ?? []
-            },
             handleTabClick(e: Event) {
-                this.setActiveIndex(this.getTabElements().indexOf((e as CustomEvent<TNavigationTabClickEventDetail>).detail.tab))
-            },
-            setActiveIndex(index: number) {
-                if (this.activeIndex === index) {
+                e.preventDefault()
+                e.stopPropagation()
+                if (this.navigableController === null) {
                     return
                 }
-                if (index < 0 || index >= this.getTabElements().length) {
-                    return
-                }
-
+                const eventTab = (e as TNavigationTabClickEvent).detail.tab
                 const changeEvent = new CustomEvent<TNavigationBarChangeEventDetail>('change', {
-                    detail: {
-                        activeElement: this.getTabElements()[index],
-                        activeIndex: index,
-                    },
                     cancelable: true,
+                    bubbles: true,
+                    composed: true,
+                    detail: {
+                        indexAfterUpdate: this.navigableController.getNavigationTabs().findIndex(tab => tab === eventTab),
+                        indexBeforeUpdate: this.navigableController.activeIndex,
+                    }
                 })
-                this.$emit('change', changeEvent)
-                const preventChange = !this.$el.dispatchEvent(changeEvent)
+                const preventChange = !this.navigableController.host.dispatchEvent(changeEvent)
                 if (preventChange) {
                     return
                 }
-
-                if (this.activeIndex !== -1) {
-                    this.getTabElements()[this.activeIndex].removeAttribute('active')
-                }
-                this.activeIndex = index
-                this.getTabElements()[index].setAttribute('active', 'true')
-            },
+                this.navigableController.activeIndex = this.navigableController.getNavigationTabs().findIndex(tab => tab === (e as CustomEvent<TNavigationRailTabClickEventDetail>).detail.tab)
+            }
         },
         render() {
             return (
