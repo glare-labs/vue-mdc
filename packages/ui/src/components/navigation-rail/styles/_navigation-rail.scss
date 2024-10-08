@@ -1,0 +1,72 @@
+@use 'sass:map';
+@use '../../elevation/styles/elevation.scss';
+@use '../../../tokens';
+
+$_motion: tokens.md-sys-motion-values();
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$md-comp-navigation-rail-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token)==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --md-navigation-rail-#{$token}: #{$value};
+        }
+    }
+}
+
+@mixin styles() {
+    $tokens: tokens.md-comp-navigation-rail-values();
+
+    @layer navigation-rail-styles {
+
+        & {
+            @each $token, $value in $tokens {
+                --_#{$token}: var(--gu-navigation-rail-#{$token}, #{$value});
+            }
+
+            @include elevation.theme(('level': var(--_container-elevation),
+                    'shadow-color': var(--_container-shadow-color),
+                ));
+
+        }
+
+        & {
+            box-sizing: border-box;
+            position: relative;
+            width: var(--_container-width);
+            height: 100%;
+
+            &>.tabs {
+                width: inherit;
+                height: fit-content;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &.top>.tabs {
+                justify-content: start;
+            }
+
+            &.center>.tabs {
+                justify-content: center;
+            }
+
+            &.bottom>.tabs {
+                justify-content: end;
+            }
+        }
+
+        &>.background {
+            background-color: var(--_container-color);
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            z-index: -1;
+        }
+    }
+}

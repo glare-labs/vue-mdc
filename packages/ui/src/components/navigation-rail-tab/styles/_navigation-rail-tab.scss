@@ -1,8 +1,3 @@
-//
-// Copyright 2022 Google LLC
-// SPDX-License-Identifier: Apache-2.0
-//
-
 @use 'sass:map';
 // @use '../../../focus/focus-ring';
 @use '../../ripple/styles/ripple';
@@ -13,7 +8,7 @@
 $animation-duration: 200ms;
 
 @mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-navigation-bar-supported-tokens;
+    $supported-tokens: tokens.$md-comp-navigation-rail-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
@@ -21,17 +16,17 @@ $animation-duration: 200ms;
         }
 
         @if $value {
-            --md-navigation-tab-#{$token}: #{$value};
+            --md-navigation-rail-tab-#{$token}: #{$value};
         }
     }
 }
 
 @mixin styles() {
-    $tokens: tokens.md-comp-navigation-bar-values();
+    $tokens: tokens.md-comp-navigation-rail-values();
 
     & {
         @each $token, $value in $tokens {
-            --_#{$token}: var(--md-navigation-tab-#{$token}, #{$value});
+            --_#{$token}: var(--md-navigation-rail-tab-#{$token}, #{$value});
         }
     }
 
@@ -49,9 +44,10 @@ $animation-duration: 200ms;
         box-sizing: border-box;
         cursor: pointer;
         display: flex;
-        flex-grow: 1;
+        // Rail tab does not grow.
+        flex-grow: 0;
         flex-direction: column;
-        height: 100%;
+        height: fit-content;
         justify-content: center;
         min-height: 48px;
         min-width: 48px;
@@ -81,6 +77,7 @@ $animation-duration: 200ms;
         justify-content: center;
         position: relative;
         z-index: 1;
+        border-radius: inherit;
     }
 
     & .label {
@@ -107,7 +104,7 @@ $animation-duration: 200ms;
         width: 32px;
         background-color: var(--_active-indicator-color);
         border-radius: var(--_active-indicator-shape);
-
+        z-index: -1;
     }
 
     &:is(.active, [active]) .active-indicator {
@@ -142,6 +139,7 @@ $animation-duration: 200ms;
 
     & [data-component="ripple"] {
         z-index: 0;
+        border-radius: var(--_active-indicator-shape);
     }
 
     &:is(.active, [active]) {

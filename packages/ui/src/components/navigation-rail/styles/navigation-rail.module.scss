@@ -1,0 +1,5 @@
+@use './navigation-rail';
+
+.navigation-rail {
+    @include navigation-rail.styles();
+}

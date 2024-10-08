@@ -1,0 +1,5 @@
+@use './navigation-rail-tab';
+
+.navigation-rail-tab {
+    @include navigation-rail-tab.styles();
+}
