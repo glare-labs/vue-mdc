@@ -1,35 +1,27 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { NavigableController } from '../../internal/controller/navigable-controller'
+import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
+import { Elevation } from '../elevation'
 import type { TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
 import type { TNavigationTabClickEvent } from '../navigation-tab'
-import type { INavigationBarEventMap, TNavigationBarChangeEventDetail } from './navigation-bar.event'
 import css from './styles/navigation-bar.module.scss'
-
-export type TNavigationBarPosition = 'left' | 'center' | 'right'
-
-export const enum ENavigationBarPosition {
-    Left = 'left',
-    Center = 'center',
-    Right = 'right',
-}
 
 class NavigationBarComponent {
     private readonly name = `GlareUi-NavigationBar`
     private readonly props = {
         defaultActiveIndex: {
-            type: Number,
+            type: Number as PropType<number>,
             default: 0,
         },
-        position: {
-            type: String as PropType<TNavigationBarPosition>,
-            default: ENavigationBarPosition.Center,
-        },
+        rippleUnbounded: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        }
     }
     private readonly slots = {} as SlotsType<{
         default: void
     }>
-    private readonly emits: Array<keyof INavigationBarEventMap> = [
+    private readonly emits: Array<keyof INavigableElementEventMap> = [
         'change'
     ]
 
@@ -43,6 +35,7 @@ class NavigationBarComponent {
                 return
             }
             this.navigableController = new NavigableController(this.$el)
+            this.navigableController.activeIndex = this.defaultActiveIndex
             this.navigableController.host.addEventListener('tab-click', this.handleTabClick)
         },
         beforeUnmount() {
@@ -59,7 +52,7 @@ class NavigationBarComponent {
                     return
                 }
                 const eventTab = (e as TNavigationTabClickEvent).detail.tab
-                const changeEvent = new CustomEvent<TNavigationBarChangeEventDetail>('change', {
+                const changeEvent = new CustomEvent<TNavigableElementChangeEventDetail>('change', {
                     cancelable: true,
                     bubbles: true,
                     composed: true,
@@ -68,6 +61,7 @@ class NavigationBarComponent {
                         indexBeforeUpdate: this.navigableController.activeIndex,
                     }
                 })
+                this.$emit('change', changeEvent)
                 const preventChange = !this.navigableController.host.dispatchEvent(changeEvent)
                 if (preventChange) {
                     return
@@ -79,9 +73,11 @@ class NavigationBarComponent {
             return (
                 <div
                     data-component="navigation-bar"
-                    class={[css['navigation-bar']]}
+                    class={[css['navigation-bar'], this.rippleUnbounded && css['ripple-unbounded']]}
                 >
                     {this.$slots.default && this.$slots.default()}
+
+                    <Elevation></Elevation>
                 </div>
             )
         }

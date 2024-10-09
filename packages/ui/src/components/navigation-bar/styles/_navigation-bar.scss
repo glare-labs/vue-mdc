@@ -47,17 +47,20 @@ $_motion: tokens.md-sys-motion-values();
             background-color: var(--_container-color);
             border-radius: var(--_container-shape);
             height: var(--_container-height);
-
-            .md3-navigation-bar__tabs-slot-container {
-                display: inherit;
-                width: inherit;
-            }
         }
 
         & [data-component="elevation"] {
             transition-duration: 280ms;
             transition-timing-function: map.get($_motion, 'emphasized-easing');
             z-index: 0;
+        }
+
+        &.ripple-unbounded [data-component="ripple"] {
+            --_size: calc(var(--_container-height) + var(--_active-indicator-height));
+            inset: unset !important;
+            height: var(--_size);
+            width: var(--_size);
+            border-radius: 50% !important;
         }
     }
 

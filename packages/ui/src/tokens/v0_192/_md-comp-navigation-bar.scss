@@ -50,7 +50,7 @@ $_default: (
         'active-pressed-label-text-color': map.get($deps, 'md-sys-color', 'on-surface'),
         'active-pressed-state-layer-color': map.get($deps, 'md-sys-color', 'on-surface'),
         'container-color': map.get($deps, 'md-sys-color', 'surface-container'),
-        'container-elevation': map.get($deps, 'md-sys-elevation', 'level2'),
+        'container-elevation': map.get($deps, 'md-sys-elevation', 'level0'),
         'container-height': if($exclude-hardcoded-values, null, 80px),
         'container-shape': map.get($deps, 'md-sys-shape', 'corner-none'),
         'focus-state-layer-opacity': map.get($deps, 'md-sys-state', 'focus-state-layer-opacity'),

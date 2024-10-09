@@ -1,11 +1,19 @@
 import { isServer } from '../../utils/is-server'
 
+export interface INavigableElementEventMap {
+    'change': CustomEvent<TNavigableElementChangeEventDetail>
+}
+export type TNavigableElementChangeEventDetail = {
+    indexBeforeUpdate: number
+    indexAfterUpdate: number
+}
+
 export const SNavigableControllerHost = Symbol('navigableController')
 
-interface INavigableControllerHost extends HTMLElement {
+export interface INavigableControllerHost extends HTMLElement {
     [SNavigableControllerHost]?: INavigableController
 }
-interface INavigableController {
+export interface INavigableController {
     getNavigationTabs: () => Array<HTMLElement>
 }
 

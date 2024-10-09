@@ -102,6 +102,8 @@ $animation-duration: 200ms;
         transition: animation.standard(width, $animation-duration),
             animation.standard(opacity, $animation-duration);
         width: 32px;
+        margin-left: 12px;
+        margin-right: 12px;
         background-color: var(--_active-indicator-color);
         border-radius: var(--_active-indicator-shape);
         z-index: -1;

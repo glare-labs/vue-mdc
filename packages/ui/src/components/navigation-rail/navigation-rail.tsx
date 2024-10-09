@@ -1,9 +1,8 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { NavigableController } from '../../internal/controller/navigable-controller'
+import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
 import type { TNavigationRailTabClickEvent, TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
 import { ENavigationRailPosition, type TNavigationRailPosition } from './navigation-rail-position'
-import type { INavigationRailEventMap, TNavigationRailChangeEventDetail } from './navigation-rail.event'
 import css from './styles/navigation-rail.module.scss'
 
 class NavigationRailComponent {
@@ -18,11 +17,13 @@ class NavigationRailComponent {
             default: ENavigationRailPosition.Center,
         },
     }
-    private emits: Array<keyof INavigationRailEventMap> = [
+    private emits: Array<keyof INavigableElementEventMap> = [
         'change'
     ]
     private slots = {} as SlotsType<{
         default?: void
+        start?: void
+        end?: void
     }>
 
     public readonly component = defineComponent({
@@ -35,6 +36,7 @@ class NavigationRailComponent {
                 return
             }
             this.navigableController = new NavigableController(this.$el)
+            this.navigableController.activeIndex = this.defaultActiveIndex
             this.navigableController.host.addEventListener('tab-click', this.handleTabClick)
         },
         beforeUnmount() {
@@ -51,7 +53,7 @@ class NavigationRailComponent {
                     return
                 }
                 const eventTab = (e as TNavigationRailTabClickEvent).detail.tab
-                const changeEvent = new CustomEvent<TNavigationRailChangeEventDetail>('change', {
+                const changeEvent = new CustomEvent<TNavigableElementChangeEventDetail>('change', {
                     cancelable: true,
                     bubbles: true,
                     composed: true,
@@ -60,6 +62,7 @@ class NavigationRailComponent {
                         indexBeforeUpdate: this.navigableController.activeIndex,
                     }
                 })
+                this.$emit('change', changeEvent)
                 const preventChange = !this.navigableController.host.dispatchEvent(changeEvent)
                 if (preventChange) {
                     return
@@ -70,9 +73,16 @@ class NavigationRailComponent {
         render() {
             return (
                 <div data-component="navigation-rail" class={[css['navigation-rail'], css[this.position]]}>
-                    <span class={css.tabs}>
+                    <span class={css['start-wrapper']}>
+                        {this.$slots.start && this.$slots.start()}
+                    </span>
+                    <span class={css['tabs-wrapper']}>
                         {this.$slots.default && this.$slots.default()}
                     </span>
+                    <span class={css['end-wrapper']}>
+                        {this.$slots.end && this.$slots.end()}
+                    </span>
+
                     <span aria-hidden="true" class={css.background}></span>
                 </div>
             )
