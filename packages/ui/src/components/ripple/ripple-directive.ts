@@ -1,16 +1,16 @@
 import { type Directive } from 'vue'
-import { SAttachableController, type AttachableControllerHost } from '../../utils/attachable-controller'
-import { RippleAttachableController } from './ripple-attachable-controller'
+import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../internal/controller/attachable-controller'
+import { RippleReactiveState, type IRippleReactiveStateHost } from './ripple-reactive-state'
 import css from './styles/ripple.module.scss'
 
 class RippleDirective {
 
-    private static readonly createRippleElement = () => {
+    private static readonly createRippleElement = (): IRippleReactiveStateHost => {
         const rippleElement = document.createElement('div')
         rippleElement.setAttribute('aria-hidden', 'true')
         rippleElement.setAttribute('data-standalone', 'true')
         rippleElement.classList.add(css.ripple)
-        return rippleElement
+        return rippleElement as unknown as IRippleReactiveStateHost
     }
     private static readonly queryRippleElement = (el: HTMLElement) => {
         return el.querySelector<AttachableControllerHost>(`div.${css.ripple}[data-standalone="true"]`)
@@ -26,7 +26,8 @@ class RippleDirective {
         beforeMount: (el) => {
             const rippleElement = this.createRippleElement()
             el.appendChild(rippleElement)
-            new RippleAttachableController(rippleElement)
+            const reactiveState = new RippleReactiveState(rippleElement)
+            new AttachableController(rippleElement, reactiveState.onControlChange)
         },
         mounted: (el) => {
             const queriedRippleElement = this.queryRippleElement(el)

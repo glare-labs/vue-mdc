@@ -1,8 +1,3 @@
-import { AttachableController } from '../../utils/attachable-controller'
-import { EMotionEasing } from '../../utils/token'
-import { RippleConfiguration } from './ripple-configuration'
-import { RippleState } from './ripple-state'
-
 /**
  * @license
  * Copyright 2022 Google LLC
@@ -10,6 +5,22 @@ import { RippleState } from './ripple-state'
  * @link
  * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
  */
+
+import { EMotionEasing } from '../../utils/token'
+import { RippleConfiguration } from './ripple-configuration'
+import { RippleState } from './ripple-state'
+
+export const SRippleReactiveState = Symbol('rippleReactiveState')
+
+export interface IRippleReactiveState {
+    hover: boolean
+    pressed: boolean
+    disabled: boolean
+}
+
+export interface IRippleReactiveStateHost extends HTMLElement {
+    [SRippleReactiveState]: IRippleReactiveState
+}
 
 /**
  * Events that the ripple listens to.
@@ -24,8 +35,7 @@ const Events = [
     'pointerup',
 ]
 
-export class RippleAttachableController {
-
+export class RippleReactiveState implements IRippleReactiveState {
     private _hover = false
     private _pressed = false
     private _disabled = false
@@ -33,7 +43,7 @@ export class RippleAttachableController {
     public get hover() {
         return this._hover
     }
-    public set hover(hover: boolean) {
+    private set hover(hover: boolean) {
         if (this._hover === hover) {
             return
         }
@@ -43,7 +53,7 @@ export class RippleAttachableController {
     public get pressed() {
         return this._pressed
     }
-    public set pressed(pressed: boolean) {
+    private set pressed(pressed: boolean) {
         if (this._pressed === pressed) {
             return
         }
@@ -53,15 +63,17 @@ export class RippleAttachableController {
     public get disabled() {
         return this._disabled
     }
-    public set disabled(disabled: boolean) {
+    private set disabled(disabled: boolean) {
         if (this._disabled === disabled) {
             return
         }
         this._disabled = disabled
         this.host.setAttribute('data-disabled', `${disabled}`)
-
     }
 
+    private get host() {
+        return this._host
+    }
     private state = RippleState.INACTIVE
     private startEvent: null | PointerEvent = null
     private checkBoundsAfterContextMenu = false
@@ -70,29 +82,13 @@ export class RippleAttachableController {
     private rippleSize = ''
     private growAnimation: null | Animation = null
 
-    private _controller: AttachableController
-    public get controller() {
-        return this._controller
+    constructor(
+        private _host: IRippleReactiveStateHost,
+    ) {
+        _host[SRippleReactiveState] = this
     }
 
-    private get host() {
-        if (typeof this.controller === 'undefined' || this.controller === null || typeof this.controller.host === 'undefined' || this.controller.host === null) {
-            throw new Error(`Controller initialization failed for RippleAttachableController. This may be an internal error. Please report it.`)
-        }
-        return this.controller.host
-    }
-    public hostConnected() {
-        this.controller.hostConnected()
-    }
-    public hostDisconnected() {
-        this.controller.hostDisconnected()
-    }
-
-    constructor(root: HTMLElement) {
-        this._controller = new AttachableController(root, this.onControlChange)
-    }
-
-    private onControlChange = (prev: HTMLElement | null, next: HTMLElement | null) => {
+    public onControlChange = (prev: HTMLElement | null, next: HTMLElement | null) => {
         if (typeof window === 'undefined') {
             return
         }

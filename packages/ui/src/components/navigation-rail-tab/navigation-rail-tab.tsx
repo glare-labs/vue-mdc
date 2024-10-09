@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../utils/attachable-controller'
+import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../internal/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import { type INavigationRailTabEventMap, type TNavigationRailTabClickEventDetail } from './navigation-rail-tab-event'

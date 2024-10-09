@@ -1,8 +1,8 @@
-import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref, type PropType } from 'vue'
+import { defineComponent, type PropType } from 'vue'
 import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import type { AttachableControllerHost } from '../../utils/attachable-controller'
+import { AttachableController } from '../../internal/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
-import { RippleAttachableController } from './ripple-attachable-controller'
+import { RippleReactiveState } from './ripple-reactive-state'
 import css from './styles/ripple.module.scss'
 
 class RippleComponent {
@@ -18,57 +18,44 @@ class RippleComponent {
             type: String as PropType<string>
         }
     }
+    private readonly emits = []
 
     public readonly component = defineComponent({
         name: this.name,
         props: this.props,
-        setup: (props) => {
-            const root = ref<null | HTMLElement | AttachableControllerHost>(null)
-            const controller = ref<null | RippleAttachableController>(null)
-            onMounted(() => {
-                if (isServer()) {
-                    return
-                }
+        emits: this.emits,
+        mounted() {
+            if (isServer()) {
+                return
+            }
 
-                if (root.value === null || typeof root.value === 'undefined') {
-                    console.warn(`Ripple component init faild`)
-                    return
-                }
+            this.rippleReactiveState = new RippleReactiveState(this.$el)
+            this.attachableController = new AttachableController(this.$el, this.rippleReactiveState!.onControlChange)
 
-                if (controller.value === null) {
-                    controller.value = new RippleAttachableController(root.value)
-                }
+            if (this.for !== null) {
+                (this.$el as HTMLElement).setAttribute('for', this.for)
+            }
 
-                if (controller.value !== null) {
-                    controller.value.hostConnected()
-                    controller.value.disabled = props.disabled
-                }
-
-                if (props.for !== null) {
-                    controller.value.controller.htmlFor = props.for
-                }
-            })
-            onUpdated(() => {
-                if (controller.value === null) {
-                    return
-                }
-
-                controller.value.disabled = props.disabled
-                if (props.for !== null) {
-                    controller.value.controller.htmlFor = props.for
-                }
-            })
-            onBeforeUnmount(() => {
-                controller.value?.hostDisconnected()
-            })
-
-
-            return () => (
+            this.attachableController.hostConnected()
+        },
+        updated() {
+            if (this.for !== null) {
+                (this.$el as HTMLElement).setAttribute('for', this.for)
+            }
+        },
+        beforeUnmount() {
+            this.attachableController?.hostDisconnected()
+        },
+        data: () => ({
+            attachableController: null as null | AttachableController,
+            rippleReactiveState: null as null | RippleReactiveState,
+        }),
+        render() {
+            return (
                 <span
                     data-component="ripple"
                     aria-hidden="true"
                     class={[css.ripple]}
-                    ref={root}
                 ></span>
             )
         }

@@ -140,14 +140,14 @@ export interface Attachable {
  * A key to retrieve an `Attachable` element's `AttachableController` from a
  * global `MutationObserver`.
  */
-export const AttachableControllerSymbol = Symbol('attachableController')
+export const SAttachableController = Symbol('attachableController')
 
 /**
  * The host of an `AttachableController`. The controller will add itself to
  * the host so it can be retrieved in a global `MutationObserver`.
  */
 export interface AttachableControllerHost extends HTMLElement {
-    [AttachableControllerSymbol]?: AttachableController
+    [SAttachableController]?: AttachableController
 }
 
 let FOR_ATTRIBUTE_OBSERVER: MutationObserver | undefined
@@ -163,7 +163,7 @@ if (typeof window !== 'undefined') {
             // When a control's `for` attribute changes, inform its
             // `AttachableController` to update to a new control.
             (record.target as AttachableControllerHost)[
-                AttachableControllerSymbol
+                SAttachableController
             ]?.hostConnected()
         }
     })
@@ -245,7 +245,7 @@ export class AttachableController implements ReactiveController, Attachable {
             next: HTMLElement | null,
         ) => void,
     ) {
-        _host[AttachableControllerSymbol] = this
+        _host[SAttachableController] = this
         FOR_ATTRIBUTE_OBSERVER?.observe(_host, { attributeFilter: ['for'] })
     }
 
@@ -255,6 +255,7 @@ export class AttachableController implements ReactiveController, Attachable {
         }
 
         this.setCurrentControl(control)
+
         // When imperatively attaching, remove the `for` attribute so
         // that the attached control is used instead of a referenced one.
         this._host.removeAttribute('for')
