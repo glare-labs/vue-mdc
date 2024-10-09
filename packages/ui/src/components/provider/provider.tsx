@@ -1,10 +1,8 @@
-import { MaterialDynamicTokens, MaterialTokens } from '@glare-labs/material-tokens-generator'
+import { EMaterialContrastLevel, EMaterialVariant, MaterialDynamicTokens, MaterialTokens, type TMaterialContrastLevel, type TMaterialVariant } from '@glare-labs/material-tokens-generator'
 import { Hct, TonalPalette } from '@material/material-color-utilities'
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
-import { EMaterialContrastLevel, type TMaterialContrastLevel } from '../../utils/theme/MaterialContrastLevel'
-import { EMaterialVariant, type TMaterialVariant } from '../../utils/theme/MaterialVariant'
 
 class ProviderComponent {
     private readonly name = `${componentNamePrefix}-provider`
@@ -47,7 +45,7 @@ class ProviderComponent {
             type: Number as PropType<TMaterialContrastLevel>
         },
         variant: {
-            default: EMaterialVariant.CONTENT,
+            default: EMaterialVariant.Content,
             type: Number as PropType<TMaterialVariant>
         },
         styleAttribute: {
