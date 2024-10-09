@@ -1,9 +1,10 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { EIconVariant, type TIconVariant } from './icon-variant'
 import css from './styles/icon.module.scss'
 
 class IconComponent {
-    private readonly name = `GlareUi-Icon`
+    private readonly name = `${componentNamePrefix}-icon`
     private readonly props = {
         /**
          * 图标变体

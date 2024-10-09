@@ -70,7 +70,11 @@ export class RippleAttachableController {
     private rippleSize = ''
     private growAnimation: null | Animation = null
 
-    private controller: AttachableController
+    private _controller: AttachableController
+    public get controller() {
+        return this._controller
+    }
+
     private get host() {
         if (typeof this.controller === 'undefined' || this.controller === null || typeof this.controller.host === 'undefined' || this.controller.host === null) {
             throw new Error(`Controller initialization failed for RippleAttachableController. This may be an internal error. Please report it.`)
@@ -85,7 +89,7 @@ export class RippleAttachableController {
     }
 
     constructor(root: HTMLElement) {
-        this.controller = new AttachableController(root, this.onControlChange)
+        this._controller = new AttachableController(root, this.onControlChange)
     }
 
     private onControlChange = (prev: HTMLElement | null, next: HTMLElement | null) => {

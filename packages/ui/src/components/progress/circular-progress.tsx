@@ -1,8 +1,9 @@
 import { defineComponent } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import css from './styles/progress.module.scss'
 
 class CircularProgressComponent {
-    private readonly name = 'GlareUi-CircularProgress'
+    private readonly name = `${componentNamePrefix}-circular-progress`
     private readonly props = {
         max: {
             type: Number,

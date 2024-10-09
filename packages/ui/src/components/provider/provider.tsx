@@ -1,12 +1,14 @@
 import { MaterialDynamicTokens, MaterialTokens } from '@glare-labs/material-tokens-generator'
 import { Hct, TonalPalette } from '@material/material-color-utilities'
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { EMaterialContrastLevel, type TMaterialContrastLevel } from '../../utils/theme/MaterialContrastLevel'
 import { EMaterialVariant, type TMaterialVariant } from '../../utils/theme/MaterialVariant'
 
-class GlareProviderComponent {
-    protected readonly name = 'GlareUi-GlareProvider'
+class ProviderComponent {
+    private readonly name = `${componentNamePrefix}-provider`
+
     protected readonly props = {
         sourceColorHct: {
             default: Hct.from(90, 100, 75),
@@ -63,15 +65,15 @@ class GlareProviderComponent {
         props: this.props,
         slots: this.slots,
         mounted() {
-            if(isServer()) {
+            if (isServer()) {
                 return
             }
 
-            if(!(this.$el as Element).getAttribute(this.styleAttribute)) {
+            if (!(this.$el as Element).getAttribute(this.styleAttribute)) {
                 (this.$el as Element).setAttribute(this.styleAttribute, '')
             }
 
-            if(!this.queryMdStyleElement()) {
+            if (!this.queryMdStyleElement()) {
                 const sE = this.createMdStyleElement()
                 this.updateMdStyleElement(sE, this.createMdThemeStyle())
                 this.insertMdStyleElementToRoot(sE)
@@ -79,7 +81,7 @@ class GlareProviderComponent {
         },
         updated() {
             const styleElement = this.queryMdStyleElement()
-            if(styleElement !== null) {
+            if (styleElement !== null) {
                 this.updateMdStyleElement(styleElement, this.createMdThemeStyle())
             }
         },
@@ -99,17 +101,17 @@ class GlareProviderComponent {
                 (this.$el as Element).appendChild(styleElement)
             },
             updateMdStyleElement(styleElement: Element, styleText: string) {
-                const themeUpdateEvent = new Event('theme-update', {cancelable: true})
+                const themeUpdateEvent = new Event('theme-update', { cancelable: true })
                 this.$emit('theme-update', themeUpdateEvent)
                 const preventUpdate = !dispatchEvent(themeUpdateEvent)
-                if(preventUpdate) {
+                if (preventUpdate) {
                     return
                 }
                 styleElement.textContent = `[${this.styleAttribute}] {${styleText}}`
             },
             createMdThemeStyle() {
                 let theme = null
-                if(this.enableDynamicMode) {
+                if (this.enableDynamicMode) {
                     theme = new MaterialDynamicTokens({
                         sourceColorHct: this.sourceColorHct,
                         primaryPalette: this.primaryPalette,
@@ -145,4 +147,4 @@ class GlareProviderComponent {
     })
 }
 
-export const GlareProvider = new GlareProviderComponent().component
+export const Provider = new ProviderComponent().component

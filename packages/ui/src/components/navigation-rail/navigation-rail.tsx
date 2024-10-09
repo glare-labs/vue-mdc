@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
 import type { TNavigationRailTabClickEvent, TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
@@ -6,7 +7,8 @@ import { ENavigationRailPosition, type TNavigationRailPosition } from './navigat
 import css from './styles/navigation-rail.module.scss'
 
 class NavigationRailComponent {
-    private name = 'GlareUi-NavigationRail'
+    private readonly name = `${componentNamePrefix}-navigation-rail`
+
     private props = {
         defaultActiveIndex: {
             type: Number,

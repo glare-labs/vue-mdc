@@ -1,9 +1,10 @@
 import { defineComponent, type PropType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { EElevationLevel, type TElevationLevel } from './elevation-level'
 import css from './styles/elevation.module.scss'
 
 class ElevationComponent {
-    private readonly name = 'GlareUi-Elevation'
+    private readonly name = `${componentNamePrefix}-elevation`
     private readonly props = {
         /**
          * 阴影级数, 取值在0到5之间, 包括0和5

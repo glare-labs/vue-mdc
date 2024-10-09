@@ -1,8 +1,11 @@
 import { defineComponent, type PropType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { EDividerVariant, type TDividerVariant } from './divider-variant'
 import css from './styles/divider.module.scss'
 
 class DividerComponent {
+    private readonly name = `${componentNamePrefix}-divider`
+
     private readonly props = {
         variant: {
             default: EDividerVariant.MiddleInset,
@@ -11,7 +14,7 @@ class DividerComponent {
     }
 
     public readonly component = defineComponent({
-        name: 'GlareUi-Divider',
+        name: this.name,
         props: this.props,
         render() {
             const isNoInsert = this.variant === EDividerVariant.NoInset

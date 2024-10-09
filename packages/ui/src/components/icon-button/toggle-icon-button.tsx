@@ -1,12 +1,13 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
 import { EIconButtonType, type TIconButtonType } from './icon-button-type'
 import css from './styles/icon-button.module.scss'
 
-export class TogglableIconButtonComponent {
-    private readonly name = 'GlareUi-TogglableIconButton'
+class ToggleIconButtonComponent {
+    private readonly name = `${componentNamePrefix}-toggle-icon-button`
     private readonly props = {
         appearance: {
             type: String as PropType<TIconButtonAppearance>,
@@ -43,13 +44,13 @@ export class TogglableIconButtonComponent {
         emits: this.emits,
         slots: this.slots,
         mounted() {
-            if(isServer()) {
+            if (isServer()) {
                 return
             }
             (this.$el as HTMLButtonElement).addEventListener('click', this.handleIconButtonClick)
         },
         beforeUpdate() {
-            if(this.modelValue !== null) {
+            if (this.modelValue !== null) {
                 this.selected = this.modelValue
             }
         },
@@ -66,13 +67,13 @@ export class TogglableIconButtonComponent {
                 this.setSelected(!this.selected)
             },
             setSelected(value: boolean) {
-                const changeEvent = new Event('change', {bubbles: true, cancelable: true,})
+                const changeEvent = new Event('change', { bubbles: true, cancelable: true, })
                 this.$emit('change', changeEvent)
                 const preventChange = !dispatchEvent(changeEvent)
-                if(preventChange) {
+                if (preventChange) {
                     return
                 }
-                if(this.selected === value) {
+                if (this.selected === value) {
                     return
                 }
                 this.selected = value
@@ -113,4 +114,4 @@ export class TogglableIconButtonComponent {
     })
 }
 
-export const TogglableIconButton = new TogglableIconButtonComponent().component
+export const ToggleIconButton = new ToggleIconButtonComponent().component

@@ -1,10 +1,11 @@
 import { defineComponent } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/checkbox.module.scss'
 
 class CheckboxComponent {
-    private readonly name = `GlareUi-Checkbox`
+    private readonly name = `${componentNamePrefix}-checkbox`
     private readonly props = {
         disabled: {
             type: Boolean,
@@ -45,7 +46,7 @@ class CheckboxComponent {
             }
         },
         mounted() {
-            if(isServer()) {
+            if (isServer()) {
                 return
             }
             ((this.$el as Element).querySelector('&>.input-target') as HTMLInputElement).addEventListener('change', this.handleChange)
@@ -55,7 +56,7 @@ class CheckboxComponent {
             this.prevDisabled = this.disabled
             this.prevIndeterminate = this.interIndeterminate
 
-            if(this.modelValue !== null) {
+            if (this.modelValue !== null) {
                 this.setChecked(this.modelValue)
             }
         },
@@ -69,13 +70,13 @@ class CheckboxComponent {
                 this.interIndeterminate = target.indeterminate
             },
             setChecked(value: boolean) {
-                const changeEvent = new Event('change', { bubbles: true, cancelable: true})
+                const changeEvent = new Event('change', { bubbles: true, cancelable: true })
                 this.$emit('change', changeEvent)
                 const preventChange = !dispatchEvent(changeEvent)
-                if(preventChange) {
+                if (preventChange) {
                     return
                 }
-                if(this.checked === value) {
+                if (this.checked === value) {
                     return
                 }
                 this.checked = value

@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../utils/attachable-controller'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
@@ -6,7 +7,8 @@ import { type INavigationRailTabEventMap, type TNavigationRailTabClickEventDetai
 import css from './styles/navigation-rail-tab.module.scss'
 
 class NavigationRailTabComponent {
-    private readonly name = `GlareUi-NavigationRailTab`
+    private readonly name = `${componentNamePrefix}-navigation-rail-tab`
+
     private readonly props = {
         label: {
             type: String as PropType<string>,

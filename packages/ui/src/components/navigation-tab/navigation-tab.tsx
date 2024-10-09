@@ -1,11 +1,13 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import { type INavigationTabEventMap, type TNavigationTabClickEventDetail } from './navigation-tab-event'
 import css from './styles/navigation-tab.module.scss'
 
 class NavigationTabComponent {
-    private readonly name = `GlareUi-NavigationTab`
+    private readonly name = `${componentNamePrefix}-navigation-tab`
+
     private readonly props = {
         label: {
             type: String as PropType<string>,

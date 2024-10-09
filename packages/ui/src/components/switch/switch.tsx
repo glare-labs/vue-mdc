@@ -1,10 +1,12 @@
 import { type SlotsType, defineComponent } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/switch.module.scss'
 
 class SwitchComponent {
-    private readonly name = 'GlareUi-Switch'
+    private readonly name = `${componentNamePrefix}-switch`
+
     private readonly props = {
         disabled: {
             type: Boolean,

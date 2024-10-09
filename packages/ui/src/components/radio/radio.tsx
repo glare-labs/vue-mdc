@@ -1,11 +1,13 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { generateUuid } from '../../utils/uuid'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/radio.module.scss'
 
 class RadioComponent {
-    private readonly name = 'GlareUi-Radio'
+    private readonly name = `${componentNamePrefix}-radio`
+
     private readonly props = {
         disabled: {
             type: Boolean as PropType<boolean>,

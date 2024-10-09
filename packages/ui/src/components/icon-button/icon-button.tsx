@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
@@ -6,7 +7,8 @@ import { EIconButtonType, type TIconButtonType } from './icon-button-type'
 import css from './styles/icon-button.module.scss'
 
 class IconButtonComponent {
-    private name: string = 'GlareUi-IconButton'
+    private readonly name = `${componentNamePrefix}-icon-button`
+
     private props = {
         appearance: {
             type: String as PropType<TIconButtonAppearance>,

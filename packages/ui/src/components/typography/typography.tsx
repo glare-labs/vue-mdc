@@ -1,9 +1,11 @@
 import { type PropType, type SlotsType, defineComponent } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import css from './styles/typography.module.scss'
 import { ETypographyVariant, type TTypographyVariant } from './typography-variant'
 
 class TypographyComponent {
-    private readonly name = 'GlareUi-Typography'
+    private readonly name = `${componentNamePrefix}-typography`
+
     private readonly props = {
         variant: {
             default: ETypographyVariant.BodyMedium,

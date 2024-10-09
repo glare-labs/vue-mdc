@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
 import { Ripple } from '../ripple/ripple'
@@ -8,6 +9,7 @@ import { EButtonType, type TButtonType } from './button-type'
 import css from './styles/button.module.scss'
 
 class ButtonComponent {
+    private readonly name = `${componentNamePrefix}-button`
     private readonly props = {
         appearance: {
             type: String as PropType<TButtonAppearance>,
@@ -42,7 +44,7 @@ class ButtonComponent {
     }>
 
     public readonly component = defineComponent({
-        name: 'GlareUi-Button',
+        name: this.name,
         props: this.props,
         slots: this.slots,
         render() {

@@ -1,4 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
 import { Elevation } from '../elevation'
@@ -7,7 +8,8 @@ import type { TNavigationTabClickEvent } from '../navigation-tab'
 import css from './styles/navigation-bar.module.scss'
 
 class NavigationBarComponent {
-    private readonly name = `GlareUi-NavigationBar`
+    private readonly name = `${componentNamePrefix}-navigation-bar`
+
     private readonly props = {
         defaultActiveIndex: {
             type: Number as PropType<number>,

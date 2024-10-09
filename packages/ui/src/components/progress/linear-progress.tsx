@@ -1,8 +1,10 @@
 import { defineComponent, type PropType } from 'vue'
+import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
 import css from './styles/progress.module.scss'
 
 class LinearProgressComponent {
-    private readonly name = 'GlareUi-LinearProgress'
+    private readonly name = `${componentNamePrefix}-linear-progress`
+
     private readonly props = {
         buffer: {
             type: Number as PropType<number>,
