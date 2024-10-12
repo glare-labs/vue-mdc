@@ -50,7 +50,8 @@ class NavigationRailTabComponent {
                         bubbles: true,
                         composed: true,
                         detail: {
-                            tab: this.$el as HTMLElement
+                            tab: this.$el as HTMLElement,
+                            label: this.label
                         }
                     }
                 )

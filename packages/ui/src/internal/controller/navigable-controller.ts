@@ -6,6 +6,7 @@ export interface INavigableElementEventMap {
 export type TNavigableElementChangeEventDetail = {
     indexBeforeUpdate: number
     indexAfterUpdate: number
+    label: string
 }
 
 export const SNavigableControllerHost = Symbol('navigableController')

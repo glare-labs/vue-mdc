@@ -62,6 +62,7 @@ class NavigationRailComponent {
                     detail: {
                         indexAfterUpdate: this.navigableController.getNavigationTabs().findIndex(tab => tab === eventTab),
                         indexBeforeUpdate: this.navigableController.activeIndex,
+                        label: (e as TNavigationRailTabClickEvent).detail.label
                     }
                 })
                 this.$emit('change', changeEvent)

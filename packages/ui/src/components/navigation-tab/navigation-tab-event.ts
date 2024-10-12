@@ -5,4 +5,5 @@ export interface INavigationTabEventMap {
 export type TNavigationTabClickEvent = CustomEvent<TNavigationTabClickEventDetail>
 export type TNavigationTabClickEventDetail = {
     tab: HTMLElement
+    label: string
 }
