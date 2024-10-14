@@ -1,5 +1,5 @@
 import { defineComponent, type PropType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { EElevationLevel, type TElevationLevel } from './elevation-level'
 import css from './styles/elevation.module.scss'
 

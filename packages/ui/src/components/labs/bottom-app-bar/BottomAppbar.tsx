@@ -1,8 +1,8 @@
 import { defineComponent } from 'vue'
+import { Elevation } from '../../elevation/elevation'
 import { BottomAppbarBase } from './base'
-import css from './bottomAppbar.module.css'
 import cssBase from './base.module.css'
-import { Elevation } from '../../elevation/Elevation'
+import css from './bottomAppbar.module.css'
 
 class BottomAppbarComponent {
     private static readonly props = BottomAppbarBase.propsShared
@@ -15,7 +15,7 @@ class BottomAppbarComponent {
         slots: this.slots,
         emits: this.emits,
         setup(props, ctx) {
-            
+
         },
         render() {
             const renderBackground = <div aria-hidden="true" class={cssBase.background}></div>

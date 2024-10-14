@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internals/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
 import type { TNavigationRailTabClickEvent, TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
 import { ENavigationRailPosition, type TNavigationRailPosition } from './navigation-rail-position'

@@ -1,5 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { Elevation } from '../elevation/elevation'
 import { Ripple } from '../ripple/ripple'
 import { EFabSize, type TFabSize } from './fab-size'

@@ -1,5 +1,5 @@
 import { type Directive } from 'vue'
-import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../internal/controller/attachable-controller'
+import { AttachableController, SAttachableController, type IAttachableControllerHost } from '../../internals/controller/attachable-controller'
 import { RippleReactiveState, type IRippleReactiveStateHost } from './ripple-reactive-state'
 import css from './styles/ripple.module.scss'
 
@@ -13,7 +13,7 @@ class RippleDirective {
         return rippleElement as unknown as IRippleReactiveStateHost
     }
     private static readonly queryRippleElement = (el: HTMLElement) => {
-        return el.querySelector<AttachableControllerHost>(`div.${css.ripple}[data-standalone="true"]`)
+        return el.querySelector<IAttachableControllerHost>(`div.${css.ripple}[data-standalone="true"]`)
     }
     private static readonly isRippleColorProperty = (color: string) => {
         return typeof color === 'string'

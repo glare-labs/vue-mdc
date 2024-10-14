@@ -1,7 +1,7 @@
 import { EMaterialContrastLevel, EMaterialVariant, MaterialDynamicTokens, MaterialTokens, type TMaterialContrastLevel, type TMaterialVariant } from '@glare-labs/material-tokens-generator'
 import { Hct, TonalPalette } from '@material/material-color-utilities'
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 
 class ProviderComponent {
@@ -51,6 +51,14 @@ class ProviderComponent {
         styleAttribute: {
             default: 'md-theme-style-target',
             type: String as PropType<string>
+        },
+        prefix: {
+            default: 'md-sys-color',
+            type: String as PropType<string>
+        },
+        noEmit: {
+            default: false,
+            type: Boolean as PropType<boolean>
         }
     }
     protected readonly slots = {} as SlotsType<{
@@ -71,16 +79,18 @@ class ProviderComponent {
                 (this.$el as Element).setAttribute(this.styleAttribute, '')
             }
 
-            if (!this.queryMdStyleElement()) {
+            if (!this.noEmit && !this.queryMdStyleElement()) {
                 const sE = this.createMdStyleElement()
                 this.updateMdStyleElement(sE, this.createMdThemeStyle())
                 this.insertMdStyleElementToRoot(sE)
             }
         },
         updated() {
-            const styleElement = this.queryMdStyleElement()
-            if (styleElement !== null) {
-                this.updateMdStyleElement(styleElement, this.createMdThemeStyle())
+            if(this.noEmit) {
+                const styleElement = this.queryMdStyleElement()
+                if (styleElement !== null) {
+                    this.updateMdStyleElement(styleElement, this.createMdThemeStyle())
+                }
             }
         },
         beforeUnmount() {
@@ -127,7 +137,7 @@ class ProviderComponent {
                         contrastLevel: this.contrastLevel,
                         isDark: this.dark,
                         variant: this.variant,
-                        prefix: 'md-sys-color'
+                        prefix: this.prefix
                     })
                 }
                 return theme.cssText()

@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import { AttachableController, SAttachableController, type AttachableControllerHost } from '../../internal/controller/attachable-controller'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { AttachableController, SAttachableController, type IAttachableControllerHost } from '../../internals/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import { type INavigationRailTabEventMap, type TNavigationRailTabClickEventDetail } from './navigation-rail-tab-event'
@@ -35,7 +35,7 @@ class NavigationRailTabComponent {
             }
             (this.$el as HTMLElement).addEventListener('click', this.handleTabClick)
 
-            const ripple = (this.$el as HTMLElement).querySelector('&>span>.ripple')! as AttachableControllerHost;
+            const ripple = (this.$el as HTMLElement).querySelector('&>span>.ripple')! as IAttachableControllerHost;
             (ripple[SAttachableController] as AttachableController).attach(this.$el)
         },
         beforeUnmount() {

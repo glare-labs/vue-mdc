@@ -9,10 +9,10 @@ export type TNavigableElementChangeEventDetail = {
     label: string
 }
 
-export const SNavigableControllerHost = Symbol('navigableController')
+export const SNavigableController = Symbol('navigableController')
 
 export interface INavigableControllerHost extends HTMLElement {
-    [SNavigableControllerHost]?: INavigableController
+    [SNavigableController]?: INavigableController
 }
 export interface INavigableController {
     getNavigationTabs: () => Array<HTMLElement>
@@ -49,7 +49,7 @@ export class NavigableController implements INavigableController {
             return
         }
         this.treewalker = document.createTreeWalker(_host, NodeFilter.SHOW_ELEMENT)
-        _host[SNavigableControllerHost] = this
+        _host[SNavigableController] = this
 
         if (this.getNavigationTabs().length !== 0) {
             this.activeIndex = 0

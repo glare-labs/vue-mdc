@@ -1,5 +1,5 @@
 import { defineComponent, type PropType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { EDividerVariant, type TDividerVariant } from './divider-variant'
 import css from './styles/divider.module.scss'
 

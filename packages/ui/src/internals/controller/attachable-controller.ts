@@ -8,17 +8,17 @@
  * An object that can host Reactive Controllers and call their lifecycle
  * callbacks.
  */
-export interface ReactiveControllerHost {
+export interface IReactiveControllerHost {
     /**
      * Adds a controller to the host, which sets up the controller's lifecycle
      * methods to be called with the host's lifecycle.
      */
-    addController(controller: ReactiveController): void
+    addController(controller: IReactiveController): void
 
     /**
      * Removes a controller from the host.
      */
-    removeController(controller: ReactiveController): void
+    removeController(controller: IReactiveController): void
 
     /**
      * Requests a host update which is processed asynchronously. The update can
@@ -45,12 +45,12 @@ export interface ReactiveControllerHost {
  * hooks related to a single feature.
  *
  * Controllers are added to a host component, or other object that implements
- * the `ReactiveControllerHost` interface, via the `addController()` method.
+ * the `IReactiveControllerHost` interface, via the `addController()` method.
  * They can hook their host components's lifecycle by implementing one or more
  * of the lifecycle callbacks, or initiate an update of the host component by
  * calling `requestUpdate()` on the host.
  */
-export interface ReactiveController {
+export interface IReactiveController {
     /**
      * Called when the host is connected to the component tree. For custom
      * element hosts, this corresponds to the `connectedCallback()` lifecycle,
@@ -86,7 +86,7 @@ export interface ReactiveController {
 /**
  * An element that can be attached to an associated controlling element.
  */
-export interface Attachable {
+export interface IAttachable {
     /**
      * Reflects the value of the `for` attribute, which is the ID of the element's
      * associated control.
@@ -146,7 +146,7 @@ export const SAttachableController = Symbol('attachableController')
  * The host of an `AttachableController`. The controller will add itself to
  * the host so it can be retrieved in a global `MutationObserver`.
  */
-export interface AttachableControllerHost extends HTMLElement {
+export interface IAttachableControllerHost extends HTMLElement {
     [SAttachableController]?: AttachableController
 }
 
@@ -162,7 +162,7 @@ if (typeof window !== 'undefined') {
         for (const record of records) {
             // When a control's `for` attribute changes, inform its
             // `AttachableController` to update to a new control.
-            (record.target as AttachableControllerHost)[
+            (record.target as IAttachableControllerHost)[
                 SAttachableController
             ]?.hostConnected()
         }
@@ -190,7 +190,7 @@ if (typeof window !== 'undefined') {
  * }
  * ```
  */
-export class AttachableController implements ReactiveController, Attachable {
+export class AttachableController implements IReactiveController, IAttachable {
     get htmlFor() {
         return this._host.getAttribute('for')
     }
@@ -239,7 +239,7 @@ export class AttachableController implements ReactiveController, Attachable {
      *     logic whenever the control changes.
      */
     constructor(
-        protected readonly _host: AttachableControllerHost,
+        protected readonly _host: IAttachableControllerHost,
         private readonly onControlChange: (
             prev: HTMLElement | null,
             next: HTMLElement | null,

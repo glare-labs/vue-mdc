@@ -16,7 +16,7 @@ import { Radio } from '../components/radio'
 import { Ripple } from '../components/ripple'
 import { Switch } from '../components/switch'
 import { Typography } from '../components/typography'
-import { componentNamePrefix } from '../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../internals/component-name-prefix/component-name-prefix'
 
 export const registerComponents = (prefix = componentNamePrefix) => ({
     install: (instance: App<any>) => {

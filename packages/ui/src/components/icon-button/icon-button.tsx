@@ -1,5 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'

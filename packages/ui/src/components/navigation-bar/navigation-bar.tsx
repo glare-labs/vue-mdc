@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internal/controller/navigable-controller'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { NavigableController, type INavigableElementEventMap, type TNavigableElementChangeEventDetail } from '../../internals/controller/navigable-controller'
 import { isServer } from '../../utils/is-server'
 import { Elevation } from '../elevation'
 import type { TNavigationRailTabClickEventDetail } from '../navigation-rail-tab'
@@ -61,6 +61,7 @@ class NavigationBarComponent {
                     detail: {
                         indexAfterUpdate: this.navigableController.getNavigationTabs().findIndex(tab => tab === eventTab),
                         indexBeforeUpdate: this.navigableController.activeIndex,
+                        label: (e as TNavigationTabClickEvent).detail.label
                     }
                 })
                 this.$emit('change', changeEvent)

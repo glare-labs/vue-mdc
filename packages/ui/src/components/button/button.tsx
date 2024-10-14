@@ -1,5 +1,5 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
 import { Ripple } from '../ripple/ripple'
@@ -59,7 +59,7 @@ class ButtonComponent {
                     <span class={css.touch}></span>
                     {this.$slots['leading-icon'] && this.$slots['leading-icon']()}
                     <span class={[css.label]}>
-                        {this.$slots.default()}
+                        {this.$slots.default && this.$slots.default()}
                     </span>
                     {this.$slots['trailing-icon'] && this.$slots['trailing-icon']()}
                 </>

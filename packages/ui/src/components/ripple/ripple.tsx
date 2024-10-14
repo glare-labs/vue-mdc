@@ -1,6 +1,6 @@
 import { defineComponent, type PropType } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
-import { AttachableController } from '../../internal/controller/attachable-controller'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { AttachableController } from '../../internals/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
 import { RippleReactiveState } from './ripple-reactive-state'
 import css from './styles/ripple.module.scss'

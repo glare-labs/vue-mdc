@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue'
-import { componentNamePrefix } from '../../internal/component-name-prefix/component-name-prefix'
+import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/checkbox.module.scss'
