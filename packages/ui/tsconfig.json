@@ -1,52 +1,43 @@
 {
-  "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "jsx": "preserve",
-    "jsxImportSource": "vue",
-
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-
-    "forceConsistentCasingInFileNames": true,
-
-    "verbatimModuleSyntax": true,
-    "preserveConstEnums": true,
-    "isolatedModules": true,
-
-    "baseUrl": "./packages/ui/",
-    "sourceMap": false,
-    "strict": true,
-
-    "target": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ES2022",
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable",
+        ],
+        "moduleResolution": "Bundler",
+        "composite": false,
+        "noEmit": true,
+        "declaration": true,
+        "declarationMap": true,
+        "downlevelIteration": true,
+        "importHelpers": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "sourceMap": true,
+        "inlineSources": true,
+        "pretty": true,
+        "outDir": "build",
+        "jsx": "preserve",
+        "jsxImportSource": "vue",
+        "types": [
+            "./dev-env.d.ts"
+        ],
+    },
+    "include": [
+        "./src/colors/**/*",
+        "./src/component-register/**/*",
+        "./src/components/**/*",
+        "src/internals/**/*",
+        "./src/utils/**/*",
     ],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true,
-    
-    "composite": true,
-    "declaration": true,
-  },
-  "include": [
-    "./src/**/*", 
-    "./types/declaration.d.ts",
-  ],
-  "exclude": [
-    "./src/components/**/test/*",
-    "./src/**/*.vue",
-    "./src/**/*.test.vue",
-    "./src/**/*.test.ts",
-    "./src/**/*.test.tsx",
-    "./src/**/fixure/*"
-  ]
+    "exclude": [
+        "./src/components/labs/**/*",
+        "./src/tokens/**/*"
+    ],
 }

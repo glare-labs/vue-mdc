@@ -1,71 +1,161 @@
 {
-  "name": "@glare-labs/ui",
-  "version": "0.0.1",
-  "private": "true",
-  "publishConfig": {
-    "access": "public"
-  },
-  "type": "module",
-  "license": "MIT",
-  "author": "bre97-web",
-  "module": "build/index.js",
-  "main": "build/index.js",
-  "exports": {
-    ".": {
-      "import": "./build/index.js",
-      "default": "./build/index.js",
-      "types": "./build/src/index.d.ts"
+    "name": "@glare-labs/vue-mdc",
+    "version": "0.0.0",
+    "private": "true",
+    "publishConfig": {
+        "access": "public"
     },
-    "./css": {
-      "import": "./build/style.css",
-      "default": "./build/style.css"
-    }
-  },
-  "types": "./build/src/index.d.ts",
-  "files": [
-    "build/**/*"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/glare-labs/ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/glare-labs/ui/issues"
-  },
-  "homepage": "https://github.com/glare-labs/ui",
-  "keywords": [
-    "vue",
-    "components",
-    "lib",
-    "material",
-    "material-design",
-    "material-you",
-    "vue-components",
-    "vue-library",
-    "vue3",
-    "ui"
-  ],
-  "scripts": {
-    "compile": "npx vite build",
-    "lint": "tsc --noEmit"
-  },
-  "dependencies": {
-    "vue": "^3.4.23"
-  },
-  "devDependencies": {
-    "@material/material-color-utilities": "^0.2.7",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-swc": "^0.3.0",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/node": "20.12.7",
-    "@vitejs/plugin-vue": "^5.0.4",
-    "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "terser": "^5.30.3",
-    "typescript": "~5.4.5",
-    "vite": "^5.2.9",
-    "vite-plugin-dts": "^3.8.3",
-    "vue-compile": "^1.1.2",
-    "vue-tsc": "^2.0.13"
-  }
+    "type": "module",
+    "license": "MIT",
+    "author": "bre97-web",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/glare-labs/ui.git"
+    },
+    "bugs": {
+        "url": "https://github.com/glare-labs/ui/issues"
+    },
+    "homepage": "https://github.com/glare-labs/ui",
+    "keywords": [
+        "vue",
+        "components",
+        "lib",
+        "material",
+        "material-design",
+        "material-you",
+        "vue-components",
+        "vue-library",
+        "vue3",
+        "ui"
+    ],
+    "devDependencies": {
+        "@glare-labs/material-tokens-generator": "^0.2.1",
+        "@material/material-color-utilities": "^0.3.0",
+        "@types/node": "22.7.4",
+        "@vitejs/plugin-vue-jsx": "^4.0.1",
+        "terser": "^5.34.1",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "postcss-nesting": "^13.0.0",
+        "sass": "^1.79.4",
+        "typescript": "~5.6.2",
+        "vite": "^5.4.8",
+        "vite-plugin-dts": "^4.2.3",
+        "vue": "^3.5.11"
+    },
+    "scripts": {
+        "build": "npx vite build"
+    },
+    "main": "build/index.js",
+    "module": "build/index.js",
+    "exports": {
+        "./button": {
+            "import": "./build/button.js",
+            "default": "./build/button.js",
+            "types": "./build/components/button/index.d.ts"
+        },
+        "./checkbox": {
+            "import": "./build/checkbox.js",
+            "default": "./build/checkbox.js",
+            "types": "./build/components/checkbox/index.d.ts"
+        },
+        "./divider": {
+            "import": "./build/divider.js",
+            "default": "./build/divider.js",
+            "types": "./build/components/divider/index.d.ts"
+        },
+        "./elevation": {
+            "import": "./build/elevation.js",
+            "default": "./build/elevation.js",
+            "types": "./build/components/elevation/index.d.ts"
+        },
+        "./fab": {
+            "import": "./build/fab.js",
+            "default": "./build/fab.js",
+            "types": "./build/components/fab/index.d.ts"
+        },
+        "./icon": {
+            "import": "./build/icon.js",
+            "default": "./build/icon.js",
+            "types": "./build/components/icon/index.d.ts"
+        },
+        "./icon-button": {
+            "import": "./build/icon-button.js",
+            "default": "./build/icon-button.js",
+            "types": "./build/components/icon-button/index.d.ts"
+        },
+        "./navigation-bar": {
+            "import": "./build/navigation-bar.js",
+            "default": "./build/navigation-bar.js",
+            "types": "./build/components/navigation-bar/index.d.ts"
+        },
+        "./navigation-tab": {
+            "import": "./build/navigation-tab.js",
+            "default": "./build/navigation-tab.js",
+            "types": "./build/components/navigation-tab/index.d.ts"
+        },
+        "./navigation-rail": {
+            "import": "./build/navigation-rail.js",
+            "default": "./build/navigation-rail.js",
+            "types": "./build/components/navigation-rail/index.d.ts"
+        },
+        "./navigation-rail-tab": {
+            "import": "./build/navigation-rail-tab.js",
+            "default": "./build/navigation-rail-tab.js",
+            "types": "./build/components/navigation-rail-tab/index.d.ts"
+        },
+        "./progress": {
+            "import": "./build/progress.js",
+            "default": "./build/progress.js",
+            "types": "./build/components/progress/index.d.ts"
+        },
+        "./provider": {
+            "import": "./build/provider.js",
+            "default": "./build/provider.js",
+            "types": "./build/components/provider/index.d.ts"
+        },
+        "./radio": {
+            "import": "./build/radio.js",
+            "default": "./build/radio.js",
+            "types": "./build/components/radio/index.d.ts"
+        },
+        "./ripple": {
+            "import": "./build/ripple.js",
+            "default": "./build/ripple.js",
+            "types": "./build/components/ripple/index.d.ts"
+        },
+        "./switch": {
+            "import": "./build/switch.js",
+            "default": "./build/switch.js",
+            "types": "./build/components/switch/index.d.ts"
+        },
+        "./typography": {
+            "import": "./build/typography.js",
+            "default": "./build/typography.js",
+            "types": "./build/components/typography/index.d.ts"
+        },
+        "./component-register": {
+            "import": "./build/component-register.js",
+            "default": "./build/component-register.js",
+            "types": "./build/component-register/index.d.ts"
+        },
+        "./colors": {
+            "import": "./build/colors.js",
+            "default": "./build/colors.js",
+            "types": "./build/colors/index.d.ts"
+        },
+        "./utils": {
+            "import": "./build/utils.js",
+            "default": "./build/utils.js",
+            "types": "./build/utils/index.d.ts"
+        },
+        "./internals": {
+            "import": "./build/internals.js",
+            "default": "./build/internals.js",
+            "types": "./build/internals/index.d.ts"
+        }
+    },
+    "files": [
+        "build/**/*"
+    ]
 }
