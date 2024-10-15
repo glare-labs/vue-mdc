@@ -10,12 +10,12 @@
     "author": "bre97-web",
     "repository": {
         "type": "git",
-        "url": "https://github.com/glare-labs/ui.git"
+        "url": "https://github.com/glare-labs/vue-mdc.git"
     },
     "bugs": {
-        "url": "https://github.com/glare-labs/ui/issues"
+        "url": "https://github.com/glare-labs/vue-mdc/issues"
     },
-    "homepage": "https://github.com/glare-labs/ui",
+    "homepage": "https://github.com/glare-labs/vue-mdc",
     "keywords": [
         "vue",
         "components",

@@ -1,5 +1,5 @@
 {
-  "name": "@glare-labs/ui",
+  "name": "@glare-labs/vue-mdc",
   "version": "0.0.0",
   "private": "true",
   "type": "module",
@@ -11,8 +11,7 @@
   ],
   "scripts": {
     "dev": "npm run dev -w dev-app",
-    "compile": "npm run generate -w @glare-labs/ui",
-    "generate": "npm run generate -w dev-app",
-    "lint": "npm run lint -w @glare-labs/ui"
+    "list:modules": "ls packages/ui/src/* -d | grep -vE 'md|tokens'",
+    "list:entries": "echo '// componens' && ls packages/ui/src/components/*/index.ts | grep -vE 'labs' && echo '// colors' && ls packages/ui/src/colors/index.ts && echo '// component-register' && ls packages/ui/src/component-register/index.ts && echo 'internals' && ls packages/ui/src/internals/index.ts && echo 'utils' && ls packages/ui/src/utils/index.ts"
   }
 }
