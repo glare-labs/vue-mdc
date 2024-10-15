@@ -1,7 +1,7 @@
 import { type PropType, type SlotsType, computed, defineComponent, inject, onBeforeMount, onBeforeUnmount, watch } from 'vue'
+import { Ripple } from '../../ripple/ripple'
 import { type INavigationDrawerContext, NavigationDrawerContext } from './NavigationDrawerContext'
 import css from './navigationDrawerItem.module.css'
-import { Ripple } from '../../ripple/Ripple'
 
 export type TNavigationDrawerItemType = 'headline' | 'divider' | 'indicator'
 export const NavigationDrawerItemTypes = {
@@ -13,19 +13,19 @@ export const NavigationDrawerItemTypes = {
 const props = {
     /**
      * 表示导航按钮的显示文本
-     * 
+     *
      * **当[type]为indicator或headline时必须提供label属性值**, 当type为divider时label属性值没有作用
-     * 
+     *
      * *label应该使用最短的词语且尽可能的表达明确意义*
      * @example
      * ```
      * // 完全不推荐, 完全错误
      * <NavigationDrawerItem label="Click here to login"></NavigationDrawerItem>
-     * 
+     *
      * // 良好
      * <NavigationDrawerItem label="Login"></NavigationDrawerItem>
      * ```
-     * 
+     *
      * @param {string} label 导航按钮的显示文本
      */
     label: {
@@ -35,7 +35,7 @@ const props = {
 
     /**
      * 表示导航按钮旁的数字, **通常用于表达某一邻域相关的通知, 例如特别活动, 未读消息, 注意事项**
-     * 
+     *
      * @param {string} badge 导航按钮的消息数
      */
     badge: {
@@ -45,12 +45,12 @@ const props = {
 
     /**
      * 表示导航按钮代表的url地址
-     * 
-     * 当NavigationDrawerItem组件触发事件后(例如点击导航按钮), NavigationDrawer组件的currentLabelName和currentUrl会发生变换, 
+     *
+     * 当NavigationDrawerItem组件触发事件后(例如点击导航按钮), NavigationDrawer组件的currentLabelName和currentUrl会发生变换,
      * 同时触发[routeRequested]事件, [routeRequested]事件会传递目标url到callback
-     * 
+     *
      * 当url没有参数时不会触发[routeRequested]事件
-     * 
+     *
      * @param {string | null} 导航按钮代表的url地址
      */
     url: {
@@ -60,12 +60,12 @@ const props = {
 
     /**
      * NavigationDrawerItem组件的类型, [type]默认取值为'indicator'
-     * 
+     *
      * + 支持的类型
      *   - indicator
      *   - headline
      *   - divider
-     * 
+     *
      * @param {'indicator' | 'headline' | 'divider'} type 组件的类型
      */
     type: {
