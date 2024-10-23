@@ -1,0 +1,7 @@
+@use './dialog';
+
+.dialog-container {
+    @include dialog.styles;
+}
+
+.scrim {}
