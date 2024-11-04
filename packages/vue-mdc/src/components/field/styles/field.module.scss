@@ -1,0 +1,15 @@
+@use './filled-field';
+@use './outlined-field';
+@use './shared';
+
+.field {
+    @include shared.styles();
+}
+
+.filled-field {
+    @include filled-field.styles();
+}
+
+.outlined-field {
+    @include outlined-field.styles();
+}

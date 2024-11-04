@@ -183,4 +183,8 @@
     &[touch-target='none'] .touch {
         display: none;
     }
+
+    & :is(.touch, .label, .background, [data-component="icon"]) {
+        pointer-events: none;
+    }
 }
