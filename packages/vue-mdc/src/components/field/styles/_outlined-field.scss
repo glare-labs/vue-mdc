@@ -41,7 +41,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .outline {
+        & .outline {
             border-color: var(--_outline-color);
             border-radius: inherit;
             display: flex;
@@ -51,12 +51,14 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             position: absolute;
             width: 100%;
             z-index: 1;
+
+
         }
 
-        .outline-start,
-        .outline-panel-inactive,
-        .outline-panel-active,
-        .outline-end {
+        & .outline-start,
+        & .outline-panel-inactive,
+        & .outline-panel-active,
+        & .outline-end {
 
             // ::before is inactive border, ::after is active border. Borders are
             // absolutely positioned within their elements.
@@ -69,8 +71,8 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .outline-start,
-        .outline-end {
+        & .outline-start,
+        & .outline-end {
             border: inherit;
             border-radius: inherit;
             box-sizing: border-box;
@@ -88,12 +90,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .focused .outline-start::after,
-        .focused .outline-end::after {
-            opacity: 1;
-        }
-
-        .outline-start {
+        & .outline-start {
 
             &::before,
             &::after {
@@ -107,7 +104,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .outline-end {
+        & .outline-end {
             flex-grow: 1;
             margin-inline-start: calc(-1 * var(--_outline-label-padding));
 
@@ -122,7 +119,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .outline-notch {
+        & .outline-notch {
             align-items: flex-start;
             border: inherit;
             display: flex;
@@ -133,12 +130,8 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             position: relative;
         }
 
-        .no-label .outline-notch {
-            display: none;
-        }
-
-        .outline-panel-inactive,
-        .outline-panel-active {
+        & .outline-panel-inactive,
+        & .outline-panel-active {
             border: inherit;
             border-bottom-style: solid;
             inset: 0;
@@ -166,10 +159,21 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .populated .outline-panel-inactive,
-        .populated .outline-panel-active,
-        .focused .outline-panel-inactive,
-        .focused .outline-panel-active {
+
+        &.focused .outline-start::after,
+        &.focused .outline-end::after {
+            opacity: 1;
+        }
+
+
+        &.no-label .outline-notch {
+            display: none;
+        }
+
+        &.populated .outline-panel-inactive,
+        &.populated .outline-panel-active,
+        &.focused .outline-panel-inactive,
+        &.focused .outline-panel-active {
 
             &::before,
             &::after {
@@ -177,16 +181,16 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        .outline-panel-active {
+        & .outline-panel-active {
             opacity: 0;
             transition: opacity map.get($_md-sys-motion, 'duration-short3') map.get($_md-sys-motion, 'easing-emphasized');
         }
 
-        .focused .outline-panel-active {
+        &.focused .outline-panel-active {
             opacity: 1;
         }
 
-        .outline-label {
+        & .outline-label {
             display: flex;
             max-width: 100%;
             // Center the floating label within the outline stroke
@@ -205,90 +209,90 @@ $_md-sys-motion: tokens.md-sys-motion-values();
                 $shape-start + var(--_outline-label-padding));
         $end-space: max(var(--_trailing-space), $shape-end);
 
-        .outline-start,
-        .field:not(.with-start) .content>* {
+        & .outline-start,
+        &:not(.with-start) .content>* {
             padding-inline-start: $start-space;
         }
 
-        .field:not(.with-start) .label-wrapper {
+        &:not(.with-start) .label-wrapper {
             margin-inline-start: $start-space;
         }
 
-        .field:not(.with-end) .content>* {
+        &:not(.with-end) .content>* {
             padding-inline-end: $end-space;
         }
 
-        .field:not(.with-end) .label-wrapper {
+        &:not(.with-end) .label-wrapper {
             margin-inline-end: $end-space;
         }
 
-        .outline-start::before,
-        .outline-end::before,
-        .outline-panel-inactive,
-        .outline-panel-inactive::before,
-        .outline-panel-inactive::after {
+        & .outline-start::before,
+        & .outline-end::before,
+        & .outline-panel-inactive,
+        & .outline-panel-inactive::before,
+        & .outline-panel-inactive::after {
             border-width: var(--_outline-width);
         }
 
         // States
 
-        :hover .outline {
+        &:hover .outline {
             border-color: var(--_hover-outline-color);
             color: var(--_hover-outline-color); // Needed for Firefox HCM
         }
 
-        :hover .outline-start::before,
-        :hover .outline-end::before,
-        :hover .outline-panel-inactive,
-        :hover .outline-panel-inactive::before,
-        :hover .outline-panel-inactive::after {
+        &:hover .outline-start::before,
+        &:hover .outline-end::before,
+        &:hover .outline-panel-inactive,
+        &:hover .outline-panel-inactive::before,
+        &:hover .outline-panel-inactive::after {
             border-width: var(--_hover-outline-width);
         }
 
-        .focused .outline {
+        &.focused .outline {
             border-color: var(--_focus-outline-color);
             color: var(--_focus-outline-color); // Needed for Firefox HCM
         }
 
-        .outline-start::after,
-        .outline-end::after,
-        .outline-panel-active,
-        .outline-panel-active::before,
-        .outline-panel-active::after {
+        & .outline-start::after,
+        & .outline-end::after,
+        & .outline-panel-active,
+        & .outline-panel-active::before,
+        & .outline-panel-active::after {
             border-width: var(--_focus-outline-width);
         }
 
-        .disabled .outline {
+        &.disabled .outline {
             border-color: var(--_disabled-outline-color);
             color: var(--_disabled-outline-color); // Needed for Firefox HCM
         }
 
-        .disabled .outline-start,
-        .disabled .outline-end,
-        .disabled .outline-panel-inactive {
+        &.disabled .outline-start,
+        &.disabled .outline-end,
+        &.disabled .outline-panel-inactive {
             opacity: var(--_disabled-outline-opacity);
         }
 
-        .disabled .outline-start::before,
-        .disabled .outline-end::before,
-        .disabled .outline-panel-inactive,
-        .disabled .outline-panel-inactive::before,
-        .disabled .outline-panel-inactive::after {
+        &.disabled .outline-start::before,
+        &.disabled .outline-end::before,
+        &.disabled .outline-panel-inactive,
+        &.disabled .outline-panel-inactive::before,
+        &.disabled .outline-panel-inactive::after {
             border-width: var(--_disabled-outline-width);
         }
 
-        .error .outline {
+        &.error .outline {
             border-color: var(--_error-outline-color);
             color: var(--_error-outline-color); // Needed for Firefox HCM
         }
 
-        .error:hover .outline {
+        &.error:hover .outline {
             border-color: var(--_error-hover-outline-color);
             // Needed for Firefox HCM
             color: var(--_error-hover-outline-color);
         }
 
-        .error.focused .outline {
+        &.error.focused .outline {
             border-color: var(--_error-focus-outline-color);
             // Needed for Firefox HCM
             color: var(--_error-focus-outline-color);
@@ -296,31 +300,31 @@ $_md-sys-motion: tokens.md-sys-motion-values();
 
         // Move the container up and to the left so that the resize handle doesn't
         // overlap the focus outline. Content is moved back the opposite direction.
-        .resizable .container {
+        &.resizable .container {
             bottom: var(--_focus-outline-width);
             inset-inline-end: var(--_focus-outline-width);
             // Ensures the container doesn't create an overhang that can be clicked on.
             clip-path: inset(var(--_focus-outline-width) 0 0 var(--_focus-outline-width));
         }
 
-        .resizable .container>* {
+        &.resizable .container>* {
             top: var(--_focus-outline-width);
             inset-inline-start: var(--_focus-outline-width);
         }
 
-        .resizable .container:dir(rtl) {
+        &.resizable .container:dir(rtl) {
             clip-path: inset(var(--_focus-outline-width) var(--_focus-outline-width) 0 0);
         }
     }
 
     @layer hcm {
         @media (forced-colors: active) {
-            .disabled .outline {
+            &.disabled .outline {
                 border-color: GrayText;
                 color: GrayText; // Needed for Firefox HCM
             }
 
-            .disabled :is(.outline-start, .outline-end, .outline-panel-inactive) {
+            &.disabled :is(.outline-start, .outline-end, .outline-panel-inactive) {
                 opacity: 1;
             }
         }

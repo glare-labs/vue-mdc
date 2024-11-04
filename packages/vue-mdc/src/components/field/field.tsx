@@ -1,6 +1,6 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { EMotionEasing } from '../../utils'
+import { EMotionEasing, isServer } from '../../utils'
 import { EFieldAppearance, type TFieldAppearance } from './field-appearance'
 import css from './styles/field.module.scss'
 
@@ -15,7 +15,7 @@ class FieldComponent {
             type: Boolean as PropType<boolean>,
             default: false,
         },
-        focused: {
+        defaultFocused: {
             type: Boolean as PropType<boolean>,
             default: false,
         },
@@ -27,7 +27,7 @@ class FieldComponent {
             type: Boolean as PropType<boolean>,
             default: false,
         },
-        populated: {
+        defaultPopulated: {
             type: Boolean as PropType<boolean>,
             default: false,
         },
@@ -82,24 +82,74 @@ class FieldComponent {
         props: this.props,
         slots: this.slots,
         emits: this.emits,
+        mounted() {
+            if (isServer()) {
+                return
+            }
+
+            this.populated = this.defaultPopulated
+            this.focused = this.defaultFocused
+
+            this.animateLabelIfNeeded()
+        },
+        beforeUpdate() {
+            this.populated = this.defaultPopulated
+            this.focused = this.defaultFocused
+
+            if (this.disabled && this.focused) {
+                this.focused = false
+            }
+        },
         updated() {
-            this.animateLabelIfNeeded(
-                this.focused,
-                this.populated,
-            )
+            if (this.refreshErrorAlert) {
+                requestAnimationFrame(() => {
+                    this.refreshErrorAlert = false
+                })
+            }
+
+            if (this.disableTransitions) {
+                requestAnimationFrame(() => {
+                    this.refreshErrorAlert = false
+                })
+            }
+            this.animateLabelIfNeeded()
         },
         data: () => ({
             labelAnimation: null as null | Animation,
             isAnimating: false,
             refreshErrorAlert: false,
             disableTransitions: false,
+            _populated: false,
+            _focused: false,
+            _wasPopulated: false,
+            _wasFocused: false,
         }),
+        computed: {
+            populated: {
+                get() {
+                    return this._populated
+                },
+                set(value: boolean) {
+                    this._wasPopulated = this._populated
+                    this._populated = value
+                }
+            },
+            focused: {
+                get() {
+                    return this._focused
+                },
+                set(value: boolean) {
+                    this._wasFocused = this._focused
+                    this._focused = value
+                }
+            },
+        },
         methods: {
             getFloatingLabelElement() {
-                return (this.$el as HTMLElement).querySelector(`.${css.floating}`) as HTMLElement
+                return (this.$el as HTMLElement).querySelector(`.${css.floating}.${css.label}`) as HTMLElement
             },
             getRestingLabelElement() {
-                return (this.$el as HTMLElement).querySelector(`.${css.resting}`) as HTMLElement
+                return (this.$el as HTMLElement).querySelector(`.${css.resting}.${css.label}`) as HTMLElement
             },
             getContainerElement() {
                 return (this.$el as HTMLElement).querySelector(`.${css.container}`) as HTMLElement
@@ -139,8 +189,14 @@ class FieldComponent {
                 )
             },
             renderLabel(isFloating: boolean) {
+                let visible
+                if (isFloating) {
+                    visible = this.focused || this.populated || this.isAnimating
+                } else {
+                    visible = !this.focused && !this.populated && !this.isAnimating
+                }
                 const classes = [
-                    isFloating ? (this.focused || this.populated || this.isAnimating) : (!this.focused && !this.populated && !this.isAnimating) && css.hidden,
+                    !visible && css.hidden,
                     isFloating && css.floating,
                     !isFloating && css.resting,
                     css.label,
@@ -174,15 +230,11 @@ class FieldComponent {
             renderIndicator() {
                 return <div class={css['active-indicator']}></div>
             },
-            animateLabelIfNeeded(wasFocused: boolean, wasPopulated: boolean) {
+            animateLabelIfNeeded() {
                 if (!this.label) {
                     return
                 }
-
-                wasFocused ??= this.focused
-                wasPopulated ??= this.populated
-
-                const wasFloating = wasFocused || wasPopulated
+                const wasFloating = this._wasFocused || this._wasPopulated
                 const shouldBeFloating = this.focused || this.populated
 
                 if (wasFloating === shouldBeFloating) {
@@ -192,7 +244,7 @@ class FieldComponent {
                 this.isAnimating = true
                 this.labelAnimation?.cancel()
 
-                this.labelAnimation = this.getFloatingLabelElement()?.animate(
+                this.labelAnimation = this.getFloatingLabelElement().animate(
                     this.getLabelKeyframes(),
                     {
                         duration: 150,
@@ -279,7 +331,6 @@ class FieldComponent {
                 !this.label && css['no-label'],
                 this.appearance === EFieldAppearance.Filled && css['filled-field'],
                 this.appearance === EFieldAppearance.Outlined && css['outlined-field'],
-                css.field
             ]
 
             return (

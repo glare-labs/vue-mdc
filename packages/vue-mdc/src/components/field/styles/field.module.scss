@@ -2,7 +2,8 @@
 @use './outlined-field';
 @use './shared';
 
-.field {
+.filled-field,
+.outlined-field {
     @include shared.styles();
 }
 

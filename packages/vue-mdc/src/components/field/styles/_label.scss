@@ -5,7 +5,7 @@
 
 @mixin styles() {
     @layer styles {
-        .label {
+        & .label {
             box-sizing: border-box;
             color: var(--_label-text-color);
             overflow: hidden;
@@ -20,7 +20,7 @@
             width: min-content;
         }
 
-        .label-wrapper {
+        & .label-wrapper {
             inset: 0;
             // The resting label at 100% height can block pointer events to the content
             // if it's very long and spans the full width of the field. Additionally,
@@ -32,29 +32,29 @@
             position: absolute;
         }
 
-        .label.resting {
+        & .label.resting {
             position: absolute;
             top: var(--_top-space);
         }
 
-        .label.floating {
+        & .label.floating {
             font-size: var(--_label-text-populated-size);
             line-height: var(--_label-text-populated-line-height);
             transform-origin: top left;
         }
 
-        .label.hidden {
+        & .label.hidden {
             opacity: 0;
         }
 
-        .no-label .label {
+        &.no-label .label {
             display: none;
         }
 
         // Labels need start/end padding when there isn't start/end content so they
         // don't sit on the edge of the field. We use a wrapper element around the
         // labels so as not to affect the dimensions used in the label keyframes.
-        .label-wrapper {
+        & .label-wrapper {
             inset: 0;
             position: absolute;
             // Don't let setting text-align on the field change the label's alignment.
@@ -62,38 +62,38 @@
             text-align: initial;
         }
 
-        :hover .label {
+        &:hover .label {
             color: var(--_hover-label-text-color);
         }
 
-        .focused .label {
+        &.focused .label {
             color: var(--_focus-label-text-color);
         }
 
-        .disabled .label {
+        &.disabled .label {
             color: var(--_disabled-label-text-color);
         }
 
-        .disabled .label:not(.hidden) {
+        &.disabled .label:not(.hidden) {
             opacity: var(--_disabled-label-text-opacity);
         }
 
-        .error .label {
+        &.error .label {
             color: var(--_error-label-text-color);
         }
 
-        .error:hover .label {
+        &.error:hover .label {
             color: var(--_error-hover-label-text-color);
         }
 
-        .error.focused .label {
+        &.error.focused .label {
             color: var(--_error-focus-label-text-color);
         }
     }
 
     @layer hcm {
         @media (forced-colors: active) {
-            .disabled .label:not(.hidden) {
+            &.disabled .label:not(.hidden) {
                 color: GrayText;
                 opacity: 1;
             }

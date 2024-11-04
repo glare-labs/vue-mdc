@@ -5,7 +5,7 @@
 
 @mixin styles() {
     @layer styles {
-        .supporting-text {
+        & .supporting-text {
             color: var(--_supporting-text-color);
             display: flex;
             font-family: var(--_supporting-text-font);
@@ -20,39 +20,39 @@
         }
 
         // Don't shrink the counter when the supporting text is long and wraps
-        .supporting-text :nth-child(2) {
+        & .supporting-text :nth-child(2) {
             flex-shrink: 0;
         }
 
-        :hover .supporting-text {
+        &:hover .supporting-text {
             color: var(--_hover-supporting-text-color);
         }
 
-        .focus .supporting-text {
+        &.focus .supporting-text {
             color: var(--_focus-supporting-text-color);
         }
 
-        .disabled .supporting-text {
+        &.disabled .supporting-text {
             color: var(--_disabled-supporting-text-color);
             opacity: var(--_disabled-supporting-text-opacity);
         }
 
-        .error .supporting-text {
+        &.error .supporting-text {
             color: var(--_error-supporting-text-color);
         }
 
-        .error:hover .supporting-text {
+        &.error:hover .supporting-text {
             color: var(--_error-hover-supporting-text-color);
         }
 
-        .error.focus .supporting-text {
+        &.error.focus .supporting-text {
             color: var(--_error-focus-supporting-text-color);
         }
     }
 
     @layer hcm {
         @media (forced-colors: active) {
-            .disabled .supporting-text {
+            &.disabled .supporting-text {
                 color: GrayText;
                 opacity: 1;
             }

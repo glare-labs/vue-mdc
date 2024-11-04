@@ -19,9 +19,7 @@ $_enter-delay: $_label-duration - $_visible-duration;
 @mixin styles() {
     @layer styles {
 
-        .start,
-        .middle,
-        .end {
+        & :is(.start, .middle, .end) {
             display: flex;
             box-sizing: border-box;
             height: 100%;
@@ -30,29 +28,28 @@ $_enter-delay: $_label-duration - $_visible-duration;
             position: relative;
         }
 
-        .start {
+        & .start {
             color: var(--_leading-content-color);
         }
 
-        .end {
+        & .end {
             color: var(--_trailing-content-color);
         }
 
-        .start,
-        .end {
+        & :is(.start, .end) {
             align-items: center;
             justify-content: center;
         }
 
-        .with-start .start {
+        &.with-start .start {
             margin-inline: var(--_with-leading-content-leading-space) var(--_content-space);
         }
 
-        .with-end .end {
+        &.with-end .end {
             margin-inline: var(--_content-space) var(--_with-trailing-content-trailing-space);
         }
 
-        .middle {
+        & .middle {
             align-items: stretch;
             // The container of the field aligns sections by "center". Only the middle
             // section opts in to baseline alignment.
@@ -65,7 +62,7 @@ $_enter-delay: $_label-duration - $_visible-duration;
             flex: 1;
         }
 
-        .content {
+        & .content {
             color: var(--_content-color);
             display: flex;
             flex: 1;
@@ -73,18 +70,18 @@ $_enter-delay: $_label-duration - $_visible-duration;
             transition: opacity $_visible-duration map.get($_md-sys-motion, 'easing-emphasized');
         }
 
-        .no-label .content,
-        .focused .content,
-        .populated .content {
+        &.no-label .content,
+        &.focused .content,
+        &.populated .content {
             opacity: 1;
             transition-delay: $_enter-delay;
         }
 
-        :is(.disabled, .disable-transitions) .content {
+        &:is(.disabled, .disable-transitions) .content {
             transition: none;
         }
 
-        .content>* {
+        & .content>* {
             all: unset;
             // Use `currentColor` to inherit the various state colors that are set
             // below.
@@ -99,101 +96,101 @@ $_enter-delay: $_label-duration - $_visible-duration;
             white-space: revert; // Needed for Firefox textarea
         }
 
-        .content>:not(textarea) {
+        & .content>:not(textarea) {
             padding-top: var(--_top-space);
             padding-bottom: var(--_bottom-space);
         }
 
-        .content>textarea {
+        & .content>textarea {
             // Use margin for textareas since they will scroll over the label if not.
             margin-top: var(--_top-space);
             margin-bottom: var(--_bottom-space);
         }
 
-        :hover .content {
+        &:hover .content {
             color: var(--_hover-content-color);
         }
 
-        :hover .start {
+        &:hover .start {
             color: var(--_hover-leading-content-color);
         }
 
-        :hover .end {
+        &:hover .end {
             color: var(--_hover-trailing-content-color);
         }
 
-        .focused .content {
+        &.focused .content {
             color: var(--_focus-content-color);
         }
 
-        .focused .start {
+        &.focused .start {
             color: var(--_focus-leading-content-color);
         }
 
-        .focused .end {
+        &.focused .end {
             color: var(--_focus-trailing-content-color);
         }
 
-        .disabled .content {
+        &.disabled .content {
             color: var(--_disabled-content-color);
         }
 
-        .disabled.no-label .content,
-        .disabled.focused .content,
-        .disabled.populated .content {
+        &.disabled.no-label .content,
+        &.disabled.focused .content,
+        &.disabled.populated .content {
             opacity: var(--_disabled-content-opacity);
         }
 
-        .disabled .start {
+        &.disabled .start {
             color: var(--_disabled-leading-content-color);
             opacity: var(--_disabled-leading-content-opacity);
         }
 
-        .disabled .end {
+        &.disabled .end {
             color: var(--_disabled-trailing-content-color);
             opacity: var(--_disabled-trailing-content-opacity);
         }
 
-        .error .content {
+        &.error .content {
             color: var(--_error-content-color);
         }
 
-        .error .start {
+        &.error .start {
             color: var(--_error-leading-content-color);
         }
 
-        .error .end {
+        &.error .end {
             color: var(--_error-trailing-content-color);
         }
 
-        .error:hover .content {
+        &.error:hover .content {
             color: var(--_error-hover-content-color);
         }
 
-        .error:hover .start {
+        &.error:hover .start {
             color: var(--_error-hover-leading-content-color);
         }
 
-        .error:hover .end {
+        &.error:hover .end {
             color: var(--_error-hover-trailing-content-color);
         }
 
-        .error.focused .content {
+        &.error.focused .content {
             color: var(--_error-focus-content-color);
         }
 
-        .error.focused .start {
+        &.error.focused .start {
             color: var(--_error-focus-leading-content-color);
         }
 
-        .error.focused .end {
+        &.error.focused .end {
             color: var(--_error-focus-trailing-content-color);
         }
     }
 
     @layer hcm {
         @media (forced-colors: active) {
-            .disabled :is(.start, .content, .end) {
+            &.disabled :is(.start, .content, .end) {
                 color: GrayText;
                 opacity: 1;
             }

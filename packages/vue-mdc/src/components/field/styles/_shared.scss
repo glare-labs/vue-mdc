@@ -12,9 +12,6 @@
     & {
         display: inline-flex;
         resize: both;
-    }
-
-    & {
         flex: 1;
         flex-direction: column;
         // Allow the use of block/inline reflexive RTL properties without impacting
@@ -26,7 +23,7 @@
     // A separate wrapper is needed around the container for the outline, whose
     // floating label needs overflow: visible. The container itself needs
     // overflow: hidden when resizable.
-    .container-overflow {
+    & .container-overflow {
         border-start-start-radius: var(--_container-shape-start-start);
         border-start-end-radius: var(--_container-shape-start-end);
         border-end-end-radius: var(--_container-shape-end-end);
@@ -36,7 +33,7 @@
         position: relative;
     }
 
-    .container {
+    & .container {
         align-items: center;
         border-radius: inherit;
         display: flex;
@@ -48,11 +45,11 @@
     }
 
     &,
-    .container-overflow {
+    & .container-overflow {
         resize: inherit;
     }
 
-    .resizable:not(.disabled) .container {
+    &.resizable:not(.disabled) .container {
         // `resize` is inherited from the host, but only applies to the container
         // when resizable.
         resize: inherit;
@@ -63,15 +60,15 @@
         overflow: hidden;
     }
 
-    .disabled {
+    &.disabled {
         pointer-events: none;
     }
 
-    .container-slot {
+    & .container-slot {
         border-radius: inherit;
     }
 
-    .container-slot>* {
+    & .container-slot>* {
         border-radius: inherit;
         inset: 0;
         pointer-events: none;
