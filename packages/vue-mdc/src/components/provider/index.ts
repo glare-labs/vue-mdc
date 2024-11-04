@@ -1,1 +1,2 @@
-export * from './provider'
+export * from './default-theme-solutions'
+export * from './theme-provider'
