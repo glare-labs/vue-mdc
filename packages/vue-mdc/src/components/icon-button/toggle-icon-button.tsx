@@ -1,6 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
 import { EIconButtonType, type TIconButtonType } from './icon-button-type'
@@ -102,6 +103,7 @@ class ToggleIconButtonComponent {
                     role='checkbox'
                 >
                     <Ripple></Ripple>
+                    <FocusRing></FocusRing>
 
                     <div aria-hidden="true" class={css.touch}></div>
                     <div aria-hidden="true" class={css.background}></div>

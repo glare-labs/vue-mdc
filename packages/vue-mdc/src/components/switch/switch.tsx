@@ -1,6 +1,8 @@
 import { type SlotsType, defineComponent } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { generateUuid } from '../../utils'
 import { isServer } from '../../utils/is-server'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/switch.module.scss'
 
@@ -102,6 +104,8 @@ class SwitchComponent {
         },
 
         render() {
+            const id = `switch-${generateUuid()}`
+
             const SwitchOnIcon = () => SwitchComponent.switchOnIcon
             const SwitchOffIcon = () => SwitchComponent.switchOffIcon
             const renderIcon = (
@@ -126,24 +130,26 @@ class SwitchComponent {
                     aria-disabled={this.disabled}
                     data-component="switch"
                 >
+                    <FocusRing htmlFor={id} shapeInherit={false}></FocusRing>
+
                     <input
                         type="checkbox"
                         role="switch"
                         checked={this.selected}
                         disabled={this.disabled}
                         aria-disabled={this.disabled}
+                        aria-hidden="true"
+                        id={id}
                     />
 
                     <span aria-hidden="true" class={css.background}></span >
                     <span aria-hidden="true" class={css.outline}></span >
 
-                    <span class={css.track}>
+                    <span class={css.track} aria-hidden="true">
                         <span class={css['handle-container']}>
                             <Ripple></Ripple>
                             {renderIcon}
                         </span>
-
-
                     </span>
                 </span >
             )

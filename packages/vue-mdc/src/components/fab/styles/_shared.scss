@@ -5,7 +5,7 @@
 
 @use 'sass:map';
 @use '../../elevation/styles/elevation';
-// @use '../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
 @use './fab';
@@ -79,12 +79,12 @@ $_md-sys-motion: tokens.md-sys-motion-values();
                 border-end-end-radius: var(--_large-container-shape-end-end);
             }
 
-            md-focus-ring {
-                // @include focus-ring.theme(('shape-start-start': var(--_large-container-shape-start-start),
-                //         'shape-start-end': var(--_large-container-shape-start-end),
-                //         'shape-end-end': var(--_large-container-shape-end-end),
-                //         'shape-end-start': var(--_large-container-shape-end-start),
-                //     ));
+            & [data-component="focus-ring"] {
+                @include focus-ring.theme(('shape-start-start': var(--_large-container-shape-start-start),
+                        'shape-start-end': var(--_large-container-shape-start-end),
+                        'shape-end-end': var(--_large-container-shape-end-end),
+                        'shape-end-start': var(--_large-container-shape-end-start),
+                    ));
             }
         }
 
@@ -180,12 +180,12 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         border-end-end-radius: var(--_container-shape-end-end);
     }
 
-    md-focus-ring {
-        // @include focus-ring.theme(('shape-start-start': var(--_container-shape-start-start),
-        //         'shape-start-end': var(--_container-shape-start-end),
-        //         'shape-end-end': var(--_container-shape-end-end),
-        //         'shape-end-start': var(--_container-shape-end-start),
-        //     ));
+    & [data-component="focus-ring"] {
+        @include focus-ring.theme(('shape-start-start': var(--_container-shape-start-start),
+                'shape-start-end': var(--_container-shape-start-end),
+                'shape-end-end': var(--_container-shape-end-end),
+                'shape-end-start': var(--_container-shape-end-start),
+            ));
     }
 
     & .icon * {
@@ -205,10 +205,10 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-        md-focus-ring {
+        & [data-component="focus-ring"] {
             // Adjust the focus ring padding to account for the 1px border in HCM.
-            // @include focus-ring.theme(('outward-offset': 3px,
-            // ));
+            @include focus-ring.theme(('outward-offset': 3px,
+                ));
         }
     }
 }

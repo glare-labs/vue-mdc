@@ -2,6 +2,7 @@ import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { AttachableController, SAttachableController, type IAttachableControllerHost } from '../../internals/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { type INavigationRailTabEventMap, type TNavigationRailTabClickEventDetail } from './navigation-rail-tab-event'
 import css from './styles/navigation-rail-tab.module.scss'
@@ -68,8 +69,10 @@ class NavigationRailTabComponent {
                     role='tab'
                 >
 
+                    <FocusRing shapeInherit={false}></FocusRing>
                     <span aria-hidden="true" class={[css["icon-content"]]}>
                         <Ripple class="ripple"></Ripple>
+
                         <span class={css["active-indicator"]}>
                         </span>
                         <span class={css["icon"]}>

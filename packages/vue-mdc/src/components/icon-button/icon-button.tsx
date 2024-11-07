@@ -1,6 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import type { TButtonTarget } from '../../utils/button-target-type'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
 import { EIconButtonType, type TIconButtonType } from './icon-button-type'
@@ -50,6 +51,7 @@ class IconButtonComponent {
             const renderContent = (
                 <>
                     <Ripple></Ripple>
+                    <FocusRing shapeInherit={false}></FocusRing>
                     <div aria-hidden="true" class={css.touch}></div>
                     <div aria-hidden="true" class={css.background}></div>
                     <div aria-hidden="true" class={css.outline}></div>

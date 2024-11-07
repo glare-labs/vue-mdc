@@ -2,6 +2,7 @@ import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { generateUuid } from '../../utils/uuid'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/radio.module.scss'
 
@@ -94,6 +95,7 @@ class RadioComponent {
         },
 
         render() {
+            const id = `radio-${generateUuid()}`
             return (
                 <div
                     data-component="radio"
@@ -101,6 +103,7 @@ class RadioComponent {
                     class={[css.radio, this.checked && css.checked, this.disabled && css.disabled]}
                 >
                     <Ripple></Ripple>
+                    <FocusRing htmlFor={id} shapeInherit={false}></FocusRing>
 
                     <svg
                         aria-hidden="true"
@@ -137,9 +140,10 @@ class RadioComponent {
                     <input
                         type="radio"
                         class={css.input}
-                        tabindex="-1"
                         checked={this.checked}
                         disabled={this.disabled}
+                        aria-hidden="true"
+                        id={id}
                     />
                 </div>
             )

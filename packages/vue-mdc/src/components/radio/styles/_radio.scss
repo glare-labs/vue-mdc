@@ -5,7 +5,7 @@
 
 @use 'sass:list';
 @use 'sass:map';
-// @use '../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../../tokens/internal/animation';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
@@ -42,6 +42,8 @@ $_motion: tokens.md-sys-motion-values();
             cursor: pointer;
             place-content: center;
             place-items: center;
+            position: relative;
+            border: none;
 
             @include ripple.theme((hover-color: map.get($tokens, 'hover-state-layer-color'),
                     hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
@@ -81,6 +83,8 @@ $_motion: tokens.md-sys-motion-values();
             position: absolute;
             width: 48px;
             cursor: inherit;
+            outline: none;
+            border: none;
         }
 
         &[touch-target='none'] input {

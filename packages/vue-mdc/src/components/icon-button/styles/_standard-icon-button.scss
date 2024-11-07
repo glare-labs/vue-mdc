@@ -5,7 +5,7 @@
 
 @use 'sass:list';
 @use 'sass:map';
-// @use '../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../ripple/styles//ripple';
 @use '../../../tokens';
 
@@ -57,12 +57,12 @@
         margin: max(0px, (48px - var(--_state-layer-height))/2) max(0px, (48px - var(--_state-layer-width))/2);
     }
 
-    & md-focus-ring {
-        // @include focus-ring.theme(('shape-start-start': var(--_state-layer-shape),
-        //         'shape-start-end': var(--_state-layer-shape),
-        //         'shape-end-end': var(--_state-layer-shape),
-        //         'shape-end-start': var(--_state-layer-shape),
-        //     ));
+    & [data-component="focus-ring"] {
+        @include focus-ring.theme(('shape-start-start': var(--_state-layer-shape),
+                'shape-start-end': var(--_state-layer-shape),
+                'shape-end-end': var(--_state-layer-shape),
+                'shape-end-start': var(--_state-layer-shape),
+            ));
     }
 
     & {

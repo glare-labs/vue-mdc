@@ -1,7 +1,10 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { dispatchActivationClick, isActivationClick } from '../../internals/events/form-label-activation'
+import { generateUuid, isServer } from '../../utils'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { EButtonAppearance, type TButtonAppearance } from './button-appearance'
 import { EButtonShape, type TButtonShape } from './button-shape'
@@ -47,7 +50,34 @@ class ButtonComponent {
         name: this.name,
         props: this.props,
         slots: this.slots,
+        mounted() {
+            if (isServer()) {
+                return
+            }
+
+            (this.$el as HTMLElement).addEventListener('click', this.handleClick, { capture: false, })
+        },
+        methods: {
+            getButtonElement() {
+                return (this.$el as HTMLElement).querySelector(`.${css.button}`) as HTMLElement
+            },
+            handleClick(e: MouseEvent) {
+                if (!this.href && this.disabled) {
+                    e.stopImmediatePropagation()
+                    e.preventDefault()
+                    return
+                }
+
+                if (!isActivationClick(e) || !this.getButtonElement()) {
+                    return
+                }
+                dispatchActivationClick(this.getButtonElement())
+
+            }
+        },
         render() {
+            const id = `button-${generateUuid()}`
+
             const elevationButtonArray: Array<TButtonAppearance> = [EButtonAppearance.Elevated, EButtonAppearance.Filled, EButtonAppearance.FilledTonal]
             const needElevation = elevationButtonArray.includes(this.appearance)
             const needOutline = this.appearance === EButtonAppearance.Outlined
@@ -71,6 +101,8 @@ class ButtonComponent {
                     type={this.type}
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
+                    aria-hidden="true"
+                    id={id}
                 >
                     {renderContent}
                 </button>
@@ -80,6 +112,8 @@ class ButtonComponent {
                     class={[css.button]}
                     href={this.href}
                     target={this.target}
+                    aria-hidden="true"
+                    id={id}
                 >
                     {renderContent}
                 </a>
@@ -93,6 +127,7 @@ class ButtonComponent {
                     role='button'
                 >
                     <Ripple></Ripple>
+                    <FocusRing htmlFor={id} shapeInherit={false}></FocusRing>
 
                     {needElevation && <Elevation></Elevation>}
                     {needOutline && <div aria-hidden="true" class={[css.outline]}></div>}

@@ -1,6 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { type INavigationTabEventMap, type TNavigationTabClickEventDetail } from './navigation-tab-event'
 import css from './styles/navigation-tab.module.scss'
@@ -64,6 +65,7 @@ class NavigationTabComponent {
                     role='tab'
                 >
                     <Ripple></Ripple>
+                    <FocusRing shapeInherit={false}></FocusRing>
 
                     <span aria-hidden="true" class={css["icon-content"]}>
                         <span class={css["active-indicator"]}></span>

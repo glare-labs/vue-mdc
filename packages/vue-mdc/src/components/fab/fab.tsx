@@ -1,6 +1,7 @@
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { Elevation } from '../elevation/elevation'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { EFabSize, type TFabSize } from './fab-size'
 import { EFabVariant, type TFabVariant } from './fab-variant'
@@ -56,6 +57,7 @@ class FabComponent {
                 >
                     <Ripple></Ripple>
                     <Elevation></Elevation>
+                    <FocusRing shapeInherit={false}></FocusRing>
 
                     <span class={css['touch-target']}></span>
 

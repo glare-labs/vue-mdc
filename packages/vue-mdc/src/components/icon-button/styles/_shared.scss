@@ -7,7 +7,7 @@
 // variants.
 
 @use 'sass:map';
-// @use '../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../icon/styles/icon';
 @use '../../../tokens';
 
@@ -43,12 +43,12 @@
         margin: max(0px, (48px - var(--_container-height)) / 2) max(0px, (48px - var(--_container-width)) / 2);
     }
 
-    & md-focus-ring {
-        // @include focus-ring.theme(('shape-start-start': var(--_container-shape-start-start),
-        //         'shape-start-end': var(--_container-shape-start-end),
-        //         'shape-end-end': var(--_container-shape-end-end),
-        //         'shape-end-start': var(--_container-shape-end-start),
-        //     ));
+    & [data-component="focus-ring"] {
+        @include focus-ring.theme(('shape-start-start': var(--_container-shape-start-start),
+                'shape-start-end': var(--_container-shape-start-end),
+                'shape-end-end': var(--_container-shape-end-end),
+                'shape-end-start': var(--_container-shape-end-start),
+            ));
     }
 
     &.disabled,

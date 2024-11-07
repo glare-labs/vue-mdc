@@ -4,7 +4,7 @@
 //
 
 @use 'sass:map';
-// @use '../../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
 @use '../../../tokens/internal/animation';
@@ -36,9 +36,9 @@ $animation-duration: 200ms;
     }
 
     & [data-component="focus-ring"] {
-        // @include focus-ring.theme(('shape': map.get(tokens.md-sys-shape-values(), 'corner-small'),
-        //         'inward-offset': -1px,
-        //     ));
+        @include focus-ring.theme(('shape': map.get(tokens.md-sys-shape-values(), 'corner-small'),
+                'inward-offset': -1px,
+            ));
     }
 
     & {

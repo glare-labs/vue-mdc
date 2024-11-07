@@ -5,7 +5,7 @@
 
 @use 'sass:list';
 @use 'sass:map';
-// @use '../../focus/focus-ring';
+@use '../../focus-ring/styles/focus-ring';
 @use '../../ripple/styles/ripple';
 @use '../../../tokens';
 
@@ -60,11 +60,11 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         & [data-component="focus-ring"] {
-            // @include focus-ring.theme(('shape-start-start': map.get($tokens, 'track-shape-start-start'),
-            //         'shape-start-end': map.get($tokens, 'track-shape-start-end'),
-            //         'shape-end-end': map.get($tokens, 'track-shape-end-end'),
-            //         'shape-end-start': map.get($tokens, 'track-shape-end-start'),
-            //     ));
+            @include focus-ring.theme(('shape-start-start': map.get($tokens, 'track-shape-start-start'),
+                    'shape-start-end': map.get($tokens, 'track-shape-start-end'),
+                    'shape-end-end': map.get($tokens, 'track-shape-end-end'),
+                    'shape-end-start': map.get($tokens, 'track-shape-end-start'),
+                ));
         }
 
         // Input is also touch target

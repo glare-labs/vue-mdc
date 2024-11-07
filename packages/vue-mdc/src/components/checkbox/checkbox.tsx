@@ -1,6 +1,8 @@
 import { defineComponent } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { generateUuid } from '../../utils'
 import { isServer } from '../../utils/is-server'
+import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/checkbox.module.scss'
 
@@ -101,9 +103,13 @@ class CheckboxComponent {
                 prevIndeterminate && css['prev-indeterminate'],
                 this.prevDisabled && css['prev-disabled'],
             ])
+
+            const id = `checkbox-${generateUuid()}`
+
             return (
                 <div data-component="checkbox" class={[css.checkbox, ...classes]}>
                     <Ripple></Ripple>
+                    <FocusRing htmlFor={id} shapeInherit={false}></FocusRing>
 
                     <div aria-hidden="true" class={css.outline}></div>
                     <div aria-hidden="true" class={css.background}></div>
@@ -115,6 +121,7 @@ class CheckboxComponent {
                         aria-checked={this.checked}
                         disabled={this.disabled}
                         aria-disabled={this.disabled}
+                        id={id}
                     />
 
                     <svg
