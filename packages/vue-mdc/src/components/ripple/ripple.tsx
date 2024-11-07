@@ -1,19 +1,14 @@
 import { defineComponent, type PropType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { AttachableController } from '../../internals/controller/attachable-controller'
 import { isServer } from '../../utils/is-server'
-import { RippleReactiveState } from './ripple-reactive-state'
+import { RippleAttachableController } from './ripple-attachable-controller'
 import css from './styles/ripple.module.scss'
 
 class RippleComponent {
     private readonly name = `${componentNamePrefix}-ripple`
 
     private readonly props = {
-        disabled: {
-            default: false,
-            type: Boolean as PropType<boolean>
-        },
-        for: {
+        htmlFor: {
             default: null,
             type: String as PropType<string>
         }
@@ -29,26 +24,24 @@ class RippleComponent {
                 return
             }
 
-            this.rippleReactiveState = new RippleReactiveState(this.$el)
-            this.attachableController = new AttachableController(this.$el, this.rippleReactiveState!.onControlChange)
+            this.rippleAttachableController = new RippleAttachableController(this.$el)
 
-            if (this.for !== null) {
-                (this.$el as HTMLElement).setAttribute('for', this.for)
+            if (this.htmlFor !== null) {
+                (this.$el as HTMLElement).setAttribute('for', this.htmlFor)
             }
 
-            this.attachableController.hostConnected()
+            this.rippleAttachableController.hostConnected()
         },
         updated() {
-            if (this.for !== null) {
-                (this.$el as HTMLElement).setAttribute('for', this.for)
+            if (this.htmlFor !== null) {
+                (this.$el as HTMLElement).setAttribute('for', this.htmlFor)
             }
         },
         beforeUnmount() {
-            this.attachableController?.hostDisconnected()
+            this.rippleAttachableController?.hostDisconnected()
         },
         data: () => ({
-            attachableController: null as null | AttachableController,
-            rippleReactiveState: null as null | RippleReactiveState,
+            rippleAttachableController: null as null | RippleAttachableController,
         }),
         render() {
             return (

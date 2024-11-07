@@ -6,21 +6,10 @@
  * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
  */
 
+import { AttachableController } from '../../internals'
 import { EMotionEasing } from '../../utils'
 import { RippleConfiguration } from './ripple-configuration'
 import { RippleState } from './ripple-state'
-
-export const SRippleReactiveState = Symbol('rippleReactiveState')
-
-export interface IRippleReactiveState {
-    hover: boolean
-    pressed: boolean
-    disabled: boolean
-}
-
-export interface IRippleReactiveStateHost extends HTMLElement {
-    [SRippleReactiveState]: IRippleReactiveState
-}
 
 /**
  * Events that the ripple listens to.
@@ -35,7 +24,7 @@ const Events = [
     'pointerup',
 ]
 
-export class RippleReactiveState implements IRippleReactiveState {
+export class RippleAttachableController extends AttachableController {
     private _hover = false
     private _pressed = false
     private _disabled = false
@@ -71,9 +60,6 @@ export class RippleReactiveState implements IRippleReactiveState {
         this.host.setAttribute('data-disabled', `${disabled}`)
     }
 
-    private get host() {
-        return this._host
-    }
     private state = RippleState.INACTIVE
     private startEvent: null | PointerEvent = null
     private checkBoundsAfterContextMenu = false
@@ -82,20 +68,16 @@ export class RippleReactiveState implements IRippleReactiveState {
     private rippleSize = ''
     private growAnimation: null | Animation = null
 
-    constructor(
-        private _host: IRippleReactiveStateHost,
-    ) {
-        _host[SRippleReactiveState] = this
-    }
-
-    public onControlChange = (prev: HTMLElement | null, next: HTMLElement | null) => {
-        if (typeof window === 'undefined') {
-            return
-        }
-        for (const event of Events) {
-            prev?.removeEventListener(event, this.handleEvent)
-            next?.addEventListener(event, this.handleEvent)
-        }
+    constructor(_host: HTMLElement) {
+        super(_host, (prev: HTMLElement | null, next: HTMLElement | null) => {
+            if (typeof window === 'undefined') {
+                return
+            }
+            for (const event of Events) {
+                prev?.removeEventListener(event, this.handleEvent)
+                next?.addEventListener(event, this.handleEvent)
+            }
+        })
     }
 
     /**
