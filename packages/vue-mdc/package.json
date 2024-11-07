@@ -77,6 +77,16 @@
             "default": "./build/fab.js",
             "types": "./build/components/fab/index.d.ts"
         },
+        "./field": {
+            "import": "./build/field.js",
+            "default": "./build/field.js",
+            "types": "./build/components/field/index.d.ts"
+        },
+        "./focus-ring": {
+            "import": "./build/focus-ring.js",
+            "default": "./build/focus-ring.js",
+            "types": "./build/components/focus-ring/index.d.ts"
+        },
         "./icon": {
             "import": "./build/icon.js",
             "default": "./build/icon.js",
