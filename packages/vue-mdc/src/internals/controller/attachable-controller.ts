@@ -191,11 +191,11 @@ if (typeof window !== 'undefined') {
  * ```
  */
 export class AttachableController implements IReactiveController, IAttachable {
-    get htmlFor() {
+    public get htmlFor() {
         return this._host.getAttribute('for')
     }
 
-    set htmlFor(htmlFor: string | null) {
+    public set htmlFor(htmlFor: string | null) {
         if (htmlFor === null) {
             this._host.removeAttribute('for')
         } else {
@@ -203,7 +203,7 @@ export class AttachableController implements IReactiveController, IAttachable {
         }
     }
 
-    get control() {
+    public get control() {
         if (this._host.hasAttribute('for')) {
             if (!this.htmlFor || !this._host.isConnected) {
                 return null
@@ -216,7 +216,7 @@ export class AttachableController implements IReactiveController, IAttachable {
 
         return this.currentControl || this._host.parentElement
     }
-    set control(control: HTMLElement | null) {
+    public set control(control: HTMLElement | null) {
         if (control) {
             this.attach(control)
         } else {
@@ -224,7 +224,7 @@ export class AttachableController implements IReactiveController, IAttachable {
         }
     }
 
-    get host() {
+    public get host() {
         return this._host
     }
 
@@ -249,7 +249,7 @@ export class AttachableController implements IReactiveController, IAttachable {
         FOR_ATTRIBUTE_OBSERVER?.observe(_host, { attributeFilter: ['for'] })
     }
 
-    attach(control: HTMLElement) {
+    public attach(control: HTMLElement) {
         if (control === this.currentControl) {
             return
         }
@@ -261,7 +261,7 @@ export class AttachableController implements IReactiveController, IAttachable {
         this._host.removeAttribute('for')
     }
 
-    detach() {
+    public detach() {
         this.setCurrentControl(null)
         // When imperatively detaching, add an empty `for=""` attribute. This will
         // ensure the control is `null` rather than the `parentElement`.
@@ -269,12 +269,12 @@ export class AttachableController implements IReactiveController, IAttachable {
     }
 
     /** @private */
-    hostConnected() {
+    public hostConnected() {
         this.setCurrentControl(this.control)
     }
 
     /** @private */
-    hostDisconnected() {
+    public hostDisconnected() {
         this.setCurrentControl(null)
     }
 

@@ -1,0 +1,5 @@
+@use './focus-ring';
+
+.focus-ring {
+    @include focus-ring.styles();
+}
