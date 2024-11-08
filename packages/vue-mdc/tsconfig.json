@@ -26,7 +26,7 @@
         "jsx": "preserve",
         "jsxImportSource": "vue",
         "types": [
-            "./dev-env.d.ts"
+            "./dev-env.d.ts",
         ],
     },
     "include": [

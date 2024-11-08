@@ -10,8 +10,8 @@
     "packages/dev-app"
   ],
   "scripts": {
-    "dev": "npm run dev -w dev-app",
-    "compile": "npm run build -w vue-mdc",
+    "dev": "npm run dev -w packages/dev-app",
+    "compile": "npm run build -w packages/vue-mdc",
     "list:modules": "ls packages/ui/src/* -d | grep -vE 'md|tokens'",
     "list:entries": "echo '// componens' && ls packages/ui/src/components/*/index.ts | grep -vE 'labs' && echo '// colors' && ls packages/ui/src/colors/index.ts && echo '// component-register' && ls packages/ui/src/component-register/index.ts && echo 'internals' && ls packages/ui/src/internals/index.ts && echo 'utils' && ls packages/ui/src/utils/index.ts"
   }

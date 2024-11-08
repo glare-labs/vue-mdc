@@ -9,9 +9,12 @@ lerna-debug.log*
 .firebase/*
 
 # Node dependencies
+package-lock.json
 node_modules
 
+# Build
 .output
+.rollup.cache*
 dist
 dist-ssr
 build
@@ -30,8 +33,6 @@ test-report
 *.sw?
 .fleet
 .idea
-package-lock.json
-packages/ui/tsconfig.tsbuildinfo
 
 # Nuxt dev/build outputs
 .output
