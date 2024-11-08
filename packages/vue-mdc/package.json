@@ -1,6 +1,6 @@
 {
     "name": "@glare-labs/vue-mdc",
-    "version": "0.0.1-pre.1",
+    "version": "0.0.1-pre.2",
     "publishConfig": {
         "access": "public"
     },
