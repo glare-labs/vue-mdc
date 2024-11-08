@@ -11,6 +11,8 @@
 
 With the help of the third-party library [`@material/material-color-utilities`](https://github.com/material-foundation/material-color-utilities), you can easily create a color scheme that conforms to the rules, and each component following the design principles of [`Material Design 3`](https://m3.material.io/).
 
+Now the bundle size has been calculated: [bundle-size.md](https://github.com/glare-labs/vue-mdc/blob/main/packages/vue-mdc/bundle-size.md).
+
 ## :zap: Highlights
 
 + Dynamic Theme
