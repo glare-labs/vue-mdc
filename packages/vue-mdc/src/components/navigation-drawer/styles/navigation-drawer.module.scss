@@ -1,0 +1,17 @@
+@use './navigation-drawer';
+@use './indicator';
+@use './shared';
+@use './headline';
+
+.navigation-drawer-component-styles {
+    @include shared.styles();
+    @include navigation-drawer.styles();
+}
+
+.navigation-drawer-indicator-component-styles {
+    @include indicator.styles();
+}
+
+.navigation-drawer-headline-component-styles {
+    @include headline.styles();
+}
