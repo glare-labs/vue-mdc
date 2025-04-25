@@ -185,7 +185,4 @@
         display: none;
     }
 
-    & :is(.touch, .label, .background, [data-component="icon"]) {
-        pointer-events: none;
-    }
 }

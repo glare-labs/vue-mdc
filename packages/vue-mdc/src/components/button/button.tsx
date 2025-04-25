@@ -55,14 +55,14 @@ class ButtonComponent {
                 return
             }
 
-            (this.$el as HTMLElement).addEventListener('click', this.handleClick, { capture: false, })
+            (this.$el as HTMLElement).addEventListener('click', this.handleClick)
         },
         methods: {
             getButtonElement() {
                 return (this.$el as HTMLElement).querySelector(`.${css.button}`) as HTMLElement
             },
             handleClick(e: MouseEvent) {
-                if (!this.href && this.disabled) {
+                if (this.href && this.disabled) {
                     e.stopImmediatePropagation()
                     e.preventDefault()
                     return
@@ -71,8 +71,8 @@ class ButtonComponent {
                 if (!isActivationClick(e) || !this.getButtonElement()) {
                     return
                 }
+                this.getButtonElement().focus()
                 dispatchActivationClick(this.getButtonElement())
-
             }
         },
         render() {
@@ -101,7 +101,8 @@ class ButtonComponent {
                     type={this.type}
                     disabled={this.disabled}
                     aria-disabled={this.disabled}
-                    aria-hidden="true"
+                    role='div'
+                    tabindex={-1}
                     id={id}
                 >
                     {renderContent}
