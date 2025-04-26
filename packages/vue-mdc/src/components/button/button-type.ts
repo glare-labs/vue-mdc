@@ -3,4 +3,3 @@ export enum EButtonType {
     Submit = 'submit',
     Reset = 'reset',
 }
-export type TButtonType = 'button' | 'submit' | 'reset'
