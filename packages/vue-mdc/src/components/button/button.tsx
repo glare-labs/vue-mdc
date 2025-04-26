@@ -2,7 +2,7 @@ import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { setupFormSubmitter, type TFormSubmitterType } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { dispatchActivationClick, isActivationClick } from '../../internals/events/form-label-activation'
-import { generateUuid, isServer } from '../../utils'
+import { isServer } from '../../utils'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
 import { FocusRing } from '../focus-ring'
@@ -54,7 +54,11 @@ class ButtonComponent {
         id: {
             type: String as PropType<string>,
             default: null,
-        }
+        },
+        tabindex: {
+            type: Number as PropType<number>,
+            default: 0,
+        },
     }
 
     private slots = {} as SlotsType<{
@@ -69,7 +73,6 @@ class ButtonComponent {
         slots: this.slots,
         data: () => ({
             elementId: null as null | string,
-            innerId: `button-${generateUuid()}`,
         }),
         created() {
             if (this.id !== null) {
@@ -112,15 +115,19 @@ class ButtonComponent {
                         this.getRoot().setAttribute('aria-disabled', cur)
                         this.getButtonElement()?.setAttribute('disabled', cur)
                         this.getButtonElement()?.setAttribute('aria-disabled', cur)
+                        this.getButtonElement()?.setAttribute('tabindex', `-1`)
                         this.getLinkElement()?.setAttribute('disabled', cur)
                         this.getLinkElement()?.setAttribute('aria-disabled', cur)
+                        this.getLinkElement()?.setAttribute('tabindex', `-1`)
                     } else {
                         this.getRoot().removeAttribute('disabled')
                         this.getRoot().removeAttribute('aria-disabled')
                         this.getButtonElement()?.removeAttribute('disabled')
                         this.getButtonElement()?.removeAttribute('aria-disabled')
+                        this.getButtonElement()?.setAttribute('tabindex', `${this.tabindex}`)
                         this.getLinkElement()?.removeAttribute('disabled')
                         this.getLinkElement()?.removeAttribute('aria-disabled')
+                        this.getLinkElement()?.setAttribute('tabindex', `${this.tabindex}`)
                     }
                 },
                 {
@@ -215,10 +222,24 @@ class ButtonComponent {
                     immediate: true,
                 }
             )
+            this.$watch(
+                'tabindex',
+                (cur, last) => {
+                    if (cur === last || this.disabled) {
+                        return
+                    }
 
-            const buttonElement = this.getButtonElement()
-            if (buttonElement) {
-                setupFormSubmitter(buttonElement)
+                    this.getRoot().setAttribute('tabindex', `-1`)
+                    this.getButtonElement()?.setAttribute('tabindex', cur)
+                    this.getLinkElement()?.setAttribute('tabindex', cur)
+                },
+                {
+                    immediate: true,
+                }
+            )
+
+            if (this.getButtonElement()) {
+                setupFormSubmitter(this.getButtonElement()!)
             }
             this.getRoot().addEventListener('click', this.handleClick)
         },
@@ -266,19 +287,14 @@ class ButtonComponent {
             )
 
             const renderButton = (
-                <button
-                    class={[css.button]}
-                    id={this.innerId}
-                >
+                <button class={[css.button]}>
+                    <FocusRing shapeInherit={false}></FocusRing>
                     {renderContent}
                 </button>
             )
             const renderLink = (
-                <a
-                    class={[css.button]}
-                    href={this.href}
-                    id={this.innerId}
-                >
+                <a class={css.button}>
+                    <FocusRing shapeInherit={false}></FocusRing>
                     {renderContent}
                 </a>
             )
@@ -290,7 +306,6 @@ class ButtonComponent {
                     role='button'
                 >
                     <Ripple></Ripple>
-                    <FocusRing htmlFor={this.innerId} shapeInherit={false}></FocusRing>
 
                     {needElevation && <Elevation></Elevation>}
                     {needOutline && <div aria-hidden="true" class={[css.outline]}></div>}
