@@ -1,58 +1,53 @@
-import { defineComponent, type PropType } from 'vue'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { defineComponent, onMounted, ref, type PropType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { isServer } from '../../utils/is-server'
 import { RippleAttachableController } from './ripple-attachable-controller'
 import css from './styles/ripple.module.scss'
 
-class RippleComponent {
-    private readonly name = `${componentNamePrefix}-ripple`
-
-    private readonly props = {
-        htmlFor: {
+export const Ripple = defineComponent({
+    name: `${componentNamePrefix}-ripple`,
+    emits: [],
+    props: {
+        for: {
             default: null,
             type: String as PropType<string>
+        },
+        disabled: {
+            default: false,
+            type: Boolean as PropType<boolean>
         }
-    }
-    private readonly emits = []
+    },
+    setup(props) {
+        const root = ref<HTMLElement | null>(null)
 
-    public readonly component = defineComponent({
-        name: this.name,
-        props: this.props,
-        emits: this.emits,
-        mounted() {
-            if (isServer()) {
-                return
+        const _disabled = ref(props.disabled)
+        const _for = ref(props.for)
+
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean' },
+                { attribute: 'for', ref: _for, reflect: true, type: 'string' },
+            ],
+        })
+
+        onMounted(() => {
+            const rippleAttachableController = new RippleAttachableController(root.value!)
+
+            if (_for.value !== null) {
+                root.value?.setAttribute('for', _for.value)
             }
 
-            this.rippleAttachableController = new RippleAttachableController(this.$el)
+            rippleAttachableController.hostConnected()
+        })
 
-            if (this.htmlFor !== null) {
-                (this.$el as HTMLElement).setAttribute('for', this.htmlFor)
-            }
+        return () => (
+            <span
+                data-component="ripple"
+                aria-hidden="true"
+                class={[css.ripple]}
+                ref={root}
+            ></span>
 
-            this.rippleAttachableController.hostConnected()
-        },
-        updated() {
-            if (this.htmlFor !== null) {
-                (this.$el as HTMLElement).setAttribute('for', this.htmlFor)
-            }
-        },
-        beforeUnmount() {
-            this.rippleAttachableController?.hostDisconnected()
-        },
-        data: () => ({
-            rippleAttachableController: null as null | RippleAttachableController,
-        }),
-        render() {
-            return (
-                <span
-                    data-component="ripple"
-                    aria-hidden="true"
-                    class={[css.ripple]}
-                ></span>
-            )
-        }
-    })
-}
-
-export const Ripple = new RippleComponent().component
+        )
+    },
+})

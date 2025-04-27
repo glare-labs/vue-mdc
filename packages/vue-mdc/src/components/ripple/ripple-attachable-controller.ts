@@ -50,14 +50,7 @@ export class RippleAttachableController extends AttachableController {
         this.host.setAttribute('data-pressed', `${pressed}`)
     }
     public get disabled() {
-        return this._disabled
-    }
-    private set disabled(disabled: boolean) {
-        if (this._disabled === disabled) {
-            return
-        }
-        this._disabled = disabled
-        this.host.setAttribute('data-disabled', `${disabled}`)
+        return this._host.hasAttribute('disabled')
     }
 
     private state = RippleState.INACTIVE
