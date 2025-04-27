@@ -52,31 +52,31 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         position: absolute;
     }
 
-    &[visible="true"] {
+    &[visible] {
         display: flex;
     }
 
-    &:not([inward="true"]) {
+    &:not([inward]) {
         animation-name: outward-grow, outward-shrink;
         inset: calc(-1 * $outward-offset);
         outline: $width solid currentColor;
     }
 
-    &[inward="true"] {
+    &[inward] {
         animation-name: inward-grow, inward-shrink;
         border: $width solid currentColor;
         inset: $inward-offset;
     }
 
-    &[shape-inherit="true"] {
-        &:not([inward="true"]) {
+    &[shape-inherit] {
+        &:not([inward]) {
             border-end-end-radius: inherit;
             border-end-start-radius: inherit;
             border-start-end-radius: inherit;
             border-start-start-radius: inherit;
         }
 
-        &[inward="true"] {
+        &[inward] {
             border-end-end-radius: inherit;
             border-end-start-radius: inherit;
             border-start-end-radius: inherit;
@@ -84,15 +84,15 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         }
     }
 
-    &:not([shape-inherit="true"]) {
-        &:not([inward="true"]) {
+    &:not([shape-inherit]) {
+        &:not([inward]) {
             border-end-end-radius: calc($end-end + $outward-offset);
             border-end-start-radius: calc($end-start + $outward-offset);
             border-start-end-radius: calc($start-end + $outward-offset);
             border-start-start-radius: calc($start-start + $outward-offset);
         }
 
-        &[inward="true"] {
+        &[inward] {
             border-end-end-radius: calc($end-end - $inward-offset);
             border-end-start-radius: calc($end-start - $inward-offset);
             border-start-end-radius: calc($start-end - $inward-offset);

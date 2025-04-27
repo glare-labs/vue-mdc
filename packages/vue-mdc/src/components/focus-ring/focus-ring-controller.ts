@@ -18,7 +18,11 @@ export class FocusRingController extends AttachableController {
             return
         }
         this._visible = value
-        this.host.setAttribute('visible', `${value}`)
+        if (value) {
+            this.host.setAttribute('visible', ``)
+        } else {
+            this.host.removeAttribute('visible')
+        }
     }
 
     constructor(_host: HTMLElement) {
