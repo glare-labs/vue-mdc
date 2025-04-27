@@ -57,13 +57,9 @@ $_motion: tokens.md-sys-motion-values();
             cursor: default;
         }
 
-        &[touch-target='wrapper'] {
-            margin: max(0px, ((48px - map.get($tokens, 'icon-size')) / 2));
-        }
-
         & [data-component="focus-ring"] {
             height: 44px;
-            inset: unset;
+            inset: unset !important;
             width: 44px;
         }
 
@@ -75,21 +71,18 @@ $_motion: tokens.md-sys-motion-values();
                 ));
         }
 
-        // <input> is also the touch target
-        & input {
-            appearance: none;
+        .touch-target {
             height: 48px;
-            margin: 0;
             position: absolute;
             width: 48px;
-            cursor: inherit;
-            outline: none;
-            border: none;
         }
 
-        &[touch-target='none'] input {
-            width: 100%;
-            height: 100%;
+        &[touch-target='wrapper'] {
+            margin: max(0px, ((48px - map.get($tokens, 'icon-size')) / 2));
+        }
+
+        &[touch-target='none'] .touch-target {
+            display: none;
         }
 
         & [data-component="ripple"] {
