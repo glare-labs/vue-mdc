@@ -1,6 +1,7 @@
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { defineComponent, onMounted, ref, type PropType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { isServer } from '../../utils'
 import { RippleAttachableController } from './ripple-attachable-controller'
 import css from './styles/ripple.module.scss'
 
@@ -31,6 +32,10 @@ export const Ripple = defineComponent({
         })
 
         onMounted(() => {
+            if (isServer()) {
+                return
+            }
+
             const rippleAttachableController = new RippleAttachableController(root.value!)
 
             if (_for.value !== null) {
