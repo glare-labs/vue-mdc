@@ -1,6 +1,6 @@
 {
     "name": "@glare-labs/vue-mdc",
-    "version": "0.0.1-pre.2",
+    "version": "0.0.1-pre.2.1",
     "publishConfig": {
         "access": "public"
     },
@@ -167,9 +167,16 @@
             "import": "./build/internals.js",
             "default": "./build/internals.js",
             "types": "./build/internals/index.d.ts"
+        },
+        "./*": {
+            "import": "./*",
+            "default": "./*"
         }
     },
     "files": [
         "build/**/*"
-    ]
+    ],
+    "dependencies": {
+        "@glare-labs/vue-reflect-attribute": "^0.0.1-pre.1"
+    }
 }
