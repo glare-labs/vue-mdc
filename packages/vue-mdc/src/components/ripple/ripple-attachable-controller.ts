@@ -6,8 +6,9 @@
  * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
  */
 
-import { AttachableController } from '../../internals'
-import { EMotionEasing } from '../../utils'
+import type { Ref } from 'vue'
+import { useAttachable } from '../../internals/controller/use-attachable'
+import { EMotionEasing, isServer } from '../../utils'
 import { RippleConfiguration } from './ripple-configuration'
 import { RippleState } from './ripple-state'
 
@@ -24,33 +25,44 @@ const Events = [
     'pointerup',
 ]
 
-export class RippleAttachableController extends AttachableController {
+export class RippleAttachableController {
+
     private _hover = false
     private _pressed = false
-    private _disabled = false
 
     public get hover() {
         return this._hover
     }
     private set hover(hover: boolean) {
-        if (this._hover === hover) {
+        if (this._hover === hover || !this.host.value) {
             return
         }
         this._hover = hover
-        this.host.setAttribute('data-hover', `${hover}`)
+        if (hover) {
+            this.host.value.setAttribute('hover', ``)
+        } else if (this.host.value.hasAttribute('hover')) {
+            this.host.value.removeAttribute('hover')
+        }
     }
     public get pressed() {
         return this._pressed
     }
     private set pressed(pressed: boolean) {
-        if (this._pressed === pressed) {
+        if (this._pressed === pressed || !this.host.value) {
             return
         }
         this._pressed = pressed
-        this.host.setAttribute('data-pressed', `${pressed}`)
+        if (pressed) {
+            this.host.value.setAttribute('pressed', ``)
+        } else if (this.host.value.hasAttribute('pressed')) {
+            this.host.value.removeAttribute('pressed')
+        }
     }
     public get disabled() {
-        return this._host.hasAttribute('disabled')
+        if (!this.host.value) {
+            return false
+        }
+        return this.host.value.hasAttribute('disabled')
     }
 
     private state = RippleState.INACTIVE
@@ -61,11 +73,14 @@ export class RippleAttachableController extends AttachableController {
     private rippleSize = ''
     private growAnimation: null | Animation = null
 
-    constructor(_host: HTMLElement) {
-        super(_host, (prev: HTMLElement | null, next: HTMLElement | null) => {
-            if (typeof window === 'undefined') {
+    constructor(
+        private host: Ref<HTMLElement | null>
+    ) {
+        useAttachable(host, (prev, next) => {
+            if (isServer()) {
                 return
             }
+
             for (const event of Events) {
                 prev?.removeEventListener(event, this.handleEvent)
                 next?.addEventListener(event, this.handleEvent)
@@ -157,8 +172,8 @@ export class RippleAttachableController extends AttachableController {
         const translateStart = `${startPoint.x}px, ${startPoint.y}px`
         const translateEnd = `${endPoint.x}px, ${endPoint.y}px`
 
-        if (this.host === null) return
-        this.growAnimation = this.host.animate(
+        if (this.host.value === null) return
+        this.growAnimation = this.host.value.animate(
             {
                 top: [0, 0],
                 left: [0, 0],
@@ -178,8 +193,9 @@ export class RippleAttachableController extends AttachableController {
         )
     }
     private getTranslationCoordinates(positionEvent?: Event) {
-        if (this.host === null) return
-        const { height, width } = this.host.getBoundingClientRect()
+        if (this.host.value === null) return
+
+        const { height, width } = this.host.value.getBoundingClientRect()
         // end in the center
         const endPoint = {
             x: (width - this.initialSize) / 2,
@@ -202,9 +218,9 @@ export class RippleAttachableController extends AttachableController {
         return { startPoint, endPoint }
     }
     private getNormalizedPointerEventCoords(pointerEvent: PointerEvent) {
-        if (this.host === null) return
+        if (this.host.value === null) return
         const { scrollX, scrollY } = window
-        const { left, top } = this.host.getBoundingClientRect()
+        const { left, top } = this.host.value.getBoundingClientRect()
         const documentX = scrollX + left
         const documentY = scrollY + top
         const { pageX, pageY } = pointerEvent
@@ -238,8 +254,8 @@ export class RippleAttachableController extends AttachableController {
         this.pressed = false
     }
     private determineRippleSize() {
-        if (this.host === null) return
-        const { height, width } = this.host.getBoundingClientRect()
+        if (this.host.value === null) return
+        const { height, width } = this.host.value.getBoundingClientRect()
         const maxDim = Math.max(height, width)
         const softEdgeSize = Math.max(
             RippleConfiguration.softEdgeContainerRadio * maxDim,
@@ -256,8 +272,8 @@ export class RippleAttachableController extends AttachableController {
     }
     // @ts-ignore
     private inBounds({ x, y }: PointerEvent) {
-        if (this.host === null) return
-        const { top, left, bottom, right } = this.host.getBoundingClientRect()
+        if (this.host.value === null) return
+        const { top, left, bottom, right } = this.host.value.getBoundingClientRect()
         return x >= left && x <= right && y >= top && y <= bottom
     }
     private isTouch({ pointerType }: PointerEvent) {

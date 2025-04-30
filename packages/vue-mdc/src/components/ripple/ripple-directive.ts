@@ -1,20 +1,16 @@
-import { type Directive } from 'vue'
-import { SAttachableController, type IAttachableControllerHost } from '../../internals/controller/attachable-controller'
-import { RippleAttachableController } from './ripple-attachable-controller'
+import { createVNode, render, type Directive } from 'vue'
+import type { IAttachableHost } from '../../internals/controller/use-attachable'
+import { Ripple } from './ripple'
 import css from './styles/ripple.module.scss'
 
 class RippleDirective {
 
-    private static readonly createRippleElement = (): IAttachableControllerHost => {
-        const rippleElement = document.createElement('div')
-        rippleElement.setAttribute('aria-hidden', 'true')
-        rippleElement.setAttribute('data-standalone', 'true')
-        rippleElement.classList.add(css.ripple)
-        new RippleAttachableController(rippleElement)
-        return rippleElement
+    private static readonly createRippleElement = (parent: HTMLElement): void => {
+        const rippleComponent = createVNode(Ripple)
+        render(rippleComponent, parent)
     }
     private static readonly queryRippleElement = (el: HTMLElement) => {
-        return el.querySelector<IAttachableControllerHost>(`.${css.ripple}[data-standalone="true"]`)
+        return el.querySelector<IAttachableHost>(`.${css.ripple}[data-component="ripple"]`)
     }
     private static readonly isRippleColorProperty = (color: string) => {
         return typeof color === 'string'
@@ -25,8 +21,7 @@ class RippleDirective {
 
     public static readonly rippleDirective: Directive<HTMLElement, void> = {
         beforeMount: (el) => {
-            const rippleElement = this.createRippleElement()
-            el.appendChild(rippleElement)
+            this.createRippleElement(el)
         },
         mounted: (el) => {
             const queriedRippleElement = this.queryRippleElement(el)
@@ -34,7 +29,6 @@ class RippleDirective {
                 console.warn(`The DOM object with the target selector 'div.\${css.ripple}[data-standalone="true"]\} was not found. This is an internal bug, please report it.`)
                 return
             }
-            queriedRippleElement[SAttachableController]?.hostConnected()
         },
         updated: (el) => {
             const queriedRippleElement = this.queryRippleElement(el)
@@ -47,8 +41,6 @@ class RippleDirective {
             const queriedRippleElement = this.queryRippleElement(el)
             if (queriedRippleElement === null || typeof queriedRippleElement === 'undefined') {
                 console.warn(`The DOM object with the target selector \`div.${css.ripple}[data-standalone="true"]\` was not found. This is an internal bug, please report it.`)
-            } else {
-                queriedRippleElement[SAttachableController]?.hostDisconnected()
             }
         }
     }

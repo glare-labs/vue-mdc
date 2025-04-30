@@ -72,13 +72,13 @@
             transition: opacity 375ms linear;
         }
 
-        &[data-hover="true"]::before,
+        &[hover]::before,
         &.hovered::before {
             background-color: map.get($tokens, 'hover-color');
             opacity: map.get($tokens, 'hover-opacity');
         }
 
-        &[data-pressed="true"]::after,
+        &[pressed]::after,
         &.pressed::after {
             // press ripple fade-in
             opacity: map.get($tokens, 'pressed-opacity');

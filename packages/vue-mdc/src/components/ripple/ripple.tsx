@@ -1,7 +1,6 @@
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onMounted, ref, type PropType } from 'vue'
+import { defineComponent, ref, type PropType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { isServer } from '../../utils'
 import { RippleAttachableController } from './ripple-attachable-controller'
 import css from './styles/ripple.module.scss'
 
@@ -9,6 +8,10 @@ export const Ripple = defineComponent({
     name: `${componentNamePrefix}-ripple`,
     emits: [],
     props: {
+        id: {
+            default: null,
+            type: String as PropType<string>
+        },
         for: {
             default: null,
             type: String as PropType<string>
@@ -23,27 +26,17 @@ export const Ripple = defineComponent({
 
         const _disabled = ref(props.disabled)
         const _for = ref(props.for)
+        const _id = ref(props.id)
 
         useReflectAttribute(root, {
             attributes: [
+                { attribute: 'id', ref: _id, reflect: true, type: 'string' },
                 { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean' },
                 { attribute: 'for', ref: _for, reflect: true, type: 'string' },
             ],
         })
 
-        onMounted(() => {
-            if (isServer()) {
-                return
-            }
-
-            const rippleAttachableController = new RippleAttachableController(root.value!)
-
-            if (_for.value !== null) {
-                root.value?.setAttribute('for', _for.value)
-            }
-
-            rippleAttachableController.hostConnected()
-        })
+        const controller = new RippleAttachableController(root)
 
         return () => (
             <span
