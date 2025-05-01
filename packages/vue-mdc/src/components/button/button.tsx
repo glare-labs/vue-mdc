@@ -1,7 +1,7 @@
-import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { setupFormSubmitter, type TFormSubmitterType } from '../../internals'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { defineComponent, onBeforeUnmount, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { type TFormSubmitterType } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { dispatchActivationClick, isActivationClick } from '../../internals/events/form-label-activation'
 import { isServer } from '../../utils'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
@@ -12,9 +12,14 @@ import { EButtonShape, type TButtonShape } from './button-shape'
 import { EButtonType } from './button-type'
 import css from './styles/button.module.scss'
 
-class ButtonComponent {
-    private readonly name = `${componentNamePrefix}-button`
-    private readonly props = {
+export const Button = defineComponent({
+    name: `${componentNamePrefix}-button`,
+    slots: {} as SlotsType<{
+        default: void
+        'leading-icon': void
+        'trailing-icon': void
+    }>,
+    props: {
         appearance: {
             type: String as PropType<TButtonAppearance>,
             default: EButtonAppearance.Filled,
@@ -51,273 +56,117 @@ class ButtonComponent {
             type: String as PropType<string>,
             default: null,
         },
-        id: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        tabindex: {
-            type: Number as PropType<number>,
-            default: 0,
-        },
-    }
+    },
+    setup(props, { slots, emit }) {
+        const root = ref<HTMLElement | null>(null)
 
-    private slots = {} as SlotsType<{
-        default: void
-        'leading-icon': void
-        'trailing-icon': void
-    }>
+        /**
+         * Props
+         */
+        const _appearance = ref(props.appearance)
+        const _disabled = ref(props.disabled)
+        const _type = ref(props.type)
+        const _shape = ref(props.shape)
+        const _href = ref(props.href)
+        const _target = ref(props.target)
+        const _form = ref(props.form)
+        const _name = ref(props.name)
+        const _value = ref(props.value)
 
-    public readonly component = defineComponent({
-        name: this.name,
-        props: this.props,
-        slots: this.slots,
-        data: () => ({
-            elementId: null as null | string,
-        }),
-        created() {
-            if (this.id !== null) {
-                this.elementId = this.id
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'appearance', ref: _appearance, reflect: true, type: 'string' },
+                { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean' },
+                { attribute: 'type', ref: _type, reflect: true, type: 'string' },
+                { attribute: 'shape', ref: _shape, reflect: true, type: 'string' },
+                { attribute: 'href', ref: _href, reflect: true, type: 'string' },
+                { attribute: 'target', ref: _target, reflect: true, type: 'string' },
+                { attribute: 'form', ref: _form, reflect: true, type: 'string' },
+                { attribute: 'name', ref: _name, reflect: true, type: 'string' },
+                { attribute: 'value', ref: _value, reflect: true, type: 'string' },
+            ]
+        })
+
+        const handleClick = (e: MouseEvent) => {
+            if (_href.value && _disabled.value) {
+                e.stopImmediatePropagation()
+                e.preventDefault()
+                return
             }
-        },
-        mounted() {
+        }
+
+        onMounted(() => {
             if (isServer()) {
                 return
             }
+            root.value?.addEventListener('click', handleClick)
+        })
 
-            this.$watch(
-                'target',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('form')
-                        this.getButtonElement()?.removeAttribute('form')
-                        return
-                    }
-                    if (cur === last) {
-                        return
-                    }
+        onBeforeUnmount(() => {
+            root.value?.removeEventListener('click', handleClick)
+        })
 
-                    this.getRoot().setAttribute('target', cur)
-                    this.getLinkElement()?.setAttribute('target', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'disabled',
-                (cur, last) => {
-                    if (cur === last) {
-                        return
-                    }
-
-                    if (cur) {
-                        this.getRoot().setAttribute('disabled', cur)
-                        this.getRoot().setAttribute('aria-disabled', cur)
-                        this.getButtonElement()?.setAttribute('disabled', cur)
-                        this.getButtonElement()?.setAttribute('aria-disabled', cur)
-                        this.getButtonElement()?.setAttribute('tabindex', `-1`)
-                        this.getLinkElement()?.setAttribute('disabled', cur)
-                        this.getLinkElement()?.setAttribute('aria-disabled', cur)
-                        this.getLinkElement()?.setAttribute('tabindex', `-1`)
-                    } else {
-                        this.getRoot().removeAttribute('disabled')
-                        this.getRoot().removeAttribute('aria-disabled')
-                        this.getButtonElement()?.removeAttribute('disabled')
-                        this.getButtonElement()?.removeAttribute('aria-disabled')
-                        this.getButtonElement()?.setAttribute('tabindex', `${this.tabindex}`)
-                        this.getLinkElement()?.removeAttribute('disabled')
-                        this.getLinkElement()?.removeAttribute('aria-disabled')
-                        this.getLinkElement()?.setAttribute('tabindex', `${this.tabindex}`)
-                    }
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'type',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('type')
-                        this.getButtonElement()?.removeAttribute('type')
-                        return
-                    }
-                    if (cur === last) {
-                        return
-                    }
-                    this.getRoot().setAttribute('type', cur)
-                    this.getButtonElement()?.setAttribute('type', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'form',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('form')
-                        this.getButtonElement()?.removeAttribute('form')
-                        return
-                    }
-                    if (cur === last) {
-                        return
-                    }
-                    this.getRoot().setAttribute('form', cur)
-                    this.getButtonElement()?.setAttribute('form', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'name',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('name')
-                        this.getButtonElement()?.removeAttribute('name')
-                        return
-                    }
-                    if (cur === last || cur === null) {
-                        return
-                    }
-                    this.getRoot().setAttribute('name', cur)
-                    this.getButtonElement()?.setAttribute('name', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'value',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('value')
-                        this.getButtonElement()?.removeAttribute('value')
-                        return
-                    }
-                    if (cur === last) {
-                        return
-                    }
-                    this.getRoot().setAttribute('value', cur)
-                    this.getButtonElement()?.setAttribute('value', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'id',
-                (cur, last) => {
-                    if (cur === null) {
-                        this.getRoot().removeAttribute('id')
-                        return
-                    }
-                    if (cur === last) {
-                        return
-                    }
-                    this.getRoot().setAttribute('id', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-            this.$watch(
-                'tabindex',
-                (cur, last) => {
-                    if (cur === last || this.disabled) {
-                        return
-                    }
-
-                    this.getRoot().setAttribute('tabindex', `-1`)
-                    this.getButtonElement()?.setAttribute('tabindex', cur)
-                    this.getLinkElement()?.setAttribute('tabindex', cur)
-                },
-                {
-                    immediate: true,
-                }
-            )
-
-            if (this.getButtonElement()) {
-                setupFormSubmitter(this.getButtonElement()!)
-            }
-            this.getRoot().addEventListener('click', this.handleClick)
-        },
-        methods: {
-            getButtonElement(): HTMLButtonElement | null {
-                return (this.$el as HTMLElement).querySelector(`button.${css.button}`)!
-            },
-            getLinkElement(): HTMLLinkElement | null {
-                return (this.$el as HTMLElement).querySelector(`a.${css.button}`)!
-            },
-            getRoot(): HTMLElement {
-                return this.$el
-            },
-            handleClick(e: MouseEvent) {
-                if (this.href && this.disabled) {
-                    e.stopImmediatePropagation()
-                    e.preventDefault()
-                    return
-                }
-
-                if (!isActivationClick(e) || !this.getButtonElement()) {
-                    return
-                }
-                this.getButtonElement()?.focus()
-                dispatchActivationClick(this.getButtonElement()!)
-            },
-
-        },
-        render() {
+        return () => {
             const elevationButtonArray: Array<TButtonAppearance> = [EButtonAppearance.Elevated, EButtonAppearance.Filled, EButtonAppearance.FilledTonal]
-            const needElevation = elevationButtonArray.includes(this.appearance)
-            const needOutline = this.appearance === EButtonAppearance.Outlined
-            const iconState = this.$slots['leading-icon'] ? css.left : this.$slots['trailing-icon'] ? css.right : null
-            const isLink = this.href !== null
+
+            const needElevation = elevationButtonArray.includes(_appearance.value)
+            const needOutline = _appearance.value === EButtonAppearance.Outlined
+
+            const iconState = slots['leading-icon'] ? css.left : slots['trailing-icon'] ? css.right : null
+            const isLink = _href.value !== null
 
             const renderContent = (
-                <>
+                <span class={css.button}>
                     <span class={css.touch}></span>
-                    {this.$slots['leading-icon'] && this.$slots['leading-icon']()}
+                    {slots['leading-icon'] && slots['leading-icon']()}
                     <span class={[css.label]}>
-                        {this.$slots.default && this.$slots.default()}
+                        {slots.default && slots.default()}
                     </span>
-                    {this.$slots['trailing-icon'] && this.$slots['trailing-icon']()}
-                </>
+                    {slots['trailing-icon'] && slots['trailing-icon']()}
+                </span>
             )
 
-            const renderButton = (
-                <button class={[css.button]}>
-                    <FocusRing shapeInherit={false}></FocusRing>
-                    {renderContent}
-                </button>
-            )
-            const renderLink = (
-                <a class={css.button}>
-                    <FocusRing shapeInherit={false}></FocusRing>
-                    {renderContent}
-                </a>
-            )
-
-            return (
-                <div
+            const renderButtonWrapper = (
+                <button
                     data-component="button"
-                    class={[css[this.appearance], iconState, this.disabled && css.disabled]}
+                    class={[css[_appearance.value], iconState, _disabled.value && css.disabled]}
                     role='button'
+                    ref={root}
+                    tabindex={_disabled.value ? -1 : 0}
                 >
                     <Ripple></Ripple>
+                    <FocusRing shapeInherit={false}></FocusRing>
 
                     {needElevation && <Elevation></Elevation>}
                     {needOutline && <div aria-hidden="true" class={[css.outline]}></div>}
 
                     <div aria-hidden="true" class={[css.background]}></div>
 
-                    {isLink ? renderLink : renderButton}
-                </div >
+                    {renderContent}
+                </button>
             )
+            const renderLinkWrapper = (
+                <a
+                    data-component="button"
+                    class={[css[_appearance.value], iconState, _disabled.value && css.disabled]}
+                    role='button'
+                    ref={root}
+                    tabindex={_disabled.value ? -1 : 0}
+                >
+                    <Ripple></Ripple>
+                    <FocusRing shapeInherit={false}></FocusRing>
+
+                    {needElevation && <Elevation></Elevation>}
+                    {needOutline && <div aria-hidden="true" class={[css.outline]}></div>}
+
+                    <div aria-hidden="true" class={[css.background]}></div>
+
+                    {renderContent}
+                </a>
+            )
+
+            return isLink ? renderLinkWrapper : renderButtonWrapper
         }
-    })
-
-}
-
-export const Button = new ButtonComponent().component
+    },
+    inheritAttrs: true,
+})

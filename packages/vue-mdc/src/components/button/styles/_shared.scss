@@ -185,4 +185,7 @@
         display: none;
     }
 
+    & :is(.touch, .label, .background, .button, .outline) {
+        pointer-events: none;
+    }
 }
