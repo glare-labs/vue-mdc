@@ -1,15 +1,22 @@
-import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { defineComponent, onBeforeUnmount, onBeforeUpdate, onMounted, ref, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
-import { EIconButtonType, type TIconButtonType } from './icon-button-type'
 import css from './styles/icon-button.module.scss'
 
-class ToggleIconButtonComponent {
-    private readonly name = `${componentNamePrefix}-toggle-icon-button`
-    private readonly props = {
+export const ToggleIconButton = defineComponent({
+    name: `${componentNamePrefix}-toggle-icon-button`,
+    slots: {} as SlotsType<{
+        default: void
+    }>,
+    emits: [
+        'update:modelValue',
+        'change'
+    ],
+    props: {
         appearance: {
             type: String as PropType<TIconButtonAppearance>,
             default: EIconButtonAppearance.Standard,
@@ -18,10 +25,6 @@ class ToggleIconButtonComponent {
             type: Boolean,
             default: false,
         },
-        type: {
-            type: String as PropType<TIconButtonType>,
-            default: EIconButtonType.Button,
-        },
         defaultSelected: {
             type: Boolean as PropType<boolean>,
             default: false,
@@ -29,81 +32,105 @@ class ToggleIconButtonComponent {
         modelValue: {
             type: Boolean as PropType<boolean>,
             default: null,
-        }
-    }
-    private readonly emits = [
-        'update:modelValue',
-        'change'
-    ]
-    private readonly slots = {} as SlotsType<{
-        default: void
-    }>
+        },
+        name: {
+            type: String as PropType<string>,
+            default: null,
+        },
+        value: {
+            type: String as PropType<string>,
+            default: null,
+        },
+    },
+    setup(props, { slots, emit }) {
+        const root = ref<HTMLElement | null>(null)
 
-    public readonly component = defineComponent({
-        name: this.name,
-        props: this.props,
-        emits: this.emits,
-        slots: this.slots,
-        mounted() {
+        /**
+         * States
+         */
+        const _selected = ref(props.defaultSelected)
+
+        /**
+         * Props
+         */
+        const _appearance = ref(props.appearance)
+        const _disabled = ref(props.disabled)
+        const _name = ref(props.name)
+        const _value = ref(props.value)
+
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'appearance', ref: _appearance, reflect: true, type: 'string', },
+                { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean', },
+                { attribute: 'name', ref: _name, reflect: true, type: 'string', },
+                { attribute: 'value', ref: _value, reflect: true, type: 'string', },
+                { attribute: 'selected', ref: _selected, reflect: true, type: 'boolean', },
+            ],
+        })
+
+        /**
+         * Methods
+         */
+        const setSelected = (value: boolean) => {
+            const changeEvent = new Event('change', { bubbles: true, cancelable: true, })
+            emit('change', changeEvent)
+            const preventChange = !dispatchEvent(changeEvent)
+            if (preventChange) {
+                return
+            }
+            console.log('u')
+
+            _selected.value = value
+            emit('update:modelValue', value)
+        }
+        const handleIconButtonClick = (e: Event) => {
+            e.stopImmediatePropagation()
+            e.preventDefault()
+            if (_disabled.value) {
+                return
+            }
+            setSelected(!_selected.value)
+        }
+
+        onMounted(() => {
             if (isServer()) {
                 return
             }
-            (this.$el as HTMLButtonElement).addEventListener('click', this.handleIconButtonClick)
-        },
-        beforeUpdate() {
-            if (this.modelValue !== null) {
-                this.selected = this.modelValue
+
+            root.value?.addEventListener('click', handleIconButtonClick)
+        })
+
+        onBeforeUnmount(() => {
+            root.value?.removeEventListener('click', handleIconButtonClick)
+        })
+
+        onBeforeUpdate(() => {
+            if (props.modelValue !== null) {
+                _selected.value = props.modelValue
             }
-        },
-        beforeUnmount() {
-            (this.$el as HTMLButtonElement).removeEventListener('click', this.handleIconButtonClick)
-        },
-        data: (props) => ({
-            selected: props.defaultSelected || props.modelValue,
-        }),
-        methods: {
-            handleIconButtonClick(e: Event) {
-                e.stopImmediatePropagation()
-                e.preventDefault()
-                this.setSelected(!this.selected)
-            },
-            setSelected(value: boolean) {
-                const changeEvent = new Event('change', { bubbles: true, cancelable: true, })
-                this.$emit('change', changeEvent)
-                const preventChange = !dispatchEvent(changeEvent)
-                if (preventChange) {
-                    return
-                }
-                if (this.selected === value) {
-                    return
-                }
-                this.selected = value
-                this.$emit('update:modelValue', value)
-            }
-        },
-        render() {
+        })
+
+        return () => {
             const renderIcon = (
                 <span class={css.icon}>
-                    {this.$slots.default && this.$slots.default()}
+                    {slots.default && slots.default()}
                 </span>
             )
 
             return (
                 <button
                     class={[
-                        css[this.appearance],
+                        css[_appearance.value],
                         css['toggle-icon-button'],
-                        this.selected && css.selected,
-                        this.disabled && css.disabled,
+                        _selected.value && css.selected,
+                        _disabled.value && css.disabled,
                     ]}
                     data-component="togglable-icon-button"
-                    disabled={this.disabled}
-                    aria-disabled={this.disabled}
-                    type={this.type}
                     role='checkbox'
+                    ref={root}
                 >
                     <Ripple></Ripple>
-                    <FocusRing></FocusRing>
+                    <FocusRing shapeInherit={false}></FocusRing>
 
                     <div aria-hidden="true" class={css.touch}></div>
                     <div aria-hidden="true" class={css.background}></div>
@@ -113,7 +140,6 @@ class ToggleIconButtonComponent {
                 </button>
             )
         }
-    })
-}
-
-export const ToggleIconButton = new ToggleIconButtonComponent().component
+    },
+    inheritAttrs: true,
+})
