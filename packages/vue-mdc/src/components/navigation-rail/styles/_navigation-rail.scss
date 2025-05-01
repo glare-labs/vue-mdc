@@ -25,7 +25,7 @@ $_motion: tokens.md-sys-motion-values();
 
         & {
             @each $token, $value in $tokens {
-                --_#{$token}: var(--gu-navigation-rail-#{$token}, #{$value});
+                --_#{$token}: #{$value};
             }
 
             @include elevation.theme(('level': var(--_container-elevation),
@@ -36,7 +36,7 @@ $_motion: tokens.md-sys-motion-values();
 
         & {
             height: 100%;
-            width: var(--_container-width);
+            width: map.get($tokens, 'container-width');
             box-sizing: border-box;
             position: relative;
             display: grid;
@@ -79,11 +79,13 @@ $_motion: tokens.md-sys-motion-values();
         }
 
         &>.background {
-            background-color: var(--_container-color);
+            background-color: map.get($tokens, 'container-color');
             position: absolute;
             inset: 0;
             border-radius: inherit;
-            z-index: -1;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
         }
     }
 }

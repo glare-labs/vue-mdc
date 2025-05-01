@@ -26,7 +26,7 @@ $animation-duration: 200ms;
 
     & {
         @each $token, $value in $tokens {
-            --_#{$token}: var(--md-navigation-rail-tab-#{$token}, #{$value});
+            --_#{$token}: #{$value};
         }
     }
 
@@ -109,7 +109,7 @@ $animation-duration: 200ms;
         z-index: -1;
     }
 
-    &:is(.active, [active]) .active-indicator {
+    &[active-navigation-tab] .active-indicator {
         opacity: 1;
     }
 
@@ -120,7 +120,7 @@ $animation-duration: 200ms;
     }
 
     // Keep icon-content in sync with active-indicator size.
-    &:is(.active, [active]) .active-indicator,
+    &[active-navigation-tab] .active-indicator,
     & .icon-content {
         width: var(--_active-indicator-width);
     }
@@ -144,7 +144,7 @@ $animation-duration: 200ms;
         border-radius: var(--_active-indicator-shape);
     }
 
-    &:is(.active, [active]) {
+    &[active-navigation-tab] {
         .icon {
             display: none;
             color: var(--_active-icon-color);
@@ -195,7 +195,7 @@ $animation-duration: 200ms;
             ));
     }
 
-    &:not(:is(.active, [active])) {
+    &:not([active-navigation-tab]) {
         .icon {
             color: var(--_inactive-icon-color);
         }
@@ -239,5 +239,9 @@ $animation-duration: 200ms;
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
             ));
+    }
+
+    &[hide-inactive-label]:not([active-navigation-tab]) .label {
+        display: none;
     }
 }

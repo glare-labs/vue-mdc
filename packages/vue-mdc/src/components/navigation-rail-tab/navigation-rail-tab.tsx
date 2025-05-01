@@ -1,99 +1,84 @@
-import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { SAttachableController, type IAttachableHost } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { AttachableController, SAttachableController, type IAttachableControllerHost } from '../../internals/controller/attachable-controller'
-import { isServer } from '../../utils/is-server'
+import { isServer } from '../../utils'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
-import { type INavigationRailTabEventMap, type TNavigationRailTabClickEventDetail } from './navigation-rail-tab-event'
 import css from './styles/navigation-rail-tab.module.scss'
 
-class NavigationRailTabComponent {
-    private readonly name = `${componentNamePrefix}-navigation-rail-tab`
-
-    private readonly props = {
-        label: {
-            type: String as PropType<string>,
-            default: 'Unnamed Tab'
-        }
-    }
-    private readonly slots = {} as SlotsType<{
+export const NavigationRailTab = defineComponent({
+    name: `${componentNamePrefix}-navigation-rail-tab`,
+    slots: {} as SlotsType<{
         default: void
         'active-icon': void
         'inactive-icon': void
-    }>
-    private readonly emits: Array<keyof INavigationRailTabEventMap> = [
-        'tab-click'
-    ]
+    }>,
+    emits: [
+        'tab-click',
+        'change',
+    ],
+    props: {
+        label: {
+            type: String as PropType<string>,
+            default: 'Unnamed Tab',
+        },
+        hideInactiveLabel: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+    },
+    setup(props, { slots, emit }) {
+        const root = ref<HTMLElement | null>(null)
 
-    public readonly component = defineComponent({
-        name: this.name,
-        props: this.props,
-        slots: this.slots,
-        emits: this.emits,
-        mounted() {
-            if (isServer()) {
+        const _hideInactiveLabel = ref(props.hideInactiveLabel)
+        const _label = ref(props.label)
+
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'hide-inactive-label', ref: _hideInactiveLabel, reflect: true, type: 'boolean' },
+                { attribute: 'label', ref: _label, reflect: true, type: 'string' },
+            ],
+        })
+
+        onMounted(() => {
+            if (isServer() || !root.value) {
                 return
             }
-            (this.$el as HTMLElement).addEventListener('click', this.handleTabClick)
+            const ripple = root.value.querySelector('&>span>.ripple')! as IAttachableHost;
+            (ripple[SAttachableController]).attach(root.value)
+        })
 
-            const ripple = (this.$el as HTMLElement).querySelector('&>span>.ripple')! as IAttachableControllerHost;
-            (ripple[SAttachableController] as AttachableController).attach(this.$el)
-        },
-        beforeUnmount() {
-            (this.$el as HTMLElement).removeEventListener('click', this.handleTabClick)
-        },
-        methods: {
-            handleTabClick(e: Event) {
-                e.preventDefault()
-                const tabClickEvent = new CustomEvent<TNavigationRailTabClickEventDetail>(
-                    'tab-click',
-                    {
-                        bubbles: true,
-                        composed: true,
-                        detail: {
-                            tab: this.$el as HTMLElement,
-                            label: this.label
-                        }
-                    }
-                )
-                this.$el.dispatchEvent(tabClickEvent)
-                this.$emit('tab-click', tabClickEvent)
-            }
-        },
-        render() {
-            return (
-                <button
-                    data-component="navigation-rail-tab"
-                    data-is-navigation-tab
-                    class={[css['navigation-rail-tab']]}
-                    role='tab'
-                >
+        return () => (
+            <button
+                data-component="navigation-rail-tab"
+                navigation-tab
+                class={[css['navigation-rail-tab']]}
+                role='tab'
+                ref={root}
+            >
 
-                    <FocusRing shapeInherit={false}></FocusRing>
-                    <span aria-hidden="true" class={[css["icon-content"]]}>
-                        <Ripple class="ripple"></Ripple>
+                <FocusRing inward shapeInherit={false}></FocusRing>
+                <span aria-hidden="true" class={[css["icon-content"]]}>
+                    <Ripple class="ripple"></Ripple>
 
-                        <span class={css["active-indicator"]}>
-                        </span>
-                        <span class={css["icon"]}>
-                            {this.$slots['inactive-icon'] ? this.$slots['inactive-icon']() : this.$slots.default && this.$slots.default()}
-                        </span>
-                        <span class={[css["icon"], css["icon--active"]]}>
-                            {this.$slots['active-icon'] ? this.$slots['active-icon']() : this.$slots.default && this.$slots.default()}
-                        </span>
-                        {/* ${this.renderBadge()} */}
+                    <span class={css["active-indicator"]}>
                     </span>
+                    <span class={css["icon"]}>
+                        {slots['inactive-icon'] ? slots['inactive-icon']() : (slots.default && slots.default())}
+                    </span>
+                    <span class={[css["icon"], css["icon--active"]]}>
+                        {slots['active-icon'] ? slots['active-icon']() : (slots.default && slots.default())}
+                    </span>
+                    {/* ${this.renderBadge()} */}
+                </span>
 
-                    {(typeof this.label.length !== 'undefined' || this.label !== null) && (
-                        <span class={css['label']}>
-                            {this.label}
-                        </span>
-                    )}
+                {(typeof _label.value.length !== 'undefined' || _label.value !== null) && (
+                    <span class={css['label']}>
+                        {_label.value}
+                    </span>
+                )}
 
-                </button>)
-        }
-    })
-
-}
-
-export const NavigationRailTab = new NavigationRailTabComponent().component
+            </button>)
+    },
+})

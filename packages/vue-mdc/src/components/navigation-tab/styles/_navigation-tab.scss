@@ -64,6 +64,7 @@ $animation-duration: 200ms;
         font-size: var(--_label-text-size);
         line-height: var(--_label-text-line-height);
         font-weight: var(--_label-text-weight);
+        // overflow: hidden;
         // Override the user-agent text-transform: none of <button>
         text-transform: inherit;
 
@@ -91,7 +92,7 @@ $animation-duration: 200ms;
             animation.standard(height, $animation-duration);
         z-index: 1;
 
-        &--hide-inactive-label:not(:is(.active, [active])) & {
+        &--hide-inactive-label:not([active-navigation-tab]) & {
             height: 0;
             opacity: 0;
         }
@@ -107,10 +108,9 @@ $animation-duration: 200ms;
         width: 32px;
         background-color: var(--_active-indicator-color);
         border-radius: var(--_active-indicator-shape);
-
     }
 
-    &:is(.active, [active]) .active-indicator {
+    &[active-navigation-tab] .active-indicator {
         opacity: 1;
     }
 
@@ -121,7 +121,7 @@ $animation-duration: 200ms;
     }
 
     // Keep icon-content in sync with active-indicator size.
-    &:is(.active, [active]) .active-indicator,
+    &[active-navigation-tab] .active-indicator,
     & .icon-content {
         width: var(--_active-indicator-width);
     }
@@ -144,7 +144,7 @@ $animation-duration: 200ms;
         z-index: 0;
     }
 
-    &:is(.active, [active]) {
+    &[active-navigation-tab] {
         .icon {
             display: none;
             color: var(--_active-icon-color);
@@ -195,7 +195,7 @@ $animation-duration: 200ms;
             ));
     }
 
-    &:not(:is(.active, [active])) {
+    &:not([active-navigation-tab]) {
         .icon {
             color: var(--_inactive-icon-color);
         }
@@ -239,5 +239,9 @@ $animation-duration: 200ms;
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
             ));
+    }
+
+    &[hide-inactive-label]:not([active-navigation-tab]) .label {
+        display: none;
     }
 }
