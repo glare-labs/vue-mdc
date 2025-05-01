@@ -1,4 +1,5 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch, type ComputedRef, type Ref, type WritableComputedRef } from 'vue'
+import { isServer } from '../../utils'
 
 /**
  * An object that can be attached to an associated controlling element.
@@ -178,6 +179,10 @@ export function useAttachable(
     }
 
     onMounted(() => {
+        if (isServer()) {
+            return
+        }
+
         const host = hostRef.value as IAttachableHost | null
         if (!host) {
             console.error("useAttachable: Host element ref is null on mount. Attachable logic will not function.")

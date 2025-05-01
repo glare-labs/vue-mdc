@@ -1,7 +1,6 @@
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onBeforeUnmount, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { isServer } from '../../utils'
 import { FocusRingController } from './focus-ring-controller'
 import css from './styles/focus-ring.module.scss'
 
@@ -51,19 +50,7 @@ export const FocusRing = defineComponent({
             ]
         })
 
-        onMounted(() => {
-            if (isServer()) {
-                return
-            }
-
-            focusRingController.value = new FocusRingController(root.value!)
-            focusRingController.value.htmlFor = _for.value
-            focusRingController.value.hostConnected()
-        })
-
-        onBeforeUnmount(() => {
-            focusRingController.value?.hostDisconnected()
-        })
+        focusRingController.value = new FocusRingController(root)
 
         return () => (
             <div

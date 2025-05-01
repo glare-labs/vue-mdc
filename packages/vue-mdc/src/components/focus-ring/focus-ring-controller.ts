@@ -1,4 +1,6 @@
-import { AttachableController } from '../../internals'
+import type { Ref } from 'vue'
+import { useAttachable } from '../../internals'
+import type { IAttachable } from '../../internals/controller/use-attachable'
 import { isServer } from '../../utils'
 import { FocusRingEvents } from './focus-ring-events'
 
@@ -7,7 +9,7 @@ interface IFocusRingEvent extends Event {
     [SHandleByFocusRing]: true
 }
 
-export class FocusRingController extends AttachableController {
+export class FocusRingController {
 
     private _visible = false
     public get visible() {
@@ -19,14 +21,18 @@ export class FocusRingController extends AttachableController {
         }
         this._visible = value
         if (value) {
-            this.host.setAttribute('visible', ``)
-        } else {
-            this.host.removeAttribute('visible')
+            this.host.value?.setAttribute('visible', ``)
+        } else if (this.host.value?.hasAttribute('visible')) {
+            this.host.value?.removeAttribute('visible')
         }
     }
 
-    constructor(_host: HTMLElement) {
-        super(_host, (prev: HTMLElement | null, next: HTMLElement | null) => {
+    private attachale: IAttachable | null = null
+
+    constructor(
+        private host: Ref<HTMLElement | null>
+    ) {
+        this.attachale = useAttachable(host, (prev, next) => {
             if (isServer()) {
                 return
             }
@@ -44,7 +50,7 @@ export class FocusRingController extends AttachableController {
         }
         switch (event.type) {
             case 'focusin':
-                this.visible = this.control?.matches(':focus-visible') ?? false
+                this.visible = this.attachale?.control?.value?.matches(':focus-visible') ?? false
                 break
             case 'focusout':
             case 'pointerdown':
