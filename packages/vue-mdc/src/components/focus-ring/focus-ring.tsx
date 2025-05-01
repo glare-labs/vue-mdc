@@ -47,7 +47,8 @@ export const FocusRing = defineComponent({
                 { attribute: 'for', ref: _for, reflect: true, type: 'string' },
                 { attribute: 'inward', ref: _inward, reflect: true, type: 'boolean' },
                 { attribute: 'shape-inherit', ref: _shapeInherit, reflect: true, type: 'boolean' },
-            ]
+            ],
+            tick: 'before'
         })
 
         focusRingController.value = new FocusRingController(root)

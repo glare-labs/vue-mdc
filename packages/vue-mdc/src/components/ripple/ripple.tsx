@@ -34,6 +34,7 @@ export const Ripple = defineComponent({
                 { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean' },
                 { attribute: 'for', ref: _for, reflect: true, type: 'string' },
             ],
+            tick: 'before'
         })
 
         const controller = new RippleAttachableController(root)
