@@ -1,5 +1,6 @@
-import { type PropType, type SlotsType, defineComponent } from 'vue'
-import { dispatchActivationClick, isActivationClick, redispatchEvent } from '../../internals'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { type ComponentPublicInstance, type PropType, type SlotsType, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { afterDispatch, dispatchActivationClick, isActivationClick, redispatchEvent, setupDispatchHooks } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { generateUuid } from '../../utils'
 import { isServer } from '../../utils/is-server'
@@ -24,8 +25,6 @@ const SwitchOffIcon = () => (
         </svg>
     </div>
 )
-
-
 
 export const Switch = defineComponent({
     name: `${componentNamePrefix}-switch`,
@@ -63,145 +62,152 @@ export const Switch = defineComponent({
             default: 'on',
         },
     },
-    data: () => ({
-        _selected: false,
-    }),
-    computed: {
-        selected: {
-            get() {
-                return this._selected
-            },
-            set(value: boolean) {
-                if (this.modelValue !== null && this.modelValue !== value) {
-                    this.$emit('update:modelValue', value)
-                }
+    setup(props, { emit, slots }) {
+        const root = ref<HTMLElement | null>(null)
+        const input = ref<HTMLInputElement | null>(null)
+        const ripple = ref<ComponentPublicInstance | null>(null)
+        const focusRing = ref<ComponentPublicInstance | null>(null)
 
-                this._selected = value
-
-                if (value) {
-                    this.getRootElement()?.setAttribute('selected', `true`)
-                } else {
-                    this.getRootElement()?.removeAttribute('selected')
-                }
-            },
-        }
-    },
-    created() {
-        if (this.modelValue === null) {
-            this.selected = this.defaultSelected
-        } else {
-            this.selected = this.modelValue
-        }
-    },
-    mounted() {
-        if (isServer()) {
-            return
-        }
-
-        this.getRootElement()?.addEventListener('click', this.handleClick)
-
-        const innerId = `switch-${generateUuid()}`
-        this.getInputElement()?.setAttribute('id', innerId)
-        this.getFocusRingElement()?.setAttribute('for', innerId)
-        this.getRippleElement()?.setAttribute('for', innerId)
-
-        this.$watch('disabled', (value) => {
-            if (value) {
-                this.getRootElement()?.setAttribute('disabled', `true`)
-                this.getInputElement()?.setAttribute('disabled', `true`)
-            } else {
-                this.getRootElement()?.removeAttribute('disabled')
-                this.getInputElement()?.removeAttribute('disabled')
+        const _selected = ref(props.defaultSelected)
+        const selected = computed({
+            get: () => _selected.value,
+            set: (value: boolean) => {
+                _selected.value = value
+                emit('update:modelValue', value)
             }
         })
 
-        this.$watch('modelValue', (value) => {
-            this.selected = value
+        /**
+         * Props
+         */
+        const _disabled = ref(props.disabled)
+        const _withIcon = ref(props.withIcon)
+        const _withIconSelectedOnly = ref(props.withIconSelectedOnly)
+
+        /**
+         * Form
+         */
+        const _value = computed(() => selected.value ? 'on' : 'off')
+
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean', },
+                { attribute: 'selected', ref: selected, reflect: true, type: 'boolean', },
+                { attribute: 'with-icon', ref: _withIcon, reflect: true, type: 'boolean', },
+                { attribute: 'with-icon-selected-only', ref: _withIconSelectedOnly, reflect: true, type: 'boolean', },
+                { attribute: 'value', ref: _value, reflect: false, type: 'string', },
+            ]
         })
-    },
-    beforeUnmount() {
-        this.getRootElement()?.removeEventListener('click', this.handleClick)
-    },
-    methods: {
-        getRootElement(): HTMLElement | null {
-            return this.$el as HTMLElement | null
-        },
-        getFocusRingElement(): HTMLElement | null {
-            return (this.$el as HTMLElement).querySelector('[data-component="focus-ring"]')
-        },
-        getRippleElement(): HTMLElement | null {
-            return (this.$el as HTMLElement).querySelector('[data-component="ripple"]')
-        },
-        getInputElement(): HTMLInputElement | null {
-            return (this.$el as HTMLElement).querySelector(`input.need-inner-id`)
-        },
-        handleClick(event: MouseEvent) {
-            if (!isActivationClick(event) || !this.getInputElement()) {
+
+        /**
+         * Methods
+         */
+        const handleClick = (event: MouseEvent) => {
+            if (!isActivationClick(event) || !input.value) {
                 return
             }
 
-            this.getRootElement()?.focus()
-            if (this.getInputElement()) {
-                dispatchActivationClick(this.getInputElement()!)
+            root.value?.focus()
+            if (input.value) {
+                dispatchActivationClick(input.value)
             }
-        },
-        handleKeydown() {
-            // TODO
-        },
-        handleInput(event: Event) {
+        }
+        const handleKeydown = (event: KeyboardEvent) => {
+            afterDispatch(event, () => {
+                const ignoreEvent = event.defaultPrevented || event.key !== 'Enter'
+                if (ignoreEvent || _disabled.value || !input.value) {
+                    return
+                }
+
+                input.value.click()
+            })
+        }
+        const handleInput = (event: Event) => {
             const target = event.target as HTMLInputElement
-            this.selected = target.checked
-        },
-        handleChange(event: Event) {
-            redispatchEvent(this.getRootElement()!, event)
+            selected.value = target.checked
+        }
+        const handleChange = (event: Event) => {
+            redispatchEvent(root.value!, event)
+        }
+
+        onMounted(() => {
+            if (isServer() || !root.value) {
+                return
+            }
+
+            const innerId = `switch-${generateUuid()}`
+            input.value?.setAttribute('id', innerId)
+            focusRing.value?.$el.setAttribute('for', innerId)
+            ripple.value?.$el.setAttribute('for', innerId)
+
+            setupDispatchHooks(root.value, 'keydown')
+            root.value.addEventListener('click', handleClick)
+            root.value.addEventListener('keydown', handleKeydown)
+        })
+
+        onBeforeUnmount(() => {
+            root.value?.removeEventListener('click', handleClick)
+            root.value?.removeEventListener('keydown', handleKeydown)
+        })
+
+        watch(() => props.modelValue, (newValue, oldValue) => {
+            selected.value = newValue
+        }, {
+            immediate: false,
+        })
+
+
+        return () => {
+            const renderIcon = (
+                <span class={[css.handle, (_withIconSelectedOnly.value || _withIcon.value) && css['with-icon']]}>
+                    {
+                        (_withIconSelectedOnly.value || _withIcon.value) &&
+                        <div class={css.icons}>
+                            {
+                                _selected.value && (slots['on-icon'] ? slots['on-icon']() : <SwitchOnIcon></SwitchOnIcon>)
+                            }
+                            {
+                                !_withIconSelectedOnly.value && !_selected.value && (slots['off-icon'] ? slots['off-icon']() : <SwitchOffIcon></SwitchOffIcon>)
+                            }
+                        </div>
+                    }
+                </span>
+            )
+
+            return (
+                <div
+                    class={[css.switch, _disabled.value && css.disabled, _selected.value ? css.selected : css.unselected]}
+                    role="switch"
+                    aria-disabled={_disabled.value}
+                    data-component="switch"
+                    ref={root}
+                >
+                    <FocusRing ref={focusRing} shapeInherit={false}></FocusRing>
+
+                    <input
+                        type="checkbox"
+                        role="switch"
+                        checked={_selected.value}
+                        disabled={_disabled.value}
+                        aria-disabled={_disabled.value}
+                        class={"need-inner-id"}
+                        onInput={handleInput}
+                        onChange={handleChange}
+                        ref={input}
+                    />
+
+                    <span aria-hidden="true" class={css.background}></span >
+                    <span aria-hidden="true" class={css.outline}></span >
+
+                    <span class={css.track} aria-hidden="true">
+                        <span class={css['handle-container']}>
+                            <Ripple ref={ripple}></Ripple>
+                            {renderIcon}
+                        </span>
+                    </span>
+                </div>
+            )
         }
     },
-    render() {
-        const renderIcon = (
-            <span class={[css.handle, (this.withIconSelectedOnly || this.withIcon) && css['with-icon']]}>
-                {
-                    (this.withIconSelectedOnly || this.withIcon) &&
-                    <div class={css.icons}>
-                        {
-                            this.selected && (this.$slots['on-icon'] ? this.$slots['on-icon']() : <SwitchOnIcon></SwitchOnIcon>)
-                        }
-                        {
-                            !this.withIconSelectedOnly && !this.selected && (this.$slots['off-icon'] ? this.$slots['off-icon']() : <SwitchOffIcon></SwitchOffIcon>)
-                        }
-                    </div>
-                }
-            </span>)
-
-        return (
-            <div
-                class={[css.switch, this.disabled && css.disabled, this.selected ? css.selected : css.unselected]}
-                role="switch"
-                aria-disabled={this.disabled}
-                data-component="switch"
-            >
-                <FocusRing shapeInherit={false}></FocusRing>
-
-                <input
-                    type="checkbox"
-                    role="switch"
-                    checked={this.selected}
-                    disabled={this.disabled}
-                    aria-disabled={this.disabled}
-                    class={"need-inner-id"}
-                    onInput={this.handleInput}
-                    onChange={this.handleChange}
-                />
-
-                <span aria-hidden="true" class={css.background}></span >
-                <span aria-hidden="true" class={css.outline}></span >
-
-                <span class={css.track} aria-hidden="true">
-                    <span class={css['handle-container']}>
-                        <Ripple></Ripple>
-                        {renderIcon}
-                    </span>
-                </span>
-            </div>
-        )
-    },
+    inheritAttrs: true,
 })
