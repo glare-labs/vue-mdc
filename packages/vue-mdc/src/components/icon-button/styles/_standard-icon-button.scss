@@ -18,7 +18,7 @@
         }
 
         @if $value {
-            --md-icon-button-#{$token}: #{$value};
+            --md-standard-icon-button-#{$token}: #{$value};
         }
     }
 }
@@ -40,35 +40,14 @@
                 pressed-opacity: var(--_pressed-state-layer-opacity),
             ));
 
-        // These custom properties are not used, so set defaults so token tests pass
-        // for <glare-icon-button>.
-        --_container-shape-start-start: 0;
-        --_container-shape-start-end: 0;
-        --_container-shape-end-end: 0;
-        --_container-shape-end-start: 0;
-        --_container-height: 0;
-        --_container-width: 0;
-
-        height: var(--_state-layer-height);
-        width: var(--_state-layer-width);
     }
 
     &[touch-target='wrapper'] {
         margin: max(0px, (48px - var(--_state-layer-height))/2) max(0px, (48px - var(--_state-layer-width))/2);
     }
 
-    & [data-component="focus-ring"] {
-        @include focus-ring.theme(('shape-start-start': var(--_state-layer-shape),
-                'shape-start-end': var(--_state-layer-shape),
-                'shape-end-end': var(--_state-layer-shape),
-                'shape-end-start': var(--_state-layer-shape),
-            ));
-    }
-
     & {
         color: var(--_icon-color);
-
-
 
         &:hover {
             color: var(--_hover-icon-color);
@@ -93,10 +72,6 @@
         inset: 0;
         position: absolute;
         z-index: -1;
-    }
-
-    & [data-component='ripple'] {
-        border-radius: var(--_state-layer-shape);
     }
 
     &:is(:disabled, .disabled, [disabled]) .icon {

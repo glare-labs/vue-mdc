@@ -3,19 +3,23 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// go/keep-sorted start
 @use 'sass:map';
-// go/keep-sorted end
-// go/keep-sorted start
+@use 'sass:string';
+@use './internal/shape';
 @use './internal/validate';
 @use './md-sys-color';
 @use './md-sys-shape';
 @use './md-sys-state';
 @use './v0_192/md-comp-icon-button';
-// go/keep-sorted end
 
 $supported-tokens: (
-  // go/keep-sorted start
+  'container-height',
+  'container-shape',
+  'container-shape-end-end',
+  'container-shape-end-start',
+  'container-shape-start-end',
+  'container-shape-start-start',
+  'container-width',
   'disabled-icon-color',
   'disabled-icon-opacity',
   'focus-icon-color',
@@ -38,16 +42,13 @@ $supported-tokens: (
   'state-layer-height',
   'state-layer-shape',
   'state-layer-width',
-  // go/keep-sorted end
 );
 
 $unsupported-tokens: (
-  // go/keep-sorted start
   'focus-state-layer-color',
   'focus-state-layer-opacity',
   'selected-focus-state-layer-color',
   'selected-focus-state-layer-opacity',
-  // go/keep-sorted end
 );
 
 $_default: (
@@ -56,16 +57,19 @@ $_default: (
   'md-sys-state': md-sys-state.values(),
 );
 
-@function values(
-  $deps: $_default,
+@function values($deps: $_default,
   $exclude-hardcoded-values: false,
-  $exclude-custom-properties: false
-) {
-  $tokens: validate.values(
-    md-comp-icon-button.values($deps, $exclude-hardcoded-values),
-    $supported-tokens: $supported-tokens,
-    $unsupported-tokens: $unsupported-tokens,
-    $renamed-tokens: (
+  $exclude-custom-properties: false) {
+
+  $tokens: md-comp-icon-button.values($deps,
+      $exclude-hardcoded-values );
+
+  $new-tokens: shape.get-new-logical-shape-tokens($tokens, 'container-shape');
+  $tokens: validate.values($tokens,
+      $supported-tokens: $supported-tokens,
+      $unsupported-tokens: $unsupported-tokens,
+      $new-tokens: $new-tokens,
+      $renamed-tokens: (
       // Remove default "unselected" prefix (b/292244480)
       'unselected-focus-icon-color': 'focus-icon-color',
       'unselected-hover-icon-color': 'hover-icon-color',
@@ -80,15 +84,18 @@ $_default: (
     )
   );
 
-  @if not $exclude-custom-properties {
-    @each $token, $value in $tokens {
-      $tokens: map.set(
-        $tokens,
-        $token,
-        var(--md-icon-button-#{$token}, #{$value})
-      );
+@if not $exclude-custom-properties {
+  @each $token, $value in $tokens {
+    @if string.index($token, 'container-shape-')==1 {
+      // Add fallback to shorthand for logical shape properties.
+      $value: var(--md-standard-icon-button-container-shape, #{$value});
     }
-  }
 
-  @return $tokens;
+    $tokens: map.set($tokens,
+        $token,
+        var(--md-standard-icon-button-#{$token}, #{$value}));
+  }
+}
+
+@return $tokens;
 }
