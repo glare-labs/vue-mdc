@@ -1,0 +1,5 @@
+@use "bottom-app-bar.scss";
+
+.bottom-app-bar {
+    @include bottom-app-bar.styles();
+}

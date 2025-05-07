@@ -10,7 +10,7 @@
 @use '../../../tokens';
 
 @mixin theme($tokens) {
-    $supported-tokens: to kens.$md-comp-fab-supported-tokens;
+    $supported-tokens: tokens.$md-comp-fab-supported-tokens;
 
     @each $token, $value in $tokens {
         @if list.index($supported-tokens, $token)==null {
