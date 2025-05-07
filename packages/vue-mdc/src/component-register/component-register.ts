@@ -1,4 +1,5 @@
 import type { App } from 'vue'
+import { BottomAppBar } from '../components/bottom-app-bar'
 import { Button } from '../components/button'
 import { Checkbox } from '../components/checkbox'
 import { Dialog } from '../components/dialog'
@@ -10,6 +11,7 @@ import { FocusRing } from '../components/focus-ring'
 import { Icon } from '../components/icon'
 import { IconButton, ToggleIconButton } from '../components/icon-button'
 import { NavigationBar } from '../components/navigation-bar'
+import { NavigationDrawer, NavigationDrawerHeadline, NavigationDrawerIndicator } from '../components/navigation-drawer'
 import { NavigationRail } from '../components/navigation-rail'
 import { NavigationRailTab } from '../components/navigation-rail-tab'
 import { NavigationTab } from '../components/navigation-tab'
@@ -24,6 +26,7 @@ import { componentNamePrefix } from '../internals/component-name-prefix/componen
 export const registerComponents = (prefix = componentNamePrefix) => ({
     install: (instance: App<any>) => {
         instance.component(`${prefix}-button`, Button)
+        instance.component(`${prefix}-bottom-app-bar`, BottomAppBar)
         instance.component(`${prefix}-checkbox`, Checkbox)
         instance.component(`${prefix}-dialog`, Dialog)
         instance.component(`${prefix}-divider`, Divider)
@@ -35,6 +38,9 @@ export const registerComponents = (prefix = componentNamePrefix) => ({
         instance.component(`${prefix}-icon-button`, IconButton)
         instance.component(`${prefix}-toggle-icon-button`, ToggleIconButton)
         instance.component(`${prefix}-navigation-bar`, NavigationBar)
+        instance.component(`${prefix}-navigation-drawer`, NavigationDrawer)
+        instance.component(`${prefix}-navigation-drawer-headline`, NavigationDrawerHeadline)
+        instance.component(`${prefix}-navigation-drawer-indicator`, NavigationDrawerIndicator)
         instance.component(`${prefix}-navigation-tab`, NavigationTab)
         instance.component(`${prefix}-navigation-rail`, NavigationRail)
         instance.component(`${prefix}-navigation-rail-tab`, NavigationRailTab)

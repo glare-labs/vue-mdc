@@ -104,6 +104,7 @@ class NavigationDrawerComponent {
             this.getDialogElement().addEventListener('close', this.handleClose)
             this.getDialogElement().addEventListener('keydown', this.handleKeydown)
             this.getScrimElement().addEventListener('click', this.handleClose)
+            // @ts-ignore
             root.addEventListener('request-route', this.handleRequestRoute)
         },
         methods: {
