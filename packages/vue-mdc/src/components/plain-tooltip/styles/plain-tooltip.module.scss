@@ -1,0 +1,5 @@
+@use './plain-tooltip';
+
+.plain-tooltip {
+    @include plain-tooltip.styles();
+}

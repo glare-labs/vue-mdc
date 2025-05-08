@@ -1,9 +1,3 @@
-//
-// Copyright 2023 Google LLC
-// SPDX-License-Identifier: Apache-2.0
-//
-
-// go/keep-sorted start
 @forward './md-comp-assist-chip' as md-comp-assist-chip-*;
 @forward './md-comp-badge' as md-comp-badge-*;
 @forward './md-comp-bottom-app-bar' as md-comp-bottom-app-bar-*;
@@ -46,6 +40,7 @@
 @forward './md-comp-outlined-segmented-button' as md-comp-outlined-segmented-button-*;
 @forward './md-comp-outlined-select' as md-comp-outlined-select-*;
 @forward './md-comp-outlined-text-field' as md-comp-outlined-text-field-*;
+@forward './md-comp-plain-tooltip' as md-comp-plain-tooltip-*;
 @forward './md-comp-primary-tab' as md-comp-primary-tab-*;
 @forward './md-comp-radio' as md-comp-radio-*;
 @forward './md-comp-ripple' as md-comp-ripple-*;
@@ -63,4 +58,3 @@
 @forward './md-sys-shape' as md-sys-shape-*;
 @forward './md-sys-state' as md-sys-state-*;
 @forward './md-sys-typescale' as md-sys-typescale-*;
-// go/keep-sorted end
