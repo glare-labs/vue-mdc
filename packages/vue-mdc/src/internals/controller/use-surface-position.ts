@@ -1,4 +1,4 @@
-import { computed, type CSSProperties, nextTick, ref, type Ref, unref, watch } from 'vue'
+import { computed, type CSSProperties, onMounted, ref, type Ref, unref, watch } from 'vue'
 import { isServer } from '../../utils'
 
 /**
@@ -30,7 +30,7 @@ export type TCorner = (typeof Corner)[keyof typeof Corner]
  * calculate the anchor positioning. Useful for when you want a surface to
  * anchor to an element in your shadow DOM rather than the host element.
  */
-export interface ISurfacePositionTarget extends HTMLElement {
+export interface IHTMLElementInShadowDOM extends HTMLElement {
     getSurfacePositionClientRect?: () => DOMRect
 }
 
@@ -44,16 +44,17 @@ export interface ISurfacePositionControllerProperties {
     disableInlineFlip?: boolean
     anchorCorner: TCorner
     surfaceCorner: TCorner
-    surfaceEl: ISurfacePositionTarget | null
-    anchorEl: ISurfacePositionTarget | null
-    positioning?: 'absolute' | 'fixed' | 'document'
+    surfaceEl: IHTMLElementInShadowDOM | null
+    anchorEl: IHTMLElementInShadowDOM | null
     isOpen: boolean
+    positioning?: 'absolute' | 'fixed' | 'document'
     xOffset?: number
     yOffset?: number
     repositionStrategy?: 'move' | 'resize'
-    onOpen?: () => void
-    beforeClose?: () => Promise<void>
-    onClose?: () => void
+    onBeforeOpen?: () => Promise<any> | any
+    onOpen?: () => Promise<any> | any
+    onBeforeClose?: () => Promise<any> | any
+    onClose?: () => Promise<any> | any
 }
 
 const defaultProps: Omit<ISurfacePositionControllerProperties, 'anchorCorner' | 'surfaceCorner' | 'surfaceEl' | 'anchorEl' | 'isOpen'> = {
@@ -63,8 +64,9 @@ const defaultProps: Omit<ISurfacePositionControllerProperties, 'anchorCorner' | 
     xOffset: 0,
     yOffset: 0,
     repositionStrategy: 'move',
+    onBeforeOpen: async () => { },
     onOpen: () => { },
-    beforeClose: async () => { },
+    onBeforeClose: async () => { },
     onClose: () => { },
 }
 
@@ -76,7 +78,7 @@ const defaultProps: Omit<ISurfacePositionControllerProperties, 'anchorCorner' | 
  * can be applied to the surface to handle visiblility and position.
  */
 export function useSurfacePosition(
-    options: Ref<ISurfacePositionControllerProperties> | ISurfacePositionControllerProperties
+    options: Ref<ISurfacePositionControllerProperties>
 ) {
     const surfaceStyles = ref<CSSProperties>({
         display: 'none',
@@ -91,8 +93,8 @@ export function useSurfacePosition(
             // Ensure required fields are present, even if null to satisfy type, consumer must provide them.
             anchorCorner: rawOpts.anchorCorner,
             surfaceCorner: rawOpts.surfaceCorner,
-            surfaceEl: rawOpts.surfaceEl,
             anchorEl: rawOpts.anchorEl,
+            surfaceEl: rawOpts.surfaceEl,
             isOpen: rawOpts.isOpen,
         }
     })
@@ -259,36 +261,16 @@ export function useSurfacePosition(
         const blockScrollbarHeight = window.innerHeight - scrollbarTestRect.bottom
         const inlineScrollbarWidth = window.innerWidth - scrollbarTestRect.right
 
-        surfaceStyles.value = {
-            display: 'block',
-            opacity: '0',
-            // Preserve other styles like transform if any were there
-            ...surfaceStyles.value,
-            // Ensure position related styles are temporary for measurement
-            insetBlockStart: undefined,
-            insetBlockEnd: undefined,
-            insetInlineStart: undefined,
-            insetInlineEnd: undefined,
-            left: undefined,
-            right: undefined,
-            top: undefined,
-            bottom: undefined,
-            height: undefined,
-            width: undefined,
-        }
-
-        await nextTick()
-
-        if (surfaceEl.popover && surfaceEl.isConnected) {
+        if (surfaceEl?.popover && surfaceEl?.isConnected) {
             const openEvent = new Event('open', { cancelable: true })
-            const preventOpen = !surfaceEl.dispatchEvent(openEvent)
+            const preventOpen = !surfaceEl?.dispatchEvent(openEvent)
             if (!preventOpen) {
-                surfaceEl.showPopover()
+                surfaceEl?.showPopover()
             }
         }
 
-        const surfaceRect = surfaceEl.getSurfacePositionClientRect ? surfaceEl.getSurfacePositionClientRect() : surfaceEl.getBoundingClientRect()
-        const anchorRect = anchorEl.getSurfacePositionClientRect ? anchorEl.getSurfacePositionClientRect() : anchorEl.getBoundingClientRect()
+        const surfaceRect = surfaceEl?.getSurfacePositionClientRect ? surfaceEl?.getSurfacePositionClientRect() : surfaceEl?.getBoundingClientRect()
+        const anchorRect = anchorEl?.getSurfacePositionClientRect ? anchorEl?.getSurfacePositionClientRect() : anchorEl?.getBoundingClientRect()
         const [surfaceBlock, surfaceInline] = surfaceCorner.split('-') as Array<'start' | 'end'>
         const [anchorBlock, anchorInline] = anchorCorner.split('-') as Array<'start' | 'end'>
 
@@ -400,37 +382,28 @@ export function useSurfacePosition(
     // Watch for changes in isOpen or other properties that require action
     if (!isServer()) {
         watch(
-            currentOptions, // Watch the computed options object
+            currentOptions,
             async (newProps, oldProps) => {
-                const { isOpen, anchorEl, surfaceEl, onOpen, beforeClose, onClose } = newProps
+                const { isOpen, anchorEl, surfaceEl, onBeforeOpen, onOpen, onBeforeClose, onClose } = newProps
 
                 if (!anchorEl || !surfaceEl) {
-                    // If elements are missing, ensure it's closed if it was open
-                    if (oldProps?.isOpen && surfaceStyles.value.display !== 'none') {
-                        if (beforeClose) await beforeClose()
-                        closeSurface()
-                        if (onClose) onClose()
-                    } else if (surfaceStyles.value.display !== 'none') {
-                        // If it's somehow visible without elements, hide it.
-                        closeSurface()
-                    }
+                    closeSurface()
                     return
                 }
-
-                const isOpenChanged = oldProps ? newProps.isOpen !== oldProps.isOpen : true // Treat initial run as a change if isOpen
 
                 if (isOpen) {
                     // If isOpen is true, always try to position.
                     // This covers both:
                     // 1. Transitioning from closed to open.
                     // 2. Already open, but other properties (anchor, offsets, etc.) changed.
+                    if (onBeforeOpen) await onBeforeOpen()
                     await openSurface()
                     // onOpen should ideally only be called when transitioning from closed to open.
                     // The original Lit controller called onOpen after every successful `position()` if `isOpen` was true.
                     // Let's stick to the original's behavior.
                     if (onOpen) onOpen()
-                } else if (isOpenChanged && !isOpen) { // Transitioning from open to closed
-                    if (beforeClose) await beforeClose()
+                } else {
+                    if (onBeforeClose) await onBeforeClose()
                     closeSurface()
                     if (onClose) onClose()
                 }
@@ -439,8 +412,21 @@ export function useSurfacePosition(
         )
     }
 
-    // Cleanup scroll listener if any were added (none in this direct translation but good practice for some hooks)
-    // onUnmounted(() => { /* remove event listeners if any */ });
+    onMounted(() => {
+        if (isServer()) {
+            return
+        }
+
+        const { surfaceEl } = currentOptions.value
+
+        if (!surfaceEl) {
+            return
+        }
+
+        if (surfaceEl.popover !== 'manual') {
+            surfaceEl.popover = 'manual'
+        }
+    })
 
     return {
         surfaceStyles,
@@ -448,49 +434,3 @@ export function useSurfacePosition(
         openSurface,
     }
 }
-
-// Example Usage (Conceptual - would be in a .vue file's setup)
-/*
-import { ref, onMounted } from 'vue';
-import { useSurfacePosition, Corner, SurfacePositionControllerProperties } from './useSurfacePosition'; // Adjust path
-
-export default {
-  setup() {
-    const anchor = ref<HTMLElement | null>(null);
-    const surface = ref<HTMLElement | null>(null);
-
-    const positionOptions = ref<SurfacePositionControllerProperties>({
-      surfaceEl: surface.value, // Will be null initially, then updated in onMounted
-      anchorEl: anchor.value,   // Same here
-      anchorCorner: Corner.END_START,
-      surfaceCorner: Corner.START_START,
-      isOpen: false,
-      xOffset: 0,
-      yOffset: 10,
-      onOpen: () => console.log('Surface opened'),
-      beforeClose: async () => console.log('Surface before close'),
-      onClose: () => console.log('Surface closed'),
-    });
-
-    const { surfaceStyles } = useSurfacePosition(positionOptions);
-
-    onMounted(() => {
-      // Now anchor.value and surface.value should be populated by template refs
-      positionOptions.value.anchorEl = anchor.value;
-      positionOptions.value.surfaceEl = surface.value;
-    });
-
-    const toggleOpen = () => {
-      positionOptions.value.isOpen = !positionOptions.value.isOpen;
-    };
-
-    return {
-      anchor,       // for template ref: <div ref="anchor">
-      surface,      // for template ref: <div ref="surface">
-      surfaceStyles,
-      toggleOpen,
-      isOpen: computed(() => positionOptions.value.isOpen) // For convenience
-    };
-  }
-}
-*/
