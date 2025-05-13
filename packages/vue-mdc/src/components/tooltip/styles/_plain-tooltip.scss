@@ -32,7 +32,7 @@
 
         & {
             all: unset;
-            display: inline-block;
+            display: none;
             position: relative;
             border-start-start-radius: var(--_container-shape-start-start);
             border-start-end-radius: var(--_container-shape-start-end);
@@ -44,6 +44,11 @@
             min-height: 24px;
             padding-left: 8px;
             padding-right: 8px;
+            margin: 0;
+
+            &[visible] {
+                display: block;
+            }
         }
         
         & .supporting-text {

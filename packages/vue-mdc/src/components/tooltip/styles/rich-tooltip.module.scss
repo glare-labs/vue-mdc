@@ -1,0 +1,5 @@
+@use './rich-tooltip';
+
+.rich-tooltip {
+    @include rich-tooltip.styles();
+}
