@@ -1,0 +1,26 @@
+@use './filled-button';
+@use './filled-tonal-button';
+@use './group';
+@use './outlined-button';
+@use './shared';
+
+.filled,
+.filled-tonal,
+.outlined {
+    @include shared.styles();
+}
+
+
+.filled {
+    @include filled-button.styles();
+}
+.filled-tonal {
+    @include filled-tonal-button.styles();
+}
+.outlined {
+    @include outlined-button.styles();
+}
+
+.button-group {
+    @include group.styles();
+}
