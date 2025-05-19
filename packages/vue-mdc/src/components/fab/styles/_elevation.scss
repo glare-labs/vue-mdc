@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use '../../elevation/styles/elevation';
+
+@mixin styles() {
+    & {
+        @include _elevation(
+            (
+                'default': var(--_container-elevation),
+                'focus': var(--_focus-container-elevation),
+                'hover': var(--_hover-container-elevation),
+                'pressed': var(--_pressed-container-elevation),
+            ),
+            var(--_container-shadow-color)
+        );
+    }
+
+    &.lowered {
+        @include _elevation(
+            (
+                'default': var(--_lowered-container-elevation),
+                'focus': var(--_lowered-focus-container-elevation),
+                'hover': var(--_lowered-hover-container-elevation),
+                'pressed': var(--_lowered-pressed-container-elevation),
+            )
+        );
+    }
+}
+
+@mixin _elevation($states, $shadow-color: null) {
+    @include elevation.theme(
+        (
+            'level': map.get($states, 'default'),
+        )
+    );
+
+    @if $shadow-color {
+        @include elevation.theme(
+            (
+                'shadow-color': $shadow-color,
+            )
+        );
+    }
+
+    // apply elevation in order of focused, hovered, pressed, disabled
+    // this ensures a button will have hover elevation after being focused
+    &:focus {
+        @include elevation.theme(
+            (
+                'level': map.get($states, 'focus'),
+            )
+        );
+    }
+
+    &:hover {
+        @include elevation.theme(
+            (
+                'level': map.get($states, 'hover'),
+            )
+        );
+    }
+
+    &:active {
+        @include elevation.theme(
+            (
+                'level': map.get($states, 'pressed'),
+            )
+        );
+    }
+}

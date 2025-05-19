@@ -1,25 +1,22 @@
-//
-// Copyright 2022 Google LLC
-// SPDX-License-Identifier: Apache-2.0
-//
-
 @use 'sass:map';
-@use '../../elevation/styles/elevation';
-@use '../../focus-ring/styles/focus-ring';
-@use '../../ripple/styles/ripple';
 @use '../../../tokens';
-@use './fab';
+@use '../../icon/styles/icon';
 
 $_md-sys-motion: tokens.md-sys-motion-values();
 
 @mixin styles() {
-    & {
-        @include ripple.theme((hover-opacity: var(--_hover-state-layer-opacity),
-                pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+    $tokens: tokens.md-comp-fab-values();
 
-        display: inline-flex;
-        -webkit-tap-highlight-color: transparent;
+    & {
+        $tokens: map.remove($tokens, 'container-shape', 'large-container-shape', 'small-container-shape');
+
+        @each $token, $value in $tokens {
+            --_#{$token}: #{$value};
+        }
+    }
+
+    &.small[touch-target='wrapper'] {
+        margin: max(0px, 48px - var(--_small-container-height));
     }
 
     &.medium[touch-target='wrapper'] {
@@ -28,115 +25,6 @@ $_md-sys-motion: tokens.md-sys-motion-values();
 
     &.large[touch-target='wrapper'] {
         margin: max(0px, 48px - var(--_large-container-height));
-    }
-
-    &.icon,
-    &.icon * {
-        display: flex;
-    }
-
-    & {
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-        padding: 0;
-        position: relative;
-        height: var(--_container-height);
-        transition-property: background-color;
-        border-width: 0px;
-        outline: none;
-        // Required for elevation and ripple to stay below content
-        z-index: 0;
-        // Override the user-agent text-transform: none of <button>
-        text-transform: inherit;
-
-        &.extended {
-            width: inherit;
-            box-sizing: border-box;
-            padding-inline-start: 16px;
-            padding-inline-end: 20px;
-        }
-
-        &:not(.extended) {
-            width: var(--_container-width);
-        }
-
-        &.large {
-            width: var(--_large-container-width);
-            height: var(--_large-container-height);
-
-            .icon * {
-                width: var(--_large-icon-size);
-                height: var(--_large-icon-size);
-                font-size: var(--_large-icon-size);
-            }
-
-            &,
-            & [data-component="ripple"] {
-                border-start-start-radius: var(--_large-container-shape-start-start);
-                border-start-end-radius: var(--_large-container-shape-start-end);
-                border-end-start-radius: var(--_large-container-shape-end-start);
-                border-end-end-radius: var(--_large-container-shape-end-end);
-            }
-
-            & [data-component="focus-ring"] {
-                @include focus-ring.theme(('shape-start-start': var(--_large-container-shape-start-start),
-                        'shape-start-end': var(--_large-container-shape-start-end),
-                        'shape-end-end': var(--_large-container-shape-end-end),
-                        'shape-end-start': var(--_large-container-shape-end-start),
-                    ));
-            }
-        }
-
-        @include _elevation(('default': var(--_container-elevation),
-                'focus': var(--_focus-container-elevation),
-                'hover': var(--_hover-container-elevation),
-                'pressed': var(--_pressed-container-elevation),
-            ),
-            var(--_container-shadow-color));
-
-        &.lowered {
-            background-color: var(--_lowered-container-color);
-
-            @include _elevation(('default': var(--_lowered-container-elevation),
-                    'focus': var(--_lowered-focus-container-elevation),
-                    'hover': var(--_lowered-hover-container-elevation),
-                    'pressed': var(--_lowered-pressed-container-elevation),
-                ));
-        }
-
-        @include fab.color(('container-color': var(--_container-color),
-                'hover-state-layer-color': var(--_hover-state-layer-color),
-                'pressed-state-layer-color': var(--_pressed-state-layer-color),
-                'label-text-color': var(--_label-text-color),
-                'hover-label-text-color': var(--_hover-label-text-color),
-                'focus-label-text-color': var(--_focus-label-text-color),
-                'pressed-label-text-color': var(--_pressed-label-text-color),
-            ));
-    }
-
-    & .label {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        font-family: var(--_label-text-font);
-        font-size: var(--_label-text-size);
-        line-height: var(--_label-text-line-height);
-        font-weight: var(--_label-text-weight);
-    }
-
-    &.extended .icon * {
-        margin-inline-end: 12px;
-    }
-
-    & [data-component="ripple"] {
-        overflow: hidden;
-    }
-
-    & [data-component="ripple"],
-    & [data-component="elevation"] {
-        // puts both behind content
-        z-index: -1;
     }
 
     &.small .touch-target {
@@ -154,6 +42,10 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         width: calc(var(--_large-container-width) + 8px);
     }
 
+    &[touch-target='none'] .touch-target {
+        display: none;
+    }
+
     & .touch-target {
         position: absolute;
         top: 50%;
@@ -161,81 +53,153 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         transform: translate(-50%, -50%);
     }
 
-    &[touch-target='none'] .touch-target {
-        display: none;
+    & .icon,
+    & .icon *,
+    & .icon [data-component='icon'] {
+        display: flex;
     }
 
-    & [data-component="elevation"],
+    & {
+        cursor: pointer;
+        box-sizing: border-box;
+        display: inline-flex;
+        -webkit-tap-highlight-color: transparent;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+        padding: 0;
+        position: relative;
+        transition-property: background-color;
+        border-width: 0px;
+        outline: none;
+        // Required for elevation and ripple to stay below content
+        z-index: 0;
+        // Override the user-agent text-transform: none of <button>
+        text-transform: inherit;
+    }
+
+    &.lowered {
+        background-color: var(--_lowered-container-color);
+    }
+
+    /* Container Size */
+
+    &.small {
+        width: var(--_small-container-width);
+        height: var(--_small-container-height);
+    }
+    &.medium.extended {
+        width: inherit;
+        height: var(--_container-height);
+    }
+    &.medium:not(.extended) {
+        width: var(--_container-width);
+        height: var(--_container-height);
+    }
+    &.large {
+        width: var(--_large-container-width);
+        height: var(--_large-container-height);
+    }
+
+    /* Shape */
+
+    &.small {
+        border-start-start-radius: var(--_small-container-shape-start-start);
+        border-start-end-radius: var(--_small-container-shape-start-end);
+        border-end-start-radius: var(--_small-container-shape-end-start);
+        border-end-end-radius: var(--_small-container-shape-end-end);
+    }
+    &.medium {
+        border-start-start-radius: var(--_container-shape-start-start);
+        border-start-end-radius: var(--_container-shape-start-end);
+        border-end-start-radius: var(--_container-shape-end-start);
+        border-end-end-radius: var(--_container-shape-end-end);
+    }
+    &.large {
+        border-start-start-radius: var(--_large-container-shape-start-start);
+        border-start-end-radius: var(--_large-container-shape-start-end);
+        border-end-start-radius: var(--_large-container-shape-end-start);
+        border-end-end-radius: var(--_large-container-shape-end-end);
+    }
+
+    /* Padding */
+    // The default content is needed because we do a bit of trickery. If there is
+    // no slotted icon we need to have `padding-inline: 20px` but if there is, we
+    // need `padding-inline: 16px 20px`.
+    //
+    // So what this approach does is make the margin / padding-inline of the outer
+    // button `padding-inline: 16px 20px`, so if there is something slotted, it
+    // renders correctly. This default content span then fills the extra `4px`
+    // inline spacing if nothing is slotted which effectively makes the button's
+    // inline spacing `20px/20px`.
+
+    &.extended {
+        padding-inline-start: 16px;
+        padding-inline-end: 20px;
+    }
+    &.extended .icon {
+        padding-inline-start: 4px;
+    }
+
+    &.extended .icon {
+        margin-inline-end: 12px;
+    }
+
+    & [data-component='ripple'],
+    & [data-component='elevation'] {
+        // puts both behind content
+        z-index: -1;
+    }
+
+    & [data-component='elevation'],
     & {
         // TODO: replace duration with animation tokens
         transition-duration: 280ms;
         transition-timing-function: map.get($_md-sys-motion, 'easing-emphasized');
     }
 
-    &,
-    & [data-component="ripple"] {
-        border-start-start-radius: var(--_container-shape-start-start);
-        border-start-end-radius: var(--_container-shape-start-end);
-        border-end-start-radius: var(--_container-shape-end-start);
-        border-end-end-radius: var(--_container-shape-end-end);
+    /* Icon */
+
+    &.small .icon [data-component='icon'] {
+        @include icon.theme(
+            (
+                size: map.get($tokens, small-icon-size),
+            )
+        );
+    }
+    &.medium .icon [data-component='icon'] {
+        @include icon.theme(
+            (
+                size: map.get($tokens, icon-size),
+            )
+        );
+    }
+    &.large .icon [data-component='icon'] {
+        @include icon.theme(
+            (
+                size: map.get($tokens, large-icon-size),
+            )
+        );
     }
 
-    & [data-component="focus-ring"] {
-        @include focus-ring.theme(('shape-start-start': var(--_container-shape-start-start),
-                'shape-start-end': var(--_container-shape-start-end),
-                'shape-end-end': var(--_container-shape-end-end),
-                'shape-end-start': var(--_container-shape-end-start),
-            ));
-    }
-
-    & .icon * {
-        width: var(--_icon-size);
-        height: var(--_icon-size);
-        font-size: var(--_icon-size);
+    & .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-family: var(--_label-text-font);
+        font-size: var(--_label-text-size);
+        line-height: var(--_label-text-line-height);
+        font-weight: var(--_label-text-weight);
     }
 
     @media (forced-colors: active) {
         & {
             border: 1px solid ButtonText;
-
-            &.extended {
-                // Adjust the padding-inline to account for the 1px border in HCM.
-                padding-inline-start: 15px;
-                padding-inline-end: 19px;
-            }
         }
-
-        & [data-component="focus-ring"] {
-            // Adjust the focus ring padding to account for the 1px border in HCM.
-            @include focus-ring.theme(('outward-offset': 3px,
-                ));
+        &.extended {
+            // Adjust the padding-inline to account for the 1px border in HCM.
+            padding-inline-start: 15px;
+            padding-inline-end: 19px;
         }
-    }
-}
-
-@mixin _elevation($states, $shadow-color: null) {
-    @include elevation.theme(('level': map.get($states, 'default'),
-        ));
-
-    @if $shadow-color {
-        @include elevation.theme(('shadow-color': $shadow-color,
-            ));
-    }
-
-    // apply elevation in order of focused, hovered, pressed, disabled
-    // this ensures a button will have hover elevation after being focused
-    &:focus {
-        @include elevation.theme(('level': map.get($states, 'focus'),
-            ));
-    }
-
-    &:hover {
-        @include elevation.theme(('level': map.get($states, 'hover'),
-            ));
-    }
-
-    &:active {
-        @include elevation.theme(('level': map.get($states, 'pressed'),
-            ));
     }
 }

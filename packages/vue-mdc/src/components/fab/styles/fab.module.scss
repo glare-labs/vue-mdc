@@ -1,7 +1,37 @@
-@use './fab';
+@use './color';
+@use './elevation';
+@use './ripple';
+@use './focus-ring';
 @use './shared';
 
-.fab {
-    @include shared.styles();
-    @include fab.styles();
+@layer mdc-fab {
+    @layer elevation {
+        .fab {
+            @include elevation.styles();
+        }
+    }
+
+    @layer focus-ring {
+        .fab {
+            @include focus-ring.styles();
+        }
+    }
+
+    @layer ripple {
+        .fab {
+            @include ripple.styles();
+        }
+    }
+
+    @layer color {
+        .fab {
+            @include color.styles();
+        }
+    }
+
+    @layer shared {
+        .fab {
+            @include shared.styles();
+        }
+    }
 }

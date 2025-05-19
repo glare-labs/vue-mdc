@@ -1,22 +1,21 @@
-import { defineComponent, type PropType, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { Elevation } from '../elevation/elevation'
-import { FocusRing } from '../focus-ring'
-import { Ripple } from '../ripple/ripple'
-import { EFabSize, type TFabSize } from './fab-size'
-import { EFabVariant, type TFabVariant } from './fab-variant'
-import css from './styles/fab.module.scss'
+import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
+import { computed, defineComponent, ref, type PropType, type SlotsType } from "vue"
+import { componentNamePrefix } from "../../internals/component-name-prefix/component-name-prefix"
+import { Elevation } from "../elevation/elevation"
+import { FocusRing } from "../focus-ring"
+import { Ripple } from "../ripple/ripple"
+import { EFabSize, EFabVariant, type TFabSize, type TFabVariant } from "./fab.definition"
+import css from "./styles/fab.module.scss"
 
-class FabComponent {
-    private readonly name = `${componentNamePrefix}-fab`
-
-    private readonly props = {
+export const Fab = defineComponent({
+    name: `${componentNamePrefix}-fab`,
+    props: {
         size: {
             default: EFabSize.Medium,
             type: String as PropType<TFabSize>,
         },
         label: {
-            default: '',
+            default: null,
             type: String as PropType<string>,
         },
         variant: {
@@ -27,47 +26,73 @@ class FabComponent {
             default: false,
             type: Boolean as PropType<boolean>,
         },
-    }
-    private readonly slots = {} as SlotsType<{
+    },
+    slots: {} as SlotsType<{
         default?: void
-    }>
+    }>,
+    setup(props, { slots }) {
+        const root = ref<HTMLElement | null>(null)
 
-    public readonly component = defineComponent({
-        props: this.props,
-        slots: this.slots,
-        render() {
+        /**
+         * Props
+         */
+        const _size = ref(props.size)
+        const _label = ref<string | null>(props.label)
+        const _variant = ref(props.variant)
+        const _lowered = ref(props.lowered)
+
+        useReflectAttribute(root, {
+            attributes: [
+                { attribute: 'size', ref: _size, reflect: true, type: 'string', },
+                { attribute: 'label', ref: _label, reflect: true, type: 'string', },
+                { attribute: 'variant', ref: _variant, reflect: true, type: 'string', },
+                { attribute: 'lowered', ref: _lowered, reflect: true, type: 'boolean', },
+            ]
+        })
+
+        /**
+         * Computed
+         */
+        const isMediumSize = computed(() => _size.value === EFabSize.Medium)
+        const isExtended = computed(() => _label.value !== null && _label.value.length !== 0)
+
+        return () => {
+            if (isExtended.value && !isMediumSize.value) {
+                console.warn(
+                    `The label and icon can only be set at the same time when the size is medium. If the size attribute of your fab component is not medium, please remove the label attribute.`
+                )
+            }
+
             const renderIcon = (
                 <span class={css.icon}>
-                    {this.$slots.default && this.$slots.default()}
+                    {slots.default && slots.default()}
                 </span>
             )
-            const renderLabel = (
-                <span class={css.label}>
-                    {this.label}
-                </span>
-            )
-            const isMediumSize = this.size === EFabSize.Medium
-            const isExtended = this.label.length !== 0
-            if (isExtended && !isMediumSize) {
-                console.warn(`The label and icon can only be set at the same time when the size is medium. If the size attribute of your fab component is not medium, please remove the label attribute.`)
-            }
+
+            const renderLabel = <span class={css.label}>{_label.value}</span>
+
             return (
                 <button
-                    class={[css.fab, (isExtended && isMediumSize) && css.extended, css[this.size], css[this.variant], this.lowered && css.lowered]}
+                    data-component="fab"
+                    class={[
+                        css.fab,
+                        isExtended.value && isMediumSize.value && css.extended,
+                        css[_size.value],
+                        css[_variant.value],
+                        _lowered.value && css.lowered,
+                    ]}
+                    ref={root}
                 >
                     <Ripple></Ripple>
                     <Elevation></Elevation>
                     <FocusRing shapeInherit={false}></FocusRing>
 
-                    <span class={css['touch-target']}></span>
+                    <span class={css["touch-target"]}></span>
 
                     {renderIcon}
-                    {isMediumSize && renderLabel}
+                    {isExtended.value && isMediumSize.value && renderLabel}
                 </button>
             )
         }
-    })
-
-}
-
-export const Fab = new FabComponent().component
+    },
+})

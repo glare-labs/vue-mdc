@@ -1,0 +1,51 @@
+@use 'sass:map';
+@use '../../focus-ring/styles/focus-ring';
+@use '../../../tokens';
+
+@mixin styles() {
+    $tokens: tokens.md-comp-fab-values();
+
+    &.small {
+        @include focus-ring.theme(
+            (
+                'shape-start-start': var(--_small-container-shape-start-start),
+                'shape-start-end': var(--_small-container-shape-start-end),
+                'shape-end-end': var(--_small-container-shape-end-end),
+                'shape-end-start': var(--_small-container-shape-end-start),
+            )
+        );
+    }
+
+    &.medium {
+        @include focus-ring.theme(
+            (
+                'shape-start-start': var(--_container-shape-start-start),
+                'shape-start-end': var(--_container-shape-start-end),
+                'shape-end-end': var(--_container-shape-end-end),
+                'shape-end-start': var(--_container-shape-end-start),
+            )
+        );
+    }
+
+    &.large {
+        @include focus-ring.theme(
+            (
+                'shape-start-start': var(--_large-container-shape-start-start),
+                'shape-start-end': var(--_large-container-shape-start-end),
+                'shape-end-end': var(--_large-container-shape-end-end),
+                'shape-end-start': var(--_large-container-shape-end-start),
+            )
+        );
+    }
+
+    @media (forced-colors: active) {
+        // Adjust the focus ring padding to account for the 1px border in HCM.
+        & {
+            @include focus-ring.theme(
+                (
+                    'outward-offset': 3px,
+                )
+            );
+        }
+    }
+}
