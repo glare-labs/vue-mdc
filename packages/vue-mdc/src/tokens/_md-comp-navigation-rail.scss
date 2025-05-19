@@ -11,6 +11,7 @@
 @use './md-sys-typescale';
 @use './v0_192/md-comp-navigation-rail';
 
+// prettier-ignore
 $supported-tokens: (
     'active-indicator-color'
     'active-indicator-height'
@@ -52,6 +53,7 @@ $supported-tokens: (
     'pressed-state-layer-opacity'
 );
 
+// prettier-ignore
 $unsupported-tokens: (
     'active-focus-state-layer-color',
     'focus-state-layer-opacity',
@@ -68,16 +70,12 @@ $_default: (
     'md-sys-typescale': md-sys-typescale.values(),
 );
 
-@function values($deps: $_default,
-    $exclude-hardcoded-values: false,
-    $exclude-custom-properties: false) {
+@function values($deps: $_default, $exclude-hardcoded-values: false, $exclude-custom-properties: false) {
     $tokens: md-comp-navigation-rail.values($deps, $exclude-hardcoded-values);
 
     @if not $exclude-custom-properties {
         @each $token, $value in $tokens {
-            $tokens: map.set($tokens,
-                    $token,
-                    var(--md-navigation-rail-#{$token}, #{$value}));
+            $tokens: map.set($tokens, $token, var(--md-navigation-rail-#{$token}, #{$value}));
         }
     }
 
