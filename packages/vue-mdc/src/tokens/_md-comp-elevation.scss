@@ -3,46 +3,33 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// go/keep-sorted start
 @use 'sass:map';
-// go/keep-sorted end
-// go/keep-sorted start
 @use './internal/validate';
 @use './md-sys-color';
 @use './md-sys-elevation';
-// go/keep-sorted end
 
+// prettier-ignore
 $supported-tokens: (
-  // go/keep-sorted start
-  'level',
-  'shadow-color',
-  // go/keep-sorted end
+    'level',
+    'shadow-color'
 );
 
 $_default: (
-  'md-sys-color': md-sys-color.values-light(),
-  'md-sys-elevation': md-sys-elevation.values(),
+    'md-sys-color': md-sys-color.values-light(),
+    'md-sys-elevation': md-sys-elevation.values(),
 );
 
-@function values(
-  $deps: $_default,
-  $exclude-hardcoded-values: false,
-  $exclude-custom-properties: false
-) {
-  $tokens: (
-    'level': map.get($deps, 'md-sys-elevation', 'level0'),
-    'shadow-color': map.get($deps, 'md-sys-color', 'shadow'),
-  );
+@function values($deps: $_default, $exclude-hardcoded-values: false, $exclude-custom-properties: false) {
+    $tokens: (
+        'level': map.get($deps, 'md-sys-elevation', 'level0'),
+        'shadow-color': map.get($deps, 'md-sys-color', 'shadow'),
+    );
 
-  @if not $exclude-custom-properties {
-    @each $token, $value in $tokens {
-      $tokens: map.set(
-        $tokens,
-        $token,
-        var(--md-elevation-#{$token}, #{$value})
-      );
+    @if not $exclude-custom-properties {
+        @each $token, $value in $tokens {
+            $tokens: map.set($tokens, $token, var(--md-elevation-#{$token}, #{$value}));
+        }
     }
-  }
 
-  @return validate.values($tokens, $supported-tokens: $supported-tokens);
+    @return validate.values($tokens, $supported-tokens: $supported-tokens);
 }
