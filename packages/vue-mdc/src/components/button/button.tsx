@@ -1,15 +1,13 @@
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { defineComponent, onBeforeUnmount, onMounted, ref, type PropType, type SlotsType } from 'vue'
-import { type TFormSubmitterType } from '../../internals'
+import { EFormSubmitterType, type TFormSubmitterType } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils'
 import type { TButtonTarget } from '../../utils/button-target-type'
 import { Elevation } from '../elevation/elevation'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
-import { EButtonAppearance, type TButtonAppearance } from './button-appearance'
-import { EButtonShape, type TButtonShape } from './button-shape'
-import { EButtonType } from './button-type'
+import { EButtonAppearance, type TButtonAppearance } from './button.definition'
 import css from './styles/button.module.scss'
 
 export const Button = defineComponent({
@@ -30,11 +28,7 @@ export const Button = defineComponent({
         },
         type: {
             type: String as PropType<TFormSubmitterType>,
-            default: EButtonType.Button,
-        },
-        shape: {
-            type: String as PropType<TButtonShape>,
-            default: EButtonShape.Circular,
+            default: EFormSubmitterType.Button,
         },
         href: {
             type: String as PropType<string>,
@@ -57,7 +51,7 @@ export const Button = defineComponent({
             default: null,
         },
     },
-    setup(props, { slots, emit }) {
+    setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
 
         /**
@@ -66,7 +60,6 @@ export const Button = defineComponent({
         const _appearance = ref(props.appearance)
         const _disabled = ref(props.disabled)
         const _type = ref(props.type)
-        const _shape = ref(props.shape)
         const _href = ref(props.href)
         const _target = ref(props.target)
         const _form = ref(props.form)
@@ -78,7 +71,6 @@ export const Button = defineComponent({
                 { attribute: 'appearance', ref: _appearance, reflect: true, type: 'string' },
                 { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean' },
                 { attribute: 'type', ref: _type, reflect: true, type: 'string' },
-                { attribute: 'shape', ref: _shape, reflect: true, type: 'string' },
                 { attribute: 'href', ref: _href, reflect: true, type: 'string' },
                 { attribute: 'target', ref: _target, reflect: true, type: 'string' },
                 { attribute: 'form', ref: _form, reflect: true, type: 'string' },

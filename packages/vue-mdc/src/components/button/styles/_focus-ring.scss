@@ -1,0 +1,15 @@
+@use 'sass:map';
+@use '../../../components/focus-ring/styles/focus-ring';
+
+@mixin styles() {
+    & {
+        @include focus-ring.theme(
+            (
+                'shape-start-start': var(--_container-shape-start-start),
+                'shape-start-end': var(--_container-shape-start-end),
+                'shape-end-end': var(--_container-shape-end-end),
+                'shape-end-start': var(--_container-shape-end-start),
+            )
+        );
+    }
+}

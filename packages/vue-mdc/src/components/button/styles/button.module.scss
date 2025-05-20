@@ -6,39 +6,86 @@
 @use './outlined-button';
 @use './text-button';
 @use './elevation';
+@use './ripple';
+@use './focus-ring';
 
+@layer mdc-button {
+    @layer shared {
+        .filled,
+        .filled-tonal,
+        .elevated,
+        .outlined,
+        .text {
+            @include shared.styles();
+        }
 
-.filled,
-.filled-tonal,
-.elevated,
-.outlined,
-.text {
-    @include shared.styles();
-    @include icon.styles();
-}
+        @layer icon {
+            .filled,
+            .filled-tonal,
+            .elevated,
+            .outlined,
+            .text {
+                @include icon.styles();
+            }
+        }
 
-.filled,
-.filled-tonal,
-.elevated {
-    @include elevation.styles();
-}
+        @layer elevation {
+            .filled,
+            .filled-tonal,
+            .elevated {
+                @include elevation.styles();
+            }
+        }
 
-.filled {
-    @include filled-button.styles();
-}
+        @layer ripple {
+            .filled,
+            .filled-tonal,
+            .elevated,
+            .outlined,
+            .text {
+                @include ripple.styles();
+            }
+        }
 
-.filled-tonal {
-    @include filled-tonal-button.styles();
-}
+        @layer focus-ring {
+            .filled,
+            .filled-tonal,
+            .elevated,
+            .outlined,
+            .text {
+                @include focus-ring.styles();
+            }
+        }
+    }
 
-.elevated {
-    @include elevated-button.styles();
-}
+    @layer appearance {
+        @layer filled {
+            .filled {
+                @include filled-button.styles();
+            }
+        }
+        @layer filled-tonal {
+            .filled-tonal {
+                @include filled-tonal-button.styles();
+            }
+        }
 
-.outlined {
-    @include outlined-button.styles();
-}
+        @layer elevated {
+            .elevated {
+                @include elevated-button.styles();
+            }
+        }
 
-.text {
-    @include text-button.styles();
+        @layer outlined {
+            .outlined {
+                @include outlined-button.styles();
+            }
+        }
+
+        @layer text {
+            .text {
+                @include text-button.styles();
+            }
+        }
+    }
 }

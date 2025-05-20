@@ -2,7 +2,7 @@
  * @license
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: Apache-2.0
- * 
+ *
  * @link
  * https://github.com/material-components/material-web/blob/main/internal/controller/form-submitter.ts
  */
@@ -10,6 +10,11 @@
 import { isServer } from '../../utils/is-server'
 
 export type TFormSubmitterType = 'button' | 'submit' | 'reset'
+export enum EFormSubmitterType {
+    Button = 'button',
+    Submit = 'submit',
+    Reset = 'reset',
+}
 
 export interface FormSubmitterElement extends HTMLButtonElement {
     /**
