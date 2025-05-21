@@ -1,20 +1,5 @@
-@use 'sass:list';
 @use 'sass:map';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-outlined-button-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-outlined-button-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-outlined-button-values();
@@ -64,11 +49,11 @@
     }
 
     & .outline,
-    & [data-component="ripple"] {
+    & [data-component='ripple'] {
         border-width: var(--_outline-width);
     }
 
-    & [data-component="ripple"] {
+    & [data-component='ripple'] {
         inline-size: calc(100% - 2 * var(--_outline-width));
         block-size: calc(100% - 2 * var(--_outline-width));
         border-style: solid;

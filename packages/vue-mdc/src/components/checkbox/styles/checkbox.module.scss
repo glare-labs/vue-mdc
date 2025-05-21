@@ -1,5 +1,7 @@
 @use './checkbox';
 
-.checkbox {
-    @include checkbox.styles();
+@layer mdc-checkbox {
+    .checkbox {
+        @include checkbox.styles();
+    }
 }

@@ -3,25 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use '../../focus-ring/styles/focus-ring';
-@use '../../ripple/styles//ripple';
+@use '../../../theme';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-icon-button-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-standard-icon-button-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-icon-button-values();
@@ -34,12 +18,14 @@
             --_#{$token}: #{$value};
         }
 
-        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-color: var(--_pressed-state-layer-color),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
-
+            )
+        );
     }
 
     &[touch-target='wrapper'] {
@@ -79,7 +65,6 @@
     }
 
     &.selected {
-
         &:not(.disabled),
         &:not(:disabled) {
             color: var(--_selected-icon-color);
@@ -97,10 +82,13 @@
             }
         }
 
-        @include ripple.theme((hover-color: var(--_selected-hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_selected-hover-state-layer-color),
                 hover-opacity: var(--_selected-hover-state-layer-opacity),
                 pressed-color: var(--_selected-pressed-state-layer-color),
                 pressed-opacity: var(--_selected-pressed-state-layer-opacity),
-            ));
+            )
+        );
     }
 }

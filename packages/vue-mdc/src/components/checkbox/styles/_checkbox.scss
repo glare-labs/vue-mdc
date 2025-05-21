@@ -3,10 +3,9 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
-@use '../../ripple/styles/ripple';
+@use '../../../theme';
 @use '../../../tokens';
 
 // Motion token values.
@@ -20,20 +19,6 @@ $_indeterminate-bottom-left: 4px, -10px;
 // checkmark icon. Y is negative to fix an issue in Safari (see below).
 $_checkmark-bottom-left: 7px, -14px;
 
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-checkbox-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-checkbox-#{$token}: #{$value};
-        }
-    }
-}
-
 @mixin styles() {
     $tokens: tokens.md-comp-checkbox-values();
 
@@ -45,7 +30,8 @@ $_checkmark-bottom-left: 7px, -14px;
         display: inline-flex;
         height: map.get($tokens, 'container-size');
         position: relative;
-        vertical-align: top; // Fix extra space when placed inside display: block
+        // Fix extra space when placed inside display: block
+        vertical-align: top;
         width: map.get($tokens, 'container-size');
         -webkit-tap-highlight-color: transparent;
         cursor: pointer;
@@ -64,7 +50,7 @@ $_checkmark-bottom-left: 7px, -14px;
         margin: max(0px, ((48px - map.get($tokens, 'container-size')) / 2));
     }
 
-    & [data-component="focus-ring"] {
+    & [data-component='focus-ring'] {
         height: 44px;
         inset: unset;
         width: 44px;
@@ -118,9 +104,7 @@ $_checkmark-bottom-left: 7px, -14px;
         transition-duration: 150ms, 50ms; // Exit duration for scale and opacity.
         transition-property: transform, opacity;
         // Exit easing function for scale, linear for opacity.
-        transition-timing-function: map.get($_motion,
-                easing-emphasized-accelerate),
-            linear;
+        transition-timing-function: map.get($_motion, easing-emphasized-accelerate), linear;
         transform: scale(0.6); // Background and icon scale from 60% to 100%.
     }
 
@@ -129,36 +113,38 @@ $_checkmark-bottom-left: 7px, -14px;
         // Enter duration for scale and opacity.
         transition-duration: 350ms, 50ms;
         // Enter easing function for scale, linear for opacity.
-        transition-timing-function: map.get($_motion,
-                easing-emphasized-decelerate),
-            linear;
+        transition-timing-function: map.get($_motion, easing-emphasized-decelerate), linear;
         transform: scale(1);
     }
 
-    // Ripple
+    & {
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: map.get($tokens, 'hover-state-layer-color'),
+                hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
+                pressed-color: map.get($tokens, 'pressed-state-layer-color'),
+                pressed-opacity: map.get($tokens, 'pressed-state-layer-opacity'),
+            )
+        );
+    }
 
-    & [data-component="ripple"] {
+    &.selected {
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
+                hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),
+                pressed-color: map.get($tokens, 'selected-pressed-state-layer-color'),
+                pressed-opacity: map.get($tokens, 'selected-pressed-state-layer-opacity'),
+            )
+        );
+    }
+
+    & [data-component='ripple'] {
         border-radius: map.get($tokens, 'state-layer-shape');
         height: map.get($tokens, 'state-layer-size');
         inset: unset;
         width: map.get($tokens, 'state-layer-size');
-
-        @include ripple.theme((hover-color: map.get($tokens, 'hover-state-layer-color'),
-                hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
-                pressed-color: map.get($tokens, 'pressed-state-layer-color'),
-                pressed-opacity: map.get($tokens, 'pressed-state-layer-opacity'),
-            ));
     }
-
-    &.selected [data-component="ripple"] {
-        @include ripple.theme((hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
-                hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),
-                pressed-color: map.get($tokens, 'selected-pressed-state-layer-color'),
-                pressed-opacity: map.get($tokens, 'selected-pressed-state-layer-opacity'),
-            ));
-    }
-
-    // Icon and icon marks
 
     & .icon {
         // The icon is created with two <rect> marks for animation:
@@ -191,21 +177,17 @@ $_checkmark-bottom-left: 7px, -14px;
     // Exit duration and easing.
     & .mark {
         animation-duration: 150ms;
-        animation-timing-function: map.get($_motion,
-                easing-emphasized-accelerate);
+        animation-timing-function: map.get($_motion, easing-emphasized-accelerate);
         transition-duration: 150ms;
-        transition-timing-function: map.get($_motion,
-                easing-emphasized-accelerate);
+        transition-timing-function: map.get($_motion, easing-emphasized-accelerate);
     }
 
     // Enter duration and easing.
     &.selected .mark {
         animation-duration: 350ms;
-        animation-timing-function: map.get($_motion,
-                easing-emphasized-decelerate);
+        animation-timing-function: map.get($_motion, easing-emphasized-decelerate);
         transition-duration: 350ms;
-        transition-timing-function: map.get($_motion,
-                easing-emphasized-decelerate);
+        transition-timing-function: map.get($_motion, easing-emphasized-decelerate);
     }
 
     // Creates the checkmark icon.

@@ -1,5 +1,7 @@
 @use './navigation-tab';
 
-.navigation-tab {
-    @include navigation-tab.styles();
+@layer mdc-navigation-bar {
+    .navigation-tab {
+        @include navigation-tab.styles();
+    }
 }

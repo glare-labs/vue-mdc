@@ -25,7 +25,8 @@ class TypographyComponent {
                     {this.$slots.default && this.$slots.default()}
                 </span>
             )
-        }
+        },
+        inheritAttrs: true,
     })
 }
 

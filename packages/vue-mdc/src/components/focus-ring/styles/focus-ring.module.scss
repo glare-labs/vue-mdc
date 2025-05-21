@@ -1,5 +1,7 @@
 @use './focus-ring';
 
-.focus-ring {
-    @include focus-ring.styles();
+@layer mdc-focus-ring {
+    .focus-ring {
+        @include focus-ring.styles();
+    }
 }

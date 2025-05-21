@@ -1,3 +1,7 @@
 @use './divider';
 
-@include divider.styles();
+@layer mdc-divider {
+    .divider {
+        @include divider.styles();
+    }
+}

@@ -3,29 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-// go/keep-sorted start
-@use 'sass:list';
 @use 'sass:map';
-// go/keep-sorted end
-// go/keep-sorted start
 @use '../../../tokens';
-// go/keep-sorted end
 
 $_md-sys-motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-focus-ring-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-focus-ring-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-focus-ring-values();
@@ -99,7 +80,6 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             border-start-start-radius: calc($start-start - $inward-offset);
         }
     }
-
 
     @keyframes outward-grow {
         from {

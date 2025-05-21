@@ -1,37 +1,24 @@
 @use 'sass:map';
-@use '../../elevation/styles/elevation.scss';
+@use '../../../theme';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-navigation-rail-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-navigation-rail-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-navigation-rail-values();
 
     @layer navigation-rail-styles {
-
         & {
             @each $token, $value in $tokens {
                 --_#{$token}: #{$value};
             }
 
-            @include elevation.theme(('level': var(--_container-elevation),
+            @include theme.md-comp-elevation-theme(
+                (
+                    'level': var(--_container-elevation),
                     'shadow-color': var(--_container-shadow-color),
-                ));
-
+                )
+            );
         }
 
         & {
@@ -44,27 +31,27 @@ $_motion: tokens.md-sys-motion-values();
             grid-template-rows: auto 1fr auto;
             padding: 12px 0px;
 
-            &.top>.tabs-wrapper {
+            &.top > .tabs-wrapper {
                 height: fit-content;
             }
 
-            &.center>.tabs-wrapper {
+            &.center > .tabs-wrapper {
                 place-content: center;
             }
 
-            &.bottom>.tabs-wrapper {
+            &.bottom > .tabs-wrapper {
                 align-self: end;
             }
 
-            &>.tabs-wrapper {
+            & > .tabs-wrapper {
                 width: inherit;
                 position: relative;
                 display: grid;
             }
         }
 
-        &>.end-wrapper,
-        &>.start-wrapper {
+        & > .end-wrapper,
+        & > .start-wrapper {
             width: inherit;
             min-height: 48px;
             min-width: 48px;
@@ -74,11 +61,11 @@ $_motion: tokens.md-sys-motion-values();
             align-items: center;
         }
 
-        &>.end-wrapper {
+        & > .end-wrapper {
             justify-self: end;
         }
 
-        &>.background {
+        & > .background {
             background-color: map.get($tokens, 'container-color');
             position: absolute;
             inset: 0;

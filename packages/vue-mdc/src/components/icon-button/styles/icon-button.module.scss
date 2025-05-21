@@ -4,25 +4,37 @@
 @use './outlined-icon-button';
 @use './standard-icon-button';
 
-.standard,
-.filled,
-.filled-tonal,
-.outlined {
-    @include shared.styles();
-}
+@layer mdc-icon-button {
+    @layer shared {
+        .standard,
+        .filled,
+        .filled-tonal,
+        .outlined {
+            @include shared.styles();
+        }
+    }
 
-.filled {
-    @include filled-icon-button.styles();
-}
+    @layer filled {
+        .filled {
+            @include filled-icon-button.styles();
+        }
+    }
 
-.filled-tonal {
-    @include filled-tonal-icon-button.styles();
-}
+    @layer filled-tonal {
+        .filled-tonal {
+            @include filled-tonal-icon-button.styles();
+        }
+    }
 
-.outlined {
-    @include outlined-icon-button.styles();
-}
+    @layer outlined {
+        .outlined {
+            @include outlined-icon-button.styles();
+        }
+    }
 
-.standard {
-    @include standard-icon-button.styles();
+    @layer standard {
+        .standard {
+            @include standard-icon-button.styles();
+        }
+    }
 }

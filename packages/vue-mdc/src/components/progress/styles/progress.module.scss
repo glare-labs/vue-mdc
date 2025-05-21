@@ -1,10 +1,16 @@
 @use './circular-progress';
 @use './linear-progress';
 
-.circular-progress {
-    @include circular-progress.styles();
-}
+@layer mdc-progress {
+    @layer circular-progress {
+        .circular-progress {
+            @include circular-progress.styles();
+        }
+    }
 
-.linear-progress {
-    @include linear-progress.styles();
+    @layer linear-progress {
+        .linear-progress {
+            @include linear-progress.styles();
+        }
+    }
 }

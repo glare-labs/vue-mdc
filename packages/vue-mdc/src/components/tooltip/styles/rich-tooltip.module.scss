@@ -1,5 +1,9 @@
 @use './rich-tooltip';
 
-.rich-tooltip {
-    @include rich-tooltip.styles();
+@layer mdc-tooltip {
+    @layer rich-tooltip {
+        .rich-tooltip {
+            @include rich-tooltip.styles();
+        }
+    }
 }

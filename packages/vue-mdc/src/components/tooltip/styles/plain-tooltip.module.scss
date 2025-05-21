@@ -1,5 +1,9 @@
 @use './plain-tooltip';
 
-.plain-tooltip {
-    @include plain-tooltip.styles();
+@layer mdc-tooltip {
+    @layer plain-tooltip {
+        .plain-tooltip {
+            @include plain-tooltip.styles();
+        }
+    }
 }

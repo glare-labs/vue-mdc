@@ -1,20 +1,5 @@
-@use 'sass:list';
 @use 'sass:map';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-navigation-drawer-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-navigation-drawer-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $md-sys-color: tokens.md-sys-color-values-light();
@@ -91,7 +76,7 @@
         padding-block: 12px;
     }
 
-    & .container>.background {
+    & .container > .background {
         box-sizing: border-box;
         position: absolute;
         inset: 0;
@@ -133,7 +118,7 @@
         height: min-content; // Needed for Safari
         position: relative;
 
-        &>.content {
+        & > .content {
             box-sizing: border-box;
             padding-left: 28px;
             padding-right: 28px;
@@ -156,5 +141,4 @@
     & .bottom.anchor {
         bottom: 0;
     }
-
 }

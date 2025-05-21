@@ -1,5 +1,7 @@
 @use './typography';
 
-.typography {
-    @include typography.styles();
+@layer mdc-typography {
+    .typography {
+        @include typography.styles();
+    }
 }

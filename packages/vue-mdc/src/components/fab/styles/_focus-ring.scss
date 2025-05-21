@@ -1,12 +1,12 @@
 @use 'sass:map';
-@use '../../focus-ring/styles/focus-ring';
+@use '../../../theme';
 @use '../../../tokens';
 
 @mixin styles() {
     $tokens: tokens.md-comp-fab-values();
 
     &.small {
-        @include focus-ring.theme(
+        @include theme.md-comp-focus-ring-theme(
             (
                 'shape-start-start': var(--_small-container-shape-start-start),
                 'shape-start-end': var(--_small-container-shape-start-end),
@@ -17,7 +17,7 @@
     }
 
     &.medium {
-        @include focus-ring.theme(
+        @include theme.md-comp-focus-ring-theme(
             (
                 'shape-start-start': var(--_container-shape-start-start),
                 'shape-start-end': var(--_container-shape-start-end),
@@ -28,7 +28,7 @@
     }
 
     &.large {
-        @include focus-ring.theme(
+        @include theme.md-comp-focus-ring-theme(
             (
                 'shape-start-start': var(--_large-container-shape-start-start),
                 'shape-start-end': var(--_large-container-shape-start-end),
@@ -41,7 +41,7 @@
     @media (forced-colors: active) {
         // Adjust the focus ring padding to account for the 1px border in HCM.
         & {
-            @include focus-ring.theme(
+            @include theme.md-comp-focus-ring-theme(
                 (
                     'outward-offset': 3px,
                 )

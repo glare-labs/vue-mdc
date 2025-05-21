@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../icon/styles/icon';
+@use '../../../theme';
 
 $_md-sys-motion: tokens.md-sys-motion-values();
 
@@ -161,21 +161,21 @@ $_md-sys-motion: tokens.md-sys-motion-values();
     /* Icon */
 
     &.small .icon [data-component='icon'] {
-        @include icon.theme(
+        @include theme.md-comp-icon-theme(
             (
                 size: map.get($tokens, small-icon-size),
             )
         );
     }
     &.medium .icon [data-component='icon'] {
-        @include icon.theme(
+        @include theme.md-comp-icon-theme(
             (
                 size: map.get($tokens, icon-size),
             )
         );
     }
     &.large .icon [data-component='icon'] {
-        @include icon.theme(
+        @include theme.md-comp-icon-theme(
             (
                 size: map.get($tokens, large-icon-size),
             )

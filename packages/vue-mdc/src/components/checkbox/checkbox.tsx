@@ -108,8 +108,8 @@ class CheckboxComponent {
 
             return (
                 <div data-component="checkbox" class={[css.checkbox, ...classes]}>
-                    <Ripple></Ripple>
-                    <FocusRing htmlFor={id} shapeInherit={false}></FocusRing>
+                    <Ripple disabled={this.disabled}></Ripple>
+                    <FocusRing for={id} shapeInherit={false}></FocusRing>
 
                     <div aria-hidden="true" class={css.outline}></div>
                     <div aria-hidden="true" class={css.background}></div>

@@ -92,7 +92,7 @@ export const Switch = defineComponent({
         useReflectAttribute(root, {
             attributes: [
                 { attribute: 'disabled', ref: _disabled, reflect: true, type: 'boolean', },
-                { attribute: 'selected', ref: selected, reflect: true, type: 'boolean', },
+                { attribute: 'selected', ref: _selected, reflect: true, type: 'boolean', },
                 { attribute: 'with-icon', ref: _withIcon, reflect: true, type: 'boolean', },
                 { attribute: 'with-icon-selected-only', ref: _withIconSelectedOnly, reflect: true, type: 'boolean', },
                 { attribute: 'value', ref: _value, reflect: false, type: 'string', },

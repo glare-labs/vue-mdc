@@ -1,5 +1,7 @@
 @use './navigation-bar';
 
-.navigation-bar {
-    @include navigation-bar.styles();
+@layer mdc-navigation-bar {
+    .navigation-bar {
+        @include navigation-bar.styles();
+    }
 }

@@ -4,52 +4,62 @@
 //
 
 @use 'sass:map';
-@use '../../elevation/styles/elevation';
+@use '../../../theme';
 @use '../../../tokens';
 
 $motion: tokens.md-sys-motion-values();
 
 @mixin styles() {
-    & [data-component="elevation"] {
+    & [data-component='elevation'] {
         // TODO: replace duration with animation tokens
         transition-duration: 280ms;
         transition-timing-function: map.get($motion, 'emphasized-easing');
     }
 
-    &[disabled] [data-component="elevation"] {
+    &[disabled] [data-component='elevation'] {
         transition: none;
     }
 
-    & [data-component="elevation"] {
-        @include elevation.theme((
-            'level': var(--_container-elevation),
-            'shadow-color': var(--_container-shadow-color),
-        ));
+    & [data-component='elevation'] {
+        @include theme.md-comp-elevation-theme(
+            (
+                'level': var(--_container-elevation),
+                'shadow-color': var(--_container-shadow-color),
+            )
+        );
     }
 
     // apply elevation in order of focused, hovered, pressed, disabled
     // this ensures a button will have hover elevation after being focused
-    &:focus-within [data-component="elevation"] {
-        @include elevation.theme((
-            'level': var(--_focus-container-elevation),
-        ));
+    &:focus-within [data-component='elevation'] {
+        @include theme.md-comp-elevation-theme(
+            (
+                'level': var(--_focus-container-elevation),
+            )
+        );
     }
 
-    &:hover [data-component="elevation"] {
-        @include elevation.theme((
-            'level': var(--_hover-container-elevation),
-        ));
+    &:hover [data-component='elevation'] {
+        @include theme.md-comp-elevation-theme(
+            (
+                'level': var(--_hover-container-elevation),
+            )
+        );
     }
 
-    &:active [data-component="elevation"] {
-        @include elevation.theme((
-            'level': var(--_pressed-container-elevation),
-        ));
+    &:active [data-component='elevation'] {
+        @include theme.md-comp-elevation-theme(
+            (
+                'level': var(--_pressed-container-elevation),
+            )
+        );
     }
 
-    &[disabled] [data-component="elevation"] {
-        @include elevation.theme((
-            'level': var(--_disabled-container-elevation),
-        ));
+    &[disabled] [data-component='elevation'] {
+        @include theme.md-comp-elevation-theme(
+            (
+                'level': var(--_disabled-container-elevation),
+            )
+        );
     }
 }

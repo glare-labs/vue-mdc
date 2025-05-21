@@ -1,20 +1,5 @@
 @use 'sass:map';
-@use 'sass:list';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-elevation-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-elevation-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-elevation-values();
@@ -24,7 +9,7 @@
             --_#{$token}: #{$value};
         }
 
-        --_level: var(--md-elevation-level, var(--_current-level, 0))
+        --_level: var(--md-elevation-level, var(--_current-level, 0));
     }
 
     & {
@@ -37,7 +22,7 @@
         pointer-events: none;
 
         &::before {
-            content: "";
+            content: '';
             inset: 0;
             border-radius: inherit;
             position: absolute;
@@ -60,7 +45,7 @@
         }
 
         &::after {
-            content: "";
+            content: '';
             border-radius: inherit;
             inset: 0;
             position: absolute;
@@ -109,5 +94,4 @@
             --_current-level: 5;
         }
     }
-
 }

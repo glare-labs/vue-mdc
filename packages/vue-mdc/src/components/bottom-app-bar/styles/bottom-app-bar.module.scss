@@ -1,5 +1,7 @@
-@use "bottom-app-bar.scss";
+@use './bottom-app-bar';
 
-.bottom-app-bar {
-    @include bottom-app-bar.styles();
+@layer mdc-bottom-app-bar {
+    .bottom-app-bar {
+        @include bottom-app-bar.styles();
+    }
 }

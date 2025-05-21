@@ -1,5 +1,7 @@
 @use './radio';
 
-.radio {
-    @include radio.styles();
+@layer mdc-radio {
+    .radio {
+        @include radio.styles();
+    }
 }

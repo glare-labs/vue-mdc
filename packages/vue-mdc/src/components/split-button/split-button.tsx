@@ -94,13 +94,7 @@ export const SplitButton = defineComponent({
                 </button>
             )
 
-
-
-            return (
-                <>
-                    {isLink ? <RenderLink></RenderLink> : <RenderButton></RenderButton>}
-                </>
-            )
+            return isLink.value ? <RenderLink></RenderLink> : <RenderButton></RenderButton>
         }
     },
 })

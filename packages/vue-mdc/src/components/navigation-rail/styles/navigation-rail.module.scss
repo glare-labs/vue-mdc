@@ -1,5 +1,7 @@
 @use './navigation-rail';
 
-.navigation-rail {
-    @include navigation-rail.styles();
+@layer mdc-navigation-rail {
+    .navigation-rail {
+        @include navigation-rail.styles();
+    }
 }

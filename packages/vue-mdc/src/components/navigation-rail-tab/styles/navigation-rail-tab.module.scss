@@ -1,5 +1,7 @@
 @use './navigation-rail-tab';
 
-.navigation-rail-tab {
-    @include navigation-rail-tab.styles();
+@layer mdc-navigation-rail {
+    .navigation-rail-tab {
+        @include navigation-rail-tab.styles();
+    }
 }

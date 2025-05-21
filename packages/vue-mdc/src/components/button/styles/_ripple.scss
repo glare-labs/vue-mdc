@@ -1,9 +1,9 @@
 @use 'sass:map';
-@use '../../../components/ripple/styles/ripple.scss';
+@use '../../../theme';
 
 @mixin styles() {
     & {
-        @include ripple.theme(
+        @include theme.md-comp-ripple-theme(
             (
                 hover-color: var(--_hover-state-layer-color),
                 pressed-color: var(--_pressed-state-layer-color),

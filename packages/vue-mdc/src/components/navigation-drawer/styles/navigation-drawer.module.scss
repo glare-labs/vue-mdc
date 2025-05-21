@@ -3,15 +3,23 @@
 @use './shared';
 @use './headline';
 
-.navigation-drawer-component-styles {
-    @include shared.styles();
-    @include navigation-drawer.styles();
-}
+@layer mdc-navigation-drawer {
+    @layer shared {
+        .navigation-drawer-component-styles {
+            @include shared.styles();
+            @include navigation-drawer.styles();
+        }
+    }
 
-.navigation-drawer-indicator-component-styles {
-    @include indicator.styles();
-}
+    @layer indicator {
+        .navigation-drawer-indicator-component-styles {
+            @include indicator.styles();
+        }
+    }
 
-.navigation-drawer-headline-component-styles {
-    @include headline.styles();
+    @layer headline {
+        .navigation-drawer-headline-component-styles {
+            @include headline.styles();
+        }
+    }
 }

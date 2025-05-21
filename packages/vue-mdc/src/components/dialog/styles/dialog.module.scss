@@ -1,7 +1,7 @@
 @use './dialog';
 
-.dialog-container {
-    @include dialog.styles;
+@layer mdc-dialog {
+    .dialog-container {
+        @include dialog.styles;
+    }
 }
-
-.scrim {}

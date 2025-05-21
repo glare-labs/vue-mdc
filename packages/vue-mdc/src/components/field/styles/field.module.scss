@@ -2,15 +2,23 @@
 @use './outlined-field';
 @use './shared';
 
-.filled-field,
-.outlined-field {
-    @include shared.styles();
-}
+@layer mdc-field {
+    @layer shared {
+        .filled-field,
+        .outlined-field {
+            @include shared.styles();
+        }
+    }
 
-.filled-field {
-    @include filled-field.styles();
-}
+    @layer filled {
+        .filled-field {
+            @include filled-field.styles();
+        }
+    }
 
-.outlined-field {
-    @include outlined-field.styles();
+    @layer outlined {
+        .outlined-field {
+            @include outlined-field.styles();
+        }
+    }
 }

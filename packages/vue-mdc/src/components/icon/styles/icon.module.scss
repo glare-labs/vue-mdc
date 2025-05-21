@@ -1,5 +1,7 @@
 @use './icon';
 
-.icon {
-    @include icon.styles();
+@layer mdc-icon {
+    .icon {
+        @include icon.styles();
+    }
 }

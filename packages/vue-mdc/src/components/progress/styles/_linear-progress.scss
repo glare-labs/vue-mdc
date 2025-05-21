@@ -3,22 +3,7 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-linear-progress-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-linear-progress-#{$token}: #{$value};
-        }
-    }
-}
 
 // note, transition settings match MDC
 // see https://github.com/material-components/material-components-web/blob/main/packages/mdc-linear-progress/_linear-progress.scss#L79
@@ -130,14 +115,13 @@ $_indeterminate-duration: 2s;
         animation-name: primary-indeterminate-translate;
     }
 
-    &.indeterminate .primary-bar>.bar-inner {
+    &.indeterminate .primary-bar > .bar-inner {
         animation: linear infinite $_indeterminate-duration primary-indeterminate-scale;
     }
 
-    &.indeterminate.four-color .primary-bar>.bar-inner {
+    &.indeterminate.four-color .primary-bar > .bar-inner {
         animation-name: primary-indeterminate-scale, four-color;
-        animation-duration: $_indeterminate-duration,
-            calc($_indeterminate-duration * 2);
+        animation-duration: $_indeterminate-duration, calc($_indeterminate-duration * 2);
     }
 
     &.indeterminate .secondary-bar {
@@ -145,14 +129,13 @@ $_indeterminate-duration: 2s;
         animation-name: secondary-indeterminate-translate;
     }
 
-    &.indeterminate .secondary-bar>.bar-inner {
+    &.indeterminate .secondary-bar > .bar-inner {
         animation: linear infinite $_indeterminate-duration secondary-indeterminate-scale;
     }
 
-    &.indeterminate.four-color .secondary-bar>.bar-inner {
+    &.indeterminate.four-color .secondary-bar > .bar-inner {
         animation-name: secondary-indeterminate-scale, four-color;
-        animation-duration: $_indeterminate-duration,
-            calc($_indeterminate-duration * 2);
+        animation-duration: $_indeterminate-duration, calc($_indeterminate-duration * 2);
     }
 
     &:dir(rtl) {
@@ -181,26 +164,17 @@ $_indeterminate-duration: 2s;
 
     @keyframes secondary-indeterminate-scale {
         0% {
-            animation-timing-function: cubic-bezier(0.205028,
-                    0.057051,
-                    0.57661,
-                    0.453971);
+            animation-timing-function: cubic-bezier(0.205028, 0.057051, 0.57661, 0.453971);
             transform: scaleX(0.08);
         }
 
         19.15% {
-            animation-timing-function: cubic-bezier(0.152313,
-                    0.196432,
-                    0.648374,
-                    1.00432);
+            animation-timing-function: cubic-bezier(0.152313, 0.196432, 0.648374, 1.00432);
             transform: scaleX(0.457104);
         }
 
         44.15% {
-            animation-timing-function: cubic-bezier(0.257759,
-                    -0.003163,
-                    0.211762,
-                    1.38179);
+            animation-timing-function: cubic-bezier(0.257759, -0.003163, 0.211762, 1.38179);
             transform: scaleX(0.72796);
         }
 
@@ -232,10 +206,7 @@ $_indeterminate-duration: 2s;
         }
 
         59.15% {
-            animation-timing-function: cubic-bezier(0.302435,
-                    0.381352,
-                    0.55,
-                    0.956352);
+            animation-timing-function: cubic-bezier(0.302435, 0.381352, 0.55, 0.956352);
             transform: translateX(83.6714%);
         }
 

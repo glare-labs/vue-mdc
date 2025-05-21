@@ -4,38 +4,26 @@
 //
 
 @use 'sass:map';
-@use '../../elevation/styles/elevation.scss';
+@use '../../../theme';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-navigation-bar-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-navigation-bar-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-navigation-bar-values();
 
     @layer navigation-bar-styles {
-
         & {
             @each $token, $value in $tokens {
                 --_#{$token}: var(--gu-navigation-bar-#{$token}, #{$value});
             }
 
-            @include elevation.theme(('level': var(--_container-elevation),
+            @include theme.md-comp-elevation-theme(
+                (
+                    'level': var(--_container-elevation),
                     'shadow-color': var(--_container-shadow-color),
-                ));
+                )
+            );
 
             width: 100%;
         }
@@ -49,13 +37,13 @@ $_motion: tokens.md-sys-motion-values();
             height: var(--_container-height);
         }
 
-        & [data-component="elevation"] {
+        & [data-component='elevation'] {
             transition-duration: 280ms;
             transition-timing-function: map.get($_motion, 'emphasized-easing');
             z-index: 0;
         }
 
-        &.ripple-unbounded [data-component="ripple"] {
+        &.ripple-unbounded [data-component='ripple'] {
             --_size: calc(var(--_container-height) + var(--_active-indicator-height));
             inset: unset !important;
             height: var(--_size);
@@ -63,5 +51,4 @@ $_motion: tokens.md-sys-motion-values();
             border-radius: 50% !important;
         }
     }
-
 }

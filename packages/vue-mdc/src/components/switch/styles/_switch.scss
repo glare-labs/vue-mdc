@@ -3,28 +3,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use '../../focus-ring/styles/focus-ring';
-@use '../../ripple/styles/ripple';
+@use '../../../theme';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
 $_easing-standard: map.get($_motion, 'easing-standard');
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-switch-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-switch-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-switch-values();
@@ -59,12 +43,15 @@ $_easing-standard: map.get($_motion, 'easing-standard');
             margin: max(0px, (48px - map.get($tokens, 'track-height')) / 2) 0px;
         }
 
-        & [data-component="focus-ring"] {
-            @include focus-ring.theme(('shape-start-start': map.get($tokens, 'track-shape-start-start'),
+        & [data-component='focus-ring'] {
+            @include theme.md-comp-focus-ring-theme(
+                (
+                    'shape-start-start': map.get($tokens, 'track-shape-start-start'),
                     'shape-start-end': map.get($tokens, 'track-shape-start-end'),
                     'shape-end-end': map.get($tokens, 'track-shape-end-end'),
                     'shape-end-start': map.get($tokens, 'track-shape-end-start'),
-                ));
+                )
+            );
         }
 
         // Input is also touch target
@@ -109,8 +96,7 @@ $_easing-standard: map.get($_motion, 'easing-standard');
             justify-content: center;
             fill: currentColor;
 
-            transition: fill 67ms linear, opacity 33ms linear,
-                transform 167ms $_easing-standard;
+            transition: fill 67ms linear, opacity 33ms linear, transform 167ms $_easing-standard;
             opacity: 0;
         }
 
@@ -196,7 +182,6 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
     }
 }
-
 
 @mixin _handle-styles($tokens) {
     @layer switch-handle-styles {
@@ -314,27 +299,33 @@ $_easing-standard: map.get($_motion, 'easing-standard');
             opacity: map.get($tokens, 'disabled-handle-opacity');
         }
 
-        & [data-component="ripple"] {
+        & [data-component='ripple'] {
             border-radius: map.get($tokens, 'state-layer-shape') !important;
             height: map.get($tokens, 'state-layer-size');
             inset: unset !important;
             width: map.get($tokens, 'state-layer-size');
         }
 
-        &.selected [data-component="ripple"] {
-            @include ripple.theme(('hover-color': map.get($tokens, 'selected-hover-state-layer-color'),
+        &.selected [data-component='ripple'] {
+            @include theme.md-comp-ripple-theme(
+                (
+                    'hover-color': map.get($tokens, 'selected-hover-state-layer-color'),
                     'pressed-color': map.get($tokens, 'selected-pressed-state-layer-color'),
                     'hover-opacity': map.get($tokens, 'selected-hover-state-layer-opacity'),
                     'pressed-opacity': map.get($tokens, 'selected-pressed-state-layer-opacity'),
-                ));
+                )
+            );
         }
 
-        &.unselected [data-component="ripple"] {
-            @include ripple.theme(('hover-color': map.get($tokens, 'hover-state-layer-color'),
+        &.unselected [data-component='ripple'] {
+            @include theme.md-comp-ripple-theme(
+                (
+                    'hover-color': map.get($tokens, 'hover-state-layer-color'),
                     'pressed-color': map.get($tokens, 'pressed-state-layer-color'),
                     'hover-opacity': map.get($tokens, 'hover-state-layer-opacity'),
                     'pressed-opacity': map.get($tokens, 'pressed-state-layer-opacity'),
-                ));
+                )
+            );
         }
     }
 

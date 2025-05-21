@@ -3,23 +3,8 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-icon-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-icon-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-icon-values();
@@ -75,5 +60,4 @@
             width: 100%;
         }
     }
-
 }

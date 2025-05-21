@@ -1,5 +1,7 @@
 @use './switch';
 
-.switch {
-    @include switch.styles();
+@layer mdc-switch {
+    .switch {
+        @include switch.styles();
+    }
 }

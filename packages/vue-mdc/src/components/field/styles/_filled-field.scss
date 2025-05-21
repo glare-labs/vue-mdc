@@ -3,35 +3,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
 @use '../../../tokens';
 
 $_md-sys-motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: list.join(tokens.$md-comp-filled-field-supported-tokens,
-            ('container-shape-start-start',
-                'container-shape-start-end',
-                'container-shape-end-end',
-                'container-shape-end-start'
-            ));
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $token =='container-shape' and meta.type-of($value)=='list' {
-            @error 'Filled field `container-shape` may not be specified as a list. Use logical (`*-start-start`) tokens instead.';
-        }
-
-        @if $value {
-            --md-filled-field-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-filled-field-values();
@@ -61,7 +37,6 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         & .state-layer {
             visibility: hidden;
         }
-
 
         & .label.floating {
             position: absolute;
@@ -109,20 +84,20 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             opacity: 1;
         }
 
-        &:not(.with-start) .content>* {
+        &:not(.with-start) .content > * {
             padding-inline-start: var(--_leading-space);
         }
 
-        &:not(.with-end) .content>* {
+        &:not(.with-end) .content > * {
             padding-inline-end: var(--_trailing-space);
         }
 
-        &:not(.no-label) .content>:not(textarea) {
+        &:not(.no-label) .content > :not(textarea) {
             padding-bottom: var(--_with-label-bottom-space);
             padding-top: calc(var(--_with-label-top-space) + var(--_label-text-populated-line-height));
         }
 
-        &:not(.no-label) .content>textarea {
+        &:not(.no-label) .content > textarea {
             // Use margin for textareas since they will scroll over the label if not.
             margin-bottom: var(--_with-label-bottom-space);
             margin-top: calc(var(--_with-label-top-space) + var(--_label-text-populated-line-height));
@@ -181,7 +156,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             clip-path: inset(var(--_focus-active-indicator-height) 0 0 0);
         }
 
-        &.resizable .container>* {
+        &.resizable .container > * {
             top: var(--_focus-active-indicator-height);
         }
     }

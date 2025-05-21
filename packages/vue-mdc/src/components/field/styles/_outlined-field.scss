@@ -3,30 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
 @use '../../../tokens';
 
 $_md-sys-motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: list.join(tokens.$md-comp-outlined-field-supported-tokens,
-            ('container-shape-start-start',
-                'container-shape-start-end',
-                'container-shape-end-end',
-                'container-shape-end-start'
-            ));
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-outlined-field-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-outlined-field-values();
@@ -51,15 +31,12 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             position: absolute;
             width: 100%;
             z-index: 1;
-
-
         }
 
         & .outline-start,
         & .outline-panel-inactive,
         & .outline-panel-active,
         & .outline-end {
-
             // ::before is inactive border, ::after is active border. Borders are
             // absolutely positioned within their elements.
             &::before,
@@ -91,7 +68,6 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         }
 
         & .outline-start {
-
             &::before,
             &::after {
                 border-inline-start-style: solid;
@@ -159,12 +135,10 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             }
         }
 
-
         &.focused .outline-start::after,
         &.focused .outline-end::after {
             opacity: 1;
         }
-
 
         &.no-label .outline-notch {
             display: none;
@@ -174,7 +148,6 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         &.populated .outline-panel-active,
         &.focused .outline-panel-inactive,
         &.focused .outline-panel-active {
-
             &::before,
             &::after {
                 transform: scaleX(0);
@@ -201,16 +174,13 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         // This is needed to prevent the outline border from clipping with the label
         // and is mirrored in the container padding to align the content and resting
         // label with the adjusted floating label.
-        $shape-start: max(var(--_container-shape-start-start),
-                var(--_container-shape-end-start));
-        $shape-end: max(var(--_container-shape-start-end),
-                var(--_container-shape-end-end));
-        $start-space: max(var(--_leading-space),
-                $shape-start + var(--_outline-label-padding));
+        $shape-start: max(var(--_container-shape-start-start), var(--_container-shape-end-start));
+        $shape-end: max(var(--_container-shape-start-end), var(--_container-shape-end-end));
+        $start-space: max(var(--_leading-space), $shape-start + var(--_outline-label-padding));
         $end-space: max(var(--_trailing-space), $shape-end);
 
         & .outline-start,
-        &:not(.with-start) .content>* {
+        &:not(.with-start) .content > * {
             padding-inline-start: $start-space;
         }
 
@@ -218,7 +188,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             margin-inline-start: $start-space;
         }
 
-        &:not(.with-end) .content>* {
+        &:not(.with-end) .content > * {
             padding-inline-end: $end-space;
         }
 
@@ -235,10 +205,10 @@ $_md-sys-motion: tokens.md-sys-motion-values();
         }
 
         // States
-
         &:hover .outline {
             border-color: var(--_hover-outline-color);
-            color: var(--_hover-outline-color); // Needed for Firefox HCM
+            // Needed for Firefox HCM
+            color: var(--_hover-outline-color);
         }
 
         &:hover .outline-start::before,
@@ -251,7 +221,8 @@ $_md-sys-motion: tokens.md-sys-motion-values();
 
         &.focused .outline {
             border-color: var(--_focus-outline-color);
-            color: var(--_focus-outline-color); // Needed for Firefox HCM
+            // Needed for Firefox HCM
+            color: var(--_focus-outline-color);
         }
 
         & .outline-start::after,
@@ -264,7 +235,8 @@ $_md-sys-motion: tokens.md-sys-motion-values();
 
         &.disabled .outline {
             border-color: var(--_disabled-outline-color);
-            color: var(--_disabled-outline-color); // Needed for Firefox HCM
+            // Needed for Firefox HCM
+            color: var(--_disabled-outline-color);
         }
 
         &.disabled .outline-start,
@@ -283,7 +255,8 @@ $_md-sys-motion: tokens.md-sys-motion-values();
 
         &.error .outline {
             border-color: var(--_error-outline-color);
-            color: var(--_error-outline-color); // Needed for Firefox HCM
+            // Needed for Firefox HCM
+            color: var(--_error-outline-color);
         }
 
         &.error:hover .outline {
@@ -307,7 +280,7 @@ $_md-sys-motion: tokens.md-sys-motion-values();
             clip-path: inset(var(--_focus-outline-width) 0 0 var(--_focus-outline-width));
         }
 
-        &.resizable .container>* {
+        &.resizable .container > * {
             top: var(--_focus-outline-width);
             inset-inline-start: var(--_focus-outline-width);
         }

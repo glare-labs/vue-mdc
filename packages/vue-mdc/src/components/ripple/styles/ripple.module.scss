@@ -1,5 +1,7 @@
 @use './ripple';
 
-.ripple {
-    @include ripple.styles();
+@layer mdc-ripple {
+    .ripple {
+        @include ripple.styles();
+    }
 }

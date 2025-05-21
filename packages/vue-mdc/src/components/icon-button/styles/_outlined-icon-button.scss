@@ -3,25 +3,10 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use '../../ripple/styles/ripple';
+@use '../../../theme';
 @use '../../../tokens';
 @use './shared';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-outlined-icon-button-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-outlined-icon-button-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-outlined-icon-button-values();
@@ -34,16 +19,18 @@
             --_#{$token}: #{$value};
         }
 
-        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-color: var(--_pressed-state-layer-color),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+            )
+        );
     }
 
     & {
         color: var(--_icon-color);
-
 
         &:hover {
             color: var(--_hover-icon-color);
@@ -127,11 +114,14 @@
             }
         }
 
-        @include ripple.theme((hover-color: var(--_selected-hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_selected-hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-color: var(--_selected-pressed-state-layer-color),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+            )
+        );
     }
 
     &.selected:not(:disabled) .background,
@@ -146,7 +136,6 @@
     }
 
     @media (forced-colors: active) {
-
         .disabled,
         &[disabled] {
             --_disabled-outline-opacity: 1;

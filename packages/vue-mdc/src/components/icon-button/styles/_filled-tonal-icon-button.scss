@@ -3,26 +3,11 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use '../../ripple/styles/ripple';
+@use '../../../theme';
 @use '../../../tokens';
 
 $_custom-property-prefix: 'filled-tonal-icon-button';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-filled-tonal-icon-button-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-filled-tonal-icon-button-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-filled-tonal-icon-button-values();
@@ -35,11 +20,14 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             --_#{$token}: #{$value};
         }
 
-        @include ripple.theme((hover-color: var(--_hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-color: var(--_pressed-state-layer-color),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
-            ));
+            )
+        );
     }
 
     & {
@@ -60,8 +48,6 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
         &:is(:disabled, .disabled, [disabled]) {
             color: var(--_disabled-icon-color);
         }
-
-
     }
 
     & .background {
@@ -99,9 +85,12 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             }
         }
 
-        @include ripple.theme((hover-color: var(--_toggle-hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_toggle-hover-state-layer-color),
                 pressed-color: var(--_toggle-pressed-state-layer-color),
-            ));
+            )
+        );
     }
 
     &.toggle-icon-button:not(.disabled) .background,
@@ -128,9 +117,12 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             }
         }
 
-        @include ripple.theme((hover-color: var(--_toggle-selected-hover-state-layer-color),
+        @include theme.md-comp-ripple-theme(
+            (
+                hover-color: var(--_toggle-selected-hover-state-layer-color),
                 pressed-color: var(--_toggle-selected-pressed-state-layer-color),
-            ));
+            )
+        );
     }
 
     &.selected:not(:is(:disabled, .disabled, [disabled])) .background {

@@ -1,23 +1,8 @@
 @use 'sass:map';
 @use '../../../tokens';
 
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-sys-typescale-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-typography-#{$token}: #{$value};
-        }
-    }
-}
-
 @mixin styles() {
     $tokens: tokens.md-sys-typescale-values();
-
 
     & {
         @each $token, $value in $tokens {

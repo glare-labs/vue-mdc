@@ -1,0 +1,18 @@
+@use 'sass:list';
+@use '../../../tokens';
+
+$_motion: tokens.md-sys-motion-values();
+
+@mixin theme($tokens) {
+    $supported-tokens: tokens.$md-comp-navigation-bar-supported-tokens;
+
+    @each $token, $value in $tokens {
+        @if list.index($supported-tokens, $token) ==null {
+            @error 'Token `#{$token}` is not a supported token.';
+        }
+
+        @if $value {
+            --md-navigation-bar-#{$token}: #{$value};
+        }
+    }
+}

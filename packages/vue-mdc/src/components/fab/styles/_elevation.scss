@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../elevation/styles/elevation';
+@use '../../../theme';
 
 @mixin styles() {
     & {
@@ -27,14 +27,14 @@
 }
 
 @mixin _elevation($states, $shadow-color: null) {
-    @include elevation.theme(
+    @include theme.md-comp-elevation-theme(
         (
             'level': map.get($states, 'default'),
         )
     );
 
     @if $shadow-color {
-        @include elevation.theme(
+        @include theme.md-comp-elevation-theme(
             (
                 'shadow-color': $shadow-color,
             )
@@ -44,7 +44,7 @@
     // apply elevation in order of focused, hovered, pressed, disabled
     // this ensures a button will have hover elevation after being focused
     &:focus {
-        @include elevation.theme(
+        @include theme.md-comp-elevation-theme(
             (
                 'level': map.get($states, 'focus'),
             )
@@ -52,7 +52,7 @@
     }
 
     &:hover {
-        @include elevation.theme(
+        @include theme.md-comp-elevation-theme(
             (
                 'level': map.get($states, 'hover'),
             )
@@ -60,7 +60,7 @@
     }
 
     &:active {
-        @include elevation.theme(
+        @include theme.md-comp-elevation-theme(
             (
                 'level': map.get($states, 'pressed'),
             )

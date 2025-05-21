@@ -3,28 +3,12 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use '../../focus-ring/styles/focus-ring';
 @use '../../../tokens/internal/animation';
-@use '../../ripple/styles/ripple';
+@use '../../../theme';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-radio-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-radio-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-radio-values();
@@ -45,11 +29,16 @@ $_motion: tokens.md-sys-motion-values();
             position: relative;
             border: none;
 
-            @include ripple.theme((hover-color: map.get($tokens, 'hover-state-layer-color'),
+            @include theme.md-comp-ripple-theme(
+                (
+                    hover-color: map.get($tokens, 'hover-state-layer-color'),
                     hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
                     pressed-color: map.get($tokens, 'pressed-state-layer-color'),
                     pressed-opacity: map.get($tokens, 'pressed-state-layer-opacity'),
-                ));
+                )
+            );
+
+            @include theme.md-comp-focus-ring-theme(());
         }
 
         &.disabled,
@@ -57,18 +46,21 @@ $_motion: tokens.md-sys-motion-values();
             cursor: default;
         }
 
-        & [data-component="focus-ring"] {
+        & [data-component='focus-ring'] {
             height: 44px;
             inset: unset !important;
             width: 44px;
         }
 
         &.checked {
-            @include ripple.theme((hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
+            @include theme.md-comp-ripple-theme(
+                (
+                    hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
                     hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),
                     pressed-color: map.get($tokens, 'selected-pressed-state-layer-color'),
                     pressed-opacity: map.get($tokens, 'selected-pressed-state-layer-opacity'),
-                ));
+                )
+            );
         }
 
         .touch-target {
@@ -85,7 +77,7 @@ $_motion: tokens.md-sys-motion-values();
             display: none;
         }
 
-        & [data-component="ripple"] {
+        & [data-component='ripple'] {
             border-radius: 50% !important;
             inset: unset !important;
             height: map.get($tokens, 'state-layer-size');

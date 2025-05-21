@@ -1,26 +1,10 @@
-@use 'sass:list';
 @use 'sass:map';
 @use '../../../tokens';
-
-@mixin theme($tokens) {
-    $supported-tokens: tokens.$md-comp-plain-tooltip-supported-tokens;
-
-    @each $token, $value in $tokens {
-        @if list.index($supported-tokens, $token)==null {
-            @error 'Token `#{$token}` is not a supported token.';
-        }
-
-        @if $value {
-            --md-plain-tooltip-#{$token}: #{$value};
-        }
-    }
-}
 
 @mixin styles() {
     $tokens: tokens.md-comp-plain-tooltip-values();
 
     @layer mdc-tooltip-component {
-
         & {
             // Only use the logical properties.
             $tokens: map.remove($tokens, 'container-shape');
@@ -50,7 +34,7 @@
                 display: block;
             }
         }
-        
+
         & .supporting-text {
             vertical-align: middle;
             display: inline-block;
@@ -61,7 +45,5 @@
             font-weight: var(--_supporting-text-weight);
             letter-spacing: var(--_supporting-text-tracking);
         }
-
     }
-
 }
