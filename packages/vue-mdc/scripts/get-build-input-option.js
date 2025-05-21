@@ -5,8 +5,17 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename).replace('scripts', '')
 
-function resolvePaths(rootDir, ignore = [] as Array<string>): Array<string> {
-    const results: Array<string> = []
+/**
+ *
+ * @param {string} rootDir
+ * @param {Array<string>} ignore
+ * @returns {Array<string>}
+ */
+function resolvePaths(rootDir, ignore = []) {
+    /**
+     * @type {Array<string>}
+     */
+    const results = []
 
     function walk(dir) {
         const files = fs.readdirSync(dir)
@@ -35,12 +44,20 @@ export const getInputEntries = () => {
     const ignorePaths = [
         'node_modules',
         'dist',
+        'build',
+        '.rollup.cache',
+        'docs',
+        'scripts',
+        'theme',
         'tokens',
         `components${path.sep}labs`
     ]
     const allPaths = resolvePaths(rootDir, ignorePaths)
 
-    const entries = {} as Record<string, string>
+    /**
+     * @type {Record<string, string>}
+     */
+    const entries = {}
     for (const filePath of allPaths) {
         const filePathArray = filePath.split(path.sep)
         if (filePathArray.length === 0) {
@@ -59,3 +76,4 @@ export const getInputEntries = () => {
     }
     return entries
 }
+console.log(getInputEntries());
