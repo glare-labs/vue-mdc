@@ -1,5 +1,10 @@
 {
   "recommendations": [
-    "Vue.volar"
+    "Vue.volar",
+    "bierner.markdown-checkbox",
+    "bierner.markdown-emoji",
+    "bierner.markdown-footnotes",
+    "bierner.markdown-mermaid",
+    "esbenp.prettier-vscode",
   ]
 }

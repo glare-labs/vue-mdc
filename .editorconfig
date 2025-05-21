@@ -2,6 +2,7 @@
 root = true
 
 [*]
+end_of_line = lf
 charset = utf-8
 indent_style = space
 indent_size = 4
@@ -14,3 +15,7 @@ quote_type = single
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[*.scss]
+max_line_length = 240
+quote_type = single
