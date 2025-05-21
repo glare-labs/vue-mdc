@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
@@ -13,7 +13,7 @@ $_motion: tokens.md-sys-motion-values();
                 --_#{$token}: #{$value};
             }
 
-            @include theme.md-comp-elevation-theme(
+            @include themes.md-comp-elevation-theme(
                 (
                     'level': var(--_container-elevation),
                     'shadow-color': var(--_container-shadow-color),

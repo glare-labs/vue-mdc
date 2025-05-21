@@ -5,7 +5,7 @@
 
 @use 'sass:map';
 @use 'sass:math';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 // Motion token values.
@@ -118,7 +118,7 @@ $_checkmark-bottom-left: 7px, -14px;
     }
 
     & {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: map.get($tokens, 'hover-state-layer-color'),
                 hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
@@ -129,7 +129,7 @@ $_checkmark-bottom-left: 7px, -14px;
     }
 
     &.selected {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
                 hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),

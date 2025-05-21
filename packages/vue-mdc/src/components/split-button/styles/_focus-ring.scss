@@ -1,8 +1,8 @@
-@use '../../../theme';
+@use '../../../themes';
 
 @mixin styles() {
     & {
-        @include theme.md-comp-focus-ring-theme(
+        @include themes.md-comp-focus-ring-theme(
             (
                 'shape-start-start': var(--_container-shape-start-start),
                 'shape-start-end': var(--_container-shape-start-end),

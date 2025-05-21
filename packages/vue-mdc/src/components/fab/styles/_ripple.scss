@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../../theme';
+@use '../../../themes';
 
 @mixin styles() {
     $tokens: tokens.md-comp-fab-values();
@@ -9,7 +9,7 @@
     &.primary,
     &.secondary,
     &.tertiary {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-opacity: var(--_hover-state-layer-opacity),
                 pressed-opacity: var(--_pressed-state-layer-opacity),
@@ -18,7 +18,7 @@
     }
 
     &.surface {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 'hover-color': map.get($tokens, hover-state-layer-color),
                 'pressed-color': map.get($tokens, pressed-state-layer-color),
@@ -27,7 +27,7 @@
     }
 
     &.primary {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 'hover-color': map.get($tokens, primary-hover-state-layer-color),
                 'pressed-color': map.get($tokens, primary-pressed-state-layer-color),
@@ -36,7 +36,7 @@
     }
 
     &.secondary {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 'hover-color': map.get($tokens, secondary-hover-state-layer-color),
                 'pressed-color': map.get($tokens, secondary-pressed-state-layer-color),
@@ -45,7 +45,7 @@
     }
 
     &.tertiary {
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 'hover-color': map.get($tokens, tertiary-hover-state-layer-color),
                 'pressed-color': map.get($tokens, tertiary-pressed-state-layer-color),

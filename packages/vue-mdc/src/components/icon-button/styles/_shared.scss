@@ -7,7 +7,7 @@
 // variants.
 
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 @mixin styles() {
@@ -43,7 +43,7 @@
     }
 
     & [data-component='focus-ring'] {
-        @include theme.md-comp-focus-ring-theme(
+        @include themes.md-comp-focus-ring-theme(
             (
                 'shape-start-start': var(--_container-shape-start-start),
                 'shape-start-end': var(--_container-shape-start-end),

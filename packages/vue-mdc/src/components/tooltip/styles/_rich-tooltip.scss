@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../../theme';
+@use '../../../themes';
 
 @mixin styles() {
     $tokens: tokens.md-comp-rich-tooltip-values();
@@ -39,7 +39,7 @@
             padding-right: 16px;
             margin: 0;
 
-            @include theme.md-comp-elevation-theme(
+            @include themes.md-comp-elevation-theme(
                 (
                     'level': var(--_container-elevation),
                 )
@@ -93,7 +93,7 @@
                 font-weight: var(--_action-label-text-weight);
                 letter-spacing: var(--_action-label-text-tracking);
 
-                @include theme.md-comp-ripple-theme(
+                @include themes.md-comp-ripple-theme(
                     (
                         'hover-color': var(--_action-hover-state-layer-color),
                         'hover-opacity': var(--_action-hover-state-layer-opacity),

@@ -1,10 +1,5 @@
-//
-// Copyright 2021 Google LLC
-// SPDX-License-Identifier: Apache-2.0
-//
-
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 $motion: tokens.md-sys-motion-values();
@@ -21,7 +16,7 @@ $motion: tokens.md-sys-motion-values();
     }
 
     & [data-component='elevation'] {
-        @include theme.md-comp-elevation-theme(
+        @include themes.md-comp-elevation-theme(
             (
                 'level': var(--_container-elevation),
                 'shadow-color': var(--_container-shadow-color),
@@ -32,7 +27,7 @@ $motion: tokens.md-sys-motion-values();
     // apply elevation in order of focused, hovered, pressed, disabled
     // this ensures a button will have hover elevation after being focused
     &:focus-within [data-component='elevation'] {
-        @include theme.md-comp-elevation-theme(
+        @include themes.md-comp-elevation-theme(
             (
                 'level': var(--_focus-container-elevation),
             )
@@ -40,7 +35,7 @@ $motion: tokens.md-sys-motion-values();
     }
 
     &:hover [data-component='elevation'] {
-        @include theme.md-comp-elevation-theme(
+        @include themes.md-comp-elevation-theme(
             (
                 'level': var(--_hover-container-elevation),
             )
@@ -48,7 +43,7 @@ $motion: tokens.md-sys-motion-values();
     }
 
     &:active [data-component='elevation'] {
-        @include theme.md-comp-elevation-theme(
+        @include themes.md-comp-elevation-theme(
             (
                 'level': var(--_pressed-container-elevation),
             )
@@ -56,7 +51,7 @@ $motion: tokens.md-sys-motion-values();
     }
 
     &[disabled] [data-component='elevation'] {
-        @include theme.md-comp-elevation-theme(
+        @include themes.md-comp-elevation-theme(
             (
                 'level': var(--_disabled-container-elevation),
             )

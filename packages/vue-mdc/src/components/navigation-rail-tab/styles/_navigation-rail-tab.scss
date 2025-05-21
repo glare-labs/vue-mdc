@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 @use '../../../tokens/internal/animation';
 
@@ -15,7 +15,7 @@ $animation-duration: 200ms;
     }
 
     & [data-component='focus-ring'] {
-        @include theme.md-comp-focus-ring-theme(
+        @include themes.md-comp-focus-ring-theme(
             (
                 'shape': map.get(tokens.md-sys-shape-values(), 'corner-small'),
                 'inward-offset': -1px,
@@ -173,7 +173,7 @@ $animation-duration: 200ms;
             }
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_active-hover-state-layer-color),
                 pressed-color: var(--_active-pressed-state-layer-color),
@@ -222,7 +222,7 @@ $animation-duration: 200ms;
             }
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_inactive-hover-state-layer-color),
                 pressed-color: var(--_inactive-pressed-state-layer-color),

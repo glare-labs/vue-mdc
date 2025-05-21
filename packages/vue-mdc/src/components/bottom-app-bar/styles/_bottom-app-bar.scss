@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../../theme';
+@use '../../../themes';
 
 @mixin styles() {
     $tokens: tokens.md-comp-bottom-app-bar-values();
@@ -22,7 +22,7 @@
         height: map.get($tokens, 'container-height');
         width: 100%;
 
-        @include theme.md-comp-fab-theme(
+        @include themes.md-comp-fab-theme(
             (
                 'container-elevation': map.get($tokens, 'container-elevation'),
                 'hover-container-elevation': map.get($tokens, 'container-elevation'),

@@ -5,7 +5,7 @@
 
 @use 'sass:map';
 @use '../../../tokens/internal/animation';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
@@ -29,7 +29,7 @@ $_motion: tokens.md-sys-motion-values();
             position: relative;
             border: none;
 
-            @include theme.md-comp-ripple-theme(
+            @include themes.md-comp-ripple-theme(
                 (
                     hover-color: map.get($tokens, 'hover-state-layer-color'),
                     hover-opacity: map.get($tokens, 'hover-state-layer-opacity'),
@@ -38,7 +38,7 @@ $_motion: tokens.md-sys-motion-values();
                 )
             );
 
-            @include theme.md-comp-focus-ring-theme(());
+            @include themes.md-comp-focus-ring-theme(());
         }
 
         &.disabled,
@@ -53,7 +53,7 @@ $_motion: tokens.md-sys-motion-values();
         }
 
         &.checked {
-            @include theme.md-comp-ripple-theme(
+            @include themes.md-comp-ripple-theme(
                 (
                     hover-color: map.get($tokens, 'selected-hover-state-layer-color'),
                     hover-opacity: map.get($tokens, 'selected-hover-state-layer-opacity'),

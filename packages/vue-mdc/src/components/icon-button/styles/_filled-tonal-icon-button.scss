@@ -4,7 +4,7 @@
 //
 
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 $_custom-property-prefix: 'filled-tonal-icon-button';
@@ -20,7 +20,7 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             --_#{$token}: #{$value};
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
@@ -85,7 +85,7 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             }
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_toggle-hover-state-layer-color),
                 pressed-color: var(--_toggle-pressed-state-layer-color),
@@ -117,7 +117,7 @@ $_custom-property-prefix: 'filled-tonal-icon-button';
             }
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_toggle-selected-hover-state-layer-color),
                 pressed-color: var(--_toggle-selected-pressed-state-layer-color),

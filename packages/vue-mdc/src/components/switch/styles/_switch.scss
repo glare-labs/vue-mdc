@@ -4,7 +4,7 @@
 //
 
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 $_motion: tokens.md-sys-motion-values();
@@ -44,7 +44,7 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         & [data-component='focus-ring'] {
-            @include theme.md-comp-focus-ring-theme(
+            @include themes.md-comp-focus-ring-theme(
                 (
                     'shape-start-start': map.get($tokens, 'track-shape-start-start'),
                     'shape-start-end': map.get($tokens, 'track-shape-start-end'),
@@ -307,7 +307,7 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         &.selected [data-component='ripple'] {
-            @include theme.md-comp-ripple-theme(
+            @include themes.md-comp-ripple-theme(
                 (
                     'hover-color': map.get($tokens, 'selected-hover-state-layer-color'),
                     'pressed-color': map.get($tokens, 'selected-pressed-state-layer-color'),
@@ -318,7 +318,7 @@ $_easing-standard: map.get($_motion, 'easing-standard');
         }
 
         &.unselected [data-component='ripple'] {
-            @include theme.md-comp-ripple-theme(
+            @include themes.md-comp-ripple-theme(
                 (
                     'hover-color': map.get($tokens, 'hover-state-layer-color'),
                     'pressed-color': map.get($tokens, 'pressed-state-layer-color'),

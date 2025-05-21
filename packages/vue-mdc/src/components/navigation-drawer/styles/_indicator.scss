@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '../../../tokens';
-@use '../../../theme';
+@use '../../../themes';
 
 @mixin styles() {
     $tokens: tokens.md-comp-navigation-drawer-values();
@@ -25,7 +25,7 @@
         margin-left: -16px;
         margin-right: -16px;
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: map.get($tokens, 'inactive-hover-state-layer-color'),
                 pressed-color: map.get($tokens, 'inactive-pressed-state-layer-color'),
@@ -34,7 +34,7 @@
             )
         );
 
-        @include theme.md-comp-focus-ring-theme(
+        @include themes.md-comp-focus-ring-theme(
             (
                 'shape-start-start': map.get($tokens, 'container-shape-start-start'),
                 'shape-start-end': map.get($tokens, 'container-shape-start-end'),
@@ -47,7 +47,7 @@
     &.active {
         background-color: map.get($tokens, 'active-indicator-color');
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: map.get($tokens, 'active-hover-state-layer-color'),
                 pressed-color: map.get($tokens, 'active-pressed-state-layer-color'),

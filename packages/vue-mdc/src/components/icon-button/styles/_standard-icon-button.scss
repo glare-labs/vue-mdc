@@ -4,7 +4,7 @@
 //
 
 @use 'sass:map';
-@use '../../../theme';
+@use '../../../themes';
 @use '../../../tokens';
 
 @mixin styles() {
@@ -18,7 +18,7 @@
             --_#{$token}: #{$value};
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_hover-state-layer-color),
                 hover-opacity: var(--_hover-state-layer-opacity),
@@ -82,7 +82,7 @@
             }
         }
 
-        @include theme.md-comp-ripple-theme(
+        @include themes.md-comp-ripple-theme(
             (
                 hover-color: var(--_selected-hover-state-layer-color),
                 hover-opacity: var(--_selected-hover-state-layer-opacity),
