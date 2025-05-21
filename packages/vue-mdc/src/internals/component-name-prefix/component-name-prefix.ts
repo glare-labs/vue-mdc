@@ -1,1 +1,1 @@
-export const componentNamePrefix = 'vue-mdc' as const
+export const componentNamePrefix = 'mdc' as const
