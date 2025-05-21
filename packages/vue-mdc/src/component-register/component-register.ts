@@ -19,14 +19,16 @@ import { CircularProgress, LinearProgress } from '../components/progress'
 import { ThemeProvider } from '../components/provider'
 import { Radio } from '../components/radio'
 import { Ripple } from '../components/ripple'
+import { SplitButton, SplitButtonGroup } from '../components/split-button'
 import { Switch } from '../components/switch'
+import { PlainTooltip, RichTooltip } from '../components/tooltip'
 import { Typography } from '../components/typography'
 import { componentNamePrefix } from '../internals/component-name-prefix/component-name-prefix'
 
 export const registerComponents = (prefix = componentNamePrefix) => ({
     install: (instance: App<any>) => {
-        instance.component(`${prefix}-button`, Button)
         instance.component(`${prefix}-bottom-app-bar`, BottomAppBar)
+        instance.component(`${prefix}-button`, Button)
         instance.component(`${prefix}-checkbox`, Checkbox)
         instance.component(`${prefix}-dialog`, Dialog)
         instance.component(`${prefix}-divider`, Divider)
@@ -41,15 +43,19 @@ export const registerComponents = (prefix = componentNamePrefix) => ({
         instance.component(`${prefix}-navigation-drawer`, NavigationDrawer)
         instance.component(`${prefix}-navigation-drawer-headline`, NavigationDrawerHeadline)
         instance.component(`${prefix}-navigation-drawer-indicator`, NavigationDrawerIndicator)
-        instance.component(`${prefix}-navigation-tab`, NavigationTab)
         instance.component(`${prefix}-navigation-rail`, NavigationRail)
         instance.component(`${prefix}-navigation-rail-tab`, NavigationRailTab)
+        instance.component(`${prefix}-navigation-tab`, NavigationTab)
         instance.component(`${prefix}-linear-progress`, LinearProgress)
         instance.component(`${prefix}-circular-progress`, CircularProgress)
         instance.component(`${prefix}-theme-provider`, ThemeProvider)
         instance.component(`${prefix}-radio`, Radio)
         instance.component(`${prefix}-ripple`, Ripple)
+        instance.component(`${prefix}-split-button`, SplitButton)
+        instance.component(`${prefix}-split-button-group`, SplitButtonGroup)
         instance.component(`${prefix}-switch`, Switch)
+        instance.component(`${prefix}-rich-tooltip`, RichTooltip)
+        instance.component(`${prefix}-plain-tooltip`, PlainTooltip)
         instance.component(`${prefix}-typography`, Typography)
     }
 })
