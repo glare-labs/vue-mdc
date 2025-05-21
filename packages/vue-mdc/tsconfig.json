@@ -30,10 +30,11 @@
         ],
     },
     "include": [
+        "./src/index.ts",
         "./src/colors/**/*",
         "./src/component-register/**/*",
         "./src/components/**/*",
-        "src/internals/**/*",
+        "./src/internals/**/*",
         "./src/utils/**/*",
     ],
     "exclude": [
