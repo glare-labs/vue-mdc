@@ -1,2 +1,8 @@
+/**
+ * @license
+ * Copyright 2024 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 export * from './color-directive'
 export * from './color-tokens'

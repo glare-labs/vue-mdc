@@ -2,6 +2,11 @@
 // Copyright 2021 Google LLC
 // SPDX-License-Identifier: Apache-2.0
 //
+// [Modified by glare-labs & bre97-web]
+//
+// Copyright 2025 glare-labs & bre97-web
+// SPDX-License-Identifier: MIT
+//
 
 @use 'sass:map';
 @use 'sass:math';
@@ -18,7 +23,6 @@ $_enter-delay: $_label-duration - $_visible-duration;
 
 @mixin styles() {
     @layer styles {
-
         & :is(.start, .middle, .end) {
             display: flex;
             box-sizing: border-box;
@@ -81,7 +85,7 @@ $_enter-delay: $_label-duration - $_visible-duration;
             transition: none;
         }
 
-        & .content>* {
+        & .content > * {
             all: unset;
             // Use `currentColor` to inherit the various state colors that are set
             // below.
@@ -96,12 +100,12 @@ $_enter-delay: $_label-duration - $_visible-duration;
             white-space: revert; // Needed for Firefox textarea
         }
 
-        & .content>:not(textarea) {
+        & .content > :not(textarea) {
             padding-top: var(--_top-space);
             padding-bottom: var(--_bottom-space);
         }
 
-        & .content>textarea {
+        & .content > textarea {
             // Use margin for textareas since they will scroll over the label if not.
             margin-top: var(--_top-space);
             margin-bottom: var(--_bottom-space);

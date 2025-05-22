@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2024 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import type { Directive } from 'vue'
 import { isServer } from '../utils/is-server'
 import { EColor } from './color-tokens'

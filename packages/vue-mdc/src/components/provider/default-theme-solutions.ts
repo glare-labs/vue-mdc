@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
 
 /**
  * Vibrant
@@ -120,7 +125,7 @@ const GreenDark = `
  * Fidelity
  * 200 75 50
  */
-const AquamarineLight = `    
+const AquamarineLight = `
     --md-sys-color-primary-palette-key-color: #008488;
     --md-sys-color-secondary-palette-key-color: #5b7d7e;
     --md-sys-color-tertiary-palette-key-color: #ad6437;

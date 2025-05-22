@@ -2,6 +2,12 @@
  * @license
  * Copyright 2023 Google LLC
  * SPDX-License-Identifier: Apache-2.0
+ *
+ * [Modified by glare-labs & bre97-web]
+ *
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
  */
 
 import { EMotionEasing } from '../../utils/material-design-system'

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import type { AnimationSignal } from '../../internals/motion/animation'
 import { EMotionEasing } from '../../utils'
 

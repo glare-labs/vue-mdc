@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { computed, defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
@@ -15,7 +21,7 @@ export const RichTooltip = defineComponent({
     slots: {} as SlotsType<{
         /**
          * Hyperlink <a></a> elements or other links should be used.
-         * According to design specifications, 
+         * According to design specifications,
          * do not use Button and IconButton components in action slot.
          */
         action?: void

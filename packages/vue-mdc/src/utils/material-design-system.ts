@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2024 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 export type TMaterialContrastLevel = -1.0 | 0 | 0.5 | 1.0 | number
 export declare enum EMaterialContrastLevel {
     Reduced = -1,

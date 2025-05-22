@@ -1,3 +1,11 @@
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * @link https://github.com/material-components/material-web/blob/main/internal/motion/animation.ts
+ */
+
 
 export interface AnimationSignal {
     /**

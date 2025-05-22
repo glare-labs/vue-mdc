@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue'
 import { detectPlatform, isServer } from '../../utils'
 
@@ -218,6 +224,7 @@ export function useTooltip(
         }
 
         surfaceRef.value.removeEventListener('mouseleave', handleSurfaceMouseLeave)
+        // @ts-ignore
         surfaceRef.value.removeEventListener('wheel', handleWheel, { passive: true, })
 
         animationTimer.value = setTimeout(() => {

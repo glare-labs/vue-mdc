@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 export type TDividerVariant = 'inset-start' | 'middle-inset' | 'inset-end' | 'no-inset'
 
 export enum EDividerVariant {

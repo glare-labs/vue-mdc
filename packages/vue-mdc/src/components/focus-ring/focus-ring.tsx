@@ -1,3 +1,15 @@
+/**
+ * @license
+ * Copyright 2021 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * [Modified by glare-labs & bre97-web]
+ *
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
@@ -11,7 +23,7 @@ export const FocusRing = defineComponent({
     props: {
         /**
          * Default is false. When inward is true, the focus-ring focuses within the element.
-         * 
+         *
          * @default false
          */
         inward: {
@@ -23,10 +35,10 @@ export const FocusRing = defineComponent({
             type: Boolean as PropType<boolean>,
         },
         /**
-         * The target element that activates the focus-ring component. 
-         * If this parameter is not specified, the parent element is the target element by default. 
+         * The target element that activates the focus-ring component.
+         * If this parameter is not specified, the parent element is the target element by default.
          * Please make sure that the **position attribute value of the target element's CSS is relative**.
-         * 
+         *
          * @default null
          */
         for: {

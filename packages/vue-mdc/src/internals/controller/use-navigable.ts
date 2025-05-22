@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { nextTick, onMounted, type Component, type Ref } from 'vue'
 import type { JSX } from 'vue/jsx-runtime'
 import { isServer } from '../../utils'

@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { defineComponent, onBeforeUnmount, onMounted, ref, type PropType, type SlotsType } from 'vue'
 import { EFormSubmitterType, type TFormSubmitterType } from '../../internals'

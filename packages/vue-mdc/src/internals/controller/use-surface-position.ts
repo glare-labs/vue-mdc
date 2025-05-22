@@ -1,3 +1,17 @@
+/**
+ * @license
+ * Copyright 2023 Google LLC
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * @link https://github.com/material-components/material-web/blob/main/menu/internal/controllers/surfacePositionController.ts
+ *
+ * [Modified by glare-labs & bre97-web]
+ *
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { computed, type CSSProperties, onMounted, ref, type Ref, unref, watch } from 'vue'
 import { isServer } from '../../utils'
 

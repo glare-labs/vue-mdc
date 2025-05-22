@@ -3,9 +3,17 @@
  * @license
  * Copyright 2022 Google LLC
  * SPDX-License-Identifier: Apache-2.0
+ *
  * @link
  * https://github.com/material-components/material-web/blob/main/ripple/internal/ripple.ts
+ *
+ * [Modified by glare-labs & bre97-web]
+ *
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
  */
+
 export class RippleConfiguration {
     public static readonly pressGrowMs = 550
     public static readonly minimumPressMs = 250

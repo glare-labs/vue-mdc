@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
 import type { TFormSubmitterType } from '../../internals'

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { type Directive } from 'vue'
 import css from './styles/typography.module.scss'
 import { type TTypographyVariant } from './typography-variant'

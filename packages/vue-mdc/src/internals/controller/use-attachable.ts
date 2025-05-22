@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { computed, onBeforeUnmount, onMounted, ref, watch, type ComputedRef, type Ref, type WritableComputedRef } from 'vue'
 import { isServer } from '../../utils'
 

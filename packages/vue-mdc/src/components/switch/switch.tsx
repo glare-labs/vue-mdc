@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
 import { type ComponentPublicInstance, type PropType, type SlotsType, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { afterDispatch, dispatchActivationClick, isActivationClick, redispatchEvent, setupDispatchHooks } from '../../internals'

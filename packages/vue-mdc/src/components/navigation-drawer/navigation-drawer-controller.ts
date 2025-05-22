@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { ENavigationDrawerState } from './navigation-state'
 import css from './styles/navigation-drawer.module.scss'
 

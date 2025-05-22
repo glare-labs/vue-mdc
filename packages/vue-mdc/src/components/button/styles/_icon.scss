@@ -2,13 +2,17 @@
 // Copyright 2021 Google LLC
 // SPDX-License-Identifier: Apache-2.0
 //
+// [Modified by glare-labs & bre97-web]
+//
+// Copyright 2025 glare-labs & bre97-web
+// SPDX-License-Identifier: MIT
+//
 
 @mixin styles() {
-
     // The icon CSS class overrides styles defined in the .material-icons CSS
     // class, which is loaded separately so the order of CSS definitions is not
     // guaranteed. Therefore, increase specifity to ensure overrides apply.
-    & [data-component="icon"] {
+    & [data-component='icon'] {
         display: inline-flex;
         position: relative;
         writing-mode: horizontal-tb;
@@ -20,19 +24,19 @@
         block-size: var(--_icon-size);
     }
 
-    &:hover [data-component="icon"] {
+    &:hover [data-component='icon'] {
         color: var(--_hover-icon-color);
     }
 
-    &:focus-within [data-component="icon"] {
+    &:focus-within [data-component='icon'] {
         color: var(--_focus-icon-color);
     }
 
-    &:active [data-component="icon"] {
+    &:active [data-component='icon'] {
         color: var(--_pressed-icon-color);
     }
 
-    &[disabled] [data-component="icon"] {
+    &[disabled] [data-component='icon'] {
         color: var(--_disabled-icon-color);
         opacity: var(--_disabled-icon-opacity);
     }

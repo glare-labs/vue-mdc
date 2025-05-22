@@ -1,3 +1,9 @@
+/**
+ * @listens
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { defineComponent, type PropType, type SlotsType } from 'vue'
 import { redispatchEvent } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'

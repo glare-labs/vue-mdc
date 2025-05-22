@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import type { Ref } from 'vue'
 import { useAttachable } from '../../internals'
 import type { IAttachable } from '../../internals/controller/use-attachable'

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { createVNode, render, type Directive } from 'vue'
 import type { IAttachableHost } from '../../internals/controller/use-attachable'
 import { Ripple } from './ripple'

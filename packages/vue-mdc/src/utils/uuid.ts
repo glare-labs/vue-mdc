@@ -1,7 +1,12 @@
+/**
+ * @license
+ * Copyright 2024 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
 
 /**
  * RFC4122 like, v4.
- * 
+ *
  * @license CC BY-SA 4.0
  * @link https://stackoverflow.com/a/8809472/
  * @author Briguy37

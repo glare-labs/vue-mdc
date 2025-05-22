@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 export type TElevationLevel = 0 | 1 | 2 | 3 | 4 | 5
 
 export const enum EElevationLevel {

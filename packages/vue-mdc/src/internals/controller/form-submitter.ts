@@ -5,6 +5,12 @@
  *
  * @link
  * https://github.com/material-components/material-web/blob/main/internal/controller/form-submitter.ts
+ *
+ * [Modified by glare-labs & bre97-web]
+ *
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
  */
 
 import { isServer } from '../../utils/is-server'

@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2024 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import type { App } from 'vue'
 import { BottomAppBar } from '../components/bottom-app-bar'
 import { Button } from '../components/button'

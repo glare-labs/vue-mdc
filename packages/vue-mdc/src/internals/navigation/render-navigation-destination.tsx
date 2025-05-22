@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
+
 import { type Component, type Ref, createVNode, render } from 'vue'
 import { Fragment } from 'vue/jsx-runtime'
 import { isServer } from '../../utils'

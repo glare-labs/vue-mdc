@@ -1,3 +1,8 @@
+/**
+ * @license
+ * Copyright 2025 glare-labs & bre97-web
+ * SPDX-License-Identifier: MIT
+ */
 
 export type TTypographyVariant =
     'label-small' | 'label-medium' | 'label-large' |
