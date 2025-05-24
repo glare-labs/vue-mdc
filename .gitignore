@@ -21,6 +21,12 @@ build
 !docs
 *.local
 test-report
+.tgz
+
+# chore
+src/READMD.md
+src/bundle-size.md
+src/LICENSE
 
 # Editor directories and files
 !.vscode/extensions.json
