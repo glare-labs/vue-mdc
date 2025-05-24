@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './divider'
-export * from './divider-variant'
+export { Divider } from './divider'
+
+export { DividerVariant, type TDividerProps, type TDividerSlots, type TDividerVariant } from './divider.definition'

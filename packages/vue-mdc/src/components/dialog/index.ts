@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './dialog'
-export * from './dialog-controller'
+export { Dialog } from './dialog'
+
+export { SDialogController, type IDialogController, type IDialogControllerHost } from './dialog-controller'

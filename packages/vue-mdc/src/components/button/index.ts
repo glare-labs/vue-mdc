@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './button'
-export * from './button.definition'
+export { Button } from './button'
+
+export { ButtonAppearance, type TButtonAppearance, type TButtonProps, type TButtonSlots } from './button.definition'

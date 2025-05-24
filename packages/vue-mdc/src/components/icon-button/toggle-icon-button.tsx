@@ -5,49 +5,22 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onBeforeUnmount, onBeforeUpdate, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, onBeforeUnmount, onBeforeUpdate, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
-import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
 import css from './styles/icon-button.module.scss'
+import { props, type TToggleIconButtonSlots } from './toggle-icon-button.definition'
 
 export const ToggleIconButton = defineComponent({
     name: `${componentNamePrefix}-toggle-icon-button`,
-    slots: {} as SlotsType<{
-        default: void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TToggleIconButtonSlots>,
     emits: [
         'update:modelValue',
         'change'
     ],
-    props: {
-        appearance: {
-            type: String as PropType<TIconButtonAppearance>,
-            default: EIconButtonAppearance.Standard,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        defaultSelected: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        modelValue: {
-            type: Boolean as PropType<boolean>,
-            default: null,
-        },
-        name: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        value: {
-            type: String as PropType<string>,
-            default: null,
-        },
-    },
     setup(props, { slots, emit }) {
         const root = ref<HTMLElement | null>(null)
 

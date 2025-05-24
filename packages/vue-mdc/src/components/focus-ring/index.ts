@@ -4,5 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './focus-ring'
-export * from './focus-ring-controller'
+export { FocusRing } from './focus-ring'
+
+export { FocusRingController } from './focus-ring-controller'
+
+export { type TFocusRingProps, type TFocusRingSlot } from './focus-ring.definition'

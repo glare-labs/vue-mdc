@@ -4,4 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './checkbox'
+export { Checkbox } from './checkbox'
+
+export { type TCheckboxProps, type TCheckboxSlots } from './checkbox.definition'

@@ -14,7 +14,7 @@
 
 import type { Ref } from 'vue'
 import { useAttachable } from '../../internals/controller/use-attachable'
-import { EMotionEasing, isServer } from '../../utils'
+import { MaterialDesignSystem, isServer } from '../../utils'
 import { RippleConfiguration } from './ripple-configuration'
 import { RippleState } from './ripple-state'
 
@@ -193,7 +193,7 @@ export class RippleAttachableController {
             {
                 pseudoElement: RippleConfiguration.pressPseudo,
                 duration: RippleConfiguration.pressGrowMs,
-                easing: EMotionEasing.Standard,
+                easing: MaterialDesignSystem.Motion.Easing.Standard,
                 fill: RippleConfiguration.animationFill,
             },
         )

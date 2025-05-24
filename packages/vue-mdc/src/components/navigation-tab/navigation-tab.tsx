@@ -5,33 +5,20 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
+import { props, type TNavigationTabSlots } from './navigation-tab.definition'
 import css from './styles/navigation-tab.module.scss'
-
 
 export const NavigationTab = defineComponent({
     name: `${componentNamePrefix}-navigation-tab`,
-    slots: {} as SlotsType<{
-        default: void
-        'active-icon': void
-        'inactive-icon': void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TNavigationTabSlots>,
     emits: [
         'tab-click'
     ],
-    props: {
-        label: {
-            type: String as PropType<string>,
-            default: 'Unnamed Tab',
-        },
-        hideInactiveLabel: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
     setup(props, { slots, emit }) {
         const root = ref<HTMLElement | null>(null)
 
@@ -76,4 +63,5 @@ export const NavigationTab = defineComponent({
             </button>
         )
     },
+    inheritAttrs: true,
 })

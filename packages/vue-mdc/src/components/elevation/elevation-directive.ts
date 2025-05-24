@@ -5,7 +5,7 @@
  */
 
 import { type Directive, type DirectiveBinding } from 'vue'
-import { type TElevationLevel } from './elevation-level'
+import { type TElevationLevel } from './elevation.definition'
 import css from './styles/elevation.module.scss'
 
 class ElevationDirective {

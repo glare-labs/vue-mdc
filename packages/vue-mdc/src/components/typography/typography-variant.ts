@@ -4,27 +4,22 @@
  * SPDX-License-Identifier: MIT
  */
 
-export type TTypographyVariant =
-    'label-small' | 'label-medium' | 'label-large' |
-    'body-small' | 'body-medium' | 'body-large' |
-    'title-small' | 'title-medium' | 'title-large' |
-    'headline-small' | 'headline-medium' | 'headline-large' |
-    'display-small' | 'display-medium' | 'display-large'
+export const TypographyVariant = {
+    LabelSmall: 'label-small',
+    LabelMedium: 'label-medium',
+    LabelLarge: 'label-large',
+    BodySmall: 'body-small',
+    BodyMedium: 'body-medium',
+    BodyLarge: 'body-large',
+    TitleSmall: 'title-small',
+    TitleMedium: 'title-medium',
+    TitleLarge: 'title-large',
+    HeadlineSmall: 'headline-small',
+    HeadlineMedium: 'headline-medium',
+    HeadlineLarge: 'headline-large',
+    DisplaySmall: 'display-small',
+    DisplayMedium: 'display-medium',
+    DisplayLarge: 'display-large',
+} as const
 
-export enum ETypographyVariant {
-    LabelSmall = 'label-small',
-    LabelMedium = 'label-medium',
-    LabelLarge = 'label-large',
-    BodySmall = 'body-small',
-    BodyMedium = 'body-medium',
-    BodyLarge = 'body-large',
-    TitleSmall = 'title-small',
-    TitleMedium = 'title-medium',
-    TitleLarge = 'title-large',
-    HeadlineSmall = 'headline-small',
-    HeadlineMedium = 'headline-medium',
-    HeadlineLarge = 'headline-large',
-    DisplaySmall = 'display-small',
-    DisplayMedium = 'display-medium',
-    DisplayLarge = 'display-large',
-}
+export type TTypographyVariant = typeof TypographyVariant[keyof typeof TypographyVariant]

@@ -5,40 +5,19 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { computed, defineComponent, Fragment, ref, type PropType, type SlotsType } from 'vue'
-import type { TFormSubmitterType } from '../../internals'
+import { computed, defineComponent, Fragment, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple'
-import { ESplitButtonAppearance, type TSplitButtonAppearance } from './interface'
+import { SplitButtonAppearance } from './interface'
+import { props, type TSplitButtonSlots } from './split-button.definition'
 import css from './styles/split-button.module.scss'
 
 export const SplitButton = defineComponent({
     name: `${componentNamePrefix}-split-button`,
-    slots: {} as SlotsType<{
-        default?: void
-        'leading-icon'?: void
-        'trailing-icon'?: void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TSplitButtonSlots>,
     emits: [],
-    props: {
-        appearance: {
-            type: String as PropType<TSplitButtonAppearance>,
-            default: ESplitButtonAppearance.Filled,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        type: {
-            type: String as PropType<TFormSubmitterType>,
-            default: 'submit',
-        },
-        href: {
-            type: String as PropType<string>,
-            default: null,
-        },
-    },
     setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
 
@@ -63,7 +42,7 @@ export const SplitButton = defineComponent({
          * Computed
          */
         const isLink = computed(() => _href.value !== null)
-        const needOutline = computed(() => _appearance.value === ESplitButtonAppearance.Outlined)
+        const needOutline = computed(() => _appearance.value === SplitButtonAppearance.Outlined)
 
         return () => {
             const iconState = slots['leading-icon'] ? css.left : slots['trailing-icon'] ? css.right : null
@@ -103,4 +82,5 @@ export const SplitButton = defineComponent({
             return isLink.value ? <RenderLink></RenderLink> : <RenderButton></RenderButton>
         }
     },
+    inheritAttrs: true,
 })

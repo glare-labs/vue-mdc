@@ -5,35 +5,23 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, onMounted, ref, type SlotsType } from 'vue'
 import { SAttachableController, type IAttachableHost } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
+import { props, type TNavigationRailTabSlots } from './navigation-rail-tab.definition'
 import css from './styles/navigation-rail-tab.module.scss'
 
 export const NavigationRailTab = defineComponent({
     name: `${componentNamePrefix}-navigation-rail-tab`,
-    slots: {} as SlotsType<{
-        default: void
-        'active-icon': void
-        'inactive-icon': void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TNavigationRailTabSlots>,
     emits: [
         'tab-click',
         'change',
     ],
-    props: {
-        label: {
-            type: String as PropType<string>,
-            default: 'Unnamed Tab',
-        },
-        hideInactiveLabel: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
     setup(props, { slots, emit }) {
         const root = ref<HTMLElement | null>(null)
 

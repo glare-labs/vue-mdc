@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './icon'
-export * from './icon-variant'
+export { Icon } from './icon'
+
+export { IconVariant, type TIconProps, type TIconSlots, type TIconVariant } from './icon.definition'

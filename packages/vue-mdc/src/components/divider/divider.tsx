@@ -4,38 +4,26 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { defineComponent, type PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { EDividerVariant, type TDividerVariant } from './divider-variant'
+import { DividerVariant, props } from './divider.definition'
 import css from './styles/divider.module.scss'
 
-class DividerComponent {
-    private readonly name = `${componentNamePrefix}-divider`
+export const Divider = defineComponent({
+    name: `${componentNamePrefix}-divider`,
+    props: props,
+    render() {
+        const isNoInsert = this.variant === DividerVariant.NoInset
+        const isMiddle = this.variant === DividerVariant.MiddleInset
 
-    private readonly props = {
-        variant: {
-            default: EDividerVariant.MiddleInset,
-            type: String as PropType<TDividerVariant>,
-        },
-    }
-
-    public readonly component = defineComponent({
-        name: this.name,
-        props: this.props,
-        render() {
-            const isNoInsert = this.variant === EDividerVariant.NoInset
-            const isMiddle = this.variant === EDividerVariant.MiddleInset
-
-            const variant = isNoInsert ? [] : isMiddle ? css.inset : css[this.variant]
-            return (
-                <span
-                    data-component="divider"
-                    aria-hidden="true"
-                    class={[css.divider, variant]}
-                ></span>
-            )
-        }
-    })
-}
-
-export const Divider = new DividerComponent().component
+        const variant = isNoInsert ? [] : isMiddle ? css.inset : css[this.variant]
+        return (
+            <span
+                data-component="divider"
+                aria-hidden="true"
+                class={[css.divider, variant]}
+            ></span>
+        )
+    },
+    inheritAttrs: true,
+})

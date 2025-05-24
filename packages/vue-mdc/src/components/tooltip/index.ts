@@ -4,7 +4,16 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './plain-tooltip'
-export * from './rich-tooltip'
-export * from './rich-tooltip-action-label'
-export * from './tooltip-controller'
+export { PlainTooltip } from './plain-tooltip'
+
+export { RichTooltip } from './rich-tooltip'
+
+export { ActionLabel } from './rich-tooltip-action-label'
+
+export {
+    ETooltipPosition, STooltipController, useTooltip, type ITooltip,
+    type ITooltipControllerHost,
+    type IUseTooltipOptions, type TooltipVisibility,
+    type TTooltipPosition,
+    type TTooltipTouchGestures
+} from './tooltip-controller'

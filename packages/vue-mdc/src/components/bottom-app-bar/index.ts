@@ -4,4 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './bottom-app-bar'
+export { BottomAppBar } from './bottom-app-bar'
+
+export { type TBottomAppBarProps, type TBottomAppBarSlots } from './bottom-app-bar.definition'

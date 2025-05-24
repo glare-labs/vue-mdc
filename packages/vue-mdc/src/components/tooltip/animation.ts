@@ -5,7 +5,7 @@
  */
 
 import type { AnimationSignal } from '../../internals/motion/animation'
-import { EMotionEasing } from '../../utils'
+import { MaterialDesignSystem } from '../../utils'
 
 export async function animateOpen(tooltipEl: HTMLElement, animationSignal: AnimationSignal) {
     const signal = animationSignal.start()
@@ -14,7 +14,7 @@ export async function animateOpen(tooltipEl: HTMLElement, animationSignal: Anima
         [{ transform: 'scale(0.8)', opacity: '0' }, { transform: 'scale(1)', opacity: '1' }],
         {
             duration: 200,
-            easing: EMotionEasing.Emphasized,
+            easing: MaterialDesignSystem.Motion.Easing.Emphasized,
         }
     )
 

@@ -5,28 +5,17 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, ref, type PropType } from 'vue'
+import { defineComponent, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { RippleAttachableController } from './ripple-attachable-controller'
+import { props, type TRippleSlots } from './ripple.definition'
 import css from './styles/ripple.module.scss'
 
 export const Ripple = defineComponent({
     name: `${componentNamePrefix}-ripple`,
+    props: props,
+    slots: {} as SlotsType<TRippleSlots>,
     emits: [],
-    props: {
-        id: {
-            default: null,
-            type: String as PropType<string>
-        },
-        for: {
-            default: null,
-            type: String as PropType<string>
-        },
-        disabled: {
-            default: false,
-            type: Boolean as PropType<boolean>
-        }
-    },
     setup(props) {
         const root = ref<HTMLElement | null>(null)
 
@@ -55,4 +44,5 @@ export const Ripple = defineComponent({
 
         )
     },
+    inheritAttrs: true,
 })

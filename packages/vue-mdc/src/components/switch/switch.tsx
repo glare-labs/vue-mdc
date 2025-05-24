@@ -5,7 +5,7 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { type ComponentPublicInstance, type PropType, type SlotsType, computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch, type ComponentPublicInstance, type SlotsType } from 'vue'
 import { afterDispatch, dispatchActivationClick, isActivationClick, redispatchEvent, setupDispatchHooks } from '../../internals'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { generateUuid } from '../../utils'
@@ -13,6 +13,7 @@ import { isServer } from '../../utils/is-server'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
 import css from './styles/switch.module.scss'
+import { props, type TSwitchSlots } from './switch.definition'
 
 const SwitchOnIcon = () => (
     <div class={[css.icon, css['icon--on']]}>
@@ -34,40 +35,12 @@ const SwitchOffIcon = () => (
 
 export const Switch = defineComponent({
     name: `${componentNamePrefix}-switch`,
-    slots: {} as SlotsType<{
-        'on-icon': void,
-        'off-icon': void,
-    }>,
+    props: props,
+    slots: {} as SlotsType<TSwitchSlots>,
     emits: [
         'update:modelValue',
         'change'
     ],
-    props: {
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        defaultSelected: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        modelValue: {
-            type: Boolean as PropType<boolean>,
-            default: null,
-        },
-        withIcon: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        withIconSelectedOnly: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        value: {
-            type: String as PropType<string>,
-            default: 'on',
-        },
-    },
     setup(props, { emit, slots }) {
         const root = ref<HTMLElement | null>(null)
         const input = ref<HTMLInputElement | null>(null)

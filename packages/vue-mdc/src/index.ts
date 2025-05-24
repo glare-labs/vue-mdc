@@ -4,19 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-/**
- * colors
- */
-export * from './colors'
-
-/**
- * component-register
- */
 export * from './component-register'
 
-/**
- * components
- */
 export * from './components/bottom-app-bar'
 export * from './components/button'
 export * from './components/checkbox'
@@ -41,12 +30,8 @@ export * from './components/switch'
 export * from './components/tooltip'
 export * from './components/typography'
 
-/**
- * internals
- */
+export * from './directives'
+
 export * from './internals'
 
-/**
- * utils
- */
 export * from './utils'

@@ -4,35 +4,23 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { defineComponent, type PropType, type SlotsType } from 'vue'
+import { defineComponent, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { isServer } from '../../utils/is-server'
 import { generateUuid } from '../../utils/uuid'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
+import { props, type TRadioSlots } from './radio.definition'
 import css from './styles/radio.module.scss'
 
 export const Radio = defineComponent({
     name: `${componentNamePrefix}-radio`,
-    slots: {} as SlotsType<{}>,
+    props: props,
+    slots: {} as SlotsType<TRadioSlots>,
     emits: [
         'update:modelValue',
         'change'
     ],
-    props: {
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        defaultChecked: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        modelValue: {
-            type: Boolean as PropType<boolean>,
-            default: null,
-        },
-    },
     setup(props) {
 
         // const _disabled = ref()

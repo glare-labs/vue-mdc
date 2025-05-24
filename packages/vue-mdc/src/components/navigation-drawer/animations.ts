@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { EMotionEasing } from '../../utils'
+import { MaterialDesignSystem } from '../../utils'
 
 export type TNavigationDrawerAnimationArgs = Parameters<Element['animate']>
 
@@ -21,7 +21,7 @@ export const NavigationDrawerDefaultOpenAnimation: INavigationAnimation = {
     dialog: [
         [
             [{ 'transform': 'translateX(-100%)' }, { 'transform': 'translateX(0)' }],
-            { duration: 500, easing: EMotionEasing.Emphasized },
+            { duration: 500, easing: MaterialDesignSystem.Motion.Easing.Emphasized },
         ]
     ],
     scrim: [
@@ -44,7 +44,7 @@ export const NavigationDrawerDefaultOpenAnimation: INavigationAnimation = {
             // is supposed to clip content as it grows. From 0dp it's possible to see
             // text/actions appear before the container has fully grown.
             [{ 'width': '35%' }, { 'width': '100%' }],
-            { duration: 500, easing: EMotionEasing.Emphasized, pseudoElement: '::before' },
+            { duration: 500, easing: MaterialDesignSystem.Motion.Easing.Emphasized, pseudoElement: '::before' },
         ],
     ],
     headline: [
@@ -61,7 +61,7 @@ export const NavigationDrawerDefaultCloseAnimation: INavigationAnimation = {
         [
             // Dialog slide up
             [{ 'transform': 'translateX(0)' }, { 'transform': 'translateX(-100%)' }],
-            { duration: 150, easing: EMotionEasing.EmphasizedAccelerate },
+            { duration: 150, easing: MaterialDesignSystem.Motion.Easing.EmphasizedAccelerate },
         ],
     ],
     scrim: [
@@ -77,7 +77,7 @@ export const NavigationDrawerDefaultCloseAnimation: INavigationAnimation = {
             [{ 'height': '100%' }, { 'height': '35%' }],
             {
                 duration: 150,
-                easing: EMotionEasing.EmphasizedAccelerate,
+                easing: MaterialDesignSystem.Motion.Easing.EmphasizedAccelerate,
                 pseudoElement: '::before',
             },
         ],

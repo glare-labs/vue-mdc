@@ -5,49 +5,22 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { useNavigable, type INavigableHost, type INavigationItem } from '../../internals/controller/use-navigable'
+import { useNavigable, type INavigableHost } from '../../internals/controller/use-navigable'
 import { renderNavigationDestination } from '../../internals/navigation/render-navigation-destination'
 import { isServer } from '../../utils'
 import { NavigationRailTab } from '../navigation-rail-tab'
+import { props, type TNavigationRailSlots } from './navigation-rail.definition'
 import css from './styles/navigation-rail.module.scss'
-
-export type TNavigationRailPosition = 'top' | 'center' | 'bottom'
-export enum ENavigationRailPosition {
-    Left = 'top',
-    Center = 'center',
-    Right = 'bottom',
-}
 
 export const NavigationRail = defineComponent({
     name: `${componentNamePrefix}-navigation-rail`,
-    slots: {} as SlotsType<{
-        default?: void
-        start?: void
-        end?: void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TNavigationRailSlots>,
     emits: [
         'change'
     ],
-    props: {
-        defaultActiveOrder: {
-            type: Number as PropType<number>,
-            default: -2,
-        },
-        position: {
-            type: String as PropType<TNavigationRailPosition>,
-            default: ENavigationRailPosition.Center,
-        },
-        tabs: {
-            type: Array as PropType<Array<INavigationItem>>,
-            default: [],
-        },
-        hideInactiveLabel: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        }
-    },
     setup(props, { slots, emit }) {
         const root = ref<INavigableHost | null>(null)
         const tabContainer = ref<HTMLElement | null>(null)
@@ -108,4 +81,5 @@ export const NavigationRail = defineComponent({
             )
         }
     },
+    inheritAttrs: true,
 })

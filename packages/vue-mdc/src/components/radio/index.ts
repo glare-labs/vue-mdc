@@ -4,4 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './radio'
+export { Radio } from './radio'
+
+export { type TRadioProps, type TRadioSlots } from './radio.definition'

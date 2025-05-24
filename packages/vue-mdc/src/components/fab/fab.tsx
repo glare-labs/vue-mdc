@@ -5,37 +5,18 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { computed, defineComponent, ref, type PropType, type SlotsType } from "vue"
+import { computed, defineComponent, ref, type SlotsType } from "vue"
 import { componentNamePrefix } from "../../internals/component-name-prefix/component-name-prefix"
 import { Elevation } from "../elevation/elevation"
 import { FocusRing } from "../focus-ring"
 import { Ripple } from "../ripple/ripple"
-import { EFabSize, EFabVariant, type TFabSize, type TFabVariant } from "./fab.definition"
+import { FabSize, props, type TFabSlots } from './fab.definition'
 import css from "./styles/fab.module.scss"
 
 export const Fab = defineComponent({
     name: `${componentNamePrefix}-fab`,
-    props: {
-        size: {
-            default: EFabSize.Medium,
-            type: String as PropType<TFabSize>,
-        },
-        label: {
-            default: null,
-            type: String as PropType<string>,
-        },
-        variant: {
-            default: EFabVariant.Secondary,
-            type: String as PropType<TFabVariant>,
-        },
-        lowered: {
-            default: false,
-            type: Boolean as PropType<boolean>,
-        },
-    },
-    slots: {} as SlotsType<{
-        default?: void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TFabSlots>,
     setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
 
@@ -59,7 +40,7 @@ export const Fab = defineComponent({
         /**
          * Computed
          */
-        const isMediumSize = computed(() => _size.value === EFabSize.Medium)
+        const isMediumSize = computed(() => _size.value === FabSize.Medium)
         const isExtended = computed(() => _label.value !== null && _label.value.length !== 0)
 
         return () => {
@@ -101,4 +82,5 @@ export const Fab = defineComponent({
             )
         }
     },
+    inheritAttrs: true,
 })

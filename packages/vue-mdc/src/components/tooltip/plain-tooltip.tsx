@@ -5,54 +5,21 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { computed, defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { computed, defineComponent, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { Corner, useSurfacePosition, type ISurfacePositionControllerProperties } from '../../internals/controller/use-surface-position'
 import { createAnimationSignal } from '../../internals/motion/animation'
 import { isServer } from '../../utils'
 import { animateClose, animateOpen } from './animation'
+import { props, type TPlainTooltipSlots } from './plain-tooltip.definition'
 import css from './styles/plain-tooltip.module.scss'
-import { ETooltipPosition, STooltipController, useTooltip, type ITooltipControllerHost, type TTooltipPosition } from './tooltip-controller'
+import { STooltipController, useTooltip, type ITooltipControllerHost } from './tooltip-controller'
 
 export const PlainTooltip = defineComponent({
     name: `${componentNamePrefix}-plain-tooltip`,
+    props: props,
+    slots: {} as SlotsType<TPlainTooltipSlots>,
     emits: [],
-    slots: {} as SlotsType<{}>,
-    props: {
-        supportingText: {
-            type: String as PropType<string>,
-            default: null
-        },
-        position: {
-            type: String as PropType<TTooltipPosition>,
-            default: ETooltipPosition.Below,
-        },
-        visibility: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        showDelay: {
-            type: Number as PropType<number>,
-            default: 500,
-        },
-        hideDelay: {
-            type: Number as PropType<number>,
-            default: 200,
-        },
-        anchor: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        disableElevation: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-
-    },
     setup(props, { }) {
         const root = ref<ITooltipControllerHost | null>(null)
         const animationSignal = createAnimationSignal()
@@ -188,5 +155,5 @@ export const PlainTooltip = defineComponent({
             )
         }
     },
-    inheritAttrs: false,
+    inheritAttrs: true,
 })

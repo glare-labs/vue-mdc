@@ -4,4 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './navigation-rail-tab'
+export { NavigationRailTab } from './navigation-rail-tab'
+
+export { type TNavigationRailPosition, type TNavigationRailTabProps, type TNavigationRailTabSlots } from './navigation-rail-tab.definition'

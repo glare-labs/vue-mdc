@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-export const toKebabCase = (str: string) => {
+export function toKebabCase(str: string) {
     return str.split('').map((letter, idx) => {
         return letter.toUpperCase() === letter
             ? `${idx !== 0 ? '-' : ''}${letter.toLowerCase()}`

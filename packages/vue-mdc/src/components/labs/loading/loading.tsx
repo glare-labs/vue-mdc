@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { defineComponent, nextTick, onMounted, ref, type SlotsType } from 'vue'
-import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { isServer } from '../../utils'
+import { componentNamePrefix } from '../../../internals/component-name-prefix/component-name-prefix'
+import { isServer } from '../../../utils'
 
 
 // 定义常量，使用对象组织，方便传递

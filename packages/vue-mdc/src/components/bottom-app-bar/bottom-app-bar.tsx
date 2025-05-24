@@ -6,15 +6,14 @@
 
 import { defineComponent, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { props, type TBottomAppBarSlots } from './bottom-app-bar.definition'
 import css from './styles/bottom-app-bar.module.scss'
 
 export const BottomAppBar = defineComponent({
     name: `${componentNamePrefix}-bottom-app-bar`,
+    props: props,
+    slots: {} as SlotsType<TBottomAppBarSlots>,
     emits: [],
-    slots: {} as SlotsType<{
-        ['leading-icons']?: void
-        default?: void
-    }>,
     setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
         const dialog = ref<HTMLDialogElement | null>(null)
@@ -44,4 +43,5 @@ export const BottomAppBar = defineComponent({
             )
         }
     },
+    inheritAttrs: true,
 })

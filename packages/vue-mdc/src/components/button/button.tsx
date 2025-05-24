@@ -3,59 +3,21 @@
  * Copyright 2025 glare-labs & bre97-web
  * SPDX-License-Identifier: MIT
  */
+
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, onBeforeUnmount, onMounted, ref, type PropType, type SlotsType } from 'vue'
-import { EFormSubmitterType, type TFormSubmitterType } from '../../internals'
+import { defineComponent, onBeforeUnmount, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { isServer } from '../../utils'
-import type { TButtonTarget } from '../../utils/button-target-type'
+import { isServer } from '../../utils/is-server'
 import { Elevation } from '../elevation/elevation'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
-import { EButtonAppearance, type TButtonAppearance } from './button.definition'
+import { ButtonAppearance, props, type TButtonAppearance, type TButtonSlots } from './button.definition'
 import css from './styles/button.module.scss'
 
 export const Button = defineComponent({
     name: `${componentNamePrefix}-button`,
-    slots: {} as SlotsType<{
-        default: void
-        'leading-icon': void
-        'trailing-icon': void
-    }>,
-    props: {
-        appearance: {
-            type: String as PropType<TButtonAppearance>,
-            default: EButtonAppearance.Filled,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        type: {
-            type: String as PropType<TFormSubmitterType>,
-            default: EFormSubmitterType.Button,
-        },
-        href: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        target: {
-            type: String as PropType<TButtonTarget>,
-            default: null,
-        },
-        form: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        name: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        value: {
-            type: String as PropType<string>,
-            default: null,
-        },
-    },
+    slots: {} as SlotsType<TButtonSlots>,
+    props,
     setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
 
@@ -104,10 +66,10 @@ export const Button = defineComponent({
         })
 
         return () => {
-            const elevationButtonArray: Array<TButtonAppearance> = [EButtonAppearance.Elevated, EButtonAppearance.Filled, EButtonAppearance.FilledTonal]
+            const elevationButtonArray: Array<TButtonAppearance> = [ButtonAppearance.Elevated, ButtonAppearance.Filled, ButtonAppearance.FilledTonal]
 
             const needElevation = elevationButtonArray.includes(_appearance.value)
-            const needOutline = _appearance.value === EButtonAppearance.Outlined
+            const needOutline = _appearance.value === ButtonAppearance.Outlined
 
             const iconState = slots['leading-icon'] ? css.left : slots['trailing-icon'] ? css.right : null
             const isLink = _href.value !== null

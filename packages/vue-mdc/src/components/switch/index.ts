@@ -4,4 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './switch'
+export { Switch } from './switch'
+
+export { type TSwitchProps, type TSwitchSlots } from './switch.definition'

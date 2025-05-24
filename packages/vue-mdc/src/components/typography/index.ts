@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './typography'
-export * from './typography-directive'
-export * from './typography-variant'
+export { Typography } from './typography'
+
+export { vTypography } from './typography-directive'
+
+export { TypographyVariant, type TTypographyVariant } from './typography-variant'
+
+export { type TTypograhyProps, type TTypograhySlots } from './typography.definition'

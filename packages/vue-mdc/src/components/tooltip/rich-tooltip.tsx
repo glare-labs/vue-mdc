@@ -5,59 +5,22 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { computed, defineComponent, onMounted, ref, type PropType, type SlotsType } from 'vue'
+import { computed, defineComponent, onMounted, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
 import { Corner, useSurfacePosition, type ISurfacePositionControllerProperties } from '../../internals/controller/use-surface-position'
 import { createAnimationSignal } from '../../internals/motion/animation'
-import { isServer } from '../../utils'
+import { isServer } from '../../utils/is-server'
 import { Elevation } from '../elevation'
 import { animateClose, animateOpen } from './animation'
+import { props, type TRichTooltipSlots } from './rich-tooltip.definition'
 import css from './styles/rich-tooltip.module.scss'
-import { ETooltipPosition, STooltipController, useTooltip, type ITooltipControllerHost, type TTooltipPosition } from './tooltip-controller'
+import { STooltipController, useTooltip, type ITooltipControllerHost } from './tooltip-controller'
 
 export const RichTooltip = defineComponent({
     name: `${componentNamePrefix}-rich-tooltip`,
+    props: props,
+    slots: {} as SlotsType<TRichTooltipSlots>,
     emits: [],
-    slots: {} as SlotsType<{
-        /**
-         * Hyperlink <a></a> elements or other links should be used.
-         * According to design specifications,
-         * do not use Button and IconButton components in action slot.
-         */
-        action?: void
-        subhead?: void
-        ['supporting-text']?: void
-    }>,
-    props: {
-        position: {
-            type: String as PropType<TTooltipPosition>,
-            default: ETooltipPosition.Below,
-        },
-        visibility: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        showDelay: {
-            type: Number as PropType<number>,
-            default: 500,
-        },
-        hideDelay: {
-            type: Number as PropType<number>,
-            default: 200,
-        },
-        anchor: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        disableElevation: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
     setup(props, { slots }) {
         const root = ref<ITooltipControllerHost | null>(null)
         const animationSignal = createAnimationSignal()
@@ -203,5 +166,5 @@ export const RichTooltip = defineComponent({
             )
         }
     },
-    inheritAttrs: false,
+    inheritAttrs: true,
 })

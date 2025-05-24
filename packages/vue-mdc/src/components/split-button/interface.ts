@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: MIT
  */
 
-export enum ESplitButtonAppearance {
-    Filled = 'filled',
-    FilledTonal = 'filled-tonal',
-    Outlined = 'outlined',
-}
+export const SplitButtonAppearance = {
+    Filled: 'filled',
+    FilledTonal: 'filled-tonal',
+    Outlined: 'outlined',
+} as const
 
-export type TSplitButtonAppearance = (typeof ESplitButtonAppearance)[keyof typeof ESplitButtonAppearance]
+export type TSplitButtonAppearance = typeof SplitButtonAppearance[keyof typeof SplitButtonAppearance]

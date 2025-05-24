@@ -5,55 +5,17 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
-import type { TFormSubmitterType } from '../../internals'
+import { defineComponent, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import type { TButtonTarget } from '../../utils/button-target-type'
 import { FocusRing } from '../focus-ring'
 import { Ripple } from '../ripple/ripple'
-import { EIconButtonAppearance, type TIconButtonAppearance } from './icon-button-appearance'
-import { EIconButtonType } from './icon-button-type'
+import { props, type TIconButtonSlots } from './icon-button.definition'
 import css from './styles/icon-button.module.scss'
 
 export const IconButton = defineComponent({
     name: `${componentNamePrefix}-icon-button`,
-    slots: {} as SlotsType<{
-        default: void
-    }>,
-    props: {
-        appearance: {
-            type: String as PropType<TIconButtonAppearance>,
-            default: EIconButtonAppearance.Standard,
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
-        },
-        type: {
-            type: String as PropType<TFormSubmitterType>,
-            default: EIconButtonType.Button,
-        },
-        href: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        target: {
-            type: String as PropType<TButtonTarget>,
-            default: null,
-        },
-        form: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        name: {
-            type: String as PropType<string>,
-            default: null,
-        },
-        value: {
-            type: String as PropType<string>,
-            default: null,
-        },
-    },
+    slots: {} as SlotsType<TIconButtonSlots>,
+    props: props,
     setup(props, { slots }) {
         const root = ref<HTMLElement | null>(null)
 

@@ -2,16 +2,14 @@
  * @license
  * Copyright 2024 glare-labs & bre97-web
  * SPDX-License-Identifier: MIT
- */
-
-/**
+ *
  * RFC4122 like, v4.
  *
  * @license CC BY-SA 4.0
  * @link https://stackoverflow.com/a/8809472/
  * @author Briguy37
  */
-export const generateUuid = () => {
+export function generateUuid() {
     let d = new Date().getTime()
     let d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {

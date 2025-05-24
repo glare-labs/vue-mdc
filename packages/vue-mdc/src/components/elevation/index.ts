@@ -4,6 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './elevation'
-export * from './elevation-directive'
-export * from './elevation-level'
+export { Elevation } from './elevation'
+
+export { vElevation } from './elevation-directive'
+
+export { ElevationLevel, type TElevationLevel, type TElevationProps, type TElevationSlots } from './elevation.definition'

@@ -15,12 +15,12 @@
 
 import { isServer } from '../../utils/is-server'
 
-export type TFormSubmitterType = 'button' | 'submit' | 'reset'
-export enum EFormSubmitterType {
-    Button = 'button',
-    Submit = 'submit',
-    Reset = 'reset',
-}
+export const FormSubmitterType = {
+    Button: 'button',
+    Submit: 'submit',
+    Reset: 'reset',
+} as const
+export type TFormSubmitterType = typeof FormSubmitterType[keyof typeof FormSubmitterType]
 
 export interface FormSubmitterElement extends HTMLButtonElement {
     /**

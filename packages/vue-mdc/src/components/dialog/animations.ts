@@ -10,7 +10,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { EMotionEasing } from '../../utils/material-design-system'
+import { MaterialDesignSystem } from '../../utils/material-design-system'
 
 /**
  * A dialog animation's arguments. See `Element.prototype.animate`.
@@ -60,7 +60,7 @@ export const DialogDefaultOpenAnimation: IDialogAnimation = {
         [
             // Dialog slide down
             [{ 'transform': 'translateY(-50px)' }, { 'transform': 'translateY(0)' }],
-            { duration: 500, easing: EMotionEasing.Emphasized },
+            { duration: 500, easing: MaterialDesignSystem.Motion.Easing.Emphasized },
         ],
     ],
     scrim: [
@@ -83,7 +83,7 @@ export const DialogDefaultOpenAnimation: IDialogAnimation = {
             // is supposed to clip content as it grows. From 0dp it's possible to see
             // text/actions appear before the container has fully grown.
             [{ 'height': '35%' }, { 'height': '100%' }],
-            { duration: 500, easing: EMotionEasing.Emphasized, pseudoElement: '::before' },
+            { duration: 500, easing: MaterialDesignSystem.Motion.Easing.Emphasized, pseudoElement: '::before' },
         ],
     ],
     headline: [
@@ -117,7 +117,7 @@ export const DialogDefaultCloseAnimation: IDialogAnimation = {
         [
             // Dialog slide up
             [{ 'transform': 'translateY(0)' }, { 'transform': 'translateY(-50px)' }],
-            { duration: 150, easing: EMotionEasing.EmphasizedAccelerate },
+            { duration: 150, easing: MaterialDesignSystem.Motion.Easing.EmphasizedAccelerate },
         ],
     ],
     scrim: [
@@ -133,7 +133,7 @@ export const DialogDefaultCloseAnimation: IDialogAnimation = {
             [{ 'height': '100%' }, { 'height': '35%' }],
             {
                 duration: 150,
-                easing: EMotionEasing.EmphasizedAccelerate,
+                easing: MaterialDesignSystem.Motion.Easing.EmphasizedAccelerate,
                 pseudoElement: '::before',
             },
         ],

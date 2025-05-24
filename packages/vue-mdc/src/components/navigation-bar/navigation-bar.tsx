@@ -5,45 +5,19 @@
  */
 
 import { useReflectAttribute } from '@glare-labs/vue-reflect-attribute'
-import { defineComponent, ref, type PropType, type SlotsType } from 'vue'
+import { defineComponent, ref, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
-import { useNavigable, type INavigationItem } from '../../internals/controller/use-navigable'
+import { useNavigable } from '../../internals/controller/use-navigable'
 import { renderNavigationDestination } from '../../internals/navigation/render-navigation-destination'
 import { Elevation } from '../elevation'
 import { NavigationTab } from '../navigation-tab'
+import { NavigationBarRippleStyle, props, type TNavigationBarSlots } from './navigation-bar.definition'
 import css from './styles/navigation-bar.module.scss'
 
-export enum ENavigationBarRippleStyle {
-    Default = 'default',
-    Unbounded = 'unbounded',
-    Bounded = 'bounded',
-}
-
-export type TNavigationBarRippleStyle = 'default' | 'unbounded' | 'bounded'
-
-export const NavigationBar = defineComponent({
+const NavigationBar = defineComponent({
     name: `${componentNamePrefix}-navigation-bar`,
-    slots: {} as SlotsType<{
-        default: void
-    }>,
-    props: {
-        defaultActiveOrder: {
-            type: Number as PropType<number>,
-            default: -2,
-        },
-        rippleStyle: {
-            type: String as PropType<TNavigationBarRippleStyle>,
-            default: ENavigationBarRippleStyle.Default,
-        },
-        tabs: {
-            type: Array as PropType<Array<INavigationItem>>,
-            default: [],
-        },
-        hideInactiveLabel: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        }
-    },
+    slots: {} as SlotsType<TNavigationBarSlots>,
+    props: props,
     emits: [
         'change'
     ],
@@ -82,7 +56,7 @@ export const NavigationBar = defineComponent({
             return (
                 <div
                     data-component="navigation-bar"
-                    class={[css['navigation-bar'], _rippleStyle.value === ENavigationBarRippleStyle.Unbounded && css['ripple-unbounded']]}
+                    class={[css['navigation-bar'], _rippleStyle.value === NavigationBarRippleStyle.Unbounded && css['ripple-unbounded']]}
                     ref={root}
                 >
                     {slots.default && slots.default()}
@@ -92,4 +66,9 @@ export const NavigationBar = defineComponent({
             )
         }
     },
+    inheritAttrs: true,
 })
+
+export {
+    NavigationBar
+}

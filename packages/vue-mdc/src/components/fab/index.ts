@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './fab'
-export * from './fab.definition'
+export { Fab } from './fab'
+
+export { FabSize, FabVariant, type TFabProps, type TFabSize, type TFabSlots, type TFabVariant } from './fab.definition'

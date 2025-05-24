@@ -4,7 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './icon-button'
-export * from './icon-button-appearance'
-export * from './icon-button-type'
-export * from './toggle-icon-button'
+export { IconButton } from './icon-button'
+export { ToggleIconButton } from './toggle-icon-button'
+
+export { type TIconButtonProps, type TIconButtonSlots } from './icon-button.definition'
+export { type TToggleIconButtonProps, type TToggleIconButtonSlots } from './toggle-icon-button.definition'

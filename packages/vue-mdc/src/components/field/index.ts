@@ -4,5 +4,6 @@
  * SPDX-License-Identifier: MIT
  */
 
-export * from './field'
-export * from './field-appearance'
+export { Field } from './field'
+
+export { FieldAppearance, type TFieldAppearance, type TFieldProps, type TFieldSlot } from './field.definition'

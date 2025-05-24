@@ -6,15 +6,14 @@
 
 import { defineComponent, type SlotsType } from 'vue'
 import { componentNamePrefix } from '../../internals/component-name-prefix/component-name-prefix'
+import { props, type TSplitButtonGroupSlots } from './split-button-group.definition'
 import css from './styles/split-button.module.scss'
 
 export const SplitButtonGroup = defineComponent({
     name: `${componentNamePrefix}-split-button-group`,
-    slots: {} as SlotsType<{
-        default?: void
-    }>,
+    props: props,
+    slots: {} as SlotsType<TSplitButtonGroupSlots>,
     emits: [],
-    props: {},
     setup(props, { slots }) {
 
         return () => (
@@ -23,4 +22,5 @@ export const SplitButtonGroup = defineComponent({
             </div>
         )
     },
+    inheritAttrs: true,
 })
